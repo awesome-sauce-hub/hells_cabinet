@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Politician, Role } from '../engine/types.js'
 
 export const ROLE_LABEL: Record<Role, string> = {
@@ -29,20 +30,29 @@ function initials(name: string): string {
 
 export function CandidateCard({
   figure,
-  onPick,
+  selected,
+  onSelect,
   onBench,
   canBench,
 }: {
   figure: Politician
-  onPick: () => void
+  selected: boolean
+  onSelect: () => void
   onBench: () => void
   canBench: boolean
 }) {
   return (
     <button
-      className={`card ${figure.category}`}
-      onClick={onPick}
-      aria-label={`Draft ${figure.name}`}
+      className={`card ${figure.category} ${selected ? 'selected' : ''}`}
+      draggable
+      onDragStart={(e) => {
+        e.dataTransfer.setData('text/plain', figure.id)
+        e.dataTransfer.effectAllowed = 'move'
+        onSelect()
+      }}
+      onClick={onSelect}
+      aria-pressed={selected}
+      aria-label={`Select ${figure.name}`}
     >
       <div className="mono" aria-hidden>{initials(figure.name)}</div>
       {figure.category !== 'politician' && (
@@ -74,24 +84,64 @@ export function CandidateCard({
   )
 }
 
+/**
+ * The five posts, doubling as drop targets. Dragging is the intended gesture;
+ * tapping a card then tapping a post does the same thing, because drag events
+ * do not exist on touch.
+ */
 export function SlotStrip({
   order,
   picks,
-  activeIndex,
+  armed,
+  onPlace,
 }: {
   order: readonly Role[]
   picks: Partial<Record<Role, Politician>>
-  activeIndex: number
+  /** True while a card is selected or being dragged, to light up the targets. */
+  armed: boolean
+  onPlace?: (role: Role, figureId?: string) => void
 }) {
+  const [over, setOver] = useState<Role | null>(null)
   return (
     <div className="slots">
-      {order.map((role, i) => {
+      {order.map((role) => {
         const picked = picks[role]
-        const state = picked ? 'filled' : i === activeIndex ? 'active' : ''
+        const open = !picked
+        const droppable = open && armed
+        const classes = [
+          'slot',
+          picked ? 'filled' : '',
+          droppable ? 'droppable' : '',
+          over === role && droppable ? 'over' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')
         return (
-          <div className={`slot ${state}`} key={role}>
+          <div
+            className={classes}
+            key={role}
+            onDragOver={(e) => {
+              if (!open) return
+              e.preventDefault()
+              setOver(role)
+            }}
+            onDragLeave={() => setOver((r) => (r === role ? null : r))}
+            onDrop={(e) => {
+              e.preventDefault()
+              setOver(null)
+              if (open) onPlace?.(role, e.dataTransfer.getData('text/plain') || undefined)
+            }}
+            onClick={() => open && onPlace?.(role)}
+            role={droppable ? 'button' : undefined}
+            tabIndex={droppable ? 0 : undefined}
+            onKeyDown={(e) => {
+              if (droppable && (e.key === 'Enter' || e.key === ' ')) onPlace?.(role)
+            }}
+          >
             <div className="label">{ROLE_LABEL[role]}</div>
-            <div className={`who ${picked ? '' : 'empty'}`}>{picked ? picked.name : '—'}</div>
+            <div className={`who ${picked ? '' : 'empty'}`}>
+              {picked ? picked.name : droppable ? 'place here' : '—'}
+            </div>
           </div>
         )
       })}

@@ -6,7 +6,8 @@ import {
   bench,
   finishDraft,
   isDraftComplete,
-  pickCandidate,
+  openRoles,
+  placeCandidate,
   respin,
   startDraft,
 } from '../engine/draft.js'
@@ -16,6 +17,7 @@ import { resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
 import { roleScore } from '../engine/score.js'
 import { ROLES, STAT_ABBR, STATS } from '../engine/types.js'
+import type { Role } from '../engine/types.js'
 
 type Phase = 'briefing' | 'draft' | 'gameover' | 'sim' | 'verdict'
 
@@ -34,9 +36,9 @@ export default function App() {
     setPhase('draft')
   }
 
-  function choose(id: string) {
+  function choose(id: string, role: Role) {
     if (!draft) return
-    const next = { ...pickCandidate(draft, id) }
+    const next = { ...placeCandidate(draft, id, role) }
     setDraft(next)
     if (next.endedBy) {
       setPhase('gameover')
@@ -64,7 +66,7 @@ export default function App() {
       {phase === 'draft' && draft && (
         <Draft
           draft={draft}
-          onPick={choose}
+          onPlace={choose}
           onRespin={() => setDraft({ ...respin(draft) })}
           onBench={(id) => setDraft({ ...bench(draft, id) })}
         />
@@ -138,27 +140,39 @@ function Briefing({
 
 function Draft({
   draft,
-  onPick,
+  onPlace,
   onRespin,
   onBench,
 }: {
   draft: DraftState
-  onPick: (id: string) => void
+  onPlace: (id: string, role: Role) => void
   onRespin: () => void
   onBench: (id: string) => void
 }) {
-  const role = ROLES[draft.round]!
+  const [selected, setSelected] = useState<string | null>(null)
+  const open = openRoles(draft)
+  const filled = ROLES.length - open.length
+
+  function place(role: Role, draggedId?: string) {
+    const id = draggedId ?? selected
+    if (!id) return
+    setSelected(null)
+    onPlace(id, role)
+  }
+
   return (
     <>
       <div className="row spread">
-        <span className="label">Round {draft.round + 1} of {ROLES.length}</span>
-        <span className="label">Choose 1 of {draft.candidates.length}</span>
+        <span className="label">Wave {draft.wave + 1} of {ROLES.length}</span>
+        <span className="label">{filled} of {ROLES.length} posts filled</span>
       </div>
 
-      <SlotStrip order={ROLES} picks={draft.picks} activeIndex={draft.round} />
+      <SlotStrip order={ROLES} picks={draft.picks} armed={selected !== null} onPlace={place} />
 
       <div className="row spread mt-s">
-        <h2 style={{ margin: 0, fontSize: 24 }}>{ROLE_LABEL[role]}</h2>
+        <h2 style={{ margin: 0, fontSize: 22 }}>
+          {selected ? 'Now choose their post' : 'Drag someone into a post'}
+        </h2>
         <div className="row">
           <button onClick={onRespin} disabled={draft.respins <= 0}>
             Respin ({draft.respins})
@@ -167,12 +181,17 @@ function Draft({
         </div>
       </div>
 
+      <p className="label mt-s" style={{ letterSpacing: '0.08em' }}>
+        One appointment per wave · the other five leave with the wave
+      </p>
+
       <div className="board mt-s">
         {draft.candidates.map((c) => (
           <CandidateCard
             key={c.id}
             figure={c}
-            onPick={() => onPick(c.id)}
+            selected={selected === c.id}
+            onSelect={() => setSelected((cur) => (cur === c.id ? null : c.id))}
             onBench={() => onBench(c.id)}
             canBench={draft.benches > 0}
           />

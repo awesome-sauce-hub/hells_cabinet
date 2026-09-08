@@ -60,22 +60,28 @@ const ALIGNMENT_RARITY: Record<(typeof ALIGNMENTS)[number], number> = {
   neutral: 1,
 }
 
-export function poolWeight(p: Politician, role: Role): number {
-  const affine = ROLE_AFFINITY[role].some((t) => p.traits.includes(t))
+/**
+ * Weighted against every post still open, not one named role: a wave is dealt
+ * before the player has decided what anyone is for, so a card only has to be
+ * plausible somewhere on the remaining board.
+ */
+export function poolWeight(p: Politician, openRoles: readonly Role[]): number {
+  const affine = openRoles.some((r) => ROLE_AFFINITY[r].some((t) => p.traits.includes(t)))
   const base = 1 + (affine ? AFFINITY_BONUS : 0)
   const byCategory =
     p.category === 'object' ? OBJECT_WEIGHT : p.category === 'wildcard' ? WILDCARD_WEIGHT : 1
   const rarity = byCategory * POWER_RARITY[p.tier] * ALIGNMENT_RARITY[p.alignment]
-  return base * rarity * (1 + roleScore(p.stats, role) * FIT_WEIGHT)
+  const bestFit = openRoles.reduce((m, r) => Math.max(m, roleScore(p.stats, r)), 0)
+  return base * rarity * (1 + bestFit * FIT_WEIGHT)
 }
 
 export function drawCandidates(
   rng: Rng,
   available: readonly Politician[],
-  role: Role,
+  openRoles: readonly Role[],
   count = CANDIDATES_PER_ROUND,
 ): Politician[] {
-  return sampleWeighted(rng, available, (p) => poolWeight(p, role), count)
+  return sampleWeighted(rng, available, (p) => poolWeight(p, openRoles), count)
 }
 
 export interface DraftState {
@@ -83,39 +89,46 @@ export interface DraftState {
   /** Set when the player drafted a figure carrying endsRun. */
   endedBy: Politician | null
   remaining: Politician[]
-  round: number
+  /** Which wave of six is on the table, 0-4. */
+  wave: number
   candidates: Politician[]
   picks: Partial<Record<Role, Politician>>
   respins: number
   benches: number
 }
 
-export function currentRole(state: DraftState): Role {
-  const role = ROLES[state.round]
-  if (!role) throw new Error(`draft is over (round ${state.round})`)
-  return role
+/** Posts still to be filled, in cabinet order. */
+export function openRoles(state: DraftState): Role[] {
+  return ROLES.filter((r) => !state.picks[r])
 }
+
+
 
 export function startDraft(rng: Rng, roster: readonly Politician[]): DraftState {
   const remaining = roster.slice()
   const state: DraftState = {
     rng,
     remaining,
-    round: 0,
+    wave: 0,
     endedBy: null,
     candidates: [],
     picks: {},
     respins: RESPIN_TOKENS,
     benches: BENCH_TOKENS,
   }
-  state.candidates = drawCandidates(rng, remaining, currentRole(state))
+  state.candidates = drawCandidates(rng, remaining, ROLES)
   return state
 }
 
-export function pickCandidate(state: DraftState, id: string): DraftState {
+/**
+ * Place one candidate from the current wave into any post still open. Choosing
+ * the post is the decision the draft is really made of - the same six people
+ * make a different cabinet depending on where you put them.
+ */
+export function placeCandidate(state: DraftState, id: string, role: Role): DraftState {
   const chosen = state.candidates.find((c) => c.id === id)
-  if (!chosen) throw new Error(`${id} is not on offer this round`)
-  const role = currentRole(state)
+  if (!chosen) throw new Error(`${id} is not on offer this wave`)
+  if (state.picks[role]) throw new Error(`${role} is already filled`)
   state.picks[role] = chosen
   if (chosen.endsRun) {
     // The run is over the moment they are appointed. No further rounds, no
@@ -124,12 +137,14 @@ export function pickCandidate(state: DraftState, id: string): DraftState {
     state.candidates = []
     return state
   }
-  // Drafted names leave the pool, so later rounds cannot re-offer them.
-  state.remaining = state.remaining.filter((p) => p.id !== chosen.id)
-  state.round += 1
+  // Everyone on the table leaves the pool, taken or not: a wave that passes is
+  // gone, so declining a good card costs something.
+  const seen = new Set(state.candidates.map((c) => c.id))
+  state.remaining = state.remaining.filter((p) => !seen.has(p.id))
+  state.wave += 1
   state.candidates = isDraftComplete(state)
     ? []
-    : drawCandidates(state.rng, state.remaining, currentRole(state))
+    : drawCandidates(state.rng, state.remaining, openRoles(state))
   return state
 }
 
@@ -137,7 +152,7 @@ export function pickCandidate(state: DraftState, id: string): DraftState {
 export function respin(state: DraftState): DraftState {
   if (state.respins <= 0) throw new Error('no respins left')
   state.respins -= 1
-  state.candidates = drawCandidates(state.rng, state.remaining, currentRole(state))
+  state.candidates = drawCandidates(state.rng, state.remaining, openRoles(state))
   return state
 }
 
@@ -149,14 +164,14 @@ export function bench(state: DraftState, id: string): DraftState {
   state.benches -= 1
   const shown = new Set(state.candidates.map((c) => c.id))
   const pool = state.remaining.filter((p) => !shown.has(p.id))
-  const [replacement] = drawCandidates(state.rng, pool, currentRole(state), 1)
+  const [replacement] = drawCandidates(state.rng, pool, openRoles(state), 1)
   if (replacement) state.candidates[idx] = replacement
   else state.candidates.splice(idx, 1)
   return state
 }
 
 export function isDraftComplete(state: DraftState): boolean {
-  return state.round >= ROLES.length
+  return ROLES.every((r) => state.picks[r])
 }
 
 export function finishDraft(state: DraftState): Roster {
@@ -175,13 +190,15 @@ export function randomDraft(rng: Rng, roster: readonly Politician[]): Roster {
   let state = startDraft(rng, roster)
   while (!isDraftComplete(state)) {
     const pickable = state.candidates.filter((c) => !c.endsRun)
-    // Every candidate ends the run: respin the board rather than deadlock.
+    // Every candidate ends the run: redeal rather than deadlock.
     if (pickable.length === 0) {
-      state.candidates = drawCandidates(state.rng, state.remaining, currentRole(state))
+      state.candidates = drawCandidates(state.rng, state.remaining, openRoles(state))
       continue
     }
     const choice = pickable[Math.floor(rng.next() * pickable.length)]!
-    state = pickCandidate(state, choice.id)
+    const open = openRoles(state)
+    const role = open[Math.floor(rng.next() * open.length)]!
+    state = placeCandidate(state, choice.id, role)
   }
   return finishDraft(state)
 }

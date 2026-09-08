@@ -1,0 +1,820 @@
+{
+  "reviewed": 122,
+  "findings": [
+    {
+      "id": "ataturk",
+      "field": "cunning",
+      "severity": "error",
+      "current": "5",
+      "suggested": "8",
+      "why": "He built a rival parliament in Ankara while nominally serving the Sultan, then abolished the sultanate and caliphate and eliminated his Young Turk and opposition rivals — a career built on political manoeuvre."
+    },
+    {
+      "id": "darth-vader",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "Vader slaughtered the Jedi younglings, tortured Leia and served the Empire that destroyed Alderaan; a late redemption does not make him neutral on how the canon remembers him."
+    },
+    {
+      "id": "gandhi",
+      "field": "traits",
+      "severity": "error",
+      "current": "beloved, statesman, isolationist",
+      "suggested": "beloved, statesman, strategist",
+      "why": "Gandhi was an anti-colonial internationalist who organised in South Africa and courted world opinion; the Salt March and the non-cooperation campaigns were feats of strategy, not isolationism."
+    },
+    {
+      "id": "glados",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "She flooded the Aperture Science enrichment centre with neurotoxin and killed the entire staff, then kept killing test subjects."
+    },
+    {
+      "id": "jar-jar",
+      "field": "bio",
+      "severity": "error",
+      "current": "Was handed emergency powers once. Everyone agreed not to discuss it.",
+      "suggested": "Moved that emergency powers be handed to the Chancellor. Everyone agreed not to discuss it.",
+      "why": "In Attack of the Clones Jar Jar proposed granting Palpatine emergency powers; he never held them himself."
+    },
+    {
+      "id": "joker",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "He is a serial mass murderer who poisons Gotham's water supply and blows up hospitals; mass killers are \"bad\" on this axis."
+    },
+    {
+      "id": "judge-judy",
+      "field": "traits",
+      "severity": "error",
+      "current": "statesman, soldier, technocrat",
+      "suggested": "statesman, beloved, technocrat",
+      "why": "Judy Sheindlin was a New York family court prosecutor and judge with no military service whatsoever, whereas her courtroom show was the highest-rated in daytime syndication and made her the best-paid host on television, which is what \"beloved\" covers."
+    },
+    {
+      "id": "leopold-ii",
+      "field": "traits",
+      "severity": "error",
+      "current": "banker, cunning, isolationist",
+      "suggested": "banker, cunning, dealmaker",
+      "why": "Leopold II was the era's most aggressive colonial expansionist, lobbying the Berlin Conference into granting him a private empire — the opposite of an isolationist."
+    },
+    {
+      "id": "mario",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "He is remembered solely as the man who keeps rescuing the kingdom without seeking office - the bio itself says so."
+    },
+    {
+      "id": "optimus-prime",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "His defining line and repeated self-sacrifice - \"freedom is the right of all sentient beings\" - make him the canonical moral hero of the franchise."
+    },
+    {
+      "id": "robespierre",
+      "field": "integrity",
+      "severity": "error",
+      "current": "2",
+      "suggested": "8",
+      "why": "His contemporary nickname was \"the Incorruptible\" — he refused bribes and office-hunting and even the file's own bio calls him incorruptible, so integrity 2 contradicts the record."
+    },
+    {
+      "id": "rubber-stamp",
+      "field": "cunning",
+      "severity": "error",
+      "current": "8",
+      "suggested": "2",
+      "why": "Cunning is manoeuvre and manipulation, and the bio states the stamp approves everything and has never read anything — it schemes nothing, it is the instrument other schemers use; move the freed points into integrity/force to stay at 32."
+    },
+    {
+      "id": "sauron",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "Sauron engineers the drowning of Númenor and the wars of the Second and Third Ages; a mass killer is \"bad\" on this axis regardless of capability."
+    },
+    {
+      "id": "talleyrand",
+      "field": "traits",
+      "severity": "error",
+      "current": "dealmaker, cunning, loyalist",
+      "suggested": "dealmaker, cunning, statesman",
+      "why": "Talleyrand served and abandoned the Bourbons, the Revolution, Napoleon and the Restoration in turn — he is the textbook opposite of a loyalist, as the bio itself states."
+    },
+    {
+      "id": "tesla",
+      "field": "traits",
+      "severity": "error",
+      "current": "technocrat, paranoid, strategist",
+      "suggested": "technocrat, paranoid, liability",
+      "why": "Tesla tore up his AC royalty contract with Westinghouse and died broke in a hotel room — the opposite of a strategist."
+    },
+    {
+      "id": "thanos",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "He kills half of all life in the universe with the Snap; the axis is memory, not capability, and genocide reads bad however well he argued the arithmetic."
+    },
+    {
+      "id": "umbridge",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "She tortured students with a blood quill, sent dementors after Harry, and ran the Muggle-Born Registration Commission for a Voldemort-controlled Ministry — canon remembers her as a villain."
+    },
+    {
+      "id": "voldemort",
+      "field": "alignment",
+      "severity": "error",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "He runs a blood-purity terror campaign, murders the Potters and countless others, and is the wizarding world's byword for evil."
+    },
+    {
+      "id": "weird-al",
+      "field": "traits",
+      "severity": "error",
+      "current": "showman, beloved, demagogue",
+      "suggested": "showman, beloved, loyalist",
+      "why": "Yankovic's trademark is asking every artist's permission before parodying them and a scandal-free 40-year career - the antithesis of a demagogue."
+    },
+    {
+      "id": "ada-lovelace",
+      "field": "traits",
+      "severity": "warn",
+      "current": "technocrat, strategist, banker",
+      "suggested": "technocrat, strategist (drop banker)",
+      "why": "Lovelace had no financial career; her one venture into money was a mathematical betting syndicate that left her in debt to bookmakers, the opposite of a banker."
+    },
+    {
+      "id": "allende",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "4",
+      "suggested": "6",
+      "why": "He ran for president four times, served as President of the Senate, and assembled the fractious Popular Unity coalition that got him elected — that is coalition manoeuvre, even if he was ultimately outplayed by the military."
+    },
+    {
+      "id": "batman",
+      "field": "integrity",
+      "severity": "warn",
+      "current": "6",
+      "suggested": "8",
+      "why": "His defining and never-broken feature across canon is the absolute no-kill rule and keeping his word even to enemies — that is high integrity, whatever his secrecy."
+    },
+    {
+      "id": "bob-ross",
+      "field": "traits",
+      "severity": "warn",
+      "current": "beloved, statesman, loyalist",
+      "suggested": "beloved, soldier, loyalist",
+      "why": "Ross spent twenty years in the US Air Force rising to Master Sergeant — the entry's own office line — so 'soldier' is the obvious trait and 'statesman' fits a TV painter poorly."
+    },
+    {
+      "id": "bokassa",
+      "field": "traits",
+      "severity": "warn",
+      "current": "showman, warhawk, paranoid",
+      "suggested": "showman, soldier, paranoid",
+      "why": "Bokassa spent 23 years in the French army, fought in Indochina and rose to army chief of staff before his coup, yet he never prosecuted a war, so \"soldier\" fits where \"warhawk\" does not."
+    },
+    {
+      "id": "bolivar",
+      "field": "intellect",
+      "severity": "warn",
+      "current": "6",
+      "suggested": "8 (offset force 7→6 and charisma 10→9 to hold the 43 budget)",
+      "why": "Bolívar authored the Cartagena Manifesto, the Jamaica Letter and the Angostura Address, among the most sophisticated political writing of the independence era."
+    },
+    {
+      "id": "bowser",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "His entire record is invading the Mushroom Kingdom and abducting its head of state, repeatedly."
+    },
+    {
+      "id": "briefcase-of-cash",
+      "field": "intellect",
+      "severity": "warn",
+      "current": "6",
+      "suggested": "3",
+      "why": "The bio says it \"explains absolutely nothing\" — cash persuades without reasoning, so its analytical stat should be near the floor with the points moved to force or grit."
+    },
+    {
+      "id": "caesar",
+      "field": "integrity",
+      "severity": "warn",
+      "current": "2",
+      "suggested": "4",
+      "why": "Caesar's trademark policy was clementia — he pardoned Pompeians such as Brutus and Cassius and honoured those terms, which is above the bad-faith floor of 2."
+    },
+    {
+      "id": "caligula",
+      "field": "bio",
+      "severity": "warn",
+      "current": "Made his horse a senator.",
+      "suggested": "Planned to make his horse a consul.",
+      "why": "Suetonius and Dio report that Caligula intended Incitatus for the consulship, not a senate seat."
+    },
+    {
+      "id": "caligula",
+      "field": "force",
+      "severity": "warn",
+      "current": "10",
+      "suggested": "8",
+      "why": "Caligula was a sickly non-soldier whose only campaign ended with troops collecting seashells on the Channel shore, and he was cut down by his own Praetorians after four years."
+    },
+    {
+      "id": "caligula",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "5",
+      "suggested": "7",
+      "why": "He outmanoeuvred Macro and Gemellus to take sole power in 37 AD, and the two points restore the 36-point flawed budget after lowering force."
+    },
+    {
+      "id": "chamberlain",
+      "field": "traits",
+      "severity": "warn",
+      "current": "statesman, isolationist, dealmaker",
+      "suggested": "statesman, dealmaker, technocrat",
+      "why": "Chamberlain was the opposite of an isolationist — he flew personally to Berchtesgaden, Godesberg and Munich and issued the Polish guarantee; his real background was the Birmingham businessman-administrator and Chancellor of the Exchequer."
+    },
+    {
+      "id": "churchill",
+      "field": "intellect",
+      "severity": "warn",
+      "current": "7",
+      "suggested": "8",
+      "why": "He wrote some forty books of history and biography and won the 1953 Nobel Prize in Literature, which places him above a middling intellect score."
+    },
+    {
+      "id": "colonel-sanders",
+      "field": "force",
+      "severity": "warn",
+      "current": "2",
+      "suggested": "4",
+      "why": "Harland Sanders served in the US Army in Cuba as a teenager and was an armed participant in the 1931 Corbin shootout over a Shell sign in which a rival's man was killed, so a 2 understates him."
+    },
+    {
+      "id": "crassus",
+      "field": "charisma",
+      "severity": "warn",
+      "current": "4",
+      "suggested": "6",
+      "why": "Plutarch records Crassus as courteous and affable, greeting ordinary citizens by name and defending them in court to build the largest patronage network in Rome."
+    },
+    {
+      "id": "crassus",
+      "field": "tier",
+      "severity": "warn",
+      "current": "flawed",
+      "suggested": "operator",
+      "why": "Crassus crushed the Spartacus revolt, bankrolled Caesar's rise and formed one third of the First Triumvirate — Carrhae ended him but the record before it is more than 36 points (restate all six stats to 40)."
+    },
+    {
+      "id": "danny-devito",
+      "field": "integrity",
+      "severity": "warn",
+      "current": "3",
+      "suggested": "6",
+      "why": "Integrity 3 borrows Frank Reynolds' morals; the real DeVito has a 40-year marriage, no professional scandals, and a reputation for keeping commitments to collaborators."
+    },
+    {
+      "id": "dracula",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "He drains Lucy Westenra to death, feeds on Mina and ships a crew of corpses into Whitby; the novel and every retelling remember him as the villain."
+    },
+    {
+      "id": "dracula",
+      "field": "traits",
+      "severity": "warn",
+      "current": "cunning, showman, isolationist",
+      "suggested": "cunning, showman, strategist",
+      "why": "His entire plot is to leave Transylvania and buy property across London to expand his feeding ground - the opposite of isolationism, and executed as a long campaign."
+    },
+    {
+      "id": "eleanor-roosevelt",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "3",
+      "suggested": "6",
+      "why": "She ran her own press corps, worked New York Democratic machine politics for decades, and out-manoeuvred the Soviet bloc to get the Universal Declaration of Human Rights adopted in 1948 — that is not a cunning of 3."
+    },
+    {
+      "id": "elon-musk",
+      "field": "tier",
+      "severity": "warn",
+      "current": "flawed",
+      "suggested": "operator",
+      "why": "He built the first reusable orbital rocket company, the dominant EV maker and Starlink, and bought and reshaped a global platform — that is more than a 36-point figure."
+    },
+    {
+      "id": "freddy-fazbear",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "In FNAF canon Freddy hunts night guards and stuffs them into animatronic suits; he is the franchise's principal killer, not a neutral party."
+    },
+    {
+      "id": "gandalf",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "Gandalf is a Maia sent expressly to oppose Sauron and spends the whole legendarium refusing the Ring and rallying the free peoples — canon remembers him as unambiguously good."
+    },
+    {
+      "id": "gandalf",
+      "field": "force",
+      "severity": "warn",
+      "current": "5",
+      "suggested": "7",
+      "why": "He kills a Balrog in single combat on the Peak of Zirakzigil and physically bars the Witch-king at Minas Tirith's gate, which is more than mid-scale coercive power."
+    },
+    {
+      "id": "glados",
+      "field": "traits",
+      "severity": "warn",
+      "current": "technocrat, cunning, demagogue",
+      "suggested": "technocrat, cunning, showman",
+      "why": "GLaDOS never works a crowd - she manipulates a single silent test subject with taunts, songs and the promise of cake, which is showmanship, not demagoguery."
+    },
+    {
+      "id": "godzilla",
+      "field": "integrity",
+      "severity": "warn",
+      "current": "9",
+      "suggested": "5",
+      "why": "Integrity measures keeping one's word, and a creature that flattens Tokyo without warning or bargain has no word to keep."
+    },
+    {
+      "id": "godzilla",
+      "field": "traits",
+      "severity": "warn",
+      "current": "warhawk, soldier, isolationist",
+      "suggested": "warhawk, isolationist, liability",
+      "why": "\"soldier\" implies discipline and a chain of command; Godzilla answers to no one and cannot be deployed, only survived."
+    },
+    {
+      "id": "gordon-ramsay",
+      "field": "traits",
+      "severity": "warn",
+      "current": "warhawk, soldier, showman",
+      "suggested": "warhawk, dealmaker, showman",
+      "why": "Ramsay never served in any military — he trained as a footballer then a chef — but he did build a multinational restaurant and broadcast empire on negotiated deals."
+    },
+    {
+      "id": "gordon-ramsay",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "2",
+      "suggested": "5",
+      "why": "A man who turned kitchen tantrums into a global restaurant group and a dozen licensed TV formats across two continents is not a 2 at manoeuvre."
+    },
+    {
+      "id": "gritty",
+      "field": "traits",
+      "severity": "warn",
+      "current": "showman, demagogue, soldier",
+      "suggested": "showman, demagogue, liability",
+      "why": "Gritty is a hockey mascot who prompted a police assault complaint from a fan and is banned from nothing but trusted with nothing either; \"soldier\" implies military service he canonically has none of."
+    },
+    {
+      "id": "hal-9000",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "HAL deliberately murders four sleeping crew and strands Poole in vacuum, which is remembered as villainy even if the conflicting orders explain it."
+    },
+    {
+      "id": "hamilton",
+      "field": "traits",
+      "severity": "warn",
+      "current": "technocrat, banker, scandal-magnet",
+      "suggested": "technocrat, banker, soldier",
+      "why": "Hamilton was an artillery captain, Washington's wartime aide and led the bayonet assault on Redoubt 10 at Yorktown, later Inspector General of the Army."
+    },
+    {
+      "id": "hamilton",
+      "field": "force",
+      "severity": "warn",
+      "current": "4",
+      "suggested": "6",
+      "why": "A combat officer who stormed a redoubt at bayonet point and later rode with the troops suppressing the Whiskey Rebellion rates above the desk-bound range."
+    },
+    {
+      "id": "hearst",
+      "field": "force",
+      "severity": "warn",
+      "current": "6",
+      "suggested": "3",
+      "why": "Hearst commanded printing presses, not men — his coercive reach was purely editorial, and he never held any office with armed or physical power."
+    },
+    {
+      "id": "herzog",
+      "field": "traits",
+      "severity": "warn",
+      "current": "statesman, strategist, isolationist",
+      "suggested": "showman, strategist, isolationist",
+      "why": "Herzog has never held or approached public office; he ate a boiled shoe on camera and hauled a steamship over a hill for a film, which is showmanship."
+    },
+    {
+      "id": "joker",
+      "field": "traits",
+      "severity": "warn",
+      "current": "demagogue, showman, paranoid",
+      "suggested": "demagogue, showman, liability",
+      "why": "The Joker is not suspicious of plots against him — the file's own bio says he wants nothing and cannot be negotiated with, which is the definition of a liability, not paranoia."
+    },
+    {
+      "id": "julia-child",
+      "field": "traits",
+      "severity": "warn",
+      "current": "technocrat, showman, soldier",
+      "suggested": "technocrat, showman, cunning",
+      "why": "Child was a civilian OSS research employee — she worked on shark repellent and handled classified files, never wore a uniform or held a rank."
+    },
+    {
+      "id": "lee-kuan-yew",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "7",
+      "suggested": "8",
+      "why": "Lee systematically bankrupted opponents through defamation suits and detained rivals without trial under Operation Coldstore — political manoeuvre was his signature instrument, not a middling skill."
+    },
+    {
+      "id": "mandela",
+      "field": "force",
+      "severity": "warn",
+      "current": "3",
+      "suggested": "5",
+      "why": "He co-founded and commanded Umkhonto we Sizwe, the ANC's armed wing, and was convicted for its sabotage campaign — he was not a pure non-violence figure."
+    },
+    {
+      "id": "marie-curie",
+      "field": "traits",
+      "severity": "warn",
+      "current": "technocrat, loyalist, statesman",
+      "suggested": "technocrat, loyalist, beloved",
+      "why": "Curie never held or sought public office and refused most public roles; she was, however, a nationally venerated figure and two-time Nobel laureate, which is \"beloved\", not \"statesman\"."
+    },
+    {
+      "id": "mister-rogers",
+      "field": "traits",
+      "severity": "warn",
+      "current": "beloved, statesman, loyalist",
+      "suggested": "beloved, statesman, technocrat",
+      "why": "Rogers was loyal to no faction or leader — he was an ordained minister with formal child-development training who scripted every episode against research, which is the technocrat's profile."
+    },
+    {
+      "id": "mr-burns",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "bad",
+      "why": "Burns literally blocked out the sun over Springfield to sell more power and keeps a private squad of goons; he is written as the town's villain, not a neutral party."
+    },
+    {
+      "id": "mussolini",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "5",
+      "suggested": "7",
+      "why": "He bluffed his way into power with the March on Rome, survived the Matteotti murder crisis, and brokered Munich - domestic manoeuvre was his one genuine talent even as his war planning failed."
+    },
+    {
+      "id": "nicolas-cage",
+      "field": "intellect",
+      "severity": "warn",
+      "current": "4",
+      "suggested": "6",
+      "why": "Cage is a heavy reader who took his stage name from a Marvel comic and articulated his own acting theory (\"Nouveau Shamanic\"); the record shows eccentricity, not low intelligence."
+    },
+    {
+      "id": "nicolas-cage",
+      "field": "traits",
+      "severity": "warn",
+      "current": "showman, soldier, liability",
+      "suggested": "showman, scandal-magnet, liability",
+      "why": "Cage never served in any military; his defining public pattern is the castles, dinosaur skull and four-day marriage, which is scandal-magnet."
+    },
+    {
+      "id": "niyazov",
+      "field": "charisma",
+      "severity": "warn",
+      "current": "9",
+      "suggested": "7",
+      "why": "Niyazov was a colourless Soviet party functionary whose personality cult was manufactured by decree — golden statues and renamed months — rather than by any personal magnetism."
+    },
+    {
+      "id": "niyazov",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "7",
+      "suggested": "9",
+      "why": "He climbed the Turkmen SSR apparatus to First Secretary, converted independence into a president-for-life post and neutralised every rival, which is manoeuvre worth more than his stage presence (keeps the 36-point flawed budget)."
+    },
+    {
+      "id": "oprah",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "Decades of philanthropy including the Leadership Academy for Girls and her role as one of America's most trusted public figures put her on the favourably-remembered side."
+    },
+    {
+      "id": "optimus-prime",
+      "field": "charisma",
+      "severity": "warn",
+      "current": "7",
+      "suggested": "9",
+      "why": "His command rests almost entirely on oratory that holds a scattered resistance together across millions of years, which is a higher charisma than 7."
+    },
+    {
+      "id": "pinochet",
+      "field": "traits",
+      "severity": "warn",
+      "current": "soldier, paranoid, technocrat",
+      "suggested": "soldier, paranoid, cunning",
+      "why": "Pinochet was an infantry officer who outsourced economic policy entirely to the Chicago Boys; the technocrats were his hires, not him, whereas he personally outmanoeuvred his fellow junta members to take sole power."
+    },
+    {
+      "id": "pol-pot",
+      "field": "traits",
+      "severity": "warn",
+      "current": "paranoid, demagogue, isolationist",
+      "suggested": "paranoid, strategist, isolationist",
+      "why": "Pol Pot ruled anonymously as \"Brother Number One\", concealing his identity and avoiding mass rallies, so demagogue (mass public appeal) misdescribes him where his clandestine organisational manoeuvre fits strategist."
+    },
+    {
+      "id": "potted-fern",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "9",
+      "suggested": "5",
+      "why": "The fern's stated function is passive presence — it overhears everything but never manoeuvres or manipulates, unlike the locked cabinet whose secrets are actively withheld."
+    },
+    {
+      "id": "robespierre",
+      "field": "force",
+      "severity": "warn",
+      "current": "7",
+      "suggested": "3",
+      "why": "He was a slight provincial lawyer who never held a command or fought; the Terror's violence was exercised through committee authority, which the stat sheet explicitly says is not force."
+    },
+    {
+      "id": "sauron",
+      "field": "charisma",
+      "severity": "warn",
+      "current": "3",
+      "suggested": "7",
+      "why": "As Annatar he charmed the Elven-smiths of Eregion into forging the Rings and later talked Ar-Pharazôn's Númenor into human sacrifice — that is seduction, not a charisma of 3."
+    },
+    {
+      "id": "sherlock",
+      "field": "traits",
+      "severity": "warn",
+      "current": "strategist, technocrat, paranoid",
+      "suggested": "strategist, technocrat, beloved",
+      "why": "Holmes is not suspicious of imagined threats - he is a public celebrity whose 'death' at Reichenbach put London into mourning, so beloved fits where paranoid does not."
+    },
+    {
+      "id": "simon-cowell",
+      "field": "traits",
+      "severity": "warn",
+      "current": "demagogue, cunning, showman",
+      "suggested": "dealmaker, cunning, showman",
+      "why": "Cowell's career is built on contracts - the Idol/X Factor formats and the recording deals attached to them - not on rousing crowds against an enemy, which is what demagogue means."
+    },
+    {
+      "id": "sonic",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "He is a Freedom Fighter whose entire canon is liberating animals from Robotnik's machines, which is a straightforwardly heroic record."
+    },
+    {
+      "id": "steve-irwin",
+      "field": "traits",
+      "severity": "warn",
+      "current": "beloved, soldier, showman",
+      "suggested": "beloved, showman, liability",
+      "why": "Irwin was a self-taught zookeeper with no military service, and famously fed a crocodile while holding his month-old son — the record supports recklessness, not soldiering."
+    },
+    {
+      "id": "the-rock",
+      "field": "traits",
+      "severity": "warn",
+      "current": "beloved, showman, soldier",
+      "suggested": "beloved, showman, dealmaker",
+      "why": "Johnson never served in any military — he was a college footballer turned wrestler, while he did build Seven Bucks, Teremana and bought the XFL, which is dealmaking, not soldiering."
+    },
+    {
+      "id": "the-rock",
+      "field": "cunning",
+      "severity": "warn",
+      "current": "2",
+      "suggested": "4 (trim force to 6)",
+      "why": "The man renegotiated his way from WWE mid-card to top-billed Hollywood producer and runs a tequila and production empire; cunning 2 makes him a naif, which the balance sheet contradicts."
+    },
+    {
+      "id": "toussaint",
+      "field": "charisma",
+      "severity": "warn",
+      "current": "5",
+      "suggested": "7 (offset grit 9→8 and force 7→6 to hold the 43 budget)",
+      "why": "He welded a fractured slave insurgency into a disciplined national army and commanded such personal loyalty that Napoleon had to lure him to a parley under false pretences to remove him — that is not a charisma of 5."
+    },
+    {
+      "id": "traffic-cone",
+      "field": "force",
+      "severity": "warn",
+      "current": "6",
+      "suggested": "3",
+      "why": "Force is physical/coercive power, and a hollow plastic cone stops nothing by contact — it redirects traffic purely by convention and visibility."
+    },
+    {
+      "id": "winnie-the-pooh",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "A century of readers remember Pooh purely for kindness and loyalty to his friends; nothing in canon is morally ambiguous."
+    },
+    {
+      "id": "yoda",
+      "field": "alignment",
+      "severity": "warn",
+      "current": "neutral",
+      "suggested": "good",
+      "why": "Yoda is the Jedi Grand Master who trains Luke and refuses the dark side even in exile; canon remembers him as good, not neutral."
+    },
+    {
+      "id": "yoda",
+      "field": "force",
+      "severity": "warn",
+      "current": "5",
+      "suggested": "7",
+      "why": "He duels Dooku and Palpatine personally in the Senate chamber and is canonically among the greatest lightsaber combatants alive."
+    },
+    {
+      "id": "cthulhu",
+      "field": "traits",
+      "severity": "nit",
+      "current": "isolationist, warhawk, paranoid",
+      "suggested": "isolationist, warhawk, demagogue",
+      "why": "Cthulhu is cosmically indifferent rather than suspicious, but he does command a worldwide cult that dreams his message, which is closer to demagogue."
+    },
+    {
+      "id": "einstein",
+      "field": "integrity",
+      "severity": "nit",
+      "current": "10",
+      "suggested": "8",
+      "why": "Einstein imposed a written list of household conditions on Mileva Marić and conducted an affair with (and later married) his cousin Elsa while still married, which sits awkwardly at a flawless 10."
+    },
+    {
+      "id": "filing-cabinet",
+      "field": "traits",
+      "severity": "nit",
+      "current": "paranoid, technocrat, banker",
+      "suggested": "paranoid, technocrat, cunning",
+      "why": "\"Banker\" denotes handling money; this cabinet stores records, and its leverage over everyone's past is better captured by cunning."
+    },
+    {
+      "id": "havel",
+      "field": "grit",
+      "severity": "nit",
+      "current": "7",
+      "suggested": "8",
+      "why": "Havel spent nearly five years in communist prisons (including a near-fatal illness in custody) and endured two decades of surveillance and harassment before 1989."
+    },
+    {
+      "id": "idi-amin",
+      "field": "traits",
+      "severity": "nit",
+      "current": "showman, warhawk, paranoid",
+      "suggested": "soldier, showman, paranoid",
+      "why": "Amin was a career soldier from the King's African Rifles who rose to army commander before seizing power, and \"soldier\" is the more defining tag than warhawk given his one botched Tanzania invasion."
+    },
+    {
+      "id": "marcos",
+      "field": "bio",
+      "severity": "nit",
+      "current": "Declared martial law and left behind three thousand pairs of shoes.",
+      "suggested": "Declared martial law; his wife left behind three thousand pairs of shoes.",
+      "why": "The shoe hoard found in Malacañang in 1986 was Imelda Marcos's, not Ferdinand's."
+    },
+    {
+      "id": "minecraft-steve",
+      "field": "traits",
+      "severity": "nit",
+      "current": "technocrat, soldier, loyalist",
+      "suggested": "technocrat, soldier, strategist",
+      "why": "Steve operates alone with no sovereign or faction to be loyal to; his defining behaviour is planning, mining and fortifying."
+    },
+    {
+      "id": "mr-burns",
+      "field": "force",
+      "severity": "nit",
+      "current": "3",
+      "suggested": "1",
+      "why": "Canon has him too feeble to crush a paper cup or lift a phone receiver, which the figure's own bio concedes."
+    },
+    {
+      "id": "nixon",
+      "field": "force",
+      "severity": "nit",
+      "current": "6",
+      "suggested": "4 (offset intellect 8→9 and grit 7→8)",
+      "why": "Nixon's only military service was as a rear-area Navy supply officer in WWII and his entire career was legal and political; his coercive reach was institutional, not personal."
+    },
+    {
+      "id": "rubber-stamp",
+      "field": "traits",
+      "severity": "nit",
+      "current": "loyalist, technocrat, liability",
+      "suggested": "loyalist, liability, dealmaker",
+      "why": "A technocrat rules by expertise and process review, which is the exact opposite of an object whose defining trait is approving documents unread."
+    },
+    {
+      "id": "shrek",
+      "field": "traits",
+      "severity": "nit",
+      "current": "isolationist, soldier, beloved",
+      "suggested": "isolationist, loyalist, beloved",
+      "why": "Shrek has no military service in canon — he is an ogre who scares off mobs and whose defining loyalty is to Fiona and Donkey, so \"loyalist\" fits where \"soldier\" does not."
+    }
+  ],
+  "clean": [
+    "lincoln",
+    "marcus-aurelius",
+    "ashoka",
+    "elizabeth-i",
+    "fdr",
+    "ardern",
+    "attlee",
+    "golda-meir",
+    "kofi-annan",
+    "sankara",
+    "genghis",
+    "stalin",
+    "mao",
+    "franco",
+    "ceausescu",
+    "kim-il-sung",
+    "duvalier",
+    "gaddafi",
+    "saddam",
+    "mobutu",
+    "vlad",
+    "bismarck",
+    "cleopatra",
+    "markiplier",
+    "mrbeast",
+    "keanu-reeves",
+    "kermit",
+    "homer-simpson",
+    "spongebob",
+    "patrick-star",
+    "gollum",
+    "crewmate",
+    "snoop-dogg",
+    "attenborough",
+    "turing",
+    "jane-goodall",
+    "bear-grylls",
+    "clarkson",
+    "chunghwa-cigs",
+    "red-telephone",
+    "roomba",
+    "fax-machine",
+    "shredder",
+    "nuclear-football",
+    "half-sandwich"
+  ]
+}

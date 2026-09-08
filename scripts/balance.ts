@@ -24,8 +24,8 @@ const politicians = loadPoliticians()
   const byPower = new Map<PowerTier, number>(POWER_TIERS.map((t) => [t, 0]))
   for (let i = 0; i < 2000; i++) {
     const rng = mulberry32(i)
-    for (const role of ROLES) {
-      for (const c of drawCandidates(rng, politicians, role)) {
+    for (let slot = 0; slot < ROLES.length; slot++) {
+      for (const c of drawCandidates(rng, politicians, ROLES)) {
         cards++
         if (c.category === 'wildcard') wild++
         byPower.set(c.tier, byPower.get(c.tier)! + 1)
