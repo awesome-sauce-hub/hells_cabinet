@@ -1,5 +1,4 @@
 import type { Politician, Role } from '../engine/types.js'
-import { POWER_STARS } from '../engine/types.js'
 
 export const ROLE_LABEL: Record<Role, string> = {
   President: 'President',
@@ -20,24 +19,12 @@ function initials(name: string): string {
   return words.slice(0, 2).map((w) => w[0]!.toUpperCase()).join('')
 }
 
-/** Tier as 1-5 stars. Coarse on purpose: strength, not a stat readout. */
-export function Stars({ figure }: { figure: Politician }) {
-  const filled = POWER_STARS[figure.tier]
-  return (
-    <span className="stars" title={`${figure.tier} (${filled}/5)`} aria-label={`${filled} out of 5 stars`}>
-      {[1, 2, 3, 4, 5].map((n) => (
-        <span className={n <= filled ? 'star on' : 'star'} key={n} aria-hidden>
-          {n <= filled ? '\u2605' : '\u2606'}
-        </span>
-      ))}
-    </span>
-  )
-}
-
 /**
- * Individual stats are deliberately absent. The player reads the person -
- * office, era, bio, traits and an overall star rating - and finds out the
- * numbers only in the verdict.
+ * No numbers of any kind reach the card - not individual stats, and not an
+ * aggregate strength rating either. The player reads the person: office, era,
+ * bio and traits. A visible power score would collapse an event-first draft
+ * into picking the highest number, which is the one thing the design cannot
+ * afford. The figures are revealed only in the verdict.
  */
 export function CandidateCard({
   figure,
@@ -73,7 +60,6 @@ export function CandidateCard({
       <span className="body">
         <span className="name">{figure.name}</span>
         <span className="office">{figure.office} · {figure.era}</span>
-        <Stars figure={figure} />
         <span className="bio">{figure.bio}</span>
         <span className="traits">
           {figure.traits.map((t) => (
@@ -103,7 +89,6 @@ export function SlotStrip({
           <div className={`slot ${state}`} key={role}>
             <div className="label">{ROLE_LABEL[role]}</div>
             <div className={`who ${picked ? '' : 'empty'}`}>{picked ? picked.name : '—'}</div>
-            {picked && <Stars figure={picked} />}
           </div>
         )
       })}

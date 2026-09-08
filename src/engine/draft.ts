@@ -27,7 +27,7 @@ const AFFINITY_BONUS = 2.5
  * 6 on the board. Weighted down rather than gated so any role can still be
  * offered one. See scripts/balance.ts for the realised rate.
  */
-const WILDCARD_WEIGHT = 0.2
+const WILDCARD_WEIGHT = 0.15
 /** Keeps a plausible pick likelier than an implausible one without excluding it. */
 const FIT_WEIGHT = 0.02
 /**
