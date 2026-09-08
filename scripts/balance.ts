@@ -8,7 +8,8 @@
  */
 import { loadEvents, loadPoliticians } from '../src/engine/content.js'
 import { drawCandidates, randomDraft } from '../src/engine/draft.js'
-import { ROLES } from '../src/engine/types.js'
+import { POWER_TIERS, ROLES } from '../src/engine/types.js'
+import type { PowerTier } from '../src/engine/types.js'
 import { mulberry32 } from '../src/engine/rng.js'
 import { TIERS, resolveEvent } from '../src/engine/resolve.js'
 import type { Tier } from '../src/engine/resolve.js'
@@ -20,16 +21,20 @@ const politicians = loadPoliticians()
 {
   let wild = 0
   let cards = 0
+  const byPower = new Map<PowerTier, number>(POWER_TIERS.map((t) => [t, 0]))
   for (let i = 0; i < 2000; i++) {
     const rng = mulberry32(i)
     for (const role of ROLES) {
       for (const c of drawCandidates(rng, politicians, role)) {
         cards++
         if (c.category === 'wildcard') wild++
+        byPower.set(c.tier, byPower.get(c.tier)! + 1)
       }
     }
   }
   console.log(`wildcards: ${((wild / cards) * 100).toFixed(1)}% of cards offered`)
+  const share = POWER_TIERS.map((t) => `${t} ${((byPower.get(t)! / cards) * 100).toFixed(1)}%`)
+  console.log(`power tiers offered: ${share.join(', ')}`)
 }
 
 for (const event of loadEvents()) {

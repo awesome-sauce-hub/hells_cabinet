@@ -21,6 +21,8 @@ export interface CheckResult {
 
 export interface Resolution {
   event: GameEvent
+  /** Kept on the result so the verdict screen can reveal the hidden stats. */
+  roster: Roster
   checks: CheckResult[]
   chemistry: ChemistryResult
   /** 0-100. */
@@ -74,6 +76,7 @@ export function resolveEvent(event: GameEvent, roster: Roster): Resolution {
 
   return {
     event,
+    roster,
     checks,
     chemistry: chem,
     score,

@@ -9,7 +9,7 @@
  */
 import { z } from 'zod'
 import { readFileSync } from 'node:fs'
-import { CATEGORIES, ROLES, STATS } from '../src/engine/types.js'
+import { CATEGORIES, POWER_BUDGETS, POWER_TIERS, ROLES, STATS } from '../src/engine/types.js'
 import { loadEvents, loadPoliticians } from '../src/engine/content.js'
 
 const roleEnum = z.enum(ROLES)
@@ -18,6 +18,7 @@ const statEnum = z.enum(STATS)
 const politicianSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
   category: z.enum(CATEGORIES),
+  tier: z.enum(POWER_TIERS),
   name: z.string().min(1),
   country: z.string().min(1),
   era: z.string().min(1),
@@ -68,15 +69,17 @@ for (const [i, e] of rawEvents.entries()) {
 }
 
 /**
- * Every figure spends the same number of stat points, so strength has to be
- * bought with weakness. Without this, high-total cards win regardless of what
- * the event asks and the draft collapses into "pick the biggest number".
+ * A figure spends exactly its tier's budget - no more, so strength still has to
+ * be bought with weakness, and no less, so nobody is quietly undercooked.
+ * Tiers themselves are unequal on purpose: the roster is meant to have obvious
+ * heavyweights and obvious liabilities, not twenty-one interchangeable cards.
  */
-const STAT_BUDGET = 40
 for (const p of rawPoliticians) {
+  const budget = POWER_BUDGETS[p.tier as keyof typeof POWER_BUDGETS]
+  if (budget === undefined) continue // schema already reported the bad tier
   const total = Object.values(p.stats ?? {}).reduce((a: number, b) => a + (b as number), 0)
-  if (total !== STAT_BUDGET) {
-    fail(`politician ${p.id}: stat total ${total}, budget is ${STAT_BUDGET}`)
+  if (total !== budget) {
+    fail(`politician ${p.id}: stat total ${total}, budget for tier ${p.tier} is ${budget}`)
   }
 }
 

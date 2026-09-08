@@ -1,4 +1,4 @@
-import { ROLES } from './types.js'
+import { POWER_TIERS, ROLES } from './types.js'
 import type { Politician, Role, Roster } from './types.js'
 import { sampleWeighted } from './rng.js'
 import type { Rng } from './rng.js'
@@ -27,14 +27,27 @@ const AFFINITY_BONUS = 2.5
  * 6 on the board. Weighted down rather than gated so any role can still be
  * offered one. See scripts/balance.ts for the realised rate.
  */
-const WILDCARD_WEIGHT = 0.35
+const WILDCARD_WEIGHT = 0.2
 /** Keeps a plausible pick likelier than an implausible one without excluding it. */
 const FIT_WEIGHT = 0.02
+/**
+ * Power tiers are drawn unevenly: a titan on the board should feel like luck and
+ * a liability like the ordinary weather. Weights are relative, so a titan is
+ * ~7x rarer than an operator and ~9x rarer than a liability per slot. See
+ * scripts/balance.ts for the realised rates.
+ */
+const POWER_RARITY: Record<(typeof POWER_TIERS)[number], number> = {
+  titan: 0.15,
+  heavyweight: 0.45,
+  operator: 1,
+  flawed: 1.15,
+  liability: 1.3,
+}
 
 export function poolWeight(p: Politician, role: Role): number {
   const affine = ROLE_AFFINITY[role].some((t) => p.traits.includes(t))
   const base = 1 + (affine ? AFFINITY_BONUS : 0)
-  const rarity = p.category === 'wildcard' ? WILDCARD_WEIGHT : 1
+  const rarity = (p.category === 'wildcard' ? WILDCARD_WEIGHT : 1) * POWER_RARITY[p.tier]
   return base * rarity * (1 + roleScore(p.stats, role) * FIT_WEIGHT)
 }
 

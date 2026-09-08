@@ -1,18 +1,20 @@
 [
   {
     "id": "churchill",
+    "category": "politician",
+    "tier": "titan",
     "name": "Winston Churchill",
     "country": "United Kingdom",
     "era": "1940s",
     "office": "Prime Minister",
     "bio": "Will not surrender, will not go to bed, will not stop dictating.",
     "stats": {
-      "charisma": 8,
+      "charisma": 9,
       "cunning": 5,
       "integrity": 4,
       "grit": 10,
-      "intellect": 6,
-      "force": 7
+      "intellect": 8,
+      "force": 10
     },
     "traits": [
       "statesman",
@@ -22,11 +24,12 @@
     "rivals": [
       "chamberlain"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "chamberlain",
+    "category": "politician",
+    "tier": "flawed",
     "name": "Neville Chamberlain",
     "country": "United Kingdom",
     "era": "1930s",
@@ -34,11 +37,11 @@
     "bio": "Brings an umbrella to every crisis and a signature to most of them.",
     "stats": {
       "charisma": 6,
-      "cunning": 6,
+      "cunning": 5,
       "integrity": 10,
-      "grit": 6,
+      "grit": 5,
       "intellect": 9,
-      "force": 3
+      "force": 1
     },
     "traits": [
       "statesman",
@@ -48,34 +51,36 @@
     "rivals": [
       "churchill"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "bismarck",
+    "category": "politician",
+    "tier": "titan",
     "name": "Otto von Bismarck",
     "country": "Prussia",
     "era": "1870s",
     "office": "Chancellor",
     "bio": "Has already arranged the war you have not yet decided to start.",
     "stats": {
-      "charisma": 5,
+      "charisma": 6,
       "cunning": 10,
       "integrity": 4,
-      "grit": 7,
-      "intellect": 8,
-      "force": 6
+      "grit": 8,
+      "intellect": 10,
+      "force": 8
     },
     "traits": [
       "strategist",
       "cunning",
       "statesman"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "eleanor-roosevelt",
+    "category": "politician",
+    "tier": "operator",
     "name": "Eleanor Roosevelt",
     "country": "United States",
     "era": "1940s",
@@ -94,11 +99,12 @@
       "statesman",
       "loyalist"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "nixon",
+    "category": "politician",
+    "tier": "heavyweight",
     "name": "Richard Nixon",
     "country": "United States",
     "era": "1970s",
@@ -108,8 +114,8 @@
       "charisma": 6,
       "cunning": 10,
       "integrity": 1,
-      "grit": 8,
-      "intellect": 8,
+      "grit": 9,
+      "intellect": 10,
       "force": 7
     },
     "traits": [
@@ -117,23 +123,24 @@
       "cunning",
       "scandal-magnet"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "caesar",
+    "category": "politician",
+    "tier": "titan",
     "name": "Julius Caesar",
     "country": "Rome",
     "era": "Antiquity",
     "office": "Dictator",
     "bio": "Excellent general, adequate delegator, catastrophic at reading a room.",
     "stats": {
-      "charisma": 8,
-      "cunning": 8,
+      "charisma": 9,
+      "cunning": 9,
       "integrity": 1,
-      "grit": 8,
-      "intellect": 7,
-      "force": 8
+      "grit": 9,
+      "intellect": 8,
+      "force": 10
     },
     "traits": [
       "soldier",
@@ -144,11 +151,12 @@
     "rivals": [
       "crassus"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "cleopatra",
+    "category": "politician",
+    "tier": "heavyweight",
     "name": "Cleopatra VII",
     "country": "Egypt",
     "era": "Antiquity",
@@ -156,10 +164,10 @@
     "bio": "Arrives by boat, leaves with your navy.",
     "stats": {
       "charisma": 10,
-      "cunning": 9,
-      "integrity": 4,
-      "grit": 6,
-      "intellect": 7,
+      "cunning": 10,
+      "integrity": 3,
+      "grit": 7,
+      "intellect": 9,
       "force": 4
     },
     "traits": [
@@ -167,22 +175,23 @@
       "showman",
       "cunning"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "genghis",
+    "category": "politician",
+    "tier": "heavyweight",
     "name": "Genghis Khan",
     "country": "Mongol Empire",
     "era": "Medieval",
     "office": "Great Khan",
     "bio": "Outstanding logistics. Do not give him the word 'escalate'.",
     "stats": {
-      "charisma": 5,
+      "charisma": 6,
       "cunning": 7,
       "integrity": 3,
-      "grit": 9,
-      "intellect": 6,
+      "grit": 10,
+      "intellect": 7,
       "force": 10
     },
     "traits": [
@@ -190,11 +199,12 @@
       "soldier",
       "strategist"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "hamilton",
+    "category": "politician",
+    "tier": "operator",
     "name": "Alexander Hamilton",
     "country": "United States",
     "era": "1790s",
@@ -213,11 +223,12 @@
       "banker",
       "scandal-magnet"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "hearst",
+    "category": "politician",
+    "tier": "operator",
     "name": "William Randolph Hearst",
     "country": "United States",
     "era": "1900s",
@@ -236,11 +247,12 @@
       "showman",
       "scandal-magnet"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "crassus",
+    "category": "politician",
+    "tier": "operator",
     "name": "Marcus Licinius Crassus",
     "country": "Rome",
     "era": "Antiquity",
@@ -262,80 +274,84 @@
     "rivals": [
       "caesar"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "lincoln",
+    "category": "politician",
+    "tier": "titan",
     "name": "Abraham Lincoln",
     "country": "United States",
     "era": "1860s",
     "office": "President",
     "bio": "Keeps his rivals in the cabinet and his temper in a drawer.",
     "stats": {
-      "charisma": 7,
-      "cunning": 5,
-      "integrity": 9,
-      "grit": 9,
-      "intellect": 8,
-      "force": 2
+      "charisma": 9,
+      "cunning": 6,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 10,
+      "force": 1
     },
     "traits": [
       "beloved",
       "statesman",
       "strategist"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "talleyrand",
+    "category": "politician",
+    "tier": "heavyweight",
     "name": "Charles-Maurice de Talleyrand",
     "country": "France",
     "era": "1800s",
     "office": "Foreign Minister",
     "bio": "Has served every regime France has had, and outlived most of them.",
     "stats": {
-      "charisma": 7,
+      "charisma": 8,
       "cunning": 10,
       "integrity": 2,
       "grit": 7,
-      "intellect": 9,
-      "force": 5
+      "intellect": 10,
+      "force": 6
     },
     "traits": [
       "dealmaker",
       "cunning",
       "loyalist"
     ],
-    "reviewed": true,
-    "category": "politician"
+    "reviewed": true
   },
   {
     "id": "freddy-fazbear",
+    "category": "wildcard",
+    "tier": "titan",
     "name": "Freddy Fazbear",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Animatronic Entertainer",
     "bio": "Runs on rails, works nights, and has never once been talked down from anything.",
     "stats": {
-      "charisma": 7,
-      "cunning": 6,
+      "charisma": 9,
+      "cunning": 9,
       "integrity": 4,
       "grit": 10,
       "intellect": 4,
-      "force": 9
+      "force": 10
     },
     "traits": [
       "showman",
       "soldier",
       "paranoid"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "markiplier",
+    "category": "wildcard",
+    "tier": "flawed",
     "name": "Markiplier",
     "country": "United States",
     "era": "Internet",
@@ -343,22 +359,23 @@
     "bio": "Can hold a room for nine hours and has the vocal cords to prove it.",
     "stats": {
       "charisma": 10,
-      "cunning": 5,
+      "cunning": 4,
       "integrity": 8,
       "grit": 9,
-      "intellect": 6,
-      "force": 2
+      "intellect": 4,
+      "force": 1
     },
     "traits": [
       "showman",
       "beloved",
       "loyalist"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "mrbeast",
+    "category": "wildcard",
+    "tier": "operator",
     "name": "MrBeast",
     "country": "United States",
     "era": "Internet",
@@ -377,45 +394,47 @@
       "dealmaker",
       "showman"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "gordon-ramsay",
+    "category": "wildcard",
+    "tier": "flawed",
     "name": "Gordon Ramsay",
     "country": "United Kingdom",
     "era": "Modern",
     "office": "Chef",
     "bio": "Extremely effective under pressure, unusable in a press conference.",
     "stats": {
-      "charisma": 8,
+      "charisma": 7,
       "cunning": 2,
       "integrity": 6,
       "grit": 9,
-      "intellect": 6,
-      "force": 9
+      "intellect": 4,
+      "force": 8
     },
     "traits": [
       "warhawk",
       "soldier",
       "showman"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "bob-ross",
+    "category": "wildcard",
+    "tier": "flawed",
     "name": "Bob Ross",
     "country": "United States",
     "era": "1980s",
     "office": "Painter, former Air Force Master Sergeant",
     "bio": "Twenty years in the military and has not raised his voice since.",
     "stats": {
-      "charisma": 8,
-      "cunning": 4,
+      "charisma": 7,
+      "cunning": 3,
       "integrity": 10,
       "grit": 8,
-      "intellect": 9,
+      "intellect": 7,
       "force": 1
     },
     "traits": [
@@ -423,11 +442,12 @@
       "statesman",
       "loyalist"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "darth-vader",
+    "category": "wildcard",
+    "tier": "operator",
     "name": "Darth Vader",
     "country": "Fictional",
     "era": "Fictional",
@@ -447,11 +467,12 @@
       "paranoid",
       "strategist"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "keanu-reeves",
+    "category": "wildcard",
+    "tier": "flawed",
     "name": "Keanu Reeves",
     "country": "Canada",
     "era": "Modern",
@@ -459,22 +480,23 @@
     "bio": "Universally trusted, which in this cabinet is a structural advantage.",
     "stats": {
       "charisma": 8,
-      "cunning": 3,
+      "cunning": 2,
       "integrity": 10,
-      "grit": 8,
-      "intellect": 6,
-      "force": 5
+      "grit": 7,
+      "intellect": 5,
+      "force": 4
     },
     "traits": [
       "beloved",
       "loyalist",
       "statesman"
     ],
-    "category": "wildcard",
     "reviewed": true
   },
   {
     "id": "kermit",
+    "category": "wildcard",
+    "tier": "operator",
     "name": "Kermit the Frog",
     "country": "Fictional",
     "era": "Fictional",
@@ -493,7 +515,6 @@
       "beloved",
       "loyalist"
     ],
-    "category": "wildcard",
     "reviewed": true
   }
 ]

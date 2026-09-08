@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import type { GameEvent, Politician } from './types.js'
+import { shippable } from './roster.js'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const contentDir = join(here, '..', '..', 'content')
@@ -12,7 +13,7 @@ function load<T>(file: string): T {
 
 /** Only reviewed entries ever reach the game. See the ingest pipeline. */
 export function loadPoliticians(): Politician[] {
-  return load<Politician[]>('politicians.json').filter((p) => p.reviewed)
+  return shippable(load<Politician[]>('politicians.json'))
 }
 
 export function loadEvents(): GameEvent[] {

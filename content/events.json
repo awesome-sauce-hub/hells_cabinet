@@ -27,14 +27,14 @@
       {
         "role": "VicePresident",
         "stat_bias": "grit",
-        "dc": 68,
+        "dc": 71,
         "weight": 0.8,
         "note": "holding the room together at 4am"
       },
       {
         "role": "Treasurer",
         "stat_bias": "intellect",
-        "dc": 65,
+        "dc": 81,
         "weight": 0.5,
         "note": "costing the blockade"
       }
@@ -77,7 +77,7 @@
       {
         "role": "President",
         "stat_bias": "charisma",
-        "dc": 70,
+        "dc": 75,
         "note": "stopping the run before it starts"
       },
       {
