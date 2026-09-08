@@ -70,7 +70,7 @@
       {
         "role": "Treasurer",
         "stat_bias": "intellect",
-        "dc": 78,
+        "dc": 68,
         "weight": 1.5,
         "note": "understanding the instruments"
       },
@@ -83,7 +83,7 @@
       {
         "role": "PropagandaMinister",
         "stat_bias": "cunning",
-        "dc": 74,
+        "dc": 70,
         "note": "the word 'rescue' instead of 'bailout'"
       },
       {

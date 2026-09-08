@@ -33,8 +33,13 @@ export interface Resolution {
 
 /** Half role fit, half the stat the event actually cares about. */
 const ROLE_FIT_SHARE = 0.5
-/** Margin at which a check is fully won or fully lost. */
-const MARGIN_BAND = 30
+/**
+ * Margin at which a check is fully won or fully lost, and the single lever over
+ * how far apart ordinary and perfect play land. Raising it compresses the range:
+ * shifting every dc moves the ceiling and the average together and so cannot
+ * separate them. See scripts/autotune.ts.
+ */
+const MARGIN_BAND = 38
 
 function runCheck(check: Check, roster: Roster, isTwist: boolean): CheckResult {
   const p = roster[check.role]

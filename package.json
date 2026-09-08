@@ -14,7 +14,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "review": "tsx scripts/review-content.ts"
+    "review": "tsx scripts/review-content.ts",
+    "autotune": "tsx scripts/autotune.ts"
   },
   "devDependencies": {
     "@types/node": "^26.5.0",
