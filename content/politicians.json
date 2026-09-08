@@ -1,0 +1,149 @@
+[
+  {
+    "id": "churchill",
+    "name": "Winston Churchill",
+    "country": "United Kingdom",
+    "era": "1940s",
+    "office": "Prime Minister",
+    "bio": "Will not surrender, will not go to bed, will not stop dictating.",
+    "stats": { "charisma": 9, "cunning": 7, "integrity": 6, "grit": 10, "intellect": 8, "force": 8 },
+    "traits": ["statesman", "warhawk", "showman"],
+    "rivals": ["chamberlain"],
+    "reviewed": true
+  },
+  {
+    "id": "chamberlain",
+    "name": "Neville Chamberlain",
+    "country": "United Kingdom",
+    "era": "1930s",
+    "office": "Prime Minister",
+    "bio": "Brings an umbrella to every crisis and a signature to most of them.",
+    "stats": { "charisma": 4, "cunning": 4, "integrity": 7, "grit": 4, "intellect": 6, "force": 2 },
+    "traits": ["statesman", "isolationist", "dealmaker"],
+    "rivals": ["churchill"],
+    "reviewed": true
+  },
+  {
+    "id": "bismarck",
+    "name": "Otto von Bismarck",
+    "country": "Prussia",
+    "era": "1870s",
+    "office": "Chancellor",
+    "bio": "Has already arranged the war you have not yet decided to start.",
+    "stats": { "charisma": 6, "cunning": 10, "integrity": 4, "grit": 8, "intellect": 9, "force": 7 },
+    "traits": ["strategist", "cunning", "statesman"],
+    "reviewed": true
+  },
+  {
+    "id": "eleanor-roosevelt",
+    "name": "Eleanor Roosevelt",
+    "country": "United States",
+    "era": "1940s",
+    "office": "First Lady, UN Delegate",
+    "bio": "The only person in the cabinet who has read the whole document.",
+    "stats": { "charisma": 8, "cunning": 5, "integrity": 9, "grit": 8, "intellect": 8, "force": 2 },
+    "traits": ["beloved", "statesman", "loyalist"],
+    "reviewed": true
+  },
+  {
+    "id": "nixon",
+    "name": "Richard Nixon",
+    "country": "United States",
+    "era": "1970s",
+    "office": "President",
+    "bio": "Brilliant at foreign policy, cannot be left alone with a tape recorder.",
+    "stats": { "charisma": 4, "cunning": 9, "integrity": 2, "grit": 7, "intellect": 8, "force": 6 },
+    "traits": ["paranoid", "cunning", "scandal-magnet"],
+    "reviewed": true
+  },
+  {
+    "id": "caesar",
+    "name": "Julius Caesar",
+    "country": "Rome",
+    "era": "Antiquity",
+    "office": "Dictator",
+    "bio": "Excellent general, adequate delegator, catastrophic at reading a room.",
+    "stats": { "charisma": 9, "cunning": 9, "integrity": 3, "grit": 9, "intellect": 8, "force": 9 },
+    "traits": ["soldier", "strategist", "showman", "cunning"],
+    "rivals": ["crassus"],
+    "reviewed": true
+  },
+  {
+    "id": "cleopatra",
+    "name": "Cleopatra VII",
+    "country": "Egypt",
+    "era": "Antiquity",
+    "office": "Pharaoh",
+    "bio": "Arrives by boat, leaves with your navy.",
+    "stats": { "charisma": 10, "cunning": 9, "integrity": 4, "grit": 7, "intellect": 8, "force": 4 },
+    "traits": ["dealmaker", "showman", "cunning"],
+    "reviewed": true
+  },
+  {
+    "id": "genghis",
+    "name": "Genghis Khan",
+    "country": "Mongol Empire",
+    "era": "Medieval",
+    "office": "Great Khan",
+    "bio": "Outstanding logistics. Do not give him the word 'escalate'.",
+    "stats": { "charisma": 6, "cunning": 8, "integrity": 3, "grit": 10, "intellect": 6, "force": 10 },
+    "traits": ["warhawk", "soldier", "strategist"],
+    "reviewed": true
+  },
+  {
+    "id": "hamilton",
+    "name": "Alexander Hamilton",
+    "country": "United States",
+    "era": "1790s",
+    "office": "Secretary of the Treasury",
+    "bio": "Will fix the national debt and publish a pamphlet about his personal life.",
+    "stats": { "charisma": 7, "cunning": 7, "integrity": 5, "grit": 8, "intellect": 10, "force": 6 },
+    "traits": ["technocrat", "banker", "scandal-magnet"],
+    "reviewed": true
+  },
+  {
+    "id": "hearst",
+    "name": "William Randolph Hearst",
+    "country": "United States",
+    "era": "1900s",
+    "office": "Congressman, Publisher",
+    "bio": "You furnish the crisis, he will furnish the coverage.",
+    "stats": { "charisma": 7, "cunning": 8, "integrity": 2, "grit": 6, "intellect": 6, "force": 5 },
+    "traits": ["demagogue", "showman", "scandal-magnet"],
+    "reviewed": true
+  },
+  {
+    "id": "crassus",
+    "name": "Marcus Licinius Crassus",
+    "country": "Rome",
+    "era": "Antiquity",
+    "office": "Consul",
+    "bio": "Richest man in Rome. Owns the fire brigade. Will negotiate at the fire.",
+    "stats": { "charisma": 4, "cunning": 8, "integrity": 2, "grit": 6, "intellect": 7, "force": 5 },
+    "traits": ["banker", "dealmaker", "paranoid"],
+    "rivals": ["caesar"],
+    "reviewed": true
+  },
+  {
+    "id": "lincoln",
+    "name": "Abraham Lincoln",
+    "country": "United States",
+    "era": "1860s",
+    "office": "President",
+    "bio": "Keeps his rivals in the cabinet and his temper in a drawer.",
+    "stats": { "charisma": 8, "cunning": 7, "integrity": 9, "grit": 10, "intellect": 9, "force": 5 },
+    "traits": ["beloved", "statesman", "strategist"],
+    "reviewed": true
+  },
+  {
+    "id": "talleyrand",
+    "name": "Charles-Maurice de Talleyrand",
+    "country": "France",
+    "era": "1800s",
+    "office": "Foreign Minister",
+    "bio": "Has served every regime France has had, and outlived most of them.",
+    "stats": { "charisma": 7, "cunning": 10, "integrity": 2, "grit": 7, "intellect": 9, "force": 3 },
+    "traits": ["dealmaker", "cunning", "loyalist"],
+    "reviewed": true
+  }
+]

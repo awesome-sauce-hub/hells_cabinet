@@ -1,0 +1,23 @@
+{
+  "name": "politidle",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sim": "tsx scripts/sim.ts",
+    "balance": "tsx scripts/balance.ts",
+    "calibrate": "tsx scripts/calibrate.ts",
+    "solvability": "tsx scripts/solvability.ts",
+    "validate": "tsx scripts/validate-content.ts",
+    "test": "vitest run && npm run validate"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "dependencies": {
+    "zod": "^4.5.4"
+  }
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cuban-missile-crisis",
+    "title": "The Cuban Missile Crisis",
+    "year": 1962,
+    "dossier": "Thirteen days. Everybody in the room is exhausted, and at least two of them want to bomb something to get it over with.",
+    "briefing_hint": "This one is won or lost on nerve, not firepower.",
+    "spotlight": [
+      "President",
+      "General",
+      "VicePresident"
+    ],
+    "checks": [
+      {
+        "role": "General",
+        "stat_bias": "force",
+        "invert": true,
+        "dc": 55,
+        "note": "restraint under pressure"
+      },
+      {
+        "role": "President",
+        "stat_bias": "cunning",
+        "dc": 72,
+        "note": "a ladder for the other side to climb down"
+      },
+      {
+        "role": "VicePresident",
+        "stat_bias": "grit",
+        "dc": 66,
+        "weight": 0.8,
+        "note": "holding the room together at 4am"
+      },
+      {
+        "role": "Treasurer",
+        "stat_bias": "intellect",
+        "dc": 60,
+        "weight": 0.5,
+        "note": "costing the blockade"
+      }
+    ],
+    "twist": {
+      "id": "the-leak",
+      "text": "A transcript of the war room reaches the evening papers.",
+      "check": {
+        "role": "PropagandaMinister",
+        "stat_bias": "charisma",
+        "dc": 68,
+        "weight": 1.2
+      }
+    },
+    "tags": [
+      "military",
+      "diplomacy",
+      "brinkmanship"
+    ]
+  },
+  {
+    "id": "the-2008-crash",
+    "title": "The 2008 Financial Crisis",
+    "year": 2008,
+    "dossier": "A bank you have never heard of has failed, and it turns out everything was standing on it.",
+    "briefing_hint": "Nobody will remember your speech. They will remember whether the cash machines worked.",
+    "spotlight": [
+      "Treasurer",
+      "President",
+      "PropagandaMinister"
+    ],
+    "checks": [
+      {
+        "role": "Treasurer",
+        "stat_bias": "intellect",
+        "dc": 74,
+        "weight": 1.5,
+        "note": "understanding the instruments"
+      },
+      {
+        "role": "President",
+        "stat_bias": "charisma",
+        "dc": 70,
+        "note": "stopping the run before it starts"
+      },
+      {
+        "role": "PropagandaMinister",
+        "stat_bias": "cunning",
+        "dc": 73,
+        "note": "the word 'rescue' instead of 'bailout'"
+      },
+      {
+        "role": "General",
+        "stat_bias": "force",
+        "invert": true,
+        "dc": 50,
+        "weight": 0.4,
+        "note": "not deploying troops to a bank"
+      }
+    ],
+    "twist": {
+      "id": "the-bonus-memo",
+      "text": "The rescued bank pays out its bonuses on schedule.",
+      "check": {
+        "role": "VicePresident",
+        "stat_bias": "integrity",
+        "dc": 52,
+        "weight": 1.2
+      }
+    },
+    "tags": [
+      "economy",
+      "panic",
+      "media"
+    ]
+  }
+]
