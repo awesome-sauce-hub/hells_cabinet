@@ -9,7 +9,7 @@
  */
 import { z } from 'zod'
 import { readFileSync } from 'node:fs'
-import { CATEGORIES, POWER_BUDGETS, POWER_TIERS, ROLES, STATS } from '../src/engine/types.js'
+import { ALIGNMENTS, CATEGORIES, POWER_BUDGETS, POWER_TIERS, ROLES, STATS } from '../src/engine/types.js'
 import { loadEvents, loadPoliticians } from '../src/engine/content.js'
 
 const roleEnum = z.enum(ROLES)
@@ -18,6 +18,8 @@ const statEnum = z.enum(STATS)
 const politicianSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
   category: z.enum(CATEGORIES),
+  alignment: z.enum(ALIGNMENTS),
+  endsRun: z.string().min(1).optional(),
   tier: z.enum(POWER_TIERS),
   name: z.string().min(1),
   country: z.string().min(1),
@@ -83,6 +85,15 @@ for (const p of rawPoliticians) {
   }
 }
 
+/**
+ * The instant-loss card is a punchline and punchlines do not scale: a second
+ * one turns "the Nixon rule" into a mechanic the player has to play around.
+ */
+const enders = rawPoliticians.filter((p: { endsRun?: string }) => p.endsRun)
+if (enders.length > 1) {
+  fail(`${enders.length} figures end the run instantly; exactly one is allowed`)
+}
+
 const ids = new Set<string>(rawPoliticians.map((p: { id: string }) => p.id))
 for (const p of rawPoliticians) {
   for (const r of p.rivals ?? []) {
@@ -121,9 +132,9 @@ if (errors.length) {
   for (const e of errors) console.error(`   - ${e}`)
   process.exit(1)
 }
-const wildcards = shipped.filter((p) => p.category === 'wildcard').length
+const count = (c: string) => shipped.filter((p) => p.category === c).length
 console.log(
   `  content ok: ${shipped.length} figures ` +
-    `(${shipped.length - wildcards} politicians, ${wildcards} wildcards), ` +
-    `${loadEvents().length} events`,
+    `(${count('politician')} politicians, ${count('wildcard')} wildcards, ` +
+    `${count('object')} objects), ${loadEvents().length} events`,
 )

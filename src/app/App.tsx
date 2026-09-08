@@ -17,7 +17,7 @@ import type { Resolution } from '../engine/resolve.js'
 import { roleScore } from '../engine/score.js'
 import { ROLES, STAT_ABBR, STATS } from '../engine/types.js'
 
-type Phase = 'briefing' | 'draft' | 'sim' | 'verdict'
+type Phase = 'briefing' | 'draft' | 'gameover' | 'sim' | 'verdict'
 
 export default function App() {
   const [seed, setSeed] = useState(todayKey())
@@ -38,6 +38,10 @@ export default function App() {
     if (!draft) return
     const next = { ...pickCandidate(draft, id) }
     setDraft(next)
+    if (next.endedBy) {
+      setPhase('gameover')
+      return
+    }
     if (isDraftComplete(next)) {
       setResult(resolveEvent(run.event, finishDraft(next)))
       setPhase('sim')
@@ -64,6 +68,10 @@ export default function App() {
           onRespin={() => setDraft({ ...respin(draft) })}
           onBench={(id) => setDraft({ ...bench(draft, id) })}
         />
+      )}
+
+      {phase === 'gameover' && draft?.endedBy && (
+        <GameOver figure={draft.endedBy} onAgain={() => newRun(randomSeed())} />
       )}
 
       {phase === 'sim' && result && (
@@ -169,6 +177,28 @@ function Draft({
             canBench={draft.benches > 0}
           />
         ))}
+      </div>
+    </>
+  )
+}
+
+/** The one card that ends a run the moment it is appointed. */
+function GameOver({
+  figure,
+  onAgain,
+}: {
+  figure: NonNullable<DraftState['endedBy']>
+  onAgain: () => void
+}) {
+  return (
+    <>
+      <div className="panel gameover">
+        <div className="stamp">ADMINISTRATION ENDED</div>
+        <h1>{figure.name}</h1>
+        <p className="said">{figure.endsRun}</p>
+      </div>
+      <div className="row mt">
+        <button className="primary" onClick={onAgain}>Try that again</button>
       </div>
     </>
   )

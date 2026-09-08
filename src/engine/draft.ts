@@ -1,4 +1,4 @@
-import { POWER_TIERS, ROLES } from './types.js'
+import { ALIGNMENTS, POWER_TIERS, ROLES } from './types.js'
 import type { Politician, Role, Roster } from './types.js'
 import { sampleWeighted } from './rng.js'
 import type { Rng } from './rng.js'
@@ -28,6 +28,9 @@ const AFFINITY_BONUS = 2.5
  * offered one. See scripts/balance.ts for the realised rate.
  */
 const WILDCARD_WEIGHT = 0.15
+/** Objects are rarer still - a filing cabinet running the treasury is a gag
+ *  that stops landing the third time it happens in one run. */
+const OBJECT_WEIGHT = 0.09
 /** Keeps a plausible pick likelier than an implausible one without excluding it. */
 const FIT_WEIGHT = 0.02
 /**
@@ -44,10 +47,25 @@ const POWER_RARITY: Record<(typeof POWER_TIERS)[number], number> = {
   liability: 1.3,
 }
 
+/**
+ * The people history actually has an opinion about are the exception, not the
+ * rule. A genuine reformer is the rarest thing on the board; monsters are
+ * merely uncommon, because a cabinet that keeps offering you tyrants is funnier
+ * than one that keeps offering you saints. Everyone else - the forgettable
+ * middle, the wildcards, the furniture - is the ordinary weather.
+ */
+const ALIGNMENT_RARITY: Record<(typeof ALIGNMENTS)[number], number> = {
+  good: 0.62,
+  bad: 0.85,
+  neutral: 1,
+}
+
 export function poolWeight(p: Politician, role: Role): number {
   const affine = ROLE_AFFINITY[role].some((t) => p.traits.includes(t))
   const base = 1 + (affine ? AFFINITY_BONUS : 0)
-  const rarity = (p.category === 'wildcard' ? WILDCARD_WEIGHT : 1) * POWER_RARITY[p.tier]
+  const byCategory =
+    p.category === 'object' ? OBJECT_WEIGHT : p.category === 'wildcard' ? WILDCARD_WEIGHT : 1
+  const rarity = byCategory * POWER_RARITY[p.tier] * ALIGNMENT_RARITY[p.alignment]
   return base * rarity * (1 + roleScore(p.stats, role) * FIT_WEIGHT)
 }
 
@@ -62,6 +80,8 @@ export function drawCandidates(
 
 export interface DraftState {
   rng: Rng
+  /** Set when the player drafted a figure carrying endsRun. */
+  endedBy: Politician | null
   remaining: Politician[]
   round: number
   candidates: Politician[]
@@ -82,6 +102,7 @@ export function startDraft(rng: Rng, roster: readonly Politician[]): DraftState 
     rng,
     remaining,
     round: 0,
+    endedBy: null,
     candidates: [],
     picks: {},
     respins: RESPIN_TOKENS,
@@ -96,6 +117,13 @@ export function pickCandidate(state: DraftState, id: string): DraftState {
   if (!chosen) throw new Error(`${id} is not on offer this round`)
   const role = currentRole(state)
   state.picks[role] = chosen
+  if (chosen.endsRun) {
+    // The run is over the moment they are appointed. No further rounds, no
+    // resolution - the joke is that nothing else gets to happen.
+    state.endedBy = chosen
+    state.candidates = []
+    return state
+  }
   // Drafted names leave the pool, so later rounds cannot re-offer them.
   state.remaining = state.remaining.filter((p) => p.id !== chosen.id)
   state.round += 1
@@ -136,11 +164,23 @@ export function finishDraft(state: DraftState): Roster {
   return Object.fromEntries(ROLES.map((r) => [r, state.picks[r]!])) as Roster
 }
 
-/** Convenience for the balance harness: a full random draft in one call. */
+/**
+ * Convenience for the balance harnesses: a full random draft in one call.
+ *
+ * Run-ending figures are skipped rather than drafted. The harnesses measure how
+ * events resolve, and a run that stops at round two never reaches resolution -
+ * including those would quietly bias every distribution they report.
+ */
 export function randomDraft(rng: Rng, roster: readonly Politician[]): Roster {
   let state = startDraft(rng, roster)
   while (!isDraftComplete(state)) {
-    const choice = state.candidates[Math.floor(rng.next() * state.candidates.length)]!
+    const pickable = state.candidates.filter((c) => !c.endsRun)
+    // Every candidate ends the run: respin the board rather than deadlock.
+    if (pickable.length === 0) {
+      state.candidates = drawCandidates(state.rng, state.remaining, currentRole(state))
+      continue
+    }
+    const choice = pickable[Math.floor(rng.next() * pickable.length)]!
     state = pickCandidate(state, choice.id)
   }
   return finishDraft(state)

@@ -140,21 +140,25 @@ button.primary:hover { background: #eeb85a; border-color: #eeb85a; }
   background: var(--panel);
 }
 .card:hover:not(:disabled) { border-color: var(--amber); }
+.card .body { padding: 16px 15px 15px; display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 132px; }
+.card .name { font-weight: 650; font-size: 16px; line-height: 1.25; }
+.card .bio { font-size: 13px; line-height: 1.5; color: #b3bdcd; font-style: italic; }
+.card .office { font-size: 12px; color: var(--muted); margin-top: -4px; }
+
+/* Monogram stands in until portraits exist. */
 .card .mono {
-  height: 88px;
+  height: 84px;
   display: grid;
   place-items: center;
-  font: 700 30px ui-monospace, Menlo, monospace;
+  font: 700 28px ui-monospace, Menlo, monospace;
   letter-spacing: 0.04em;
   color: #0e131d;
   background: linear-gradient(160deg, #6d7d97, #46536b);
 }
 .card.wildcard .mono { background: linear-gradient(160deg, #b874d8, #6d47a8); }
-.card .body { padding: 11px 12px 13px; display: flex; flex-direction: column; gap: 5px; flex: 1; }
-.card .name { font-weight: 650; font-size: 15px; line-height: 1.2; }
-.card .office { font-size: 12px; color: var(--muted); }
-.card .bio { font-size: 12.5px; color: #b3bdcd; font-style: italic; }
-.card .traits { display: flex; gap: 5px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+.card.object .mono { background: linear-gradient(160deg, #6fa88c, #3c6b58); }
+
+.card .traits { display: flex; gap: 5px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
 .trait {
   font: 600 10px/1 ui-monospace, Menlo, monospace;
   letter-spacing: 0.06em;
@@ -164,15 +168,17 @@ button.primary:hover { background: #eeb85a; border-color: #eeb85a; }
   padding: 4px 6px;
   color: #93a1b6;
 }
-.card.wildcard .badge {
+
+.card .badge {
   position: absolute; top: 8px; right: 8px;
   font: 700 9px/1 ui-monospace, Menlo, monospace;
   letter-spacing: 0.14em;
-  background: var(--wild); color: #16091d;
   border-radius: 4px; padding: 4px 6px;
+  background: var(--wild); color: #16091d;
 }
+.card.object .badge { background: #6fa88c; color: #0a1712; }
 .bench-btn {
-  position: absolute; top: 8px; left: 8px;
+  align-self: flex-start; margin-top: auto;
   padding: 3px 7px; font-size: 11px; border-radius: 5px;
   background: #0b0f18cc;
   opacity: 0;
@@ -212,3 +218,14 @@ table.breakdown th { text-align: left; font: 600 10px ui-monospace, Menlo, monos
 table.breakdown td { padding: 8px; border-top: 1px solid var(--line); }
 table.breakdown td.num { text-align: right; font: 500 13px ui-monospace, Menlo, monospace; }
 .pass { color: var(--good); } .fail { color: var(--bad); }
+
+/* ---------- instant loss ---------- */
+
+.gameover { text-align: center; padding: 44px 22px; border-color: var(--bad); }
+.gameover .stamp {
+  font: 700 13px ui-monospace, Menlo, monospace;
+  letter-spacing: 0.3em;
+  color: var(--bad);
+}
+.gameover h1 { font-size: 34px; margin: 12px 0 6px; letter-spacing: -0.02em; }
+.gameover .said { color: #c9d2e0; font-size: 16px; max-width: 34em; margin: 0 auto; }

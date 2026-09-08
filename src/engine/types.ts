@@ -23,14 +23,24 @@ export type Role = (typeof ROLES)[number]
 /** Stat values are 1-10, hand-assigned or derived from the ingest pipeline. */
 export type StatBlock = Record<Stat, number>
 
-export const CATEGORIES = ['politician', 'wildcard'] as const
+export const CATEGORIES = ['politician', 'wildcard', 'object'] as const
 /**
  * Wildcards are the non-politicians - fictional characters, internet figures,
- * anyone the Wikidata scrape will never produce. They exist because the comedy
- * lives in mismatch, and they are drawn at a reduced rate so a wildcard on the
- * board stays an event rather than the norm.
+ * anyone the Wikidata scrape will never produce. Objects are furniture and
+ * consumer goods that somehow ended up in the cabinet. Both exist because the
+ * comedy lives in mismatch, and both are drawn at a reduced rate so finding one
+ * on the board stays an event rather than the norm.
  */
 export type Category = (typeof CATEGORIES)[number]
+
+export const ALIGNMENTS = ['good', 'bad', 'neutral'] as const
+/**
+ * How history remembers them, which is separate from how strong the card is.
+ * Both ends of this axis are drawn rarely - a board should mostly be the
+ * unremarkable middle, so that a genuine reformer or a genuine monster landing
+ * in your six feels like weather changing. See ALIGNMENT_RARITY in draft.ts.
+ */
+export type Alignment = (typeof ALIGNMENTS)[number]
 
 /**
  * How many stat points a figure is allowed to spend. Strength is still bought
@@ -50,23 +60,11 @@ export const POWER_TIERS = Object.keys(POWER_BUDGETS) as (keyof typeof POWER_BUD
 /** Not to be confused with resolve.ts's outcome tiers. This is card strength. */
 export type PowerTier = keyof typeof POWER_BUDGETS
 
-/**
- * The card shows a figure's tier as 1-5 stars. Individual stats stay hidden
- * until the verdict; the stars are the one honest signal that a titan will do
- * more for you than a liability, whatever the event turns out to ask for.
- */
-export const POWER_STARS: Record<PowerTier, number> = {
-  titan: 5,
-  heavyweight: 4,
-  operator: 3,
-  flawed: 2,
-  liability: 1,
-}
-
 export interface Politician {
   id: string
   category: Category
   tier: PowerTier
+  alignment: Alignment
   name: string
   country: string
   era: string
@@ -79,6 +77,12 @@ export interface Politician {
   /** Ids of politicians this one cannot work with. */
   rivals?: string[]
   party?: string
+  /**
+   * Drafting this figure ends the run on the spot. A punchline, not a
+   * mechanic to build around: exactly one figure should carry it, and the card
+   * must give the player fair warning in its bio.
+   */
+  endsRun?: string
   reviewed: boolean
 }
 

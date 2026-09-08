@@ -8,9 +8,17 @@ export const ROLE_LABEL: Record<Role, string> = {
   Treasurer: 'Treasurer',
 }
 
+/**
+ * A name, and one line on what they did with their life. Nothing else reaches
+ * the card - no stats, no strength rating, no traits, not even a badge saying
+ * whether they are real. Anything sortable would collapse an event-first draft
+ * into picking the best-looking row; a life has to be read and judged. Every
+ * number behind the figure surfaces only in the verdict.
+ */
+/** Two-letter monogram, standing in until portraits exist. */
 function initials(name: string): string {
   const words = name
-    .replace(/^(the|de|von)\s+/i, '')
+    .replace(/^(a|an|the|de|von)\s+/i, '')
     .split(/\s+/)
     .filter((w) => /[a-z]/i.test(w))
   if (words.length === 0) return '??'
@@ -19,13 +27,6 @@ function initials(name: string): string {
   return words.slice(0, 2).map((w) => w[0]!.toUpperCase()).join('')
 }
 
-/**
- * No numbers of any kind reach the card - not individual stats, and not an
- * aggregate strength rating either. The player reads the person: office, era,
- * bio and traits. A visible power score would collapse an event-first draft
- * into picking the highest number, which is the one thing the design cannot
- * afford. The figures are revealed only in the verdict.
- */
 export function CandidateCard({
   figure,
   onPick,
@@ -44,7 +45,9 @@ export function CandidateCard({
       aria-label={`Draft ${figure.name}`}
     >
       <div className="mono" aria-hidden>{initials(figure.name)}</div>
-      {figure.category === 'wildcard' && <span className="badge">WILD</span>}
+      {figure.category !== 'politician' && (
+        <span className="badge">{figure.category === 'object' ? 'OBJECT' : 'WILD'}</span>
+      )}
       {canBench && (
         <span
           className="bench-btn"

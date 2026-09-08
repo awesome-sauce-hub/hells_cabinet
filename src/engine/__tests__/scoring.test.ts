@@ -10,7 +10,7 @@ const flat = (n: number): StatBlock => ({
 })
 
 const dummy = (id: string, stats: StatBlock, traits: string[] = []): Politician => ({
-  id, category: 'politician', tier: 'operator', name: id, country: 'Nowhere', era: 'Now', office: 'None',
+  id, category: 'politician', tier: 'operator', alignment: 'neutral', name: id, country: 'Nowhere', era: 'Now', office: 'None',
   bio: '', stats, traits, reviewed: true,
 })
 

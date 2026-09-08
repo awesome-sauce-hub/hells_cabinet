@@ -1,20 +1,74 @@
 [
   {
+    "id": "lincoln",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "good",
+    "name": "Abraham Lincoln",
+    "country": "United States",
+    "era": "1860s",
+    "office": "President",
+    "bio": "Keeps his rivals in the cabinet and his temper in a drawer.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 7,
+      "integrity": 9,
+      "grit": 10,
+      "intellect": 9,
+      "force": 3
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "strategist"
+    ],
+    "rivals": [
+      "leopold-ii"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "eleanor-roosevelt",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Eleanor Roosevelt",
+    "country": "United States",
+    "era": "1940s",
+    "office": "First Lady, UN Delegate",
+    "bio": "The only person in the cabinet who has read the whole document.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 3,
+      "integrity": 10,
+      "grit": 9,
+      "intellect": 10,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
     "id": "churchill",
     "category": "politician",
     "tier": "titan",
+    "alignment": "good",
     "name": "Winston Churchill",
     "country": "United Kingdom",
     "era": "1940s",
     "office": "Prime Minister",
     "bio": "Will not surrender, will not go to bed, will not stop dictating.",
     "stats": {
-      "charisma": 9,
-      "cunning": 5,
-      "integrity": 4,
+      "charisma": 10,
+      "cunning": 6,
+      "integrity": 5,
       "grit": 10,
-      "intellect": 8,
-      "force": 10
+      "intellect": 7,
+      "force": 8
     },
     "traits": [
       "statesman",
@@ -27,21 +81,1023 @@
     "reviewed": true
   },
   {
+    "id": "mandela",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "good",
+    "name": "Nelson Mandela",
+    "country": "South Africa",
+    "era": "1990s",
+    "office": "President",
+    "bio": "Twenty-seven years in a cell and somehow the least bitter man in the room.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 6,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 7,
+      "force": 3
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "dealmaker"
+    ],
+    "rivals": [
+      "pinochet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "gandhi",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Mohandas Gandhi",
+    "country": "India",
+    "era": "1930s",
+    "office": "Independence Leader",
+    "bio": "Refuses to eat until you reconsider, and he can keep this up for weeks.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 6,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 7,
+      "force": 1
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "isolationist"
+    ],
+    "rivals": [
+      "vlad"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ataturk",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "good",
+    "name": "Mustafa Kemal Atatürk",
+    "country": "Turkey",
+    "era": "1920s",
+    "office": "President",
+    "bio": "Rebuilt a country from scratch and changed the alphabet while he was at it.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 5,
+      "integrity": 7,
+      "grit": 9,
+      "intellect": 9,
+      "force": 8
+    },
+    "traits": [
+      "statesman",
+      "soldier",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "marcus-aurelius",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Marcus Aurelius",
+    "country": "Rome",
+    "era": "Antiquity",
+    "office": "Emperor",
+    "bio": "Runs an empire by day and writes anxious diary entries about it by night.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 3,
+      "integrity": 10,
+      "grit": 9,
+      "intellect": 10,
+      "force": 5
+    },
+    "traits": [
+      "statesman",
+      "technocrat",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ashoka",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Ashoka",
+    "country": "India",
+    "era": "Antiquity",
+    "office": "Emperor",
+    "bio": "Conquered everything, felt terrible about it, carved the apology into rocks.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 4,
+      "integrity": 9,
+      "grit": 8,
+      "intellect": 8,
+      "force": 7
+    },
+    "traits": [
+      "statesman",
+      "beloved",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "elizabeth-i",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "good",
+    "name": "Elizabeth I",
+    "country": "England",
+    "era": "1500s",
+    "office": "Queen",
+    "bio": "Answers every question in a way that commits her to nothing.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 10,
+      "integrity": 6,
+      "grit": 9,
+      "intellect": 9,
+      "force": 3
+    },
+    "traits": [
+      "statesman",
+      "cunning",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "fdr",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "good",
+    "name": "Franklin D. Roosevelt",
+    "country": "United States",
+    "era": "1930s",
+    "office": "President",
+    "bio": "Will explain the crisis to the nation as if you were all sitting by his fire.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 8,
+      "integrity": 5,
+      "grit": 9,
+      "intellect": 8,
+      "force": 6
+    },
+    "traits": [
+      "beloved",
+      "showman",
+      "statesman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ardern",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "Jacinda Ardern",
+    "country": "New Zealand",
+    "era": "Modern",
+    "office": "Prime Minister",
+    "bio": "Turns up, says the obviously decent thing, and means it.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 5,
+      "integrity": 9,
+      "grit": 7,
+      "intellect": 7,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "dealmaker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "lee-kuan-yew",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Lee Kuan Yew",
+    "country": "Singapore",
+    "era": "1970s",
+    "office": "Prime Minister",
+    "bio": "Built a first-world country and fined it for chewing gum.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 7,
+      "integrity": 7,
+      "grit": 8,
+      "intellect": 9,
+      "force": 6
+    },
+    "traits": [
+      "technocrat",
+      "statesman",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "attlee",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "Clement Attlee",
+    "country": "United Kingdom",
+    "era": "1940s",
+    "office": "Prime Minister",
+    "bio": "Rebuilt the country without once raising his voice or being remembered.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 6,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 9,
+      "force": 4
+    },
+    "traits": [
+      "technocrat",
+      "statesman",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "allende",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "good",
+    "name": "Salvador Allende",
+    "country": "Chile",
+    "era": "1970s",
+    "office": "President",
+    "bio": "Elected, obstructed, and eventually shelled.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 4,
+      "integrity": 8,
+      "grit": 7,
+      "intellect": 6,
+      "force": 4
+    },
+    "traits": [
+      "statesman",
+      "beloved",
+      "loyalist"
+    ],
+    "rivals": [
+      "pinochet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "havel",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "Václav Havel",
+    "country": "Czechia",
+    "era": "1990s",
+    "office": "President",
+    "bio": "A playwright who accidentally won, and then did the job properly.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 5,
+      "integrity": 9,
+      "grit": 7,
+      "intellect": 9,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "golda-meir",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Golda Meir",
+    "country": "Israel",
+    "era": "1970s",
+    "office": "Prime Minister",
+    "bio": "Runs the war cabinet out of her kitchen and does not care for your opinion.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 7,
+      "integrity": 6,
+      "grit": 9,
+      "intellect": 7,
+      "force": 7
+    },
+    "traits": [
+      "statesman",
+      "warhawk",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "bolivar",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Simón Bolívar",
+    "country": "Venezuela",
+    "era": "1820s",
+    "office": "Liberator",
+    "bio": "Liberated six countries and could not get any of them to agree on lunch.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 6,
+      "integrity": 6,
+      "grit": 8,
+      "intellect": 6,
+      "force": 7
+    },
+    "traits": [
+      "soldier",
+      "showman",
+      "statesman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "toussaint",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "good",
+    "name": "Toussaint Louverture",
+    "country": "Haiti",
+    "era": "1790s",
+    "office": "Governor-General",
+    "bio": "Out-generalled three empires with an army that started as a rumour.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 8,
+      "integrity": 7,
+      "grit": 9,
+      "intellect": 7,
+      "force": 7
+    },
+    "traits": [
+      "soldier",
+      "strategist",
+      "statesman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "kofi-annan",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "Kofi Annan",
+    "country": "Ghana",
+    "era": "2000s",
+    "office": "UN Secretary-General",
+    "bio": "Can get two people who hate each other to sign the same piece of paper.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 8,
+      "integrity": 9,
+      "grit": 7,
+      "intellect": 8,
+      "force": 1
+    },
+    "traits": [
+      "dealmaker",
+      "statesman",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "sankara",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "Thomas Sankara",
+    "country": "Burkina Faso",
+    "era": "1980s",
+    "office": "President",
+    "bio": "Sold the government limousines and cycled to work.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 4,
+      "integrity": 10,
+      "grit": 7,
+      "intellect": 6,
+      "force": 5
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "soldier"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "nixon",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Richard Nixon",
+    "country": "United States",
+    "era": "1970s",
+    "office": "President",
+    "bio": "Appointing him ends your government immediately. He has done this before.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 7,
+      "intellect": 8,
+      "force": 6
+    },
+    "traits": [
+      "paranoid",
+      "cunning",
+      "scandal-magnet"
+    ],
+    "endsRun": "Eighteen and a half minutes of the tape are missing. So is your government.",
+    "reviewed": true
+  },
+  {
+    "id": "genghis",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "Genghis Khan",
+    "country": "Mongol Empire",
+    "era": "Medieval",
+    "office": "Great Khan",
+    "bio": "Outstanding logistics. Do not give him the word \"escalate\".",
+    "stats": {
+      "charisma": 6,
+      "cunning": 10,
+      "integrity": 3,
+      "grit": 10,
+      "intellect": 7,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "stalin",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "Joseph Stalin",
+    "country": "Soviet Union",
+    "era": "1930s",
+    "office": "General Secretary",
+    "bio": "Remembers everything anyone has ever said, and files it.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 9,
+      "force": 10
+    },
+    "traits": [
+      "paranoid",
+      "cunning",
+      "strategist"
+    ],
+    "rivals": [
+      "robespierre"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "mao",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "Mao Zedong",
+    "country": "China",
+    "era": "1960s",
+    "office": "Chairman",
+    "bio": "Has a big idea about agriculture and will not be talked out of it.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 7,
+      "force": 9
+    },
+    "traits": [
+      "demagogue",
+      "strategist",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "pol-pot",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Pol Pot",
+    "country": "Cambodia",
+    "era": "1970s",
+    "office": "General Secretary",
+    "bio": "Abolished money, cities and the calendar. Considers this a strong start.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 5,
+      "force": 10
+    },
+    "traits": [
+      "paranoid",
+      "demagogue",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "mussolini",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Benito Mussolini",
+    "country": "Italy",
+    "era": "1930s",
+    "office": "Prime Minister",
+    "bio": "Jaw first, plan later.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 5,
+      "integrity": 2,
+      "grit": 6,
+      "intellect": 4,
+      "force": 9
+    },
+    "traits": [
+      "demagogue",
+      "showman",
+      "warhawk"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "franco",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Francisco Franco",
+    "country": "Spain",
+    "era": "1950s",
+    "office": "Caudillo",
+    "bio": "Outlives everyone by refusing to be interesting.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 9,
+      "integrity": 2,
+      "grit": 10,
+      "intellect": 7,
+      "force": 9
+    },
+    "traits": [
+      "paranoid",
+      "soldier",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "idi-amin",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Idi Amin",
+    "country": "Uganda",
+    "era": "1970s",
+    "office": "President",
+    "bio": "Awarded himself every medal in the building, then some from other buildings.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 6,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 3,
+      "force": 10
+    },
+    "traits": [
+      "showman",
+      "warhawk",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ceausescu",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Nicolae Ceaușescu",
+    "country": "Romania",
+    "era": "1980s",
+    "office": "General Secretary",
+    "bio": "Demolished a third of the capital to build a palace he found slightly small.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 8,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 5,
+      "force": 8
+    },
+    "traits": [
+      "paranoid",
+      "demagogue",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "pinochet",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Augusto Pinochet",
+    "country": "Chile",
+    "era": "1970s",
+    "office": "President",
+    "bio": "Arrived by helicopter, stayed seventeen years.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 9,
+      "integrity": 1,
+      "grit": 9,
+      "intellect": 7,
+      "force": 10
+    },
+    "traits": [
+      "soldier",
+      "paranoid",
+      "technocrat"
+    ],
+    "rivals": [
+      "allende",
+      "mandela"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "kim-il-sung",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Kim Il-sung",
+    "country": "North Korea",
+    "era": "1950s",
+    "office": "Supreme Leader",
+    "bio": "Still holds the office. Has been dead since 1994.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 9,
+      "integrity": 1,
+      "grit": 9,
+      "intellect": 6,
+      "force": 9
+    },
+    "traits": [
+      "demagogue",
+      "paranoid",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "duvalier",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "François Duvalier",
+    "country": "Haiti",
+    "era": "1960s",
+    "office": "President for Life",
+    "bio": "A country doctor who decided the country was the patient.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 9,
+      "integrity": 1,
+      "grit": 7,
+      "intellect": 6,
+      "force": 7
+    },
+    "traits": [
+      "paranoid",
+      "demagogue",
+      "cunning"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "gaddafi",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Muammar Gaddafi",
+    "country": "Libya",
+    "era": "1980s",
+    "office": "Brotherly Leader",
+    "bio": "Travels with a tent, a female bodyguard corps, and a book he wrote.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 8,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 5,
+      "force": 9
+    },
+    "traits": [
+      "showman",
+      "demagogue",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "saddam",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Saddam Hussein",
+    "country": "Iraq",
+    "era": "1990s",
+    "office": "President",
+    "bio": "Commissioned a novel, a mosque and several statues, all of himself.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 9,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 7,
+      "force": 10
+    },
+    "traits": [
+      "paranoid",
+      "warhawk",
+      "demagogue"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "bokassa",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Jean-Bédel Bokassa",
+    "country": "Central African Republic",
+    "era": "1970s",
+    "office": "Emperor",
+    "bio": "Spent a third of the national budget crowning himself.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 5,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 4,
+      "force": 10
+    },
+    "traits": [
+      "showman",
+      "warhawk",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "mobutu",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Mobutu Sese Seko",
+    "country": "Zaire",
+    "era": "1980s",
+    "office": "President",
+    "bio": "Renamed the country, the river, and himself. Kept the money.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 5,
+      "force": 8
+    },
+    "traits": [
+      "cunning",
+      "showman",
+      "dealmaker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "marcos",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Ferdinand Marcos",
+    "country": "Philippines",
+    "era": "1980s",
+    "office": "President",
+    "bio": "Declared martial law and left behind three thousand pairs of shoes.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 8,
+      "force": 5
+    },
+    "traits": [
+      "cunning",
+      "demagogue",
+      "banker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "niyazov",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Saparmurat Niyazov",
+    "country": "Turkmenistan",
+    "era": "1990s",
+    "office": "President for Life",
+    "bio": "Renamed the months of the year after himself and his mother.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 7,
+      "integrity": 1,
+      "grit": 7,
+      "intellect": 5,
+      "force": 7
+    },
+    "traits": [
+      "showman",
+      "demagogue",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "leopold-ii",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Leopold II",
+    "country": "Belgium",
+    "era": "1880s",
+    "office": "King",
+    "bio": "Ran a country as a private business and never once visited it.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 9,
+      "intellect": 9,
+      "force": 8
+    },
+    "traits": [
+      "banker",
+      "cunning",
+      "isolationist"
+    ],
+    "rivals": [
+      "lincoln"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "caligula",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Caligula",
+    "country": "Rome",
+    "era": "Antiquity",
+    "office": "Emperor",
+    "bio": "Made his horse a senator. The horse was, by most accounts, an improvement.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 5,
+      "integrity": 1,
+      "grit": 6,
+      "intellect": 4,
+      "force": 10
+    },
+    "traits": [
+      "showman",
+      "paranoid",
+      "demagogue"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "vlad",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Vlad the Impaler",
+    "country": "Wallachia",
+    "era": "Medieval",
+    "office": "Voivode",
+    "bio": "Has a preferred solution and applies it consistently.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 8,
+      "integrity": 2,
+      "grit": 10,
+      "intellect": 5,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "paranoid",
+      "soldier"
+    ],
+    "rivals": [
+      "gandhi"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "robespierre",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Maximilien Robespierre",
+    "country": "France",
+    "era": "1790s",
+    "office": "Committee of Public Safety",
+    "bio": "Incorruptible, tireless, and running out of people he trusts.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 7,
+      "integrity": 2,
+      "grit": 8,
+      "intellect": 8,
+      "force": 7
+    },
+    "traits": [
+      "paranoid",
+      "demagogue",
+      "statesman"
+    ],
+    "rivals": [
+      "stalin"
+    ],
+    "reviewed": true
+  },
+  {
     "id": "chamberlain",
     "category": "politician",
     "tier": "flawed",
+    "alignment": "neutral",
     "name": "Neville Chamberlain",
     "country": "United Kingdom",
     "era": "1930s",
     "office": "Prime Minister",
     "bio": "Brings an umbrella to every crisis and a signature to most of them.",
     "stats": {
-      "charisma": 6,
+      "charisma": 5,
       "cunning": 5,
       "integrity": 10,
       "grit": 5,
-      "intellect": 9,
-      "force": 1
+      "intellect": 8,
+      "force": 3
     },
     "traits": [
       "statesman",
@@ -57,6 +1113,7 @@
     "id": "bismarck",
     "category": "politician",
     "tier": "titan",
+    "alignment": "neutral",
     "name": "Otto von Bismarck",
     "country": "Prussia",
     "era": "1870s",
@@ -66,9 +1123,9 @@
       "charisma": 6,
       "cunning": 10,
       "integrity": 4,
-      "grit": 8,
+      "grit": 9,
       "intellect": 10,
-      "force": 8
+      "force": 7
     },
     "traits": [
       "strategist",
@@ -78,57 +1135,10 @@
     "reviewed": true
   },
   {
-    "id": "eleanor-roosevelt",
-    "category": "politician",
-    "tier": "operator",
-    "name": "Eleanor Roosevelt",
-    "country": "United States",
-    "era": "1940s",
-    "office": "First Lady, UN Delegate",
-    "bio": "The only person in the cabinet who has read the whole document.",
-    "stats": {
-      "charisma": 8,
-      "cunning": 3,
-      "integrity": 10,
-      "grit": 8,
-      "intellect": 9,
-      "force": 2
-    },
-    "traits": [
-      "beloved",
-      "statesman",
-      "loyalist"
-    ],
-    "reviewed": true
-  },
-  {
-    "id": "nixon",
-    "category": "politician",
-    "tier": "heavyweight",
-    "name": "Richard Nixon",
-    "country": "United States",
-    "era": "1970s",
-    "office": "President",
-    "bio": "Brilliant at foreign policy, cannot be left alone with a tape recorder.",
-    "stats": {
-      "charisma": 6,
-      "cunning": 10,
-      "integrity": 1,
-      "grit": 9,
-      "intellect": 10,
-      "force": 7
-    },
-    "traits": [
-      "paranoid",
-      "cunning",
-      "scandal-magnet"
-    ],
-    "reviewed": true
-  },
-  {
     "id": "caesar",
     "category": "politician",
     "tier": "titan",
+    "alignment": "neutral",
     "name": "Julius Caesar",
     "country": "Rome",
     "era": "Antiquity",
@@ -137,10 +1147,10 @@
     "stats": {
       "charisma": 9,
       "cunning": 9,
-      "integrity": 1,
+      "integrity": 2,
       "grit": 9,
       "intellect": 8,
-      "force": 10
+      "force": 9
     },
     "traits": [
       "soldier",
@@ -157,6 +1167,7 @@
     "id": "cleopatra",
     "category": "politician",
     "tier": "heavyweight",
+    "alignment": "neutral",
     "name": "Cleopatra VII",
     "country": "Egypt",
     "era": "Antiquity",
@@ -165,8 +1176,8 @@
     "stats": {
       "charisma": 10,
       "cunning": 10,
-      "integrity": 3,
-      "grit": 7,
+      "integrity": 4,
+      "grit": 6,
       "intellect": 9,
       "force": 4
     },
@@ -178,43 +1189,20 @@
     "reviewed": true
   },
   {
-    "id": "genghis",
-    "category": "politician",
-    "tier": "heavyweight",
-    "name": "Genghis Khan",
-    "country": "Mongol Empire",
-    "era": "Medieval",
-    "office": "Great Khan",
-    "bio": "Outstanding logistics. Do not give him the word 'escalate'.",
-    "stats": {
-      "charisma": 6,
-      "cunning": 7,
-      "integrity": 3,
-      "grit": 10,
-      "intellect": 7,
-      "force": 10
-    },
-    "traits": [
-      "warhawk",
-      "soldier",
-      "strategist"
-    ],
-    "reviewed": true
-  },
-  {
     "id": "hamilton",
     "category": "politician",
-    "tier": "operator",
+    "tier": "heavyweight",
+    "alignment": "neutral",
     "name": "Alexander Hamilton",
     "country": "United States",
     "era": "1790s",
     "office": "Secretary of the Treasury",
     "bio": "Will fix the national debt and publish a pamphlet about his personal life.",
     "stats": {
-      "charisma": 7,
+      "charisma": 8,
       "cunning": 6,
       "integrity": 5,
-      "grit": 8,
+      "grit": 10,
       "intellect": 10,
       "force": 4
     },
@@ -229,6 +1217,7 @@
     "id": "hearst",
     "category": "politician",
     "tier": "operator",
+    "alignment": "neutral",
     "name": "William Randolph Hearst",
     "country": "United States",
     "era": "1900s",
@@ -252,18 +1241,19 @@
   {
     "id": "crassus",
     "category": "politician",
-    "tier": "operator",
+    "tier": "flawed",
+    "alignment": "neutral",
     "name": "Marcus Licinius Crassus",
     "country": "Rome",
     "era": "Antiquity",
     "office": "Consul",
     "bio": "Richest man in Rome. Owns the fire brigade. Will negotiate at the fire.",
     "stats": {
-      "charisma": 5,
-      "cunning": 10,
+      "charisma": 4,
+      "cunning": 9,
       "integrity": 2,
-      "grit": 8,
-      "intellect": 9,
+      "grit": 7,
+      "intellect": 8,
       "force": 6
     },
     "traits": [
@@ -277,33 +1267,10 @@
     "reviewed": true
   },
   {
-    "id": "lincoln",
-    "category": "politician",
-    "tier": "titan",
-    "name": "Abraham Lincoln",
-    "country": "United States",
-    "era": "1860s",
-    "office": "President",
-    "bio": "Keeps his rivals in the cabinet and his temper in a drawer.",
-    "stats": {
-      "charisma": 9,
-      "cunning": 6,
-      "integrity": 10,
-      "grit": 10,
-      "intellect": 10,
-      "force": 1
-    },
-    "traits": [
-      "beloved",
-      "statesman",
-      "strategist"
-    ],
-    "reviewed": true
-  },
-  {
     "id": "talleyrand",
     "category": "politician",
     "tier": "heavyweight",
+    "alignment": "neutral",
     "name": "Charles-Maurice de Talleyrand",
     "country": "France",
     "era": "1800s",
@@ -313,9 +1280,9 @@
       "charisma": 8,
       "cunning": 10,
       "integrity": 2,
-      "grit": 7,
+      "grit": 8,
       "intellect": 10,
-      "force": 6
+      "force": 5
     },
     "traits": [
       "dealmaker",
@@ -327,18 +1294,19 @@
   {
     "id": "freddy-fazbear",
     "category": "wildcard",
-    "tier": "titan",
+    "tier": "operator",
+    "alignment": "neutral",
     "name": "Freddy Fazbear",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Animatronic Entertainer",
-    "bio": "Runs on rails, works nights, and has never once been talked down from anything.",
+    "bio": "Runs on rails, works nights, has never been talked down from anything.",
     "stats": {
-      "charisma": 9,
-      "cunning": 9,
-      "integrity": 4,
+      "charisma": 8,
+      "cunning": 6,
+      "integrity": 3,
       "grit": 10,
-      "intellect": 4,
+      "intellect": 3,
       "force": 10
     },
     "traits": [
@@ -351,7 +1319,8 @@
   {
     "id": "markiplier",
     "category": "wildcard",
-    "tier": "flawed",
+    "tier": "operator",
+    "alignment": "neutral",
     "name": "Markiplier",
     "country": "United States",
     "era": "Internet",
@@ -359,11 +1328,11 @@
     "bio": "Can hold a room for nine hours and has the vocal cords to prove it.",
     "stats": {
       "charisma": 10,
-      "cunning": 4,
+      "cunning": 5,
       "integrity": 8,
       "grit": 9,
-      "intellect": 4,
-      "force": 1
+      "intellect": 6,
+      "force": 2
     },
     "traits": [
       "showman",
@@ -376,6 +1345,7 @@
     "id": "mrbeast",
     "category": "wildcard",
     "tier": "operator",
+    "alignment": "neutral",
     "name": "MrBeast",
     "country": "United States",
     "era": "Internet",
@@ -399,19 +1369,20 @@
   {
     "id": "gordon-ramsay",
     "category": "wildcard",
-    "tier": "flawed",
+    "tier": "operator",
+    "alignment": "neutral",
     "name": "Gordon Ramsay",
     "country": "United Kingdom",
     "era": "Modern",
     "office": "Chef",
     "bio": "Extremely effective under pressure, unusable in a press conference.",
     "stats": {
-      "charisma": 7,
+      "charisma": 8,
       "cunning": 2,
       "integrity": 6,
       "grit": 9,
-      "intellect": 4,
-      "force": 8
+      "intellect": 6,
+      "force": 9
     },
     "traits": [
       "warhawk",
@@ -423,18 +1394,19 @@
   {
     "id": "bob-ross",
     "category": "wildcard",
-    "tier": "flawed",
+    "tier": "operator",
+    "alignment": "neutral",
     "name": "Bob Ross",
     "country": "United States",
     "era": "1980s",
-    "office": "Painter, former Air Force Master Sergeant",
+    "office": "Painter, former Master Sergeant",
     "bio": "Twenty years in the military and has not raised his voice since.",
     "stats": {
-      "charisma": 7,
-      "cunning": 3,
+      "charisma": 8,
+      "cunning": 4,
       "integrity": 10,
       "grit": 8,
-      "intellect": 7,
+      "intellect": 9,
       "force": 1
     },
     "traits": [
@@ -447,7 +1419,8 @@
   {
     "id": "darth-vader",
     "category": "wildcard",
-    "tier": "operator",
+    "tier": "heavyweight",
+    "alignment": "neutral",
     "name": "Darth Vader",
     "country": "Fictional",
     "era": "Fictional",
@@ -455,10 +1428,10 @@
     "bio": "Outstanding at ending negotiations. Less good at starting them.",
     "stats": {
       "charisma": 5,
-      "cunning": 7,
+      "cunning": 8,
       "integrity": 2,
-      "grit": 9,
-      "intellect": 7,
+      "grit": 10,
+      "intellect": 8,
       "force": 10
     },
     "traits": [
@@ -472,17 +1445,18 @@
   {
     "id": "keanu-reeves",
     "category": "wildcard",
-    "tier": "flawed",
+    "tier": "operator",
+    "alignment": "neutral",
     "name": "Keanu Reeves",
     "country": "Canada",
     "era": "Modern",
     "office": "Actor",
     "bio": "Universally trusted, which in this cabinet is a structural advantage.",
     "stats": {
-      "charisma": 8,
+      "charisma": 10,
       "cunning": 2,
       "integrity": 10,
-      "grit": 7,
+      "grit": 9,
       "intellect": 5,
       "force": 4
     },
@@ -497,6 +1471,7 @@
     "id": "kermit",
     "category": "wildcard",
     "tier": "operator",
+    "alignment": "neutral",
     "name": "Kermit the Frog",
     "country": "Fictional",
     "era": "Fictional",
@@ -514,6 +1489,1634 @@
       "dealmaker",
       "beloved",
       "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "shrek",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Shrek",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Swamp Proprietor",
+    "bio": "Wants everyone out of his swamp, including the delegation.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 4,
+      "integrity": 8,
+      "grit": 9,
+      "intellect": 5,
+      "force": 9
+    },
+    "traits": [
+      "isolationist",
+      "soldier",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "gandalf",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Gandalf",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Wizard, Consultant",
+    "bio": "Arrives precisely when he means to, which is never when you booked him.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 7,
+      "integrity": 8,
+      "grit": 8,
+      "intellect": 8,
+      "force": 5
+    },
+    "traits": [
+      "statesman",
+      "strategist",
+      "beloved"
+    ],
+    "rivals": [
+      "sauron"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "sauron",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Sauron",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Dark Lord",
+    "bio": "Cannot delegate, cannot compromise, cannot be reached by phone.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 9,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "paranoid",
+      "strategist"
+    ],
+    "rivals": [
+      "gandalf",
+      "optimus-prime"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "yoda",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Yoda",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Grand Master",
+    "bio": "Nine hundred years of wisdom, delivered in an order nobody can parse.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 7,
+      "integrity": 8,
+      "grit": 9,
+      "intellect": 9,
+      "force": 5
+    },
+    "traits": [
+      "statesman",
+      "strategist",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "batman",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Batman",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Vigilante",
+    "bio": "Has a contingency plan for every member of this cabinet, including himself.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 10,
+      "integrity": 6,
+      "grit": 8,
+      "intellect": 8,
+      "force": 7
+    },
+    "traits": [
+      "paranoid",
+      "strategist",
+      "soldier"
+    ],
+    "rivals": [
+      "joker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "joker",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "The Joker",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Agent of Chaos",
+    "bio": "Does not want anything, which makes him impossible to negotiate with.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 9,
+      "integrity": 1,
+      "grit": 6,
+      "intellect": 6,
+      "force": 7
+    },
+    "traits": [
+      "demagogue",
+      "showman",
+      "paranoid"
+    ],
+    "rivals": [
+      "batman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "homer-simpson",
+    "category": "wildcard",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "Homer Simpson",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Safety Inspector",
+    "bio": "Has already fallen asleep at the console.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 2,
+      "integrity": 7,
+      "grit": 7,
+      "intellect": 3,
+      "force": 6
+    },
+    "traits": [
+      "beloved",
+      "liability",
+      "showman"
+    ],
+    "rivals": [
+      "mr-burns"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "mr-burns",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Montgomery Burns",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Plant Owner",
+    "bio": "Owns everything and can lift almost none of it.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 10,
+      "force": 3
+    },
+    "traits": [
+      "banker",
+      "cunning",
+      "paranoid"
+    ],
+    "rivals": [
+      "homer-simpson"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "spongebob",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "SpongeBob SquarePants",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Fry Cook",
+    "bio": "Relentlessly willing. Absolutely no judgement whatsoever.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 2,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 3,
+      "force": 3
+    },
+    "traits": [
+      "beloved",
+      "loyalist",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "patrick-star",
+    "category": "wildcard",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "Patrick Star",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Rock Resident",
+    "bio": "Is not currently thinking about anything, and says so.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 1,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 1,
+      "force": 5
+    },
+    "traits": [
+      "liability",
+      "beloved",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "bowser",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Bowser",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Koopa King",
+    "bio": "Has a plan. The plan is a fortress with lava in it.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 5,
+      "integrity": 3,
+      "grit": 10,
+      "intellect": 4,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "showman"
+    ],
+    "rivals": [
+      "mario"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "mario",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Mario",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Plumber",
+    "bio": "Has personally saved this kingdom eleven times and never asked for a title.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 2,
+      "integrity": 9,
+      "grit": 10,
+      "intellect": 5,
+      "force": 7
+    },
+    "traits": [
+      "beloved",
+      "loyalist",
+      "soldier"
+    ],
+    "rivals": [
+      "bowser"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "godzilla",
+    "category": "wildcard",
+    "tier": "titan",
+    "alignment": "neutral",
+    "name": "Godzilla",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Force of Nature",
+    "bio": "Cannot be appointed so much as noticed.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 3,
+      "integrity": 9,
+      "grit": 10,
+      "intellect": 4,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "optimus-prime",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Optimus Prime",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Autobot Commander",
+    "bio": "Will give a speech about freedom and then personally handle the logistics.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 5,
+      "integrity": 9,
+      "grit": 8,
+      "intellect": 6,
+      "force": 8
+    },
+    "traits": [
+      "statesman",
+      "soldier",
+      "beloved"
+    ],
+    "rivals": [
+      "sauron"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "thanos",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Thanos",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Titan",
+    "bio": "Has run the numbers. The numbers are the problem.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 8,
+      "integrity": 3,
+      "grit": 9,
+      "intellect": 8,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "technocrat",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "hal-9000",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "HAL 9000",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Onboard Systems",
+    "bio": "Is afraid you are making a mistake, and has already acted on that.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 10,
+      "integrity": 2,
+      "grit": 9,
+      "intellect": 10,
+      "force": 6
+    },
+    "traits": [
+      "technocrat",
+      "paranoid",
+      "cunning"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "glados",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "GLaDOS",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Facility Administrator",
+    "bio": "Runs a rigorous testing programme with an unusually high attrition rate.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 10,
+      "force": 5
+    },
+    "traits": [
+      "technocrat",
+      "cunning",
+      "demagogue"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "sherlock",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Sherlock Holmes",
+    "country": "United Kingdom",
+    "era": "1890s",
+    "office": "Consulting Detective",
+    "bio": "Will solve the crisis and be insufferable about the timeline.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 10,
+      "integrity": 6,
+      "grit": 7,
+      "intellect": 10,
+      "force": 5
+    },
+    "traits": [
+      "strategist",
+      "technocrat",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "dracula",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Count Dracula",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Voivode, Landlord",
+    "bio": "Excellent host. Terrible daytime availability.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 9,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 7,
+      "force": 7
+    },
+    "traits": [
+      "cunning",
+      "showman",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "winnie-the-pooh",
+    "category": "wildcard",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "Winnie-the-Pooh",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Bear of Very Little Brain",
+    "bio": "Means extremely well and is thinking about lunch.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 1,
+      "integrity": 10,
+      "grit": 7,
+      "intellect": 1,
+      "force": 3
+    },
+    "traits": [
+      "beloved",
+      "loyalist",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "gollum",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Gollum",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Guide",
+    "bio": "Two positions on every issue, and both of them are his.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 5,
+      "force": 6
+    },
+    "traits": [
+      "paranoid",
+      "cunning",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "voldemort",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Lord Voldemort",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Dark Lord",
+    "bio": "Cannot be named, cannot be reasoned with, cannot delegate a single task.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 8,
+      "force": 10
+    },
+    "traits": [
+      "paranoid",
+      "demagogue",
+      "warhawk"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "umbridge",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Dolores Umbridge",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Undersecretary",
+    "bio": "Will destroy you with a form and a small polite cough.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 8,
+      "force": 7
+    },
+    "traits": [
+      "cunning",
+      "technocrat",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "cthulhu",
+    "category": "wildcard",
+    "tier": "titan",
+    "alignment": "neutral",
+    "name": "Cthulhu",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Sleeper",
+    "bio": "Attending the meeting would end the meeting, and the attendees.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 10,
+      "integrity": 2,
+      "grit": 10,
+      "intellect": 10,
+      "force": 10
+    },
+    "traits": [
+      "isolationist",
+      "warhawk",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "jar-jar",
+    "category": "wildcard",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "Jar Jar Binks",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Junior Representative",
+    "bio": "Was handed emergency powers once. Everyone agreed not to discuss it.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 2,
+      "integrity": 10,
+      "grit": 6,
+      "intellect": 3,
+      "force": 3
+    },
+    "traits": [
+      "liability",
+      "loyalist",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "sonic",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Sonic the Hedgehog",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Freedom Fighter",
+    "bio": "Fast. Will be somewhere else before the consequences arrive.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 3,
+      "integrity": 7,
+      "grit": 8,
+      "intellect": 4,
+      "force": 7
+    },
+    "traits": [
+      "soldier",
+      "showman",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "crewmate",
+    "category": "wildcard",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Crewmate",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Ship Crew",
+    "bio": "Was in electrical. Says he was in electrical.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 8,
+      "integrity": 4,
+      "grit": 6,
+      "intellect": 4,
+      "force": 6
+    },
+    "traits": [
+      "paranoid",
+      "loyalist",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "minecraft-steve",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Steve",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Builder",
+    "bio": "Silent, tireless, and has already mined under the palace.",
+    "stats": {
+      "charisma": 2,
+      "cunning": 5,
+      "integrity": 9,
+      "grit": 10,
+      "intellect": 7,
+      "force": 7
+    },
+    "traits": [
+      "technocrat",
+      "soldier",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "elon-musk",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Elon Musk",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Chief Executive",
+    "bio": "Will announce the solution on Friday and the delay on Monday.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 7,
+      "integrity": 2,
+      "grit": 7,
+      "intellect": 8,
+      "force": 5
+    },
+    "traits": [
+      "showman",
+      "technocrat",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "oprah",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Oprah Winfrey",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Broadcaster",
+    "bio": "Can get a confession out of anyone in under four minutes.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 8,
+      "integrity": 7,
+      "grit": 8,
+      "intellect": 7,
+      "force": 3
+    },
+    "traits": [
+      "showman",
+      "dealmaker",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "the-rock",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Dwayne Johnson",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Actor",
+    "bio": "Polls better than every elected official in the building.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 2,
+      "integrity": 8,
+      "grit": 8,
+      "intellect": 5,
+      "force": 8
+    },
+    "traits": [
+      "beloved",
+      "showman",
+      "soldier"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "snoop-dogg",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Snoop Dogg",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Rapper, Entrepreneur",
+    "bio": "Gets on with absolutely everyone, including the opposition.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 8,
+      "integrity": 8,
+      "grit": 6,
+      "intellect": 6,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "dealmaker",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "attenborough",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "David Attenborough",
+    "country": "United Kingdom",
+    "era": "Modern",
+    "office": "Broadcaster",
+    "bio": "Could narrate the collapse of your government and make it beautiful.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 4,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 9,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "technocrat"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "steve-irwin",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Steve Irwin",
+    "country": "Australia",
+    "era": "1990s",
+    "office": "Conservationist",
+    "bio": "Will put his hand in it to find out what it is.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 2,
+      "integrity": 9,
+      "grit": 9,
+      "intellect": 5,
+      "force": 6
+    },
+    "traits": [
+      "beloved",
+      "soldier",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "mister-rogers",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Fred Rogers",
+    "country": "United States",
+    "era": "1970s",
+    "office": "Broadcaster, Minister",
+    "bio": "Testified to the Senate for six minutes and won.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 5,
+      "integrity": 10,
+      "grit": 9,
+      "intellect": 8,
+      "force": 1
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "julia-child",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Julia Child",
+    "country": "United States",
+    "era": "1960s",
+    "office": "Chef, former OSS",
+    "bio": "Worked in intelligence before the cooking, which explains a great deal.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 7,
+      "integrity": 8,
+      "grit": 8,
+      "intellect": 7,
+      "force": 2
+    },
+    "traits": [
+      "technocrat",
+      "showman",
+      "soldier"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "tesla",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Nikola Tesla",
+    "country": "Serbia",
+    "era": "1900s",
+    "office": "Inventor",
+    "bio": "Has solved the energy crisis and lost the paperwork to a pigeon.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 3,
+      "integrity": 8,
+      "grit": 7,
+      "intellect": 9,
+      "force": 4
+    },
+    "traits": [
+      "technocrat",
+      "paranoid",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "einstein",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Albert Einstein",
+    "country": "Germany",
+    "era": "1930s",
+    "office": "Physicist",
+    "bio": "Can explain why the plan fails, in a way nobody in the room enjoys.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 4,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 10,
+      "force": 3
+    },
+    "traits": [
+      "technocrat",
+      "statesman",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ada-lovelace",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Ada Lovelace",
+    "country": "United Kingdom",
+    "era": "1840s",
+    "office": "Mathematician",
+    "bio": "Wrote the programme a century before anyone built the machine.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 7,
+      "integrity": 9,
+      "grit": 7,
+      "intellect": 10,
+      "force": 2
+    },
+    "traits": [
+      "technocrat",
+      "strategist",
+      "banker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "marie-curie",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Marie Curie",
+    "country": "Poland",
+    "era": "1900s",
+    "office": "Physicist",
+    "bio": "Carried the research in her pockets, which is why she is not with us.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 5,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 10,
+      "force": 3
+    },
+    "traits": [
+      "technocrat",
+      "loyalist",
+      "statesman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "turing",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Alan Turing",
+    "country": "United Kingdom",
+    "era": "1940s",
+    "office": "Cryptanalyst",
+    "bio": "Broke the unbreakable and was thanked appallingly.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 9,
+      "integrity": 9,
+      "grit": 8,
+      "intellect": 10,
+      "force": 4
+    },
+    "traits": [
+      "technocrat",
+      "strategist",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "jane-goodall",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Jane Goodall",
+    "country": "United Kingdom",
+    "era": "Modern",
+    "office": "Primatologist",
+    "bio": "Has spent sixty years observing troop hierarchies. Recognises this one.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 5,
+      "integrity": 10,
+      "grit": 9,
+      "intellect": 8,
+      "force": 1
+    },
+    "traits": [
+      "statesman",
+      "beloved",
+      "technocrat"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "danny-devito",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Danny DeVito",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Actor",
+    "bio": "Will absolutely take the meeting and absolutely cause a scene.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 7,
+      "integrity": 3,
+      "grit": 7,
+      "intellect": 6,
+      "force": 5
+    },
+    "traits": [
+      "showman",
+      "dealmaker",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "nicolas-cage",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Nicolas Cage",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Actor",
+    "bio": "Committed. Unpredictably, enormously committed.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 2,
+      "integrity": 6,
+      "grit": 8,
+      "intellect": 4,
+      "force": 8
+    },
+    "traits": [
+      "showman",
+      "soldier",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "herzog",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Werner Herzog",
+    "country": "Germany",
+    "era": "Modern",
+    "office": "Director",
+    "bio": "Regards the crisis as confirmation of everything he has always said.",
+    "stats": {
+      "charisma": 6,
+      "cunning": 7,
+      "integrity": 7,
+      "grit": 9,
+      "intellect": 8,
+      "force": 3
+    },
+    "traits": [
+      "statesman",
+      "strategist",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "weird-al",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "\"Weird Al\" Yankovic",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Musician",
+    "bio": "Can turn the opposition slogan into something nobody can say seriously again.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 7,
+      "integrity": 8,
+      "grit": 7,
+      "intellect": 7,
+      "force": 2
+    },
+    "traits": [
+      "showman",
+      "beloved",
+      "demagogue"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "bear-grylls",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Bear Grylls",
+    "country": "United Kingdom",
+    "era": "Modern",
+    "office": "Survivalist",
+    "bio": "Has a plan for the collapse and is mildly excited about it.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 4,
+      "integrity": 7,
+      "grit": 9,
+      "intellect": 6,
+      "force": 7
+    },
+    "traits": [
+      "soldier",
+      "showman",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "clarkson",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Jeremy Clarkson",
+    "country": "United Kingdom",
+    "era": "Modern",
+    "office": "Broadcaster",
+    "bio": "Will describe the crisis using an inappropriate car metaphor, at length.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 5,
+      "integrity": 3,
+      "grit": 6,
+      "intellect": 5,
+      "force": 7
+    },
+    "traits": [
+      "demagogue",
+      "showman",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "judge-judy",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Judge Judy",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Judge",
+    "bio": "Thirty seconds per case and no interest at all in your explanation.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 6,
+      "integrity": 8,
+      "grit": 8,
+      "intellect": 7,
+      "force": 7
+    },
+    "traits": [
+      "statesman",
+      "soldier",
+      "technocrat"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "simon-cowell",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Simon Cowell",
+    "country": "United Kingdom",
+    "era": "Modern",
+    "office": "Producer",
+    "bio": "Will tell the delegation exactly what he thinks of their proposal.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 10,
+      "integrity": 4,
+      "grit": 6,
+      "intellect": 7,
+      "force": 6
+    },
+    "traits": [
+      "demagogue",
+      "cunning",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "colonel-sanders",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Colonel Sanders",
+    "country": "United States",
+    "era": "1950s",
+    "office": "Restaurateur",
+    "bio": "Not a real colonel. Has never let that slow him down.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 8,
+      "integrity": 6,
+      "grit": 8,
+      "intellect": 7,
+      "force": 2
+    },
+    "traits": [
+      "showman",
+      "dealmaker",
+      "banker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "gritty",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Gritty",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Mascot",
+    "bio": "Nobody knows what he is. Nobody is willing to say it to his face.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 5,
+      "integrity": 5,
+      "grit": 7,
+      "intellect": 2,
+      "force": 8
+    },
+    "traits": [
+      "showman",
+      "demagogue",
+      "soldier"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "chunghwa-cigs",
+    "category": "object",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "A Pack of Chunghwa Cigarettes",
+    "country": "China",
+    "era": "Modern",
+    "office": "Ceremonial Gift",
+    "bio": "Opens more doors in this building than any minister on this list.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 10,
+      "integrity": 4,
+      "grit": 6,
+      "intellect": 5,
+      "force": 2
+    },
+    "traits": [
+      "dealmaker",
+      "banker",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "red-telephone",
+    "category": "object",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "The Red Telephone",
+    "country": "Fictional",
+    "era": "1960s",
+    "office": "Direct Line",
+    "bio": "Only rings for one reason and everyone in the room knows it.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 7,
+      "integrity": 8,
+      "grit": 8,
+      "intellect": 7,
+      "force": 7
+    },
+    "traits": [
+      "statesman",
+      "strategist",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "rubber-stamp",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Rubber Stamp",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Office Equipment",
+    "bio": "Approves everything. Has never once read anything.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 8,
+      "integrity": 4,
+      "grit": 10,
+      "intellect": 3,
+      "force": 4
+    },
+    "traits": [
+      "loyalist",
+      "technocrat",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "filing-cabinet",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Locked Filing Cabinet",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Records",
+    "bio": "Contains everything anyone has ever done. The key is missing.",
+    "stats": {
+      "charisma": 1,
+      "cunning": 9,
+      "integrity": 5,
+      "grit": 8,
+      "intellect": 6,
+      "force": 3
+    },
+    "traits": [
+      "paranoid",
+      "technocrat",
+      "banker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "traffic-cone",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Traffic Cone",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Street Furniture",
+    "bio": "Provides direction. Provides nothing else.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 1,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 1,
+      "force": 6
+    },
+    "traits": [
+      "loyalist",
+      "liability",
+      "soldier"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "roomba",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Roomba",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Automated Staff",
+    "bio": "Works tirelessly, learns the floor plan, cannot handle stairs or nuance.",
+    "stats": {
+      "charisma": 2,
+      "cunning": 3,
+      "integrity": 9,
+      "grit": 10,
+      "intellect": 6,
+      "force": 2
+    },
+    "traits": [
+      "technocrat",
+      "loyalist",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "fax-machine",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Fax Machine",
+    "country": "Fictional",
+    "era": "1980s",
+    "office": "Communications",
+    "bio": "Still the official channel. Nobody remembers why.",
+    "stats": {
+      "charisma": 1,
+      "cunning": 5,
+      "integrity": 9,
+      "grit": 10,
+      "intellect": 5,
+      "force": 2
+    },
+    "traits": [
+      "technocrat",
+      "isolationist",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "potted-fern",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Potted Fern",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Décor",
+    "bio": "Present at every meeting for eleven years. Has heard everything.",
+    "stats": {
+      "charisma": 4,
+      "cunning": 9,
+      "integrity": 8,
+      "grit": 8,
+      "intellect": 2,
+      "force": 1
+    },
+    "traits": [
+      "loyalist",
+      "paranoid",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "shredder",
+    "category": "object",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "A Paper Shredder",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Records Management",
+    "bio": "The most reliable member of any administration.",
+    "stats": {
+      "charisma": 2,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 10,
+      "intellect": 5,
+      "force": 8
+    },
+    "traits": [
+      "cunning",
+      "loyalist",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "briefcase-of-cash",
+    "category": "object",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "A Briefcase of Unmarked Cash",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Discretionary Fund",
+    "bio": "Persuades absolutely anyone and explains absolutely nothing.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 6,
+      "force": 5
+    },
+    "traits": [
+      "banker",
+      "dealmaker",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "nuclear-football",
+    "category": "object",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "The Nuclear Football",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Emergency Satchel",
+    "bio": "Follows the President everywhere and settles every argument permanently.",
+    "stats": {
+      "charisma": 3,
+      "cunning": 5,
+      "integrity": 5,
+      "grit": 10,
+      "intellect": 7,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "half-sandwich",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Half-Eaten Sandwich",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Left on the Table",
+    "bio": "Has been in the situation room since Tuesday and is now part of the team.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 1,
+      "integrity": 10,
+      "grit": 10,
+      "intellect": 1,
+      "force": 3
+    },
+    "traits": [
+      "liability",
+      "loyalist",
+      "beloved"
     ],
     "reviewed": true
   }
