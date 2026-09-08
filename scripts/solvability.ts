@@ -42,6 +42,10 @@ for (const event of loadEvents()) {
     if (score < worst.score) worst = { score, roster }
   }
   console.log(`\n${event.title}  (${n.toLocaleString()} cabinets)`)
+  // A perfect read has to be able to reach the top tier, or Legendary is
+  // decoration. It must not reach it comfortably either.
+  if (best.score < 80) console.log(`  ! ceiling ${best.score.toFixed(0)} - Legendary is unreachable here`)
+  if (best.score > 92) console.log(`  ! ceiling ${best.score.toFixed(0)} - too easy to max`)
   for (const [label, r] of [['BEST', best], ['WORST', worst]] as const) {
     const res = resolveEvent(event, r.roster!)
     console.log(`  ${label}  ${r.score.toFixed(0)}  ${res.tier}`)

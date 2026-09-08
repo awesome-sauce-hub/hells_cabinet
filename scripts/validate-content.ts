@@ -9,7 +9,7 @@
  */
 import { z } from 'zod'
 import { readFileSync } from 'node:fs'
-import { ROLES, STATS } from '../src/engine/types.js'
+import { CATEGORIES, ROLES, STATS } from '../src/engine/types.js'
 import { loadEvents, loadPoliticians } from '../src/engine/content.js'
 
 const roleEnum = z.enum(ROLES)
@@ -17,6 +17,7 @@ const statEnum = z.enum(STATS)
 
 const politicianSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
+  category: z.enum(CATEGORIES),
   name: z.string().min(1),
   country: z.string().min(1),
   era: z.string().min(1),
@@ -66,6 +67,19 @@ for (const [i, e] of rawEvents.entries()) {
   if (!parsed.success) fail(`event[${i}] ${e?.id ?? '?'}: ${parsed.error.issues.map((x) => `${x.path.join('.')} ${x.message}`).join('; ')}`)
 }
 
+/**
+ * Every figure spends the same number of stat points, so strength has to be
+ * bought with weakness. Without this, high-total cards win regardless of what
+ * the event asks and the draft collapses into "pick the biggest number".
+ */
+const STAT_BUDGET = 40
+for (const p of rawPoliticians) {
+  const total = Object.values(p.stats ?? {}).reduce((a: number, b) => a + (b as number), 0)
+  if (total !== STAT_BUDGET) {
+    fail(`politician ${p.id}: stat total ${total}, budget is ${STAT_BUDGET}`)
+  }
+}
+
 const ids = new Set<string>(rawPoliticians.map((p: { id: string }) => p.id))
 for (const p of rawPoliticians) {
   for (const r of p.rivals ?? []) {
@@ -104,4 +118,9 @@ if (errors.length) {
   for (const e of errors) console.error(`   - ${e}`)
   process.exit(1)
 }
-console.log(`  content ok: ${shipped.length} politicians, ${loadEvents().length} events`)
+const wildcards = shipped.filter((p) => p.category === 'wildcard').length
+console.log(
+  `  content ok: ${shipped.length} figures ` +
+    `(${shipped.length - wildcards} politicians, ${wildcards} wildcards), ` +
+    `${loadEvents().length} events`,
+)

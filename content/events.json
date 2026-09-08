@@ -15,26 +15,26 @@
         "role": "General",
         "stat_bias": "force",
         "invert": true,
-        "dc": 55,
+        "dc": 56,
         "note": "restraint under pressure"
       },
       {
         "role": "President",
         "stat_bias": "cunning",
-        "dc": 72,
+        "dc": 64,
         "note": "a ladder for the other side to climb down"
       },
       {
         "role": "VicePresident",
         "stat_bias": "grit",
-        "dc": 66,
+        "dc": 68,
         "weight": 0.8,
         "note": "holding the room together at 4am"
       },
       {
         "role": "Treasurer",
         "stat_bias": "intellect",
-        "dc": 60,
+        "dc": 65,
         "weight": 0.5,
         "note": "costing the blockade"
       }
@@ -45,7 +45,7 @@
       "check": {
         "role": "PropagandaMinister",
         "stat_bias": "charisma",
-        "dc": 68,
+        "dc": 69,
         "weight": 1.2
       }
     },
@@ -70,7 +70,7 @@
       {
         "role": "Treasurer",
         "stat_bias": "intellect",
-        "dc": 74,
+        "dc": 81,
         "weight": 1.5,
         "note": "understanding the instruments"
       },
@@ -83,14 +83,14 @@
       {
         "role": "PropagandaMinister",
         "stat_bias": "cunning",
-        "dc": 73,
+        "dc": 72,
         "note": "the word 'rescue' instead of 'bailout'"
       },
       {
         "role": "General",
         "stat_bias": "force",
         "invert": true,
-        "dc": 50,
+        "dc": 49,
         "weight": 0.4,
         "note": "not deploying troops to a bank"
       }
@@ -101,7 +101,7 @@
       "check": {
         "role": "VicePresident",
         "stat_bias": "integrity",
-        "dc": 52,
+        "dc": 54,
         "weight": 1.2
       }
     },

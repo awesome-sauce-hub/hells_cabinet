@@ -132,7 +132,12 @@ export function chemistry(roster: Roster): ChemistryResult {
   }
 }
 
-const COUP_MARGIN = 25
+/**
+ * Calibrated against the shipped roster, not chosen: the stat budget compresses
+ * presidential scores, so margins above ~19 do not occur at all. Fires for
+ * roughly 5% of runs. Recalibrate whenever the roster's stat spread changes.
+ */
+const COUP_MARGIN = 10
 
 /**
  * An ambitious deputy who badly outclasses the President takes the job. The

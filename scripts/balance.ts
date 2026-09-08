@@ -7,13 +7,30 @@
  *   npm run balance -- [runs]
  */
 import { loadEvents, loadPoliticians } from '../src/engine/content.js'
-import { randomDraft } from '../src/engine/draft.js'
+import { drawCandidates, randomDraft } from '../src/engine/draft.js'
+import { ROLES } from '../src/engine/types.js'
 import { mulberry32 } from '../src/engine/rng.js'
 import { TIERS, resolveEvent } from '../src/engine/resolve.js'
 import type { Tier } from '../src/engine/resolve.js'
 
 const RUNS = Number(process.argv[2] ?? 10000)
 const politicians = loadPoliticians()
+
+// Wildcards should be a surprise on the board, not the baseline.
+{
+  let wild = 0
+  let cards = 0
+  for (let i = 0; i < 2000; i++) {
+    const rng = mulberry32(i)
+    for (const role of ROLES) {
+      for (const c of drawCandidates(rng, politicians, role)) {
+        cards++
+        if (c.category === 'wildcard') wild++
+      }
+    }
+  }
+  console.log(`wildcards: ${((wild / cards) * 100).toFixed(1)}% of cards offered`)
+}
 
 for (const event of loadEvents()) {
   const tiers = new Map<Tier, number>(TIERS.map((t) => [t, 0]))

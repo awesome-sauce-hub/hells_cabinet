@@ -8,6 +8,7 @@
     "balance": "tsx scripts/balance.ts",
     "calibrate": "tsx scripts/calibrate.ts",
     "solvability": "tsx scripts/solvability.ts",
+    "toppicks": "tsx scripts/toppicks.ts",
     "validate": "tsx scripts/validate-content.ts",
     "test": "vitest run && npm run validate"
   },

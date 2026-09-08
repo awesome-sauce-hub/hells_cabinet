@@ -13,8 +13,18 @@ export type Role = (typeof ROLES)[number]
 /** Stat values are 1-10, hand-assigned or derived from the ingest pipeline. */
 export type StatBlock = Record<Stat, number>
 
+export const CATEGORIES = ['politician', 'wildcard'] as const
+/**
+ * Wildcards are the non-politicians - fictional characters, internet figures,
+ * anyone the Wikidata scrape will never produce. They exist because the comedy
+ * lives in mismatch, and they are drawn at a reduced rate so a wildcard on the
+ * board stays an event rather than the norm.
+ */
+export type Category = (typeof CATEGORIES)[number]
+
 export interface Politician {
   id: string
+  category: Category
   name: string
   country: string
   era: string

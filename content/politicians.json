@@ -6,10 +6,24 @@
     "era": "1940s",
     "office": "Prime Minister",
     "bio": "Will not surrender, will not go to bed, will not stop dictating.",
-    "stats": { "charisma": 9, "cunning": 7, "integrity": 6, "grit": 10, "intellect": 8, "force": 8 },
-    "traits": ["statesman", "warhawk", "showman"],
-    "rivals": ["chamberlain"],
-    "reviewed": true
+    "stats": {
+      "charisma": 8,
+      "cunning": 5,
+      "integrity": 4,
+      "grit": 10,
+      "intellect": 6,
+      "force": 7
+    },
+    "traits": [
+      "statesman",
+      "warhawk",
+      "showman"
+    ],
+    "rivals": [
+      "chamberlain"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "chamberlain",
@@ -18,10 +32,24 @@
     "era": "1930s",
     "office": "Prime Minister",
     "bio": "Brings an umbrella to every crisis and a signature to most of them.",
-    "stats": { "charisma": 4, "cunning": 4, "integrity": 7, "grit": 4, "intellect": 6, "force": 2 },
-    "traits": ["statesman", "isolationist", "dealmaker"],
-    "rivals": ["churchill"],
-    "reviewed": true
+    "stats": {
+      "charisma": 6,
+      "cunning": 6,
+      "integrity": 10,
+      "grit": 6,
+      "intellect": 9,
+      "force": 3
+    },
+    "traits": [
+      "statesman",
+      "isolationist",
+      "dealmaker"
+    ],
+    "rivals": [
+      "churchill"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "bismarck",
@@ -30,9 +58,21 @@
     "era": "1870s",
     "office": "Chancellor",
     "bio": "Has already arranged the war you have not yet decided to start.",
-    "stats": { "charisma": 6, "cunning": 10, "integrity": 4, "grit": 8, "intellect": 9, "force": 7 },
-    "traits": ["strategist", "cunning", "statesman"],
-    "reviewed": true
+    "stats": {
+      "charisma": 5,
+      "cunning": 10,
+      "integrity": 4,
+      "grit": 7,
+      "intellect": 8,
+      "force": 6
+    },
+    "traits": [
+      "strategist",
+      "cunning",
+      "statesman"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "eleanor-roosevelt",
@@ -41,9 +81,21 @@
     "era": "1940s",
     "office": "First Lady, UN Delegate",
     "bio": "The only person in the cabinet who has read the whole document.",
-    "stats": { "charisma": 8, "cunning": 5, "integrity": 9, "grit": 8, "intellect": 8, "force": 2 },
-    "traits": ["beloved", "statesman", "loyalist"],
-    "reviewed": true
+    "stats": {
+      "charisma": 8,
+      "cunning": 3,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 9,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "loyalist"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "nixon",
@@ -52,9 +104,21 @@
     "era": "1970s",
     "office": "President",
     "bio": "Brilliant at foreign policy, cannot be left alone with a tape recorder.",
-    "stats": { "charisma": 4, "cunning": 9, "integrity": 2, "grit": 7, "intellect": 8, "force": 6 },
-    "traits": ["paranoid", "cunning", "scandal-magnet"],
-    "reviewed": true
+    "stats": {
+      "charisma": 6,
+      "cunning": 10,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 8,
+      "force": 7
+    },
+    "traits": [
+      "paranoid",
+      "cunning",
+      "scandal-magnet"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "caesar",
@@ -63,10 +127,25 @@
     "era": "Antiquity",
     "office": "Dictator",
     "bio": "Excellent general, adequate delegator, catastrophic at reading a room.",
-    "stats": { "charisma": 9, "cunning": 9, "integrity": 3, "grit": 9, "intellect": 8, "force": 9 },
-    "traits": ["soldier", "strategist", "showman", "cunning"],
-    "rivals": ["crassus"],
-    "reviewed": true
+    "stats": {
+      "charisma": 8,
+      "cunning": 8,
+      "integrity": 1,
+      "grit": 8,
+      "intellect": 7,
+      "force": 8
+    },
+    "traits": [
+      "soldier",
+      "strategist",
+      "showman",
+      "cunning"
+    ],
+    "rivals": [
+      "crassus"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "cleopatra",
@@ -75,9 +154,21 @@
     "era": "Antiquity",
     "office": "Pharaoh",
     "bio": "Arrives by boat, leaves with your navy.",
-    "stats": { "charisma": 10, "cunning": 9, "integrity": 4, "grit": 7, "intellect": 8, "force": 4 },
-    "traits": ["dealmaker", "showman", "cunning"],
-    "reviewed": true
+    "stats": {
+      "charisma": 10,
+      "cunning": 9,
+      "integrity": 4,
+      "grit": 6,
+      "intellect": 7,
+      "force": 4
+    },
+    "traits": [
+      "dealmaker",
+      "showman",
+      "cunning"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "genghis",
@@ -86,9 +177,21 @@
     "era": "Medieval",
     "office": "Great Khan",
     "bio": "Outstanding logistics. Do not give him the word 'escalate'.",
-    "stats": { "charisma": 6, "cunning": 8, "integrity": 3, "grit": 10, "intellect": 6, "force": 10 },
-    "traits": ["warhawk", "soldier", "strategist"],
-    "reviewed": true
+    "stats": {
+      "charisma": 5,
+      "cunning": 7,
+      "integrity": 3,
+      "grit": 9,
+      "intellect": 6,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "strategist"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "hamilton",
@@ -97,9 +200,21 @@
     "era": "1790s",
     "office": "Secretary of the Treasury",
     "bio": "Will fix the national debt and publish a pamphlet about his personal life.",
-    "stats": { "charisma": 7, "cunning": 7, "integrity": 5, "grit": 8, "intellect": 10, "force": 6 },
-    "traits": ["technocrat", "banker", "scandal-magnet"],
-    "reviewed": true
+    "stats": {
+      "charisma": 7,
+      "cunning": 6,
+      "integrity": 5,
+      "grit": 8,
+      "intellect": 10,
+      "force": 4
+    },
+    "traits": [
+      "technocrat",
+      "banker",
+      "scandal-magnet"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "hearst",
@@ -108,9 +223,21 @@
     "era": "1900s",
     "office": "Congressman, Publisher",
     "bio": "You furnish the crisis, he will furnish the coverage.",
-    "stats": { "charisma": 7, "cunning": 8, "integrity": 2, "grit": 6, "intellect": 6, "force": 5 },
-    "traits": ["demagogue", "showman", "scandal-magnet"],
-    "reviewed": true
+    "stats": {
+      "charisma": 8,
+      "cunning": 10,
+      "integrity": 2,
+      "grit": 7,
+      "intellect": 7,
+      "force": 6
+    },
+    "traits": [
+      "demagogue",
+      "showman",
+      "scandal-magnet"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "crassus",
@@ -119,10 +246,24 @@
     "era": "Antiquity",
     "office": "Consul",
     "bio": "Richest man in Rome. Owns the fire brigade. Will negotiate at the fire.",
-    "stats": { "charisma": 4, "cunning": 8, "integrity": 2, "grit": 6, "intellect": 7, "force": 5 },
-    "traits": ["banker", "dealmaker", "paranoid"],
-    "rivals": ["caesar"],
-    "reviewed": true
+    "stats": {
+      "charisma": 5,
+      "cunning": 10,
+      "integrity": 2,
+      "grit": 8,
+      "intellect": 9,
+      "force": 6
+    },
+    "traits": [
+      "banker",
+      "dealmaker",
+      "paranoid"
+    ],
+    "rivals": [
+      "caesar"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "lincoln",
@@ -131,9 +272,21 @@
     "era": "1860s",
     "office": "President",
     "bio": "Keeps his rivals in the cabinet and his temper in a drawer.",
-    "stats": { "charisma": 8, "cunning": 7, "integrity": 9, "grit": 10, "intellect": 9, "force": 5 },
-    "traits": ["beloved", "statesman", "strategist"],
-    "reviewed": true
+    "stats": {
+      "charisma": 7,
+      "cunning": 5,
+      "integrity": 9,
+      "grit": 9,
+      "intellect": 8,
+      "force": 2
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "strategist"
+    ],
+    "reviewed": true,
+    "category": "politician"
   },
   {
     "id": "talleyrand",
@@ -142,8 +295,205 @@
     "era": "1800s",
     "office": "Foreign Minister",
     "bio": "Has served every regime France has had, and outlived most of them.",
-    "stats": { "charisma": 7, "cunning": 10, "integrity": 2, "grit": 7, "intellect": 9, "force": 3 },
-    "traits": ["dealmaker", "cunning", "loyalist"],
+    "stats": {
+      "charisma": 7,
+      "cunning": 10,
+      "integrity": 2,
+      "grit": 7,
+      "intellect": 9,
+      "force": 5
+    },
+    "traits": [
+      "dealmaker",
+      "cunning",
+      "loyalist"
+    ],
+    "reviewed": true,
+    "category": "politician"
+  },
+  {
+    "id": "freddy-fazbear",
+    "name": "Freddy Fazbear",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Animatronic Entertainer",
+    "bio": "Runs on rails, works nights, and has never once been talked down from anything.",
+    "stats": {
+      "charisma": 7,
+      "cunning": 6,
+      "integrity": 4,
+      "grit": 10,
+      "intellect": 4,
+      "force": 9
+    },
+    "traits": [
+      "showman",
+      "soldier",
+      "paranoid"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "markiplier",
+    "name": "Markiplier",
+    "country": "United States",
+    "era": "Internet",
+    "office": "YouTuber",
+    "bio": "Can hold a room for nine hours and has the vocal cords to prove it.",
+    "stats": {
+      "charisma": 10,
+      "cunning": 5,
+      "integrity": 8,
+      "grit": 9,
+      "intellect": 6,
+      "force": 2
+    },
+    "traits": [
+      "showman",
+      "beloved",
+      "loyalist"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "mrbeast",
+    "name": "MrBeast",
+    "country": "United States",
+    "era": "Internet",
+    "office": "Philanthropist, Content Machine",
+    "bio": "Will solve the budget crisis, but everyone has to stand in a circle first.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 8,
+      "integrity": 6,
+      "grit": 8,
+      "intellect": 8,
+      "force": 2
+    },
+    "traits": [
+      "banker",
+      "dealmaker",
+      "showman"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "gordon-ramsay",
+    "name": "Gordon Ramsay",
+    "country": "United Kingdom",
+    "era": "Modern",
+    "office": "Chef",
+    "bio": "Extremely effective under pressure, unusable in a press conference.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 2,
+      "integrity": 6,
+      "grit": 9,
+      "intellect": 6,
+      "force": 9
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "showman"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "bob-ross",
+    "name": "Bob Ross",
+    "country": "United States",
+    "era": "1980s",
+    "office": "Painter, former Air Force Master Sergeant",
+    "bio": "Twenty years in the military and has not raised his voice since.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 4,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 9,
+      "force": 1
+    },
+    "traits": [
+      "beloved",
+      "statesman",
+      "loyalist"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "darth-vader",
+    "name": "Darth Vader",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Sith Lord",
+    "bio": "Outstanding at ending negotiations. Less good at starting them.",
+    "stats": {
+      "charisma": 5,
+      "cunning": 7,
+      "integrity": 2,
+      "grit": 9,
+      "intellect": 7,
+      "force": 10
+    },
+    "traits": [
+      "warhawk",
+      "soldier",
+      "paranoid",
+      "strategist"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "keanu-reeves",
+    "name": "Keanu Reeves",
+    "country": "Canada",
+    "era": "Modern",
+    "office": "Actor",
+    "bio": "Universally trusted, which in this cabinet is a structural advantage.",
+    "stats": {
+      "charisma": 8,
+      "cunning": 3,
+      "integrity": 10,
+      "grit": 8,
+      "intellect": 6,
+      "force": 5
+    },
+    "traits": [
+      "beloved",
+      "loyalist",
+      "statesman"
+    ],
+    "category": "wildcard",
+    "reviewed": true
+  },
+  {
+    "id": "kermit",
+    "name": "Kermit the Frog",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Theatre Manager",
+    "bio": "Has spent his whole career keeping louder people in one building.",
+    "stats": {
+      "charisma": 9,
+      "cunning": 6,
+      "integrity": 10,
+      "grit": 7,
+      "intellect": 6,
+      "force": 2
+    },
+    "traits": [
+      "dealmaker",
+      "beloved",
+      "loyalist"
+    ],
+    "category": "wildcard",
     "reviewed": true
   }
 ]

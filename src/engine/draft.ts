@@ -22,13 +22,20 @@ const ROLE_AFFINITY: Record<Role, string[]> = {
 }
 
 const AFFINITY_BONUS = 2.5
+/**
+ * Wildcards are ~38% of the roster by headcount but should be roughly 1 card in
+ * 6 on the board. Weighted down rather than gated so any role can still be
+ * offered one. See scripts/balance.ts for the realised rate.
+ */
+const WILDCARD_WEIGHT = 0.35
 /** Keeps a plausible pick likelier than an implausible one without excluding it. */
 const FIT_WEIGHT = 0.02
 
 export function poolWeight(p: Politician, role: Role): number {
   const affine = ROLE_AFFINITY[role].some((t) => p.traits.includes(t))
   const base = 1 + (affine ? AFFINITY_BONUS : 0)
-  return base * (1 + roleScore(p.stats, role) * FIT_WEIGHT)
+  const rarity = p.category === 'wildcard' ? WILDCARD_WEIGHT : 1
+  return base * rarity * (1 + roleScore(p.stats, role) * FIT_WEIGHT)
 }
 
 export function drawCandidates(
