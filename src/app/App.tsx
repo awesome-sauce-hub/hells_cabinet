@@ -3,6 +3,8 @@ import { EVENTS, FIGURES } from './data.js'
 import { CandidateCard, Icon, ROLE_LABEL, SlotStrip } from './components.js'
 import { DeskAside, Masthead } from './Desk.js'
 import { narrate } from './narrate.js'
+import type { Beat } from './narrate.js'
+import { fetchNarration } from './narrateRemote.js'
 import { EVENT_LOCATIONS } from './eventLocations.js'
 import { clearRun, isDaily, linkTo, loadRun, runFromUrl, saveRun } from './session.js'
 import type { RunRef, SavedPhase } from './session.js'
@@ -88,10 +90,12 @@ export default function App() {
   return (
     <div className="app">
       <Masthead isDaily={daily} seed={ref.seed} />
-      <main className="desk-layout">
+      <main className="desk">
       <section className={`pinboard phase-${phase}`} aria-label="Cabinet pinboard">
       <span className="board-screw screw-tl" aria-hidden="true" /><span className="board-screw screw-tr" aria-hidden="true" />
       <span className="board-screw screw-bl" aria-hidden="true" /><span className="board-screw screw-br" aria-hidden="true" />
+      <div className="board-stage">
+      <div className="board-main">
       {broken ? (
         <Unresumable onFresh={() => startRun({ seed: todayKey(), eventId: null })} />
       ) : (<>
@@ -125,8 +129,10 @@ export default function App() {
         <Verdict result={result} runRef={ref} isDaily={daily} onChoose={() => setPhase('choose')} />
       )}
       </>)}
-      </section>
+      </div>
       <DeskAside event={run.event} showBriefing={phase === 'draft'} />
+      </div>
+      </section>
       </main>
       <footer className="desk-footer"><span>A little history. A lot of bad decisions.</span><span>Hell’s Cabinet · an alternate-history game <a href="/portrait-credits.html" target="_blank" rel="noreferrer">Portrait credits</a></span></footer>
     </div>
@@ -281,11 +287,35 @@ function GameOver({
  * skipping to the end costs the player nothing.
  */
 function Sim({ result, onDone }: { result: Resolution; onDone: () => void }) {
-  const beats = useMemo(() => narrate(result), [result])
+  const fallback = useMemo(() => narrate(result), [result])
+  const [written, setWritten] = useState<Beat[] | null>(null)
+  const [waiting, setWaiting] = useState(true)
   const [shown, setShown] = useState(1)
+  const newest = useRef<HTMLLIElement>(null)
+
+  /**
+   * The written story is fetched the moment this screen appears, while the
+   * player is still reading the opening beat. Most of the wait is spent behind
+   * something worth looking at, and if it never arrives the templated version
+   * was on screen the whole time anyway.
+   */
+  useEffect(() => {
+    const abort = new AbortController()
+    fetchNarration(result, abort.signal).then((beats) => {
+      if (abort.signal.aborted) return
+      // Swapping under the player would rewrite a beat they already read, so a
+      // late arrival is only taken while they are still on the first one.
+      if (beats) setWritten((current) => current ?? beats)
+      setWaiting(false)
+    })
+    return () => abort.abort()
+  }, [result])
+
+  const beats = written ?? fallback
   const finished = shown >= beats.length
   const latest = beats[shown - 1]
-  const newest = useRef<HTMLLIElement>(null)
+  // Hold at the opening beat while there is still a chance of a written story.
+  const pending = waiting && written === null && shown === 1
 
   // Move focus to each new beat so a screen reader hears it and a keyboard
   // player is left next to the button they just pressed.
@@ -326,8 +356,10 @@ function Sim({ result, onDone }: { result: Resolution; onDone: () => void }) {
             <button className="primary" onClick={onDone}>See the verdict <Icon name="arrow" /></button>
           ) : (
             <>
-              <button className="primary" onClick={() => setShown((n) => n + 1)}>Continue <Icon name="arrow" /></button>
-              <button onClick={() => setShown(beats.length)}>Skip to the end</button>
+              <button className="primary" onClick={() => setShown((n) => n + 1)} disabled={pending}>
+                {pending ? 'The room is deliberating…' : <>Continue <Icon name="arrow" /></>}
+              </button>
+              <button onClick={() => setShown(beats.length)} disabled={pending}>Skip to the end</button>
             </>
           )}
         </div>

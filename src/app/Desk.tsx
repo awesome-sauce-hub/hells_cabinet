@@ -45,7 +45,7 @@ export function DeskAside({ event, showBriefing }: { event: GameEvent; showBrief
       </figure>
       {showBriefing ? (
         <section className="desk-memo">
-          <span className="paperclip" aria-hidden="true" />
+          <span className="pushpin" aria-hidden="true" /><span className="paperclip" aria-hidden="true" />
           <h2><Icon name="file" size={17} /> The situation</h2>
           <h3>{event.title}</h3>
           <p className="memo-year">{event.year}</p>
@@ -53,7 +53,7 @@ export function DeskAside({ event, showBriefing }: { event: GameEvent; showBrief
           <details><summary>Read your briefing</summary><p className="memo-hint">{event.briefing_hint}</p><p className="spotlight-copy">Under scrutiny: {event.spotlight.map((role) => ROLE_LABEL[role]).join(', ')}.</p></details>
         </section>
       ) : (
-        <div className="desk-note"><span className="tape" aria-hidden="true" /><p>Six candidates.<br />Five seats.<br />What could<br />possibly go wrong?</p><span className="note-signature">— the electorate</span></div>
+        <div className="desk-note"><span className="pushpin" aria-hidden="true" /><p>Six candidates.<br />Five seats.<br />What could<br />possibly go wrong?</p><span className="note-signature">— the electorate</span></div>
       )}
     </aside>
   )

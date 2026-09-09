@@ -3,3 +3,9 @@ dist
 content/.cache
 dist
 dist
+
+# Local secrets. Never commit.
+.env
+.env.*
+!.env.example
+.vercel

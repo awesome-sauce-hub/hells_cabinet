@@ -47,7 +47,7 @@ The existing suite tested the engine only. This pass adds event-map coverage and
 
 The current portraits are a prototype mix of photos, historical depictions, fictional-character images and objects from Wikipedia/Wikimedia, each with its source-file attribution link. Their individual licenses and character usage have not been cleared for a public release; some sources are subject to non-free usage restrictions. Replace or clear that set before publishing. No site was deployed by this task.
 
-`src/app/narrate.ts` explicitly remains a template narrator. More event-specific authored outcomes would improve replay variety without changing the scoring engine.
+`src/app/narrate.ts` is now the fallback rather than the narrator: the story is written per game by Claude via `api/narrate.ts`, given the five appointees and their outcomes. The templates stay in the build so the game is fully playable with no key or no network. See `docs/NARRATOR.md`.
 
 ## Verification
 

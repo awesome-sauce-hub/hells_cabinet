@@ -1,6 +1,6 @@
 import { seedFrom } from '../engine/rng.js'
 import type { Resolution } from '../engine/resolve.js'
-import type { Role } from '../engine/types.js'
+import type { Role, Tone } from '../engine/types.js'
 
 /**
  * Placeholder narrator.
@@ -10,7 +10,7 @@ import type { Role } from '../engine/types.js'
  * the simulation screen can be built and playtested first, and so the shape
  * the generator has to fill is pinned down by working code rather than a spec.
  */
-export type Tone = 'good' | 'bad' | 'twist' | 'neutral'
+export type { Tone } from '../engine/types.js'
 
 export interface Beat {
   id: string

@@ -13,5 +13,5 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "allowImportingTsExtensions": false
   },
-  "include": ["src", "scripts", "vite.config.ts"]
+  "include": ["src", "scripts", "api", "vite.config.ts"]
 }

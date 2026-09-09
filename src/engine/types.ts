@@ -33,6 +33,10 @@ export const CATEGORIES = ['politician', 'wildcard', 'object'] as const
  */
 export type Category = (typeof CATEGORIES)[number]
 
+/** How a beat of the resolution reads. Shared by the templated and written narrators. */
+export const TONES = ['good', 'bad', 'twist', 'neutral'] as const
+export type Tone = (typeof TONES)[number]
+
 export const ALIGNMENTS = ['good', 'bad', 'neutral'] as const
 /**
  * How history remembers them, which is separate from how strong the card is.
