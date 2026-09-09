@@ -7,8 +7,8 @@ import type { Beat } from './narrate.js'
 import { fetchJudgement } from './narrateRemote.js'
 import type { Judged } from './narrateRemote.js'
 import { EVENT_LOCATIONS } from './eventLocations.js'
-import { clearRun, isDaily, linkTo, loadRun, runFromUrl, saveRun } from './session.js'
-import type { RunRef, SavedPhase } from './session.js'
+import { clearRun, isDaily, linkTo, loadRun, runFromUrl, saveRun, sharedFromUrl } from './session.js'
+import type { RunRef, SavedPhase, SharedCabinet } from './session.js'
 import { finishDraft, isDraftComplete, openRoles } from '../engine/draft.js'
 import type { DraftState } from '../engine/draft.js'
 import { applyAction, replayDraft } from '../engine/replay.js'
@@ -16,11 +16,12 @@ import type { DraftAction } from '../engine/replay.js'
 import { createRun, randomSeed, todayKey } from '../engine/run.js'
 import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
+import { tierFor } from '../engine/verdict.js'
 import type { RoleVerdict } from '../engine/verdict.js'
 import { ROLES } from '../engine/types.js'
 import type { Role } from '../engine/types.js'
 
-type Phase = SavedPhase | 'choose'
+type Phase = SavedPhase | 'choose' | 'shared'
 
 /**
  * How long the opening beat waits for a written story before the game goes on
@@ -30,7 +31,12 @@ type Phase = SavedPhase | 'choose'
 const HOLD_MS = 12_000
 
 /** A link beats a save: someone opening a shared game should get that game. */
-function openingRun(): { ref: RunRef; actions: DraftAction[]; phase: Phase; verdicts?: RoleVerdict[] } {
+function openingRun(): { ref: RunRef; actions: DraftAction[]; phase: Phase; verdicts?: RoleVerdict[]; sent?: SharedCabinet } {
+  // A link carrying a cabinet opens on that cabinet: the sender is showing
+  // you what they did, and the same deal is one button away.
+  const sent = sharedFromUrl(window.location.search)
+  if (sent) return { ref: sent.ref, actions: [], phase: 'shared', sent }
+
   const shared = runFromUrl(window.location.search)
   if (shared) return { ref: shared, actions: [], phase: 'briefing' }
 
@@ -58,7 +64,7 @@ export default function App() {
    * from localStorage a week ago, so resuming cannot drift from playing.
    */
   const draft = useMemo(
-    () => (phase === 'briefing' || phase === 'choose' ? null : replayDraft(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)),
+    () => (phase === 'briefing' || phase === 'choose' || phase === 'shared' ? null : replayDraft(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)),
     [ref, actions, phase],
   )
   const result = useMemo(() => {
@@ -71,10 +77,13 @@ export default function App() {
   }, [draft, run.event, verdicts])
 
   // A save that cannot be replayed is a save that would resume the wrong game.
-  const broken = phase !== 'briefing' && phase !== 'choose' && draft === null
+  const broken = phase !== 'briefing' && phase !== 'choose' && phase !== 'shared' && draft === null
 
   useEffect(() => {
     if (broken) return
+    // Looking at a cabinet someone sent is not playing: it must not overwrite
+    // or clear the run this player has of their own.
+    if (phase === 'shared') return
     if (phase === 'briefing' && actions.length === 0) clearRun()
     else saveRun({ ...ref, actions, phase: phase === 'choose' ? 'briefing' : phase, ...(verdicts ? { verdicts } : {}) })
   }, [ref, actions, phase, verdicts, broken])
@@ -123,6 +132,10 @@ export default function App() {
           onDaily={() => startRun({ seed: todayKey(), eventId: null })} isDaily={daily} />
       )}
 
+      {phase === 'shared' && opening.sent && (
+        <SharedRun sent={opening.sent} onPlay={() => startRun(opening.sent!.ref)} />
+      )}
+
       {phase === 'briefing' && (
         <Briefing run={run} isDaily={daily} onBegin={() => setPhase('draft')} onChoose={() => setPhase('choose')} />
       )}
@@ -149,11 +162,71 @@ export default function App() {
       )}
       </>)}
       </div>
-      <DeskAside event={run.event} showBriefing={phase === 'draft'} />
+      <DeskAside event={run.event} showBriefing={phase === 'draft' || phase === 'shared'} />
       </div>
       </section>
       </main>
       <footer className="desk-footer"><span>A little history. A lot of bad decisions.</span><span>Hell’s Cabinet · an alternate-history game <a href="/portrait-credits.html" target="_blank" rel="noreferrer">Portrait credits</a></span></footer>
+    </div>
+  )
+}
+
+
+/**
+ * A cabinet somebody sent, with how it went for them.
+ *
+ * Read-only on purpose: the recipient is looking at someone else's run, not
+ * resuming it. The numbers are the sender's own, read off the link rather than
+ * re-judged here - asking the adjudicator again would cost money per view and
+ * could return a different account of a game that is already over.
+ */
+function SharedRun({ sent, onPlay }: { sent: SharedCabinet; onPlay: () => void }) {
+  const event = useMemo(() => createRun(sent.ref.seed, EVENTS, sent.ref.eventId).event, [sent])
+  const tier = sent.score === undefined ? null : tierFor(sent.score)
+
+  return (
+    <div className="board-layout">
+      <SlotStrip order={ROLES} picks={sent.picks} heading="They appointed"
+        note={<>Your turn,<br />if you dare.</>} />
+      <div className="draft-area">
+        <div className="board-title">
+          <h2>{event.title}</h2>
+          <p>{event.year} · someone sent you their cabinet</p>
+        </div>
+
+        {tier && (
+          <div className="panel verdict">
+            <div className="label">How it went for them</div>
+            <div className={`tier tier-${tier.replace(/\s/g, '')}`}>{tier}</div>
+            <div className="score">{Math.round(sent.score ?? 0)} / 100</div>
+          </div>
+        )}
+
+        {sent.marks && (
+          <div className={`panel ${tier ? 'mt-s' : ''}`}>
+            <div className="label">Post by post</div>
+            <ul className="verdict-list">
+              {ROLES.map((role) => (
+                <li key={role}>
+                  <span className={`verdict-mark verdict-${sent.marks?.[role] ?? 'none'}`} aria-hidden="true" />
+                  <span className="verdict-body">
+                    <span className="verdict-head">
+                      <span className="verdict-who">{sent.picks[role].name}</span>
+                      <span className="verdict-role">{ROLE_LABEL[role]}</span>
+                    </span>
+                  </span>
+                  <span className={`verdict-word verdict-${sent.marks?.[role] ?? 'none'}`}>{sent.marks?.[role] ?? '—'}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div className="sim-actions">
+          <button className="primary" onClick={onPlay}>Play this crisis yourself <Icon name="arrow" /></button>
+        </div>
+        <p className="brief-rules">The same crisis, dealt the same way: six hopefuls a round, five seats, one reshuffle. See if you can do better than that.</p>
+      </div>
     </div>
   )
 }
@@ -467,7 +540,7 @@ function Verdict({
   const share = [
     `Hell’s Cabinet — ${result.event.title}${isDaily ? ` · ${runRef.seed}` : ''}`,
     `${result.grid} · ${Math.round(result.score)}/100 · ${result.tier.toUpperCase()}`,
-    linkTo(runRef),
+    linkTo(runRef, result),
   ].join('\n')
 
   async function copy() {

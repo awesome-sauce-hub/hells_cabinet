@@ -92,8 +92,8 @@ export function userPrompt(req: NarrationRequest): string {
   ].join('\n')
 }
 
-/** Vercel's Node runtime passes Web Request/Response. */
-export default async function handler(request: Request): Promise<Response> {
+/** The handler proper, in Web terms. Exported so the local server can call it. */
+export async function narrate(request: Request): Promise<Response> {
   if (request.method !== 'POST') return json({ error: 'POST only' }, 405)
   if (!process.env.ANTHROPIC_API_KEY) return json({ error: 'Narrator is not configured' }, 503)
 
@@ -139,4 +139,53 @@ function json(body: unknown, status: number): Response {
     status,
     headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
   })
+}
+
+/** The Node request and response objects a classic serverless runtime passes. */
+interface NodeRequest {
+  method?: string
+  url?: string
+  on(event: string, listener: (chunk?: unknown) => void): unknown
+}
+interface NodeResponse {
+  statusCode: number
+  setHeader(name: string, value: string): unknown
+  end(body?: string): unknown
+}
+
+/**
+ * Accept either calling convention.
+ *
+ * Vercel's Node runtime invokes the default export as (req, res) with Node
+ * stream objects, while the local dev and preview servers hand it a Web
+ * Request and use what it returns. A handler written for only one of those
+ * does not fail loudly under the other: given (req, res) the Web version
+ * throws inside its own try, builds a Response nobody reads, and never writes
+ * to res - so the request hangs until the platform times it out and the game
+ * quietly falls back to templates. That is what shipped, and it looked
+ * exactly like the adjudicator having nothing to say.
+ */
+export default async function handler(a: Request | NodeRequest, b?: NodeResponse): Promise<Response | void> {
+  if (!b || typeof b.setHeader !== 'function') return narrate(a as Request)
+
+  const req = a as NodeRequest
+  const chunks: Buffer[] = []
+  await new Promise<void>((resolve, reject) => {
+    req.on('data', (chunk) => chunks.push(chunk as Buffer))
+    req.on('end', () => resolve())
+    req.on('error', (error) => reject(error as Error))
+  })
+
+  const result = await narrate(
+    new Request(`https://serverless.local${req.url ?? '/api/narrate'}`, {
+      method: req.method ?? 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: chunks.length > 0 ? Buffer.concat(chunks) : undefined,
+    }),
+  )
+
+  b.statusCode = result.status
+  b.setHeader('content-type', 'application/json')
+  b.setHeader('cache-control', 'no-store')
+  b.end(await result.text())
 }

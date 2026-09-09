@@ -153,7 +153,10 @@ export function sharedFromUrl(search: string): SharedCabinet | null {
     if (words?.length === ROLES.length && words.every(isVerdict)) {
       shared.marks = Object.fromEntries(ROLES.map((role, i) => [role, words[i] as Verdict]))
     }
-    const score = Number(params.get('score'))
+    // Number(null) is 0, which would report an unscored link as a nil-point
+    // catastrophe, so a missing score has to be checked for before parsing.
+    const raw = params.get('score')
+    const score = raw === null ? NaN : Number(raw)
     if (Number.isFinite(score) && score >= 0 && score <= 100) shared.score = score
 
     return shared
