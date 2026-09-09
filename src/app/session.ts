@@ -45,8 +45,12 @@ const KEY = 'hells-cabinet:run'
  * 2: figures lost their stat blocks, which changed the draft's draw weights.
  * A version-1 save replays the same action log into a different set of
  * candidates, so it has to be discarded rather than resumed.
+ *
+ * 3: the run-ender became a one-in-ten gamble rolled off the draft's stream.
+ * A version-2 save that ended on him replays into a government still standing,
+ * and any save made after him draws from a stream one number further on.
  */
-const VERSION = 2
+const VERSION = 3
 
 /**
  * Changing the roster or the events changes what a seed deals, so a save from

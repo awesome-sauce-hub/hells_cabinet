@@ -363,13 +363,14 @@
     "country": "United States",
     "era": "1970s",
     "office": "President",
-    "bio": "Appointing him ends your government immediately. He has done this before.",
+    "bio": "Appointing him usually works out. He has ended a government before, and would rather not discuss the odds.",
     "traits": [
       "paranoid",
       "cunning",
       "scandal-magnet"
     ],
     "endsRun": "Eighteen and a half minutes of the tape are missing. So is your government.",
+    "endsRunChance": 0.1,
     "reviewed": true
   },
   {
@@ -2141,6 +2142,635 @@
       "liability",
       "loyalist",
       "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "charlie-kirk",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Charlie Kirk",
+    "country": "United States",
+    "era": "2020s",
+    "office": "Commentator, Campus Organiser",
+    "bio": "Built a movement out of arguing with undergraduates on their own lawns.",
+    "traits": [
+      "demagogue",
+      "showman",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "nine-eleven",
+    "category": "object",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "Nine Eleven",
+    "country": "United States",
+    "era": "2000s",
+    "office": "The Date Itself",
+    "bio": "Requires no introduction and will not be providing one.",
+    "traits": [
+      "paranoid",
+      "warhawk",
+      "statesman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "diddy",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Diddy",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Producer, Label Executive",
+    "bio": "Built an empire on other people's records and put his own name on the sleeve.",
+    "traits": [
+      "dealmaker",
+      "showman",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "soju-bottle",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Soju Bottle",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Refreshment",
+    "bio": "Green, cheap, and responsible for more foreign policy than anyone will admit.",
+    "traits": [
+      "dealmaker",
+      "liability",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "epstein",
+    "category": "politician",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Jeffrey Epstein",
+    "country": "United States",
+    "era": "2000s",
+    "office": "Financier",
+    "bio": "Managed money nobody could name for clients nobody would name.",
+    "traits": [
+      "cunning",
+      "dealmaker",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "hun-sen",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Hun Sen",
+    "country": "Cambodia",
+    "era": "1990s",
+    "office": "Prime Minister",
+    "bio": "Held the office for thirty-eight years and called every one of them a mandate.",
+    "traits": [
+      "cunning",
+      "paranoid",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "trump",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Donald Trump",
+    "country": "United States",
+    "era": "2020s",
+    "office": "President",
+    "bio": "Says the quiet part at length, on a stage, to applause.",
+    "traits": [
+      "demagogue",
+      "showman",
+      "dealmaker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "time-passing",
+    "category": "object",
+    "tier": "titan",
+    "alignment": "neutral",
+    "name": "The Concept of Time Passing",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Inevitability",
+    "bio": "Attends every meeting. Resolves every crisis eventually, at a cost.",
+    "traits": [
+      "statesman",
+      "strategist",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "xi-jinping",
+    "category": "politician",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "Xi Jinping",
+    "country": "China",
+    "era": "2020s",
+    "office": "General Secretary",
+    "bio": "Removed the term limit, then removed the discussion about removing the term limit.",
+    "traits": [
+      "cunning",
+      "paranoid",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "kai-cenat",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Kai Cenat",
+    "country": "United States",
+    "era": "Internet",
+    "office": "Streamer",
+    "bio": "Can hold an audience for thirty days without once leaving the room.",
+    "traits": [
+      "showman",
+      "beloved",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "four-horsemen",
+    "category": "wildcard",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "The Four Horsemen of the Apocalypse",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Death, War, Famine and Pestilence",
+    "bio": "Four applicants, one post, and a portfolio that overlaps considerably.",
+    "traits": [
+      "warhawk",
+      "soldier",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "eye-of-cthulhu",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "The Eye of Cthulhu",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Nocturnal Menace",
+    "bio": "Arrives on the first night uninvited and leaves the furniture rearranged.",
+    "traits": [
+      "warhawk",
+      "paranoid",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "erika-kirk",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Erika Kirk",
+    "country": "United States",
+    "era": "2020s",
+    "office": "Executive, Author",
+    "bio": "Inherited an organisation and a great deal of unsolicited advice about it.",
+    "traits": [
+      "loyalist",
+      "statesman",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "chatgpt",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "ChatGPT",
+    "country": "United States",
+    "era": "Internet",
+    "office": "Language Model",
+    "bio": "Will answer anything immediately, at length, and with total confidence.",
+    "traits": [
+      "technocrat",
+      "showman",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "brazil-germany",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "bad",
+    "name": "Brasil v Germany 7-1",
+    "country": "Brazil",
+    "era": "2010s",
+    "office": "A Result",
+    "bio": "Still the reason a nation flinches at the number seven.",
+    "traits": [
+      "liability",
+      "scandal-magnet",
+      "soldier"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "lamine-yamal",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "Lamine Yamal",
+    "country": "Spain",
+    "era": "Modern",
+    "office": "Footballer",
+    "bio": "Solved problems at seventeen that the room had been failing at for a decade.",
+    "traits": [
+      "beloved",
+      "strategist",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "messi",
+    "category": "wildcard",
+    "tier": "titan",
+    "alignment": "good",
+    "name": "Lionel Messi",
+    "country": "Argentina",
+    "era": "Modern",
+    "office": "Footballer",
+    "bio": "Says almost nothing, does the impossible on Tuesdays, goes home to his family.",
+    "traits": [
+      "beloved",
+      "strategist",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ronaldo",
+    "category": "wildcard",
+    "tier": "titan",
+    "alignment": "neutral",
+    "name": "Cristiano Ronaldo",
+    "country": "Portugal",
+    "era": "Modern",
+    "office": "Footballer",
+    "bio": "Has never once doubted himself and considers this a policy position.",
+    "traits": [
+      "showman",
+      "soldier",
+      "beloved"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "infantino",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "bad",
+    "name": "Gianni Infantino",
+    "country": "Switzerland",
+    "era": "Modern",
+    "office": "Football Administrator",
+    "bio": "Awards the tournament to whoever asks most generously.",
+    "traits": [
+      "dealmaker",
+      "cunning",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "hitler",
+    "category": "politician",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Adolf Hitler",
+    "country": "Germany",
+    "era": "1930s",
+    "office": "Chancellor",
+    "bio": "Failed at art school and made it comprehensively everybody else's problem.",
+    "traits": [
+      "demagogue",
+      "warhawk",
+      "paranoid"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "the-fog",
+    "category": "object",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "The Fog",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Weather",
+    "bio": "Is coming. Has been coming for some time. Will be here shortly.",
+    "traits": [
+      "isolationist",
+      "paranoid",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "lelouch",
+    "category": "wildcard",
+    "tier": "titan",
+    "alignment": "bad",
+    "name": "Lelouch vi Britannia",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Exiled Prince, Terrorist",
+    "bio": "Wins by ordering the room to agree, then wins again by having planned that.",
+    "traits": [
+      "cunning",
+      "strategist",
+      "demagogue"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "marlboro-tropical",
+    "category": "object",
+    "tier": "liability",
+    "alignment": "neutral",
+    "name": "A Pack of Marlboro 8 Tropical Blast",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Personal Effects",
+    "bio": "Somebody's favourite. Not doing anybody any good.",
+    "traits": [
+      "beloved",
+      "liability",
+      "dealmaker"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "airfryer",
+    "category": "object",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "An Air Fryer",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Kitchen Equipment",
+    "bio": "Top three inventions of all time and it will hear no argument.",
+    "traits": [
+      "technocrat",
+      "beloved",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "the-backrooms",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "The Backrooms",
+    "country": "Fictional",
+    "era": "Internet",
+    "office": "Endless Office Space",
+    "bio": "Six hundred million square feet of civil service and no exit.",
+    "traits": [
+      "isolationist",
+      "paranoid",
+      "technocrat"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "a-real-bear",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Bear (a real bear)",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Bear",
+    "bio": "Is a bear. Was not consulted about the appointment and does not know of it.",
+    "traits": [
+      "soldier",
+      "liability",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "traore",
+    "category": "politician",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Ibrahim Traore",
+    "country": "Burkina Faso",
+    "era": "2020s",
+    "office": "Interim President",
+    "bio": "Took power at thirty-four and was gifted two hundred pregnant cows for it.",
+    "traits": [
+      "soldier",
+      "demagogue",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "triple-t",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Triple T",
+    "country": "Fictional",
+    "era": "Internet",
+    "office": "Tung Tung Tung Sahur",
+    "bio": "Bangs the drum before dawn until somebody answers the door.",
+    "traits": [
+      "demagogue",
+      "showman",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "yellow-bear",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "bad",
+    "name": "Yellow Bear",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Golden Freddy, Reportedly",
+    "bio": "Appears in the room when nobody has opened a door, and is sitting down.",
+    "traits": [
+      "paranoid",
+      "liability",
+      "showman"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "spherical-cow",
+    "category": "object",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "A Spherical Cow",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Modelling Assumption",
+    "bio": "Makes the numbers work, in a vacuum, given a frictionless surface.",
+    "traits": [
+      "technocrat",
+      "strategist",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "friends-house",
+    "category": "object",
+    "tier": "operator",
+    "alignment": "good",
+    "name": "My Friend's House",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "A House",
+    "bio": "He lives there. Everyone has been. It has always been fine.",
+    "traits": [
+      "beloved",
+      "loyalist",
+      "isolationist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "ye",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "bad",
+    "name": "Ye",
+    "country": "United States",
+    "era": "Modern",
+    "office": "Musician, Designer",
+    "bio": "Produces something extraordinary, then produces a statement about it.",
+    "traits": [
+      "showman",
+      "demagogue",
+      "scandal-magnet"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "tiktok-jack",
+    "category": "wildcard",
+    "tier": "flawed",
+    "alignment": "neutral",
+    "name": "Jack from TikTok Movie Summaries",
+    "country": "Fictional",
+    "era": "Internet",
+    "office": "Protagonist",
+    "bio": "Is the male lead of every film summarised in ninety seconds by a synthetic voice.",
+    "traits": [
+      "beloved",
+      "liability",
+      "loyalist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "druski",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "Druski",
+    "country": "United States",
+    "era": "Internet",
+    "office": "Comedian",
+    "bio": "Turns up in character, in costume, and refuses to break for anyone.",
+    "traits": [
+      "showman",
+      "beloved",
+      "cunning"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "bible",
+    "category": "object",
+    "tier": "titan",
+    "alignment": "neutral",
+    "name": "The Bible",
+    "country": "Fictional",
+    "era": "Modern",
+    "office": "Book",
+    "bio": "Has been cited in support of every position the cabinet has ever taken.",
+    "traits": [
+      "statesman",
+      "beloved",
+      "strategist"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "dr-house",
+    "category": "wildcard",
+    "tier": "heavyweight",
+    "alignment": "neutral",
+    "name": "Dr House",
+    "country": "Fictional",
+    "era": "Fictional",
+    "office": "Diagnostician",
+    "bio": "Is right, is insufferable, and will not do the second one less to prove the first.",
+    "traits": [
+      "technocrat",
+      "cunning",
+      "liability"
+    ],
+    "reviewed": true
+  },
+  {
+    "id": "marsupial-lion",
+    "category": "wildcard",
+    "tier": "operator",
+    "alignment": "neutral",
+    "name": "The Marsupial Lion",
+    "country": "Australia",
+    "era": "Fictional",
+    "office": "Extinct Predator",
+    "bio": "Bit harder than anything alive and has been unavailable for comment since.",
+    "traits": [
+      "soldier",
+      "warhawk",
+      "isolationist"
     ],
     "reviewed": true
   }

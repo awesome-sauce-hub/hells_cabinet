@@ -133,13 +133,42 @@ describe('wave draft', () => {
     expect(isDraftComplete(s) || s.endedBy).toBeTruthy()
   })
 
-  it('ends the run immediately when a run-ender is appointed', () => {
+  it('ends the run immediately when a certain run-ender is appointed', () => {
     const s = startDraft(seedFrom('g'), figures)
-    const nixon = figures.find((p) => p.endsRun)!
-    s.candidates = [nixon, ...s.candidates.slice(1)]
-    const next = placeCandidate(s, nixon.id, 'VicePresident')
-    expect(next.endedBy?.id).toBe(nixon.id)
+    const certain = { ...figures.find((p) => p.endsRun)!, endsRunChance: undefined }
+    s.candidates = [certain, ...s.candidates.slice(1)]
+    const next = placeCandidate(s, certain.id, 'VicePresident')
+    expect(next.endedBy?.id).toBe(certain.id)
     expect(next.candidates).toHaveLength(0)
     expect(next.wave).toBe(0)
+  })
+
+  /**
+   * The odds are the whole point of the card, so they are pinned by a test
+   * rather than left to whoever reads the JSON next.
+   */
+  it('ends the run about a tenth of the time at a tenth chance', () => {
+    const ender = { ...figures.find((p) => p.endsRun)!, endsRunChance: 0.1 }
+    let ended = 0
+    for (let i = 0; i < 400; i++) {
+      const s = startDraft(seedFrom(`odds-${i}`), figures)
+      s.candidates = [ender, ...s.candidates.slice(1)]
+      if (placeCandidate(s, ender.id, 'President').endedBy) ended += 1
+    }
+    // Wide enough that the seeds cannot make it flaky, narrow enough that a
+    // certainty or a coin flip would fail it.
+    expect(ended / 400).toBeGreaterThan(0.04)
+    expect(ended / 400).toBeLessThan(0.18)
+  })
+
+  it('carries on as an ordinary appointment when the run-ender survives', () => {
+    const ender = { ...figures.find((p) => p.endsRun)!, endsRunChance: 0 }
+    const s = startDraft(seedFrom('survives'), figures)
+    s.candidates = [ender, ...s.candidates.slice(1)]
+    const next = placeCandidate(s, ender.id, 'General')
+    expect(next.endedBy).toBeNull()
+    expect(next.picks.General?.id).toBe(ender.id)
+    expect(next.wave).toBe(1)
+    expect(next.candidates).toHaveLength(6)
   })
 })

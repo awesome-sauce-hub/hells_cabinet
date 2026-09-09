@@ -80,11 +80,19 @@ export interface Politician {
   rivals?: string[]
   party?: string
   /**
-   * Drafting this figure ends the run on the spot. A punchline, not a
+   * Drafting this figure can end the run on the spot. A punchline, not a
    * mechanic to build around: exactly one figure should carry it, and the card
    * must give the player fair warning in its bio.
    */
   endsRun?: string
+  /**
+   * How often endsRun actually fires, 0-1. Absent means every time.
+   *
+   * A certainty is not a gamble - the card reads as a trap to step around
+   * rather than a risk to weigh. At long odds the same figure becomes a bet
+   * the player can talk themselves into, which is the joke working harder.
+   */
+  endsRunChance?: number
   reviewed: boolean
 }
 

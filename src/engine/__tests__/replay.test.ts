@@ -38,6 +38,48 @@ describe('replaying a saved run', () => {
     expect(replayed.remaining.map((p) => p.id)).toEqual(state.remaining.map((p) => p.id))
   })
 
+  /**
+   * The run-ender is a gamble taken off the seeded stream, so it has to land
+   * the same way every time the log is replayed. Otherwise reloading the page
+   * would be a way to re-roll a government you already lost.
+   */
+  it('replays a run-ender to the same outcome, win or lose', () => {
+    const nixon = figures.find((p) => p.endsRun)!
+    const outcomes = new Set<string>()
+
+    for (const seed of ['gamble-a', 'gamble-b', 'gamble-c', 'gamble-d']) {
+      // Find a wave that actually offers him, so the log is one a player
+      // could have produced rather than a hand-built state.
+      let state = startDraft(seedFrom(seed), figures)
+      const actions: DraftAction[] = []
+      while (!state.candidates.some((c) => c.id === nixon.id) && !isDraftComplete(state)) {
+        const who = state.candidates.find((c) => !c.endsRun)!
+        const action: DraftAction = { t: 'place', id: who.id, role: openRoles(state)[0]! }
+        state = applyAction(state, action)
+        actions.push(action)
+      }
+      if (!state.candidates.some((c) => c.id === nixon.id)) continue
+
+      const gamble: DraftAction = { t: 'place', id: nixon.id, role: openRoles(state)[0]! }
+      const live = applyAction(state, gamble)
+      actions.push(gamble)
+      outcomes.add(live.endedBy ? 'ended' : 'survived')
+
+      // A log that ended the run replays to null by design (nothing can follow
+      // an ended government), so the assertion is on the state before that.
+      const replayed = replayDraft(seedFrom(seed), figures, actions)
+      if (live.endedBy) {
+        expect(replayed?.endedBy?.id).toBe(nixon.id)
+      } else {
+        expect(replayed?.endedBy).toBeNull()
+        expect(ROLES.map((r) => replayed!.picks[r]?.id)).toEqual(ROLES.map((r) => live.picks[r]?.id))
+      }
+    }
+
+    // The loop is worthless if he never came up.
+    expect(outcomes.size).toBeGreaterThan(0)
+  })
+
   it('rebuilds a part-played draft, down to the candidates on the table', () => {
     const { actions } = playThrough('midway')
     // Stopping partway is the case that matters: this is a reload mid-draft.

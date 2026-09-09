@@ -129,7 +129,10 @@ export function placeCandidate(state: DraftState, id: string, role: Role): Draft
   if (!chosen) throw new Error(`${id} is not on offer this wave`)
   if (state.picks[role]) throw new Error(`${role} is already filled`)
   state.picks[role] = chosen
-  if (chosen.endsRun) {
+  // The roll comes off the draft's own stream, so a saved run replays to the
+  // same outcome: a gamble the player already lost cannot be re-rolled by
+  // reloading the page, and one they won stays won.
+  if (chosen.endsRun && state.rng.next() < (chosen.endsRunChance ?? 1)) {
     // The run is over the moment they are appointed. No further rounds, no
     // resolution - the joke is that nothing else gets to happen.
     state.endedBy = chosen
