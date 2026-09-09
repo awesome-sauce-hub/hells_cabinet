@@ -25,10 +25,16 @@ type Phase = SavedPhase | 'choose' | 'shared'
 
 /**
  * How long the opening beat waits for a written story before the game goes on
- * without one. Short enough that nobody wonders whether it has broken, long
- * enough that a normal response still lands in time to be used.
+ * without one.
+ *
+ * This is a stuck-request escape hatch, not a deadline. It has to sit well
+ * clear of how long the work actually takes: judged runs measure 16-22s, and
+ * at 12s this fired on every single game - releasing the player into the
+ * templated story, and captioning it "no adjudicator reached", while the real
+ * judgement was still four seconds from arriving. The game looked like it had
+ * no adjudicator at all.
  */
-const HOLD_MS = 12_000
+const HOLD_MS = 45_000
 
 /** A link beats a save: someone opening a shared game should get that game. */
 function openingRun(): { ref: RunRef; actions: DraftAction[]; phase: Phase; verdicts?: RoleVerdict[]; sent?: SharedCabinet } {
@@ -386,6 +392,9 @@ function Sim({ result, onJudged, onDone }: {
   const fallback = useMemo(() => narrate(result), [result])
   const [written, setWritten] = useState<Beat[] | null>(null)
   const [waiting, setWaiting] = useState(true)
+  // Only set once the request has actually resolved one way or the other, so
+  // the fallback notice cannot appear while an answer is still in flight.
+  const [settled, setSettled] = useState<'judged' | 'failed' | null>(null)
   const [shown, setShown] = useState(1)
   const newest = useRef<HTMLLIElement>(null)
   // Where the player has got to, readable from the fetch's callback without
@@ -442,6 +451,7 @@ function Sim({ result, onJudged, onDone }: {
         if (shownRef.current === 1) setWritten((current) => current ?? judged.beats)
         onJudged(judged)
       }
+      setSettled(judged ? 'judged' : 'failed')
       setWaiting(false)
     })
     return () => {
@@ -486,7 +496,7 @@ function Sim({ result, onJudged, onDone }: {
           </div>
         </div>
 
-        {!pending && !result.judged && (
+        {settled === 'failed' && !result.judged && (
           <p className="unjudged" role="status">
             No adjudicator reached — this account is the stand-in, and the verdicts are a rough reading.
           </p>
