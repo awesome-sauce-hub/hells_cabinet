@@ -22,6 +22,13 @@ import type { Role } from '../engine/types.js'
 
 type Phase = SavedPhase | 'choose'
 
+/**
+ * How long the opening beat waits for a written story before the game goes on
+ * without one. Short enough that nobody wonders whether it has broken, long
+ * enough that a normal response still lands in time to be used.
+ */
+const HOLD_MS = 12_000
+
 /** A link beats a save: someone opening a shared game should get that game. */
 function openingRun(): { ref: RunRef; actions: DraftAction[]; phase: Phase; verdicts?: RoleVerdict[] } {
   const shared = runFromUrl(window.location.search)
@@ -308,6 +315,10 @@ function Sim({ result, onJudged, onDone }: {
   const [waiting, setWaiting] = useState(true)
   const [shown, setShown] = useState(1)
   const newest = useRef<HTMLLIElement>(null)
+  // Where the player has got to, readable from the fetch's callback without
+  // making the request depend on it.
+  const shownRef = useRef(1)
+  useEffect(() => { shownRef.current = shown }, [shown])
 
   /**
    * The judgement is fetched the moment this screen appears, while the player
@@ -336,17 +347,34 @@ function Sim({ result, onJudged, onDone }: {
     }
 
     const abort = new AbortController()
+    /**
+     * The hold ends on a clock of its own, not on the request.
+     *
+     * fetchJudgement caps itself, but a cap is not a guarantee: a background
+     * tab throttles the abort timer, and a proxy or a dev server can sit on a
+     * POST for longer than the cap while the promise stays unsettled. Either
+     * way the player was left staring at a disabled button with no way
+     * forward. A complete templated story is already on screen, so after
+     * HOLD_MS the game continues and a judgement that turns up later is still
+     * taken for the verdict.
+     */
+    const release = setTimeout(() => setWaiting(false), HOLD_MS)
     fetchJudgement(result, abort.signal).then((judged) => {
       if (abort.signal.aborted) return
-      // Swapping under the player would rewrite a beat they already read, so a
-      // late arrival is only taken while they are still on the first one.
       if (judged) {
-        setWritten((current) => current ?? judged.beats)
+        // Swapping the story under a player who has read past the opening beat
+        // would rewrite what they just read, so late beats are only taken
+        // while they are still on the first one. The judgement itself is
+        // always taken: it is what the verdict is scored on.
+        if (shownRef.current === 1) setWritten((current) => current ?? judged.beats)
         onJudged(judged)
       }
       setWaiting(false)
     })
-    return () => abort.abort()
+    return () => {
+      clearTimeout(release)
+      abort.abort()
+    }
   }, [result, onJudged])
 
   const beats = written ?? fallback
@@ -405,7 +433,9 @@ function Sim({ result, onJudged, onDone }: {
               <button className="primary" onClick={() => setShown((n) => n + 1)} disabled={pending}>
                 {pending ? 'The room is deliberating…' : <>Continue <Icon name="arrow" /></>}
               </button>
-              <button onClick={() => setShown(beats.length)} disabled={pending}>Skip to the end</button>
+              {/* Never disabled: the templated story is complete from the
+                  first render, so skipping it needs nobody's permission. */}
+              <button onClick={() => setShown(beats.length)}>Skip to the end</button>
             </>
           )}
         </div>
