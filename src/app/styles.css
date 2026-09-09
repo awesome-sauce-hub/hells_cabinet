@@ -234,3 +234,4 @@ h1, h2, h3 { text-wrap: balance; }
    nothing to say rather than never having been asked. */
 .unjudged { display: block; margin: 12px 0 0; padding: 9px 0; font: italic 10.5px/1.55 inherit; color: #6f644c; border-top: 1px solid #b4ad96; border-bottom: 1px solid #b4ad96; }
 .unjudged::before { content: 'Unadjudicated'; display: block; font: 9px var(--typewriter); font-style: normal; letter-spacing: .1em; color: #99483ab8; margin-bottom: 3px; }
+.retry-judgement { display: inline-block; margin: 8px 0 0; padding: 5px 11px; font-size: 10px; }

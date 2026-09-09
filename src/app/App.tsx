@@ -395,6 +395,9 @@ function Sim({ result, onJudged, onDone }: {
   // Only set once the request has actually resolved one way or the other, so
   // the fallback notice cannot appear while an answer is still in flight.
   const [settled, setSettled] = useState<'judged' | 'failed' | null>(null)
+  // Bumped to ask again. A failed judgement used to be the end of it, leaving
+  // the player holding a templated story with no way to get the real one.
+  const [attempt, setAttempt] = useState(0)
   const [shown, setShown] = useState(1)
   const newest = useRef<HTMLLIElement>(null)
   // Where the player has got to, readable from the fetch's callback without
@@ -458,7 +461,7 @@ function Sim({ result, onJudged, onDone }: {
       clearTimeout(release)
       abort.abort()
     }
-  }, [result, onJudged])
+  }, [result, onJudged, attempt])
 
   const beats = written ?? fallback
   const finished = shown >= beats.length
@@ -498,7 +501,13 @@ function Sim({ result, onJudged, onDone }: {
 
         {settled === 'failed' && !result.judged && (
           <p className="unjudged" role="status">
-            No adjudicator reached — this account is the stand-in, and the verdicts are a rough reading.
+            No adjudicator reached. Everything below is a stand-in written from templates, and the
+            verdicts are a rough reading rather than a judgement of who these people were.
+            <button className="retry-judgement" onClick={() => {
+              setSettled(null)
+              setWaiting(true)
+              setAttempt((n) => n + 1)
+            }}>Ask again</button>
           </p>
         )}
 
