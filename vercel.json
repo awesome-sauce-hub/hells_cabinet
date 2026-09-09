@@ -4,7 +4,6 @@
   "outputDirectory": "dist",
   "functions": {
     "api/narrate.ts": {
-      "runtime": "@vercel/node@5",
       "maxDuration": 30
     }
   }
