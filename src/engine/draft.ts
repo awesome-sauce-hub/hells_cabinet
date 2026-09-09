@@ -139,8 +139,7 @@ export function placeCandidate(state: DraftState, id: string, role: Role): Draft
   }
   // Everyone on the table leaves the pool, taken or not: a wave that passes is
   // gone, so declining a good card costs something.
-  const seen = new Set(state.candidates.map((c) => c.id))
-  state.remaining = state.remaining.filter((p) => !seen.has(p.id))
+  state.remaining = withoutIds(state.remaining, state.candidates.map((c) => c.id))
   state.wave += 1
   state.candidates = isDraftComplete(state)
     ? []
@@ -148,26 +147,49 @@ export function placeCandidate(state: DraftState, id: string, role: Role): Draft
   return state
 }
 
-/** Reroll the whole board. Costs a token. */
+/**
+ * Reroll the whole board. Costs a token.
+ *
+ * The six you rejected are gone, exactly as the five you leave behind when you
+ * appoint someone are gone: dismissal is permanent everywhere in the draft.
+ * Drawing the replacements from a pool that still held them was the bug - a
+ * reshuffle could hand you most of the same board back, which is the one thing
+ * a reshuffle must never do.
+ */
 export function respin(state: DraftState): DraftState {
   if (state.respins <= 0) throw new Error('no respins left')
   state.respins -= 1
+  state.remaining = withoutIds(state.remaining, state.candidates.map((c) => c.id))
   state.candidates = drawCandidates(state.rng, state.remaining, openRoles(state))
   return state
 }
 
-/** Discard one candidate and draw a replacement into the slot. Costs a token. */
+/**
+ * Discard one candidate and draw a replacement into the slot. Costs a token.
+ *
+ * The dismissed figure leaves the game rather than the table. A token whose
+ * only effect is a one-wave reprieve - the player benches Mussolini and is
+ * offered him again two waves later - is not worth the one token you get.
+ */
 export function bench(state: DraftState, id: string): DraftState {
   if (state.benches <= 0) throw new Error('no benches left')
   const idx = state.candidates.findIndex((c) => c.id === id)
   if (idx === -1) throw new Error(`${id} is not on offer this round`)
   state.benches -= 1
+  state.remaining = withoutIds(state.remaining, [id])
+  // Still exclude the rest of the table, so the replacement is not a duplicate
+  // of somebody the player is already looking at.
   const shown = new Set(state.candidates.map((c) => c.id))
   const pool = state.remaining.filter((p) => !shown.has(p.id))
   const [replacement] = drawCandidates(state.rng, pool, openRoles(state), 1)
   if (replacement) state.candidates[idx] = replacement
   else state.candidates.splice(idx, 1)
   return state
+}
+
+function withoutIds(pool: readonly Politician[], ids: readonly string[]): Politician[] {
+  const gone = new Set(ids)
+  return pool.filter((p) => !gone.has(p.id))
 }
 
 export function isDraftComplete(state: DraftState): boolean {

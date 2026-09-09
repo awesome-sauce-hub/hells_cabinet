@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { loadPoliticians } from '../content.js'
 import {
+  bench,
   finishDraft,
   isDraftComplete,
   openRoles,
   placeCandidate,
+  respin,
   startDraft,
 } from '../draft.js'
 import { seedFrom } from '../rng.js'
@@ -65,6 +67,70 @@ describe('wave draft', () => {
     expect(s.wave).toBe(ROLES.length)
     const roster = finishDraft(s)
     expect(new Set(ROLES.map((r) => roster[r].id)).size).toBe(ROLES.length)
+  })
+
+  it('never offers a benched figure again for the rest of the run', () => {
+    let s = startDraft(seedFrom('bench'), figures)
+    const dismissed = s.candidates[0]!
+    s = bench(s, dismissed.id)
+
+    expect(s.benches).toBe(0)
+    expect(s.candidates).toHaveLength(6)
+    expect(s.candidates.some((c) => c.id === dismissed.id)).toBe(false)
+    expect(s.remaining.some((p) => p.id === dismissed.id)).toBe(false)
+
+    // The reprieve has to outlast this wave, which is where it used to fail.
+    while (!isDraftComplete(s) && !s.endedBy) {
+      expect(s.candidates.some((c) => c.id === dismissed.id), `wave ${s.wave}`).toBe(false)
+      const who = s.candidates.find((c) => !c.endsRun)!
+      s = placeCandidate(s, who.id, openRoles(s)[0]!)
+    }
+  })
+
+  it('never offers a reshuffled figure again for the rest of the run', () => {
+    let s = startDraft(seedFrom('respin'), figures)
+    const rejected = s.candidates.map((c) => c.id)
+    s = respin(s)
+
+    expect(s.respins).toBe(0)
+    expect(s.candidates).toHaveLength(6)
+    // A reshuffle that can hand back most of the same board buys nothing.
+    for (const id of rejected) expect(s.candidates.some((c) => c.id === id)).toBe(false)
+
+    while (!isDraftComplete(s) && !s.endedBy) {
+      for (const id of rejected) expect(s.candidates.some((c) => c.id === id), `wave ${s.wave}`).toBe(false)
+      const who = s.candidates.find((c) => !c.endsRun)!
+      s = placeCandidate(s, who.id, openRoles(s)[0]!)
+    }
+  })
+
+  it('reproduces the reported bench-then-reshuffle case without the figure returning', () => {
+    // From docs/REVIEW.md: bench someone, reshuffle, appoint, and they were
+    // offered again in the next wave.
+    let s = startDraft(seedFrom('2026-09-09'), figures)
+    const dismissed = s.candidates[0]!
+    s = bench(s, dismissed.id)
+    const rejected = s.candidates.map((c) => c.id)
+    s = respin(s)
+    const who = s.candidates.find((c) => !c.endsRun)!
+    s = placeCandidate(s, who.id, 'President')
+
+    for (const id of [dismissed.id, ...rejected]) {
+      expect(s.candidates.some((c) => c.id === id), id).toBe(false)
+      expect(s.remaining.some((p) => p.id === id), id).toBe(false)
+    }
+  })
+
+  it('still has enough figures left to finish after spending both tokens', () => {
+    let s = startDraft(seedFrom('tokens'), figures)
+    s = bench(s, s.candidates[0]!.id)
+    s = respin(s)
+    while (!isDraftComplete(s) && !s.endedBy) {
+      expect(s.candidates, `wave ${s.wave}`).toHaveLength(6)
+      const who = s.candidates.find((c) => !c.endsRun)!
+      s = placeCandidate(s, who.id, openRoles(s)[0]!)
+    }
+    expect(isDraftComplete(s) || s.endedBy).toBeTruthy()
   })
 
   it('ends the run immediately when a run-ender is appointed', () => {

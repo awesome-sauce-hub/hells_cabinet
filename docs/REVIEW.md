@@ -21,13 +21,13 @@ The game already has a useful separation between a deterministic engine, authore
 
 Persist a versioned seed plus an action log and replay it through the deterministic engine on reload. This avoids trying to serialize the RNG closure. Include the content version so changing the roster cannot silently alter an old game.
 
-### 2. Decide whether dismissed candidates should stay dismissed
+### 2. Decide whether dismissed candidates should stay dismissed — RESOLVED
 
-`src/engine/draft.ts:152` reshuffles from `remaining`, which still includes the current candidates. `bench()` at line 160 replaces a visible candidate but does not retire the dismissed figure from `remaining`.
+`src/engine/draft.ts:152` reshuffled from `remaining`, which still included the current candidates. `bench()` replaced a visible candidate but did not retire the dismissed figure from `remaining`.
 
 Observed in the daily game for 2026-09-09: bench Benito Mussolini, reshuffle, appoint Augusto Pinochet as President; Mussolini appears again in round two. A reshuffle can also re-offer faces from the replaced pool.
 
-This is not an accidental redesign regression: the original engine already does this. Decide whether a token means “draw again” or “guarantee different candidates,” then encode the rule in tests. This pass preserves the existing draw semantics and balance.
+Resolved: a token means “guarantee different candidates.” Both `respin()` and `bench()` now retire what they dismiss, matching the rule `placeCandidate()` already applied to a wave that passes — dismissal is permanent everywhere in the draft. Four tests in `src/engine/__tests__/draft.test.ts` cover it, including the reported repro; all three fail against the previous engine. Balance is unaffected: the harnesses' `randomDraft()` never spends a token.
 
 ### 3. Make engine transitions independently replayable
 
