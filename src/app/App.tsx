@@ -413,6 +413,12 @@ function Sim({ result, onJudged, onDone }: {
           </div>
         </div>
 
+        {!pending && !result.judged && (
+          <p className="unjudged" role="status">
+            No adjudicator reached — this account is the stand-in, and the verdicts are a rough reading.
+          </p>
+        )}
+
         <ol className="beats">
           {beats.slice(0, shown).map((b, i) => (
             <li className={`beat ${b.tone}`} key={`${b.id}-${i}`} ref={i === shown - 1 ? newest : undefined} tabIndex={-1}>
@@ -483,7 +489,12 @@ function Verdict({
       </div>
 
       <div className="panel mt-s">
-        <div className="label">{result.judged ? 'How each of them handled it' : 'How each of them handled it · no adjudicator, so this is a rough reading'}</div>
+        <div className="label">How each of them handled it</div>
+        {!result.judged && (
+          <p className="unjudged">
+            No adjudicator reached, so these verdicts are a rough reading from their traits rather than a judgement of who they were.
+          </p>
+        )}
         <ul className="verdict-list">
           {ROLES.map((role) => {
             const v = result.verdicts.find((x) => x.role === role)

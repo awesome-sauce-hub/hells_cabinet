@@ -230,3 +230,6 @@ h1, h2, h3 { text-wrap: balance; }
 .verdict-disaster { color: var(--bad); background: var(--bad); }
 .verdict-none { color: #8d8874; background: #b4ad96; }
 .verdict-word.verdict-triumph, .verdict-word.verdict-pass, .verdict-word.verdict-fail, .verdict-word.verdict-disaster, .verdict-word.verdict-none { background: none; }
+/* Said out loud, because a silent fallback reads as the adjudicator having
+   nothing to say rather than never having been asked. */
+.unjudged { display: block; margin: 10px 0 0; padding: 9px 12px; font-size: 10.5px; line-height: 1.55; color: #6e5330; background: #f0e3c4; border-left: 3px solid #b98a3e; }

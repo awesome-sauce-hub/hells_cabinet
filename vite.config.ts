@@ -1,20 +1,22 @@
 import { defineConfig, loadEnv } from 'vite'
-import type { Plugin } from 'vite'
+import type { Connect, Logger, Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 
 /**
- * Serve api/narrate.ts during `npm run dev`.
+ * Serve api/narrate.ts locally, for both `npm run dev` and `npm run preview`.
  *
  * In production Vercel runs that file itself; locally nothing would, so the
- * narrator would only ever be testable by deploying. This mounts the very same
- * handler on the dev server - not a stub of it - so what you play against here
- * is what ships.
+ * adjudicator would only ever be testable by deploying. This mounts the very
+ * same handler - not a stub of it - so what you play against here is what
+ * ships.
+ *
+ * Preview matters as much as dev. Without it `npm run preview` serves the
+ * built site with no /api route, every judgement 404s, and the game silently
+ * falls back to templates - which looks exactly like the adjudicator having
+ * nothing to say rather than never having been asked.
  */
-function narratorDevServer(env: Record<string, string>): Plugin {
-  return {
-    name: 'hells-cabinet-narrator',
-    apply: 'serve',
-    configureServer(server) {
+function narratorServer(env: Record<string, string>): Plugin {
+  const mount = (server: { middlewares: Connect.Server; ssrLoadModule?: unknown; config: { logger: Logger } }) => {
       server.middlewares.use('/api/narrate', async (req, res) => {
         // Vercel gives the handler a Web Request; Connect gives us a Node one.
         const chunks: Buffer[] = []
@@ -31,9 +33,12 @@ function narratorDevServer(env: Record<string, string>): Plugin {
             if (!process.env[key] && env[key]) process.env[key] = env[key]
           }
 
-          const { default: handler } = await server.ssrLoadModule('/api/narrate.ts') as {
-            default: (request: Request) => Promise<Response>
-          }
+          // The preview server cannot compile TypeScript, so it takes the
+          // handler through tsx instead of Vite's module runner.
+          const loaded = typeof (server as { ssrLoadModule?: unknown }).ssrLoadModule === 'function'
+            ? await (server as unknown as { ssrLoadModule: (id: string) => Promise<unknown> }).ssrLoadModule('/api/narrate.ts')
+            : await import('./api/narrate.js')
+          const { default: handler } = loaded as { default: (request: Request) => Promise<Response> }
           const result = await handler(new Request(`http://localhost${req.url}`, {
             method: req.method ?? 'POST',
             headers: { 'content-type': 'application/json' },
@@ -50,12 +55,17 @@ function narratorDevServer(env: Record<string, string>): Plugin {
           res.end(JSON.stringify({ error: 'Narrator failed to load' }))
         }
       })
-    },
+  }
+  return {
+    name: 'hells-cabinet-narrator',
+    apply: 'serve',
+    configureServer: mount,
+    configurePreviewServer: mount,
   }
 }
 
 export default defineConfig(({ mode }) => ({
-  plugins: [react(), narratorDevServer(loadEnv(mode, process.cwd(), ''))],
+  plugins: [react(), narratorServer(loadEnv(mode, process.cwd(), ''))],
   // Content lives outside src/ and is imported as JSON by the app.
   resolve: { preserveSymlinks: true },
 }))
