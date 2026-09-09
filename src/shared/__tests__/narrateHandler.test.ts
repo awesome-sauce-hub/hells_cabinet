@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { EventEmitter } from 'node:events'
-import handler from '../narrate.js'
+import handler from '../../../api/narrate.js'
 
 /**
  * The handler is invoked two different ways and has to answer both.
@@ -12,6 +12,10 @@ import handler from '../narrate.js'
  * working but bland. It shipped that way once, which is why it is tested.
  *
  * These use the 405 path so nothing reaches the API and the tests cost nothing.
+ *
+ * It lives here rather than beside the handler because Vercel turns every file
+ * under api/ into a serverless function, and a test importing vitest is not a
+ * function it can build.
  */
 function fakeNodeRequest(method: string) {
   const req = new EventEmitter() as EventEmitter & { method: string; url: string }
