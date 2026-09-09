@@ -4,6 +4,10 @@
     python3 scripts/authoring/roster_xlsx.py export     -> content/roster.xlsx
     python3 scripts/authoring/roster_xlsx.py import     -> content/politicians.json
 
+Import takes content/roster.xlsx or content/roster.csv, whichever was saved
+most recently. Google Sheets can hand back either; CSV is the one-click export
+and has nothing to go wrong, so it wins ties by being newer.
+
 Editing 122 figures in JSON means minding commas and quotes; editing them in a
 sheet means sorting by tier, filtering to the objects, and fixing forty bios in
 one pass. The importer is the half that matters - it validates before it writes,
@@ -14,6 +18,7 @@ adding a dependency to move a table around is not worth it.
 """
 from __future__ import annotations
 
+import csv
 import json
 import re
 import sys
@@ -24,6 +29,7 @@ from xml.etree import ElementTree
 ROOT = Path(__file__).resolve().parents[2]
 JSON_PATH = ROOT / 'content' / 'politicians.json'
 XLSX_PATH = ROOT / 'content' / 'roster.xlsx'
+CSV_PATH = ROOT / 'content' / 'roster.csv'
 
 # Order matters: it is the column order in the sheet and the key order in JSON.
 COLUMNS = [
@@ -39,10 +45,12 @@ COLUMNS = [
     ('traits', 'traits (comma separated)', 30),
     ('rivals', 'rivals (comma separated ids)', 24),
     ('endsRun', 'endsRun (blank for almost everyone)', 34),
+    ('endsRunChance', 'endsRunChance (0-1, blank = certain)', 26),
     ('reviewed', 'reviewed (TRUE/FALSE)', 14),
 ]
 LIST_FIELDS = {'traits', 'rivals'}
-OPTIONAL = {'rivals', 'endsRun', 'party'}
+NUMBER_FIELDS = {'endsRunChance'}
+OPTIONAL = {'rivals', 'endsRun', 'endsRunChance', 'party'}
 
 CATEGORIES = ['politician', 'wildcard', 'object']
 TIERS = ['titan', 'heavyweight', 'operator', 'flawed', 'liability']
@@ -166,6 +174,8 @@ def do_export() -> None:
             value = fig.get(key, '')
             if key in LIST_FIELDS:
                 value = ', '.join(value) if value else ''
+            elif key in NUMBER_FIELDS:
+                value = '' if value == '' else str(value)
             elif key == 'reviewed':
                 value = 'TRUE' if value else 'FALSE'
             row.append(str(value))
@@ -240,16 +250,37 @@ def read_sheet(path: Path) -> list[list[str]]:
         return rows
 
 
-def do_import() -> None:
-    if not XLSX_PATH.exists():
-        sys.exit(f'  {XLSX_PATH.relative_to(ROOT)} does not exist - run export first')
+def read_csv(path: Path) -> list[list[str]]:
+    with path.open(newline='', encoding='utf-8-sig') as f:
+        return [[cell.strip() for cell in row] for row in csv.reader(f)]
 
-    rows = [r for r in read_sheet(XLSX_PATH) if any(cell for cell in r)]
+
+def pick_source() -> Path:
+    """Whichever the editor saved last, so no flag is needed to say which."""
+    candidates = [p for p in (XLSX_PATH, CSV_PATH) if p.exists()]
+    if not candidates:
+        sys.exit(f'  neither {XLSX_PATH.name} nor {CSV_PATH.name} exists in content/ - run export first')
+    return max(candidates, key=lambda p: p.stat().st_mtime)
+
+
+def do_import() -> None:
+    # Fields the sheet does not have a column for are carried through from the
+    # current JSON, keyed by id. Without this, adding a field to the game and
+    # then importing a sheet exported before it silently deletes it - which is
+    # exactly the shape of bug a content pipeline should not have.
+    existing = {f['id']: f for f in json.loads(JSON_PATH.read_text())} if JSON_PATH.exists() else {}
+    modelled = {key for key, _, _ in COLUMNS}
+
+    source = pick_source()
+    print(f'  reading {source.relative_to(ROOT)}')
+    table = read_csv(source) if source.suffix == '.csv' else read_sheet(source)
+    rows = [r for r in table if any(cell for cell in r)]
     if not rows:
         sys.exit('  the sheet is empty')
 
     keys = [key for key, _, _ in COLUMNS]
     errors: list[str] = []
+    preserved: set[str] = set()
     figures: list[dict] = []
 
     for n, row in enumerate(rows[1:], start=2):
@@ -266,12 +297,23 @@ def do_import() -> None:
                     fig[key] = items
                 elif key not in OPTIONAL:
                     errors.append(f'{who}: {key} is empty')
+            elif key in NUMBER_FIELDS:
+                if value:
+                    try:
+                        fig[key] = float(value)
+                    except ValueError:
+                        errors.append(f'{who}: {key} "{value}" is not a number')
             elif key == 'reviewed':
                 fig[key] = value.strip().upper() in ('TRUE', '1', 'YES')
             elif value:
                 fig[key] = value
             elif key not in OPTIONAL:
                 errors.append(f'{who}: {key} is empty')
+
+        carried = {k: v for k, v in existing.get(fig.get('id', ''), {}).items() if k not in modelled}
+        if carried:
+            preserved.update(carried.keys())
+        fig.update(carried)
 
         if fig.get('category') not in CATEGORIES:
             errors.append(f'{who}: category "{fig.get("category")}" is not one of {CATEGORIES}')
@@ -308,6 +350,8 @@ def do_import() -> None:
 
     JSON_PATH.write_text(json.dumps(figures, indent=2, ensure_ascii=False) + '\n')
     print(f'  wrote {JSON_PATH.relative_to(ROOT)}  ({len(figures)} figures)')
+    if preserved:
+        print(f'  carried through fields the sheet has no column for: {", ".join(sorted(preserved))}')
     print('  now run: npm run validate')
 
 
