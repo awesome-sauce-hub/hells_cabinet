@@ -130,7 +130,16 @@ h1, h2, h3 { text-wrap: balance; }
 .label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #5c573e; }
 .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }.spread { justify-content: space-between; }.mt { margin-top: 24px; }.mt-s { margin-top: 12px; }
 .panel, .beat { background: var(--paper); padding: 24px; box-shadow: 2px 4px 7px #5c3c282f; }
-.beats { display: flex; flex-direction: column; gap: 15px; }.beat { padding: 17px 20px; line-height: 1.7; }.beat .who { font-size: 10px; color: #696653; margin-bottom: 5px; }.beat.good .who { color: var(--good); }.beat.bad .who { color: var(--bad); }.beat.twist { background: #ede0b7; }
+.beats { display: flex; flex-direction: column; gap: 15px; list-style: none; margin: 0; padding: 0; }
+.beat { padding: 17px 20px; line-height: 1.7; }.beat:focus { outline: none; }.beat .who { font-size: 10px; color: #696653; margin-bottom: 5px; }.beat.good .who { color: var(--good); }.beat.bad .who { color: var(--bad); }.beat.twist { background: #ede0b7; }
+.beat:not(.pending) { animation: pin-up .32s ease both; }
+@keyframes pin-up { from { opacity: 0; transform: translateY(-6px) rotate(-.6deg); } to { opacity: 1; transform: none; } }
+/* Blank slips reserve the space the remaining beats will take, so the board is
+   full from the first line and does not grow under the player. */
+.beat.pending { height: 52px; background: #f7f3e71c; border: 0; box-shadow: none; padding: 0; }
+.slot.speaking { box-shadow: 2px 3px 5px #4f361d30, 0 0 0 2px var(--red); transform: rotate(0) translateY(-2px); }
+.sim-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+.sim-actions .primary { display: inline-flex; gap: 8px; align-items: center; }
 .verdict { text-align: center; padding: 32px 20px; }.verdict .tier { font: 35px var(--typewriter); margin: 13px 0 8px; }.verdict .score { color: #676451; font-size: 13px; font-variant-numeric: tabular-nums; }.grid-squares { font-size: 30px; letter-spacing: 5px; margin: 18px 0; }.tier-Catastrophe, .tier-Debacle { color: var(--bad); }.tier-Triumph, .tier-Legendary { color: var(--good); }
 .table-panel { overflow-x: auto; }table.breakdown { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }table.breakdown th { text-align: left; font-size: 9px; font-weight: 500; color: #64624f; padding: 7px; }table.breakdown td { padding: 9px 7px; border-top: 1px solid #d4cfbb; }table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }.pass { color: var(--good); }.fail { color: var(--bad); }
 .gameover { text-align: center; padding: 80px 30px; margin-top: 50px; }.gameover .stamp { font-family: var(--typewriter); color: var(--red); }.gameover h1 { font: 36px var(--typewriter); margin: 28px 0 20px; }.gameover .said { max-width: 34em; margin: auto; color: #625e4c; }.copy-fallback { background: var(--paper); padding: 15px; font-size: 12px; }.copy-fallback > span { display: block; margin-top: 8px; user-select: all; }

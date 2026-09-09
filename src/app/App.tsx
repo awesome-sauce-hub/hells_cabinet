@@ -194,38 +194,67 @@ function GameOver({
   )
 }
 
+/**
+ * The crisis playing out, one beat at a time.
+ *
+ * The cabinet stays pinned on the left throughout, and the slot belonging to
+ * whoever is acting lights up as their beat lands. That is the whole reason
+ * this screen exists: without the faces, a beat is an anonymous sentence and
+ * skipping to the end costs the player nothing.
+ */
 function Sim({ result, onDone }: { result: Resolution; onDone: () => void }) {
   const beats = useMemo(() => narrate(result), [result])
   const [shown, setShown] = useState(1)
   const finished = shown >= beats.length
+  const latest = beats[shown - 1]
+  const newest = useRef<HTMLLIElement>(null)
+
+  // Move focus to each new beat so a screen reader hears it and a keyboard
+  // player is left next to the button they just pressed.
+  useEffect(() => { if (shown > 1) newest.current?.focus() }, [shown])
 
   return (
-    <>
-      <div className="row spread">
-        <span className="label">{result.event.title}</span>
-        <span className="label">{shown} / {beats.length}</span>
-      </div>
-
-      <div className="beats mt-s">
-        {beats.slice(0, shown).map((b, i) => (
-          <div className={`beat ${b.tone}`} key={`${b.id}-${i}`}>
-            {b.who && <div className="who">{b.role ? `${ROLE_LABEL[b.role]} · ` : ''}{b.who}</div>}
-            <div>{b.text}</div>
+    <div className="board-layout">
+      <SlotStrip order={ROLES} picks={result.roster} activeRole={latest?.role} heading="In the room"
+        note={finished ? <>Well.<br />That happened.</> : <>The room is<br />in session.</>} />
+      <div className="draft-area">
+        <div className="draft-heading">
+          <div>
+            <h2>{result.event.title}</h2>
+            <p>{finished ? 'That is how it went.' : 'How it is going.'}</p>
           </div>
-        ))}
-      </div>
+          <div className="round-counter">
+            <span>Beat <strong>{shown}</strong> / {beats.length}</span>
+            <div className="round-marks" aria-label={`Beat ${shown} of ${beats.length}`}>
+              {beats.map((b, i) => <span key={`${b.id}-${i}`} className={i < shown - 1 ? 'done' : i === shown - 1 ? 'current' : ''} />)}
+            </div>
+          </div>
+        </div>
 
-      <div className="row mt">
-        {finished ? (
-          <button className="primary" onClick={onDone}>See the verdict</button>
-        ) : (
-          <>
-            <button className="primary" onClick={() => setShown((n) => n + 1)}>Continue</button>
-            <button onClick={() => setShown(beats.length)}>Skip to the end</button>
-          </>
-        )}
+        <ol className="beats">
+          {beats.slice(0, shown).map((b, i) => (
+            <li className={`beat ${b.tone}`} key={`${b.id}-${i}`} ref={i === shown - 1 ? newest : undefined} tabIndex={-1}>
+              {b.who && <div className="who">{b.role ? `${ROLE_LABEL[b.role]} · ` : ''}{b.who}</div>}
+              <div>{b.text}</div>
+            </li>
+          ))}
+          {/* Blank slips hold the space the story will fill, so the board does
+              not grow under the player one beat at a time. */}
+          {beats.slice(shown).map((b, i) => <li className="beat pending" key={`pending-${b.id}-${i}`} aria-hidden="true" />)}
+        </ol>
+
+        <div className="sim-actions">
+          {finished ? (
+            <button className="primary" onClick={onDone}>See the verdict <Icon name="arrow" /></button>
+          ) : (
+            <>
+              <button className="primary" onClick={() => setShown((n) => n + 1)}>Continue <Icon name="arrow" /></button>
+              <button onClick={() => setShown(beats.length)}>Skip to the end</button>
+            </>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { Politician, Role } from '../engine/types.js'
 import portraitSources from './portraits.json'
 
@@ -75,38 +75,53 @@ export function CandidateCard({ figure, selected, onSelect, onDragSelect, onBenc
   )
 }
 
-export function SlotStrip({ order, picks, armed = false, selectedName, onPlace }: {
+export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, heading = 'Your cabinet', note, activeRole }: {
   order: readonly Role[]
   picks: Partial<Record<Role, Politician>>
   armed?: boolean
   selectedName?: string
   onPlace?: (role: Role, figureId?: string) => void
+  heading?: string
+  note?: ReactNode
+  /** Lit while this role is the one acting, during the simulation. */
+  activeRole?: Role
 }) {
   const [over, setOver] = useState<Role | null>(null)
   return (
     <div className="cabinet-rail">
-      <div className="rail-heading">Your cabinet</div>
+      <div className="rail-heading">{heading}</div>
       <div className="slots">
         {order.map((role, index) => {
           const picked = picks[role]
           const droppable = !picked && armed
-          return (
-            <button className={`slot ${picked ? 'filled' : ''} ${droppable ? 'droppable' : ''} ${over === role && droppable ? 'over' : ''}`} key={role}
-              aria-label={picked ? `${ROLE_LABEL[role]}: ${picked.name}` : selectedName ? `Appoint ${selectedName} as ${ROLE_LABEL[role]}` : `${ROLE_LABEL[role]}, vacant`}
-              aria-disabled={!droppable} onClick={() => droppable && onPlace?.(role)}
-              onDragOver={(e) => { if (picked || !armed) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; setOver(role) }}
-              onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOver(null) }}
-              onDrop={(e) => { e.preventDefault(); setOver(null); if (droppable) onPlace?.(role, e.dataTransfer.getData('text/plain')) }}>
+          const inner = (
+            <>
               <span className="role-number" aria-hidden="true">0{index + 1}</span>
               <span className="role-label">{ROLE_LABEL[role]}</span>
               <span className="slot-content">
                 {picked ? <><Portrait key={picked.id} figure={picked} compact /><span className="appointed-name">{picked.name}<span className="appointed-label"><Icon name="check" size={10} /> Appointed</span></span></> : <><span className="empty-photo" aria-hidden="true"><Icon name="pin" size={19} /></span><span className="slot-prompt">{droppable ? 'Pin here' : 'Position vacant'}</span></>}
               </span>
+            </>
+          )
+          const className = `slot ${picked ? 'filled' : ''} ${droppable ? 'droppable' : ''} ${over === role && droppable ? 'over' : ''} ${activeRole === role ? 'speaking' : ''}`
+          const label = picked ? `${ROLE_LABEL[role]}: ${picked.name}` : selectedName ? `Appoint ${selectedName} as ${ROLE_LABEL[role]}` : `${ROLE_LABEL[role]}, vacant`
+
+          // Once the draft is over the rail is a record, not a control: a plain
+          // element keeps five dead buttons out of the keyboard's way.
+          if (!onPlace) return <div className={className} key={role} aria-label={label}>{inner}</div>
+
+          return (
+            <button className={className} key={role} aria-label={label}
+              aria-disabled={!droppable} onClick={() => droppable && onPlace(role)}
+              onDragOver={(e) => { if (picked || !armed) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; setOver(role) }}
+              onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOver(null) }}
+              onDrop={(e) => { e.preventDefault(); setOver(null); if (droppable) onPlace(role, e.dataTransfer.getData('text/plain')) }}>
+              {inner}
             </button>
           )
         })}
       </div>
-      <p className="rail-note">Choose wisely.<br />History is watching.</p>
+      <p className="rail-note">{note ?? <>Choose wisely.<br />History is watching.</>}</p>
     </div>
   )
 }
