@@ -52,7 +52,9 @@ The story must agree with your own verdicts: whoever you judged a disaster must 
 FORMAT
 One or two sentences per beat. No headings, no names in bold, no stage directions. Set 'role' to the post whose holder the beat is about, or null for beats about the room, the crisis or the outcome. Tone: 'good' when it goes well for them, 'bad' when it does not, 'twist' for the complication and the coup, 'neutral' for scene-setting and the closing line.
 
-Open with a beat that sets the crisis, close with a beat that delivers the outcome. Cover all five appointees in between, plus the complication and any chemistry or coup you are given. Do not name a score or a verdict word in the prose.`
+Open with a beat that sets the crisis, close with a beat that delivers the outcome. Cover all five appointees in between, plus the complication and any chemistry or coup you are given.
+
+Nine beats at most, and never more than two sentences in one. The player advances them one at a time, so a long story is a long wait followed by a lot of clicking. Cut anything that is scene-setting rather than someone doing something. Do not name a score or a verdict word in the prose.`
 
 export function userPrompt(req: NarrationRequest): string {
   const cabinet = req.cabinet.map((a) => {

@@ -18,7 +18,13 @@ import type { Beat } from './narrate.js'
  * limit, an offline player or a slow response still produces a complete,
  * scored, shareable run - just a blunter one.
  */
-const TIMEOUT_MS = 25_000
+/**
+ * Generous, because the cost of being wrong is asymmetric. Judged runs measure
+ * 20-25s, so a 25s limit dropped roughly half of them into the fallback while
+ * the request that would have answered was still in flight - and a silent
+ * fallback is indistinguishable from a bad adjudicator.
+ */
+const TIMEOUT_MS = 60_000
 
 export interface Judged {
   resolution: Resolution

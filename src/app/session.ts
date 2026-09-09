@@ -150,8 +150,12 @@ export function sharedFromUrl(search: string): SharedCabinet | null {
     const shared: SharedCabinet = { ref, picks: picks as Roster }
 
     const words = params.get('marks')?.split(PICK_SEPARATOR)
-    if (words?.length === ROLES.length && words.every(isVerdict)) {
-      shared.marks = Object.fromEntries(ROLES.map((role, i) => [role, words[i] as Verdict]))
+    if (words?.length === ROLES.length && words.every((w) => isVerdict(w) || w === UNTESTED)) {
+      // An untested post stays absent rather than becoming a word: the
+      // recipient should read the same blank the sender was shown.
+      shared.marks = Object.fromEntries(
+        ROLES.flatMap((role, i) => (isVerdict(words[i]) ? [[role, words[i] as Verdict]] : [])),
+      )
     }
     // Number(null) is 0, which would report an unscored link as a nil-point
     // catastrophe, so a missing score has to be checked for before parsing.
@@ -189,15 +193,18 @@ export function linkTo(
   return `${origin}?${params}`
 }
 
-function worstFor(verdicts: readonly RoleVerdict[], role: Role): Verdict {
+/** A post no check named, which the share grid draws as a blank square. */
+const UNTESTED = 'none'
+
+function worstFor(verdicts: readonly RoleVerdict[], role: Role): Verdict | typeof UNTESTED {
   let worst: Verdict | null = null
   for (const v of verdicts) {
     if (v.role !== role) continue
     if (worst === null || VERDICTS.indexOf(v.verdict) < VERDICTS.indexOf(worst)) worst = v.verdict
   }
-  // A post this crisis never tested reports as a pass, the same reading the
-  // verdict screen gives it.
-  return worst ?? 'pass'
+  // Reporting an untested post as a pass would credit the sender with a
+  // showing they never had to make.
+  return worst ?? UNTESTED
 }
 
 /**
