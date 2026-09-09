@@ -2,7 +2,11 @@ import { EVENTS, FIGURES } from './data.js'
 import { hashString } from '../engine/rng.js'
 import { createRun, todayKey } from '../engine/run.js'
 import type { DraftAction } from '../engine/replay.js'
-import type { RoleVerdict } from '../engine/verdict.js'
+import { isVerdict, VERDICTS } from '../engine/verdict.js'
+import type { RoleVerdict, Verdict } from '../engine/verdict.js'
+import { ROLES } from '../engine/types.js'
+import type { Role, Roster } from '../engine/types.js'
+import type { Resolution } from '../engine/resolve.js'
 
 /**
  * Saving, resuming and sharing a run.
@@ -104,12 +108,93 @@ export function runFromUrl(search: string): RunRef | null {
   }
 }
 
-export function linkTo(ref: RunRef, origin = window.location.origin + window.location.pathname): string {
+/**
+ * A cabinet someone sent, read off their link.
+ *
+ * The seed alone puts the same six faces in front of the recipient, which is
+ * the game but not the boast: what they were sent is a lineup and how it went.
+ * So the appointments ride in the link too, along with the verdict each post
+ * was given and the score it added up to.
+ */
+export interface SharedCabinet {
+  ref: RunRef
+  picks: Roster
+  /** Absent on a link shared before the run was judged. */
+  marks?: Partial<Record<Role, Verdict>>
+  score?: number
+}
+
+const PICK_SEPARATOR = '.'
+
+/**
+ * Anything that does not parse cleanly is treated as no shared cabinet at all,
+ * leaving the recipient with the same-deal link the game has always made. A
+ * forged or truncated query never reaches the screen as a result.
+ */
+export function sharedFromUrl(search: string): SharedCabinet | null {
+  try {
+    const ref = runFromUrl(search)
+    if (!ref) return null
+
+    const params = new URLSearchParams(search)
+    const ids = params.get('picks')?.split(PICK_SEPARATOR) ?? []
+    if (ids.length !== ROLES.length) return null
+
+    const picks: Partial<Roster> = {}
+    ROLES.forEach((role, i) => {
+      const figure = FIGURES.find((f) => f.id === ids[i])
+      if (figure) picks[role] = figure
+    })
+    if (ROLES.some((role) => !picks[role])) return null
+
+    const shared: SharedCabinet = { ref, picks: picks as Roster }
+
+    const words = params.get('marks')?.split(PICK_SEPARATOR)
+    if (words?.length === ROLES.length && words.every(isVerdict)) {
+      shared.marks = Object.fromEntries(ROLES.map((role, i) => [role, words[i] as Verdict]))
+    }
+    const score = Number(params.get('score'))
+    if (Number.isFinite(score) && score >= 0 && score <= 100) shared.score = score
+
+    return shared
+  } catch {
+    return null
+  }
+}
+
+/**
+ * The link to a run. Given how that run turned out, it carries the cabinet and
+ * its verdict as well, so opening it shows the sender's lineup before offering
+ * the same deal - rather than silently dealing a stranger's game as your own.
+ */
+export function linkTo(
+  ref: RunRef,
+  result?: Resolution,
+  origin = window.location.origin + window.location.pathname,
+): string {
   // The daily is the same puzzle for everyone on the day, so it needs no link
   // of its own - but it still gets one, because a link to yesterday's game has
   // to keep working after the date rolls over.
   const params = new URLSearchParams({ event: ref.eventId ?? eventIdFor(ref.seed), seed: ref.seed })
+  if (result) {
+    params.set('picks', ROLES.map((role) => result.roster[role].id).join(PICK_SEPARATOR))
+    // One word per post. A post the crisis tested twice is reported by its
+    // worse showing: the boast should not round in the sender's favour.
+    params.set('marks', ROLES.map((role) => worstFor(result.verdicts, role)).join(PICK_SEPARATOR))
+    params.set('score', String(Math.round(result.score)))
+  }
   return `${origin}?${params}`
+}
+
+function worstFor(verdicts: readonly RoleVerdict[], role: Role): Verdict {
+  let worst: Verdict | null = null
+  for (const v of verdicts) {
+    if (v.role !== role) continue
+    if (worst === null || VERDICTS.indexOf(v.verdict) < VERDICTS.indexOf(worst)) worst = v.verdict
+  }
+  // A post this crisis never tested reports as a pass, the same reading the
+  // verdict screen gives it.
+  return worst ?? 'pass'
 }
 
 /**

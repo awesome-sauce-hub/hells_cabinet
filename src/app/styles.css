@@ -232,4 +232,5 @@ h1, h2, h3 { text-wrap: balance; }
 .verdict-word.verdict-triumph, .verdict-word.verdict-pass, .verdict-word.verdict-fail, .verdict-word.verdict-disaster, .verdict-word.verdict-none { background: none; }
 /* Said out loud, because a silent fallback reads as the adjudicator having
    nothing to say rather than never having been asked. */
-.unjudged { display: block; margin: 10px 0 0; padding: 9px 12px; font-size: 10.5px; line-height: 1.55; color: #6e5330; background: #f0e3c4; border-left: 3px solid #b98a3e; }
+.unjudged { display: block; margin: 12px 0 0; padding: 9px 0; font: italic 10.5px/1.55 inherit; color: #6f644c; border-top: 1px solid #b4ad96; border-bottom: 1px solid #b4ad96; }
+.unjudged::before { content: 'Unadjudicated'; display: block; font: 9px var(--typewriter); font-style: normal; letter-spacing: .1em; color: #99483ab8; margin-bottom: 3px; }
