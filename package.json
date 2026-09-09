@@ -6,16 +6,14 @@
   "scripts": {
     "sim": "tsx scripts/sim.ts",
     "balance": "tsx scripts/balance.ts",
-    "calibrate": "tsx scripts/calibrate.ts",
     "solvability": "tsx scripts/solvability.ts",
-    "toppicks": "tsx scripts/toppicks.ts",
     "validate": "tsx scripts/validate-content.ts",
     "test": "vitest run && npm run validate",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "review": "tsx scripts/review-content.ts",
-    "autotune": "tsx scripts/autotune.ts"
+    "bench": "tsx scripts/model-bench.ts"
   },
   "devDependencies": {
     "@types/node": "^26.5.0",

@@ -2,6 +2,7 @@ import { EVENTS, FIGURES } from './data.js'
 import { hashString } from '../engine/rng.js'
 import { createRun, todayKey } from '../engine/run.js'
 import type { DraftAction } from '../engine/replay.js'
+import type { RoleVerdict } from '../engine/verdict.js'
 
 /**
  * Saving, resuming and sharing a run.
@@ -26,10 +27,22 @@ export interface SavedRun extends RunRef {
   content: number
   actions: DraftAction[]
   phase: SavedPhase
+  /**
+   * The adjudicator's judgement, once it has judged. Kept because it is the
+   * one part of a run that replaying the action log cannot rebuild: reloading
+   * a finished game without it would quietly re-score it from the fallback and
+   * show the player a different verdict than the one they were given.
+   */
+  verdicts?: RoleVerdict[]
 }
 
 const KEY = 'hells-cabinet:run'
-const VERSION = 1
+/**
+ * 2: figures lost their stat blocks, which changed the draft's draw weights.
+ * A version-1 save replays the same action log into a different set of
+ * candidates, so it has to be discarded rather than resumed.
+ */
+const VERSION = 2
 
 /**
  * Changing the roster or the events changes what a seed deals, so a save from

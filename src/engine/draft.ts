@@ -2,7 +2,6 @@ import { ALIGNMENTS, POWER_TIERS, ROLES } from './types.js'
 import type { Politician, Role, Roster } from './types.js'
 import { sampleWeighted } from './rng.js'
 import type { Rng } from './rng.js'
-import { roleScore } from './score.js'
 
 export const CANDIDATES_PER_ROUND = 6
 export const RESPIN_TOKENS = 1
@@ -31,8 +30,6 @@ const WILDCARD_WEIGHT = 0.15
 /** Objects are rarer still - a filing cabinet running the treasury is a gag
  *  that stops landing the third time it happens in one run. */
 const OBJECT_WEIGHT = 0.09
-/** Keeps a plausible pick likelier than an implausible one without excluding it. */
-const FIT_WEIGHT = 0.02
 /**
  * Power tiers are drawn unevenly: a titan on the board should feel like luck and
  * a liability like the ordinary weather. Weights are relative, so a titan is
@@ -70,9 +67,11 @@ export function poolWeight(p: Politician, openRoles: readonly Role[]): number {
   const base = 1 + (affine ? AFFINITY_BONUS : 0)
   const byCategory =
     p.category === 'object' ? OBJECT_WEIGHT : p.category === 'wildcard' ? WILDCARD_WEIGHT : 1
-  const rarity = byCategory * POWER_RARITY[p.tier] * ALIGNMENT_RARITY[p.alignment]
-  const bestFit = openRoles.reduce((m, r) => Math.max(m, roleScore(p.stats, r)), 0)
-  return base * rarity * (1 + bestFit * FIT_WEIGHT)
+  // Fit used to add a term computed from the stat block. With the numbers gone
+  // the trait affinity above is the whole of it, which is the honest version:
+  // a name is likelier because it reads plausible for an open post, not
+  // because it scored well against a table nobody could see.
+  return base * byCategory * POWER_RARITY[p.tier] * ALIGNMENT_RARITY[p.alignment]
 }
 
 export function drawCandidates(

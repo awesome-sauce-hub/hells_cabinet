@@ -1,51 +1,18 @@
-import { ROLES, STATS } from './types.js'
-import type { Politician, Role, Roster, Stat, StatBlock } from './types.js'
+import { ROLES } from './types.js'
+import type { Politician, Role, Roster } from './types.js'
+import { clamp } from './verdict.js'
 
-export type RoleWeights = Partial<Record<Stat, number>>
-
-/**
- * Weights are deliberately not all positive: the Propaganda Minister is
- * penalised for Integrity. The role table is where the game makes its jokes.
- */
-export const ROLE_WEIGHTS: Record<Role, RoleWeights> = {
-  President: { charisma: 0.3, cunning: 0.25, grit: 0.2, intellect: 0.15, integrity: 0.1 },
-  VicePresident: { cunning: 0.35, charisma: 0.25, integrity: 0.2, grit: 0.2 },
-  General: { force: 0.45, grit: 0.3, cunning: 0.15, intellect: 0.1 },
-  PropagandaMinister: { charisma: 0.45, cunning: 0.35, integrity: -0.2, force: 0.1 },
-  Treasurer: { intellect: 0.5, cunning: 0.25, integrity: 0.25 },
-}
-
-const STAT_MIN = 1
-const STAT_MAX = 10
+export { clamp }
 
 /**
- * Normalised to 0-100 against the role's own theoretical range, so roles with
- * negative or non-unit weight vectors stay comparable to each other.
+ * Team-level modifiers, applied to the score after the per-post verdicts.
+ *
+ * These never depended on the stat block - they read traits, eras, countries
+ * and named rivalries - so they survived dropping it intact. They are also the
+ * part of the outcome that must stay in code: they are the same for everyone,
+ * they are what makes a roster more than five separate appointments, and they
+ * are cheap to reason about without asking anybody.
  */
-export function roleScore(stats: StatBlock, role: Role): number {
-  const weights = ROLE_WEIGHTS[role]
-  let raw = 0
-  let lo = 0
-  let hi = 0
-  for (const stat of STATS) {
-    const w = weights[stat] ?? 0
-    if (w === 0) continue
-    raw += w * stats[stat]
-    lo += w > 0 ? w * STAT_MIN : w * STAT_MAX
-    hi += w > 0 ? w * STAT_MAX : w * STAT_MIN
-  }
-  return clamp(((raw - lo) / (hi - lo)) * 100, 0, 100)
-}
-
-/** A single stat on the same 0-100 scale as roleScore. */
-export function statScore(stats: StatBlock, stat: Stat): number {
-  return ((stats[stat] - STAT_MIN) / (STAT_MAX - STAT_MIN)) * 100
-}
-
-export function clamp(n: number, lo: number, hi: number): number {
-  return Math.min(Math.max(n, lo), hi)
-}
-
 export interface ChemistryEffect {
   id: string
   /** Points added to the final 0-100 score. Negative is a penalty. */
@@ -57,13 +24,9 @@ export interface ChemistryEffect {
 export interface ChemistryResult {
   effects: ChemistryEffect[]
   total: number
-  coup: { usurper: Role; margin: number } | null
+  coup: { usurper: Role; reason: string } | null
 }
 
-/**
- * Team-level modifiers, applied after the per-role checks. These are what make
- * a roster more than five independent picks.
- */
 export function chemistry(roster: Roster): ChemistryResult {
   const effects: ChemistryEffect[] = []
   const entries = ROLES.map((role) => ({ role, p: roster[role] }))
@@ -75,7 +38,7 @@ export function chemistry(roster: Roster): ChemistryResult {
       const b = entries[j]!
       if (a.p.rivals?.includes(b.p.id) || b.p.rivals?.includes(a.p.id)) {
         effects.push({
-          id: 'rivalry',
+          id: `rivalry-${a.p.id}-${b.p.id}`,
           delta: -12,
           text: `${a.p.name} and ${b.p.name} will not be in a room together.`,
           roles: [a.role, b.role],
@@ -133,28 +96,36 @@ export function chemistry(roster: Roster): ChemistryResult {
 }
 
 /**
- * Calibrated against the shipped roster, not chosen: the stat budget compresses
- * presidential scores, so margins above ~19 do not occur at all. Fires for
- * roughly 7% of runs. Recalibrate whenever the roster's stat spread changes.
+ * An ambitious deputy takes the chair from a President who cannot hold it.
+ *
+ * This used to compare two presidential scores and fire on a margin. With no
+ * numbers to compare it asks the question the numbers were standing in for:
+ * is the deputy the sort of person who takes things, and is the President the
+ * sort of person things get taken from? Both halves are read off traits and
+ * the power tier, which are authored rather than computed.
  */
-const COUP_MARGIN = 18
+const GRASPING = ['paranoid', 'cunning', 'demagogue', 'warhawk'] as const
+const UNSTEADY: readonly string[] = ['liability', 'flawed']
 
-/**
- * An ambitious deputy who badly outclasses the President takes the job. The
- * run still resolves - just under new management.
- */
-function coupCheck(roster: Roster): { usurper: Role; margin: number } | null {
-  const presidential = (p: Politician) => roleScore(p.stats, 'President')
-  const bar = presidential(roster.President)
-  let best: { usurper: Role; margin: number } | null = null
+function coupCheck(roster: Roster): { usurper: Role; reason: string } | null {
+  const president = roster.President
+  // A titan or heavyweight President is not deposed by their own deputy.
+  if (!UNSTEADY.includes(president.tier)) return null
+  // Furniture cannot mount a coup, and neither can it be couped against - the
+  // joke of an object in the chair is that nothing at all happens.
+  if (president.category === 'object') return null
+
   for (const role of ['VicePresident', 'General'] as const) {
     const p = roster[role]
-    const ambitious = p.traits.includes('paranoid') || p.traits.includes('cunning')
-    if (!ambitious) continue
-    const margin = presidential(p) - bar
-    if (margin >= COUP_MARGIN && (!best || margin > best.margin)) {
-      best = { usurper: role, margin }
+    if (p.category === 'object') continue
+    const grasping = GRASPING.filter((t) => p.traits.includes(t))
+    // Two grasping traits and a President out of their depth is the threshold.
+    if (grasping.length >= 2 && (p.tier === 'titan' || p.tier === 'heavyweight')) {
+      return {
+        usurper: role,
+        reason: `${p.name} is ${grasping.join(' and ')}, and ${president.name} was never going to hold the chair.`,
+      }
     }
   }
-  return best
+  return null
 }

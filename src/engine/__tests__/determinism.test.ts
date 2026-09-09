@@ -21,7 +21,7 @@ describe('determinism', () => {
       const b = resolveEvent(event, randomDraft(mulberry32(seed), politicians))
       expect(a.score).toBe(b.score)
       expect(a.grid).toBe(b.grid)
-      expect(a.checks.map((c) => c.politicianName)).toEqual(b.checks.map((c) => c.politicianName))
+      expect(a.verdicts).toEqual(b.verdicts)
     }
   })
 

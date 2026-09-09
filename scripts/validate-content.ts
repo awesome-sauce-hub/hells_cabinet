@@ -1,19 +1,21 @@
 /**
  * Content gate. Runs in CI.
  *
- * The roster will eventually arrive from a Wikidata scrape and an LLM stat
- * pass, so this is the seam where messy or unreviewed data is stopped before
- * it reaches players.
+ * Figures no longer carry stat blocks, so what this guards has changed: the
+ * roster's whole contribution to an outcome is now its prose and its traits,
+ * which makes an empty bio or a junk trait a gameplay bug rather than a
+ * cosmetic one. This is the seam where that is stopped before it reaches
+ * players.
  *
  *   npm run validate
  */
 import { z } from 'zod'
 import { readFileSync } from 'node:fs'
-import { ALIGNMENTS, CATEGORIES, POWER_BUDGETS, POWER_TIERS, ROLES, STATS } from '../src/engine/types.js'
+import { ALIGNMENTS, CATEGORIES, POWER_TIERS, QUALITIES, ROLES } from '../src/engine/types.js'
 import { loadEvents, loadPoliticians } from '../src/engine/content.js'
 
 const roleEnum = z.enum(ROLES)
-const statEnum = z.enum(STATS)
+const qualityEnum = z.enum(QUALITIES)
 
 const politicianSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
@@ -26,8 +28,6 @@ const politicianSchema = z.object({
   era: z.string().min(1),
   office: z.string().min(1),
   bio: z.string().min(1).max(140),
-  stats: z.object(Object.fromEntries(STATS.map((s) => [s, z.number().int().min(1).max(10)])) as
-    Record<(typeof STATS)[number], z.ZodNumber>),
   traits: z.array(z.string()).min(1).max(4),
   rivals: z.array(z.string()).optional(),
   party: z.string().optional(),
@@ -36,8 +36,7 @@ const politicianSchema = z.object({
 
 const checkSchema = z.object({
   role: roleEnum,
-  stat_bias: statEnum,
-  dc: z.number().min(0).max(100),
+  demands: qualityEnum,
   invert: z.boolean().optional(),
   weight: z.number().positive().optional(),
   note: z.string().optional(),
@@ -71,17 +70,21 @@ for (const [i, e] of rawEvents.entries()) {
 }
 
 /**
- * A figure spends exactly its tier's budget - no more, so strength still has to
- * be bought with weakness, and no less, so nobody is quietly undercooked.
- * Tiers themselves are unequal on purpose: the roster is meant to have obvious
- * heavyweights and obvious liabilities, not twenty-one interchangeable cards.
+ * Nothing carries stats any more, and a leftover block would be silently
+ * ignored while looking authoritative to whoever is editing the file.
  */
 for (const p of rawPoliticians) {
-  const budget = POWER_BUDGETS[p.tier as keyof typeof POWER_BUDGETS]
-  if (budget === undefined) continue // schema already reported the bad tier
-  const total = Object.values(p.stats ?? {}).reduce((a: number, b) => a + (b as number), 0)
-  if (total !== budget) {
-    fail(`politician ${p.id}: stat total ${total}, budget for tier ${p.tier} is ${budget}`)
+  if ('stats' in p) fail(`politician ${p.id}: still carries a stats block; figures are judged on their record now`)
+}
+
+/**
+ * The bio is the whole of what the adjudicator knows about a figure beyond
+ * their name and office, so a lazy one is now a mechanical problem: it is the
+ * evidence on which their verdict is decided.
+ */
+for (const p of rawPoliticians) {
+  if (typeof p.bio === 'string' && p.bio.trim().split(/\s+/).length < 4) {
+    fail(`politician ${p.id}: bio is too thin to judge them on ("${p.bio}")`)
   }
 }
 
@@ -121,7 +124,7 @@ for (const event of loadEvents()) {
   }
   const seen = new Set<string>()
   for (const c of event.checks) {
-    const key = `${c.role}/${c.stat_bias}`
+    const key = `${c.role}/${c.demands}`
     if (seen.has(key)) fail(`event ${event.id}: duplicate check ${key}`)
     seen.add(key)
   }

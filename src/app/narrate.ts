@@ -3,12 +3,12 @@ import type { Resolution } from '../engine/resolve.js'
 import type { Role, Tone } from '../engine/types.js'
 
 /**
- * Placeholder narrator.
+ * The fallback narrator.
  *
- * The shipped game will read pre-generated prose from content/narration (see
- * the plan's step 6). This builds the same beat structure from templates so
- * the simulation screen can be built and playtested first, and so the shape
- * the generator has to fill is pinned down by working code rather than a spec.
+ * Two variants per post per outcome, written to fit anybody - which is exactly
+ * why it is no longer the narrator. It stays in the build because the game has
+ * to remain playable with no key and no network, and a blunt story is better
+ * than a blank screen. See docs/NARRATOR.md.
  */
 export type { Tone } from '../engine/types.js'
 
@@ -83,19 +83,22 @@ export function narrate(result: Resolution): Beat[] {
     { id: 'briefing', tone: 'neutral', text: result.event.dossier },
   ]
 
-  const ordered = [...result.checks].sort((a, b) => Number(a.isTwist) - Number(b.isTwist))
-  for (const c of ordered) {
-    if (c.isTwist) {
+  const twistRole = result.event.twist.check.role
+  let twistShown = false
+  for (const v of result.verdicts) {
+    if (v.role === twistRole && !twistShown) {
+      twistShown = true
       beats.push({ id: 'twist', tone: 'twist', text: result.event.twist.text })
     }
-    const table = c.passed ? SUCCESS : FAILURE
+    const who = result.roster[v.role].name
+    const went = v.verdict === 'triumph' || v.verdict === 'pass'
     beats.push({
-      id: `check-${c.role}-${c.isTwist ? 'twist' : 'main'}`,
-      tone: c.passed ? 'good' : 'bad',
-      who: c.politicianName,
-      role: c.role,
-      text: variant(table[c.role], `${result.event.id}-${c.role}-${c.politicianName}-${c.passed}`)
-        .replaceAll('{who}', c.politicianName),
+      id: `verdict-${v.role}`,
+      tone: went ? 'good' : 'bad',
+      who,
+      role: v.role,
+      text: variant((went ? SUCCESS : FAILURE)[v.role], `${result.event.id}-${v.role}-${who}-${v.verdict}`)
+        .replaceAll('{who}', who),
     })
   }
 
@@ -104,11 +107,10 @@ export function narrate(result: Resolution): Beat[] {
   }
 
   if (result.chemistry.coup) {
-    const { usurper } = result.chemistry.coup
     beats.push({
       id: 'coup',
       tone: 'twist',
-      role: usurper,
+      role: result.chemistry.coup.usurper,
       text: 'Somewhere in the third week, the meetings stop being chaired by the President.',
     })
   }

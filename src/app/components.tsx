@@ -67,8 +67,10 @@ export function CandidateCard({ figure, selected, onSelect, onDragSelect, onBenc
         </span>
         {selected && <span className="selected-mark" aria-hidden="true"><Icon name="check" size={14} /></span>}
       </button>
+      {/* Traits drive the scoring, not the pitch: the player judges a
+          candidate on the name and the write-up, and finds out the rest in
+          the room. */}
       <div className="candidate-footer">
-        <span className="traits">{figure.traits.join(' · ')}</span>
         <button className="bench-btn" disabled={!canBench} onClick={onBench} aria-label={`Bench ${figure.name}`} title={canBench ? 'Replace this candidate (one per game)' : 'Bench already used'}><Icon name="close" size={14} /></button>
       </div>
     </article>

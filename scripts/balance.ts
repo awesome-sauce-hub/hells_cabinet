@@ -11,7 +11,8 @@ import { drawCandidates, randomDraft } from '../src/engine/draft.js'
 import { POWER_TIERS, ROLES } from '../src/engine/types.js'
 import type { PowerTier } from '../src/engine/types.js'
 import { mulberry32 } from '../src/engine/rng.js'
-import { TIERS, resolveEvent } from '../src/engine/resolve.js'
+import { resolveEvent } from '../src/engine/resolve.js'
+import { TIERS } from '../src/engine/verdict.js'
 import type { Tier } from '../src/engine/resolve.js'
 
 const RUNS = Number(process.argv[2] ?? 10000)
@@ -38,7 +39,7 @@ const politicians = loadPoliticians()
 }
 
 for (const event of loadEvents()) {
-  const tiers = new Map<Tier, number>(TIERS.map((t) => [t, 0]))
+  const tiers = new Map<Tier, number>(TIERS.map((t: Tier) => [t, 0]))
   const passes = new Map<string, number>()
   let scoreTotal = 0
   let coups = 0
@@ -49,9 +50,9 @@ for (const event of loadEvents()) {
     tiers.set(result.tier, tiers.get(result.tier)! + 1)
     scoreTotal += result.score
     if (result.chemistry.coup) coups++
-    for (const c of result.checks) {
-      const key = `${c.role}/${c.check.stat_bias}${c.check.invert ? '!' : ''}${c.isTwist ? ' (twist)' : ''}`
-      passes.set(key, (passes.get(key) ?? 0) + (c.passed ? 1 : 0))
+    for (const v of result.verdicts) {
+      const key = `${v.role}/${v.verdict}`
+      passes.set(key, (passes.get(key) ?? 0) + 1)
     }
   }
 

@@ -1,14 +1,23 @@
-export const STATS = ['charisma', 'cunning', 'integrity', 'grit', 'intellect', 'force'] as const
-export type Stat = (typeof STATS)[number]
+/**
+ * What a crisis can put under strain.
+ *
+ * These are qualities a crisis demands, not numbers a figure carries. Nobody
+ * is assigned a charisma of 7: the adjudicator is told the canal demanded
+ * nerve of its General and decides, knowing who that General actually was,
+ * whether they had it. Hand-assigning the numbers was the thing that made
+ * every figure equally gritty and no figure recognisably themselves.
+ */
+export const QUALITIES = ['charisma', 'cunning', 'integrity', 'grit', 'intellect', 'force'] as const
+export type Quality = (typeof QUALITIES)[number]
 
-/** Column labels for the verdict table. Truncation collides on int*. */
-export const STAT_ABBR: Record<Stat, string> = {
-  charisma: 'CHA',
-  cunning: 'CUN',
-  integrity: 'INTEG',
-  grit: 'GRIT',
-  intellect: 'MIND',
-  force: 'FORCE',
+/** How a crisis phrases what it wanted, for the briefing and the verdict. */
+export const QUALITY_LABEL: Record<Quality, string> = {
+  charisma: 'the room won over',
+  cunning: 'the angle nobody else saw',
+  integrity: 'the honest answer',
+  grit: 'holding the line',
+  intellect: 'the numbers understood',
+  force: 'the decision taken',
 }
 
 export const ROLES = [
@@ -19,9 +28,6 @@ export const ROLES = [
   'Treasurer',
 ] as const
 export type Role = (typeof ROLES)[number]
-
-/** Stat values are 1-10, hand-assigned or derived from the ingest pipeline. */
-export type StatBlock = Record<Stat, number>
 
 export const CATEGORIES = ['politician', 'wildcard', 'object'] as const
 /**
@@ -47,22 +53,15 @@ export const ALIGNMENTS = ['good', 'bad', 'neutral'] as const
 export type Alignment = (typeof ALIGNMENTS)[number]
 
 /**
- * How many stat points a figure is allowed to spend. Strength is still bought
- * with weakness inside a tier, but tiers are not equal: a titan really is
- * better than a liability, because a roster where every card costs the same
- * reads as a spreadsheet rather than a cast. Titans are drawn rarely to pay for
- * it - see POWER_RARITY in draft.ts.
+ * Roughly how much weight a figure throws around, kept after the stat budgets
+ * were dropped because it is still what makes a board feel uneven: a titan
+ * should be luck and a liability the ordinary weather. It now only sets draw
+ * rarity (POWER_RARITY in draft.ts) and gives the fallback adjudicator a
+ * coarse sense of who was out of their depth.
  */
-export const POWER_BUDGETS = {
-  titan: 46,
-  heavyweight: 43,
-  operator: 40,
-  flawed: 36,
-  liability: 32,
-} as const
-export const POWER_TIERS = Object.keys(POWER_BUDGETS) as (keyof typeof POWER_BUDGETS)[]
-/** Not to be confused with resolve.ts's outcome tiers. This is card strength. */
-export type PowerTier = keyof typeof POWER_BUDGETS
+export const POWER_TIERS = ['titan', 'heavyweight', 'operator', 'flawed', 'liability'] as const
+/** Not to be confused with the outcome tiers in verdict.ts. This is card strength. */
+export type PowerTier = (typeof POWER_TIERS)[number]
 
 export interface Politician {
   id: string
@@ -73,10 +72,9 @@ export interface Politician {
   country: string
   era: string
   office: string
-  /** One line of satire. Shown on the card; stats are not. */
+  /** One line of satire, and the only description the adjudicator is given. */
   bio: string
-  stats: StatBlock
-  /** Visible on the card. Drives chemistry and narration variants. */
+  /** Visible on the card. Drives chemistry and the fallback adjudicator. */
   traits: string[]
   /** Ids of politicians this one cannot work with. */
   rivals?: string[]
@@ -90,14 +88,16 @@ export interface Politician {
   reviewed: boolean
 }
 
+/** One thing the crisis asks of one post. */
 export interface Check {
   role: Role
-  stat_bias: Stat
-  dc: number
-  /** When true the event punishes a high stat: restraint beats firepower. */
+  /** The quality the crisis puts under strain. */
+  demands: Quality
+  /** When true the crisis punishes the quality: restraint beats firepower. */
   invert?: boolean
   /** Relative importance within the event. Defaults to 1. */
   weight?: number
+  /** What is actually being asked, in words. The adjudicator reads this. */
   note?: string
 }
 

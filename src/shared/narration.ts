@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { ROLES, TONES } from '../engine/types.js'
+import { VERDICTS } from '../engine/verdict.js'
 
 /**
  * The contract between the game and the narrator.
@@ -17,7 +18,16 @@ export const beatSchema = z.object({
 })
 export type NarrationBeat = z.infer<typeof beatSchema>
 
+/** How one post handled what the crisis asked of it, and why. */
+export const roleVerdictSchema = z.object({
+  role: z.enum(ROLES),
+  verdict: z.enum(VERDICTS),
+  reason: z.string().min(1).max(300),
+})
+
 export const narrationSchema = z.object({
+  /** Exactly one judgement per post, whether or not the crisis tested it. */
+  verdicts: z.array(roleVerdictSchema).length(ROLES.length),
   beats: z.array(beatSchema).min(4).max(14),
 })
 export type Narration = z.infer<typeof narrationSchema>
@@ -35,13 +45,13 @@ export const appointmentSchema = z.object({
   bio: z.string().max(400),
   traits: z.array(z.string().max(40)).max(8),
   category: z.enum(['politician', 'wildcard', 'object']),
-  /** How the event's checks on this person went. */
-  outcomes: z.array(z.object({
-    passed: z.boolean(),
-    stat: z.string().max(20),
+  /** What the crisis asked of this post. Empty when it asked nothing. */
+  demands: z.array(z.object({
+    quality: z.string().max(20),
+    /** True when the crisis punishes the quality rather than rewarding it. */
+    invert: z.boolean(),
     isTwist: z.boolean(),
-    /** How decisively, so the prose can tell a near miss from a rout. */
-    margin: z.enum(['disaster', 'narrow-fail', 'narrow-pass', 'triumph']),
+    note: z.string().max(200).optional(),
   })).max(4),
 })
 
@@ -55,8 +65,6 @@ export const narrationRequestSchema = z.object({
   cabinet: z.array(appointmentSchema).length(ROLES.length),
   chemistry: z.array(z.object({ text: z.string().max(300), good: z.boolean() })).max(8),
   coup: z.object({ usurperRole: z.enum(ROLES), usurperName: z.string().max(80), presidentName: z.string().max(80) }).nullable(),
-  tier: z.string().max(40),
+  /** No tier is supplied any more: the verdicts decide it. */
 })
 export type NarrationRequest = z.infer<typeof narrationRequestSchema>
-
-export type MarginBand = NarrationRequest['cabinet'][number]['outcomes'][number]['margin']

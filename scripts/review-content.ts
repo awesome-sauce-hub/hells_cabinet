@@ -17,8 +17,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod'
 import { z } from 'zod'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { ALIGNMENTS, POWER_BUDGETS, POWER_TIERS, STATS } from '../src/engine/types.js'
-import { ROLE_WEIGHTS } from '../src/engine/score.js'
+import { ALIGNMENTS, POWER_TIERS } from '../src/engine/types.js'
 import type { Politician } from '../src/engine/types.js'
 
 /** Figures per request. Small enough that one refusal costs little. */
@@ -47,34 +46,30 @@ const reportSchema = z.object({
 
 const RUBRIC = `You are the reviewer on the content gate for Hell’s Cabinet, a satirical daily game.
 
-The player is shown a historical or fictional figure - name and one line - and drafts
-them into one of five cabinet roles. Hidden stats then resolve a historical crisis.
+The player is shown a historical or fictional figure - name, office, and one line of
+bio - and drafts them into one of five cabinet roles. A historical crisis then plays
+out, and an adjudicator decides how each of them handled what it asked, judging on
+who they actually were. There are no hidden numbers: the bio and the traits ARE the
+figure, so a lazy bio makes a figure unjudgeable and a wrong trait misjudges them.
 
-Each figure carries six stats on 1-10, a power tier, an alignment, and traits.
-
-  stats: ${STATS.join(', ')}
-  tiers (total stat points they must spend): ${POWER_TIERS.map((t) => `${t}=${POWER_BUDGETS[t]}`).join(', ')}
+  tiers (how much weight they threw around): ${POWER_TIERS.join(', ')}
   alignments: ${ALIGNMENTS.join(', ')} - how history remembers them, NOT how strong they are
-  role weights (what each stat is for):
-${Object.entries(ROLE_WEIGHTS)
-  .map(([role, w]) => `    ${role}: ${JSON.stringify(w)}`)
-  .join('\n')}
 
 Judge each figure against the life they actually led:
 
-1. STATS. Does each number match the record? force is physical/coercive power, not
-   authority; grit is endurance under sustained pressure; cunning is manoeuvre and
-   manipulation; integrity is whether they kept their word, not whether you like them.
-   A stat that contradicts a well-known fact is an "error" (a career soldier at grit 3).
-2. TIER. Does the total point budget match how formidable they were? A titan should be
-   someone who genuinely bent events. Note that a figure cannot be retiered without
-   restating all six stats to the new budget, so only raise it when it is clearly wrong.
+1. BIO AS EVIDENCE. The bio is the only description the adjudicator gets. Flag one that
+   is too generic to decide anything from - it must say what this person specifically
+   did or was like, not that they were powerful or controversial. This is the most
+   valuable finding you can make.
+2. TIER. Does it match how formidable they were? A titan genuinely bent events; a
+   liability was out of their depth anywhere near power.
 3. ALIGNMENT. good/bad/neutral by how history remembers them. Mass killers are "bad"
    however capable; this axis is not a power rating.
 4. TRAITS. Only from this vocabulary: banker, beloved, cunning, dealmaker, demagogue,
    isolationist, liability, loyalist, paranoid, scandal-magnet, showman, soldier,
    statesman, strategist, technocrat, warhawk. Flag a missing obvious one or a wrong one.
-5. BIO. Flag only factual falsehoods, never style - the voice is deliberately dry satire.
+5. FACTS. Flag falsehoods in the bio or office, never style - the voice is deliberately
+   dry satire and understatement is intended.
 
 Rules:
 - Report a finding ONLY where you can name the fact that decides it. No vibes.
@@ -90,8 +85,8 @@ const subject = limit > 0 ? roster.slice(0, limit) : roster
 
 /** Only the fields under review, so the model is not reading its own noise. */
 function forReview(p: Politician) {
-  const { id, category, tier, alignment, name, country, era, office, bio, stats, traits } = p
-  return { id, category, tier, alignment, name, country, era, office, bio, stats, traits }
+  const { id, category, tier, alignment, name, country, era, office, bio, traits } = p
+  return { id, category, tier, alignment, name, country, era, office, bio, traits }
 }
 
 type Report = z.infer<typeof reportSchema>

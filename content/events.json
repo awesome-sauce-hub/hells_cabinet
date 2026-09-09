@@ -13,28 +13,24 @@
     "checks": [
       {
         "role": "General",
-        "stat_bias": "force",
+        "demands": "force",
         "invert": true,
-        "dc": 51,
         "note": "restraint under pressure"
       },
       {
         "role": "President",
-        "stat_bias": "cunning",
-        "dc": 64,
+        "demands": "cunning",
         "note": "a ladder for the other side to climb down"
       },
       {
         "role": "VicePresident",
-        "stat_bias": "grit",
-        "dc": 69,
+        "demands": "grit",
         "weight": 0.8,
         "note": "holding the room together at 4am"
       },
       {
         "role": "Treasurer",
-        "stat_bias": "intellect",
-        "dc": 61,
+        "demands": "intellect",
         "weight": 0.5,
         "note": "costing the blockade"
       }
@@ -44,8 +40,7 @@
       "text": "A transcript of the war room reaches the evening papers.",
       "check": {
         "role": "PropagandaMinister",
-        "stat_bias": "charisma",
-        "dc": 79,
+        "demands": "charisma",
         "weight": 1.2
       }
     },
@@ -69,28 +64,24 @@
     "checks": [
       {
         "role": "Treasurer",
-        "stat_bias": "intellect",
-        "dc": 68,
+        "demands": "intellect",
         "weight": 1.5,
         "note": "understanding the instruments"
       },
       {
         "role": "President",
-        "stat_bias": "charisma",
-        "dc": 73,
+        "demands": "charisma",
         "note": "stopping the run before it starts"
       },
       {
         "role": "PropagandaMinister",
-        "stat_bias": "cunning",
-        "dc": 70,
+        "demands": "cunning",
         "note": "the word 'rescue' instead of 'bailout'"
       },
       {
         "role": "General",
-        "stat_bias": "force",
+        "demands": "force",
         "invert": true,
-        "dc": 46,
         "weight": 0.4,
         "note": "not deploying troops to a bank"
       }
@@ -100,8 +91,7 @@
       "text": "The rescued bank pays out its bonuses on schedule.",
       "check": {
         "role": "VicePresident",
-        "stat_bias": "integrity",
-        "dc": 50,
+        "demands": "integrity",
         "weight": 1.2
       }
     },
@@ -125,28 +115,24 @@
     "checks": [
       {
         "role": "PropagandaMinister",
-        "stat_bias": "cunning",
-        "dc": 66,
+        "demands": "cunning",
         "weight": 1.2,
         "note": "a story that survives a second question"
       },
       {
         "role": "VicePresident",
-        "stat_bias": "integrity",
+        "demands": "integrity",
         "invert": true,
-        "dc": 72,
         "note": "someone has to make the calls"
       },
       {
         "role": "President",
-        "stat_bias": "charisma",
-        "dc": 70,
+        "demands": "charisma",
         "note": "the press conference nobody wanted"
       },
       {
         "role": "Treasurer",
-        "stat_bias": "integrity",
-        "dc": 44,
+        "demands": "integrity",
         "weight": 0.7,
         "note": "the money leaves a trail whatever you say"
       }
@@ -156,8 +142,7 @@
       "text": "A junior staffer is offered immunity and takes an afternoon to think about it.",
       "check": {
         "role": "President",
-        "stat_bias": "integrity",
-        "dc": 55,
+        "demands": "integrity",
         "weight": 1.2
       }
     },
@@ -181,29 +166,25 @@
     "checks": [
       {
         "role": "President",
-        "stat_bias": "integrity",
-        "dc": 48,
+        "demands": "integrity",
         "weight": 1.3,
         "note": "publishing the real number"
       },
       {
         "role": "PropagandaMinister",
-        "stat_bias": "cunning",
+        "demands": "cunning",
         "invert": true,
-        "dc": 48,
         "note": "this is the one week spin kills people"
       },
       {
         "role": "Treasurer",
-        "stat_bias": "intellect",
-        "dc": 74,
+        "demands": "intellect",
         "weight": 0.9,
         "note": "paying for cities that have stopped working"
       },
       {
         "role": "General",
-        "stat_bias": "grit",
-        "dc": 72,
+        "demands": "grit",
         "weight": 0.8,
         "note": "moving supplies with a sick army"
       }
@@ -213,8 +194,7 @@
       "text": "The city that went ahead with its parade is now everybody's example.",
       "check": {
         "role": "VicePresident",
-        "stat_bias": "cunning",
-        "dc": 72,
+        "demands": "cunning",
         "weight": 1.1
       }
     },
@@ -238,29 +218,25 @@
     "checks": [
       {
         "role": "General",
-        "stat_bias": "force",
-        "dc": 70,
+        "demands": "force",
         "weight": 1.1,
         "note": "taking the canal on schedule"
       },
       {
         "role": "President",
-        "stat_bias": "cunning",
-        "dc": 68,
+        "demands": "cunning",
         "weight": 1.2,
         "note": "an alliance nobody admits to"
       },
       {
         "role": "PropagandaMinister",
-        "stat_bias": "charisma",
-        "dc": 81,
+        "demands": "charisma",
         "note": "explaining a war you started as a war you joined"
       },
       {
         "role": "VicePresident",
-        "stat_bias": "integrity",
+        "demands": "integrity",
         "invert": true,
-        "dc": 46,
         "weight": 0.7,
         "note": "deniability needs a comfortable liar"
       }
@@ -270,8 +246,7 @@
       "text": "Your largest creditor phones about the currency rather than the canal.",
       "check": {
         "role": "Treasurer",
-        "stat_bias": "cunning",
-        "dc": 68,
+        "demands": "cunning",
         "weight": 1.3
       }
     },
@@ -295,29 +270,25 @@
     "checks": [
       {
         "role": "VicePresident",
-        "stat_bias": "cunning",
-        "dc": 64,
+        "demands": "cunning",
         "weight": 1.3,
         "note": "the deal made in a corridor"
       },
       {
         "role": "General",
-        "stat_bias": "force",
+        "demands": "force",
         "invert": true,
-        "dc": 49,
         "note": "soldiers on the trains ends this the wrong way"
       },
       {
         "role": "PropagandaMinister",
-        "stat_bias": "integrity",
-        "dc": 43,
+        "demands": "integrity",
         "weight": 0.9,
         "note": "a bulletin the strikers will also believe"
       },
       {
         "role": "President",
-        "stat_bias": "grit",
-        "dc": 66,
+        "demands": "grit",
         "weight": 0.8,
         "note": "outlasting nine days of nothing working"
       }
@@ -327,8 +298,7 @@
       "text": "The strike fund is emptier than the union has admitted.",
       "check": {
         "role": "Treasurer",
-        "stat_bias": "intellect",
-        "dc": 68,
+        "demands": "intellect",
         "weight": 0.9
       }
     },
@@ -352,29 +322,25 @@
     "checks": [
       {
         "role": "General",
-        "stat_bias": "grit",
-        "dc": 78,
+        "demands": "grit",
         "weight": 1.2,
         "note": "ninety seconds on the roof, then the next man"
       },
       {
         "role": "Treasurer",
-        "stat_bias": "intellect",
-        "dc": 74,
+        "demands": "intellect",
         "weight": 1.3,
         "note": "the reading is not high, the instrument stops there"
       },
       {
         "role": "President",
-        "stat_bias": "integrity",
-        "dc": 42,
+        "demands": "integrity",
         "weight": 1.1,
         "note": "telephoning the countries downwind"
       },
       {
         "role": "PropagandaMinister",
-        "stat_bias": "charisma",
-        "dc": 76,
+        "demands": "charisma",
         "weight": 0.8,
         "note": "an evacuation order that does not become a stampede"
       }
@@ -384,8 +350,7 @@
       "text": "The parade is scheduled for the fourth day and the children are already rehearsing.",
       "check": {
         "role": "VicePresident",
-        "stat_bias": "integrity",
-        "dc": 50,
+        "demands": "integrity",
         "weight": 1.2
       }
     },
@@ -409,29 +374,25 @@
     "checks": [
       {
         "role": "Treasurer",
-        "stat_bias": "integrity",
-        "dc": 55,
+        "demands": "integrity",
         "weight": 1.3,
         "note": "who signed off on the shortcuts, and when"
       },
       {
         "role": "VicePresident",
-        "stat_bias": "grit",
-        "dc": 72,
+        "demands": "grit",
         "weight": 1.1,
         "note": "the hospitals need the compound name tonight"
       },
       {
         "role": "President",
-        "stat_bias": "charisma",
-        "dc": 70,
+        "demands": "charisma",
         "note": "a city that will not be reassured twice"
       },
       {
         "role": "General",
-        "stat_bias": "force",
+        "demands": "force",
         "invert": true,
-        "dc": 49,
         "weight": 0.7,
         "note": "this is not a crowd to be controlled"
       }
@@ -441,8 +402,7 @@
       "text": "The company chairman flies in, is arrested, and is out of the country by evening.",
       "check": {
         "role": "President",
-        "stat_bias": "cunning",
-        "dc": 61,
+        "demands": "cunning",
         "weight": 1.3
       }
     },
@@ -466,28 +426,24 @@
     "checks": [
       {
         "role": "General",
-        "stat_bias": "grit",
-        "dc": 76,
+        "demands": "grit",
         "weight": 1.3,
         "note": "boats and buses, tonight, not a plan for tonight"
       },
       {
         "role": "President",
-        "stat_bias": "integrity",
-        "dc": 54,
+        "demands": "integrity",
         "weight": 1.1,
         "note": "the ground, or the window of the aircraft"
       },
       {
         "role": "VicePresident",
-        "stat_bias": "cunning",
-        "dc": 64,
+        "demands": "cunning",
         "note": "making three agencies answer one telephone"
       },
       {
         "role": "Treasurer",
-        "stat_bias": "intellect",
-        "dc": 68,
+        "demands": "intellect",
         "weight": 0.8,
         "note": "costing a city that has to be rebuilt either way"
       }
@@ -497,8 +453,7 @@
       "text": "The convention centre has been on live television for four days and your briefing says it is being handled.",
       "check": {
         "role": "PropagandaMinister",
-        "stat_bias": "integrity",
-        "dc": 46,
+        "demands": "integrity",
         "weight": 1.2
       }
     },
@@ -522,30 +477,26 @@
     "checks": [
       {
         "role": "Treasurer",
-        "stat_bias": "integrity",
-        "dc": 55,
+        "demands": "integrity",
         "weight": 1.4,
         "note": "the grain leaving is on your ledger too"
       },
       {
         "role": "President",
-        "stat_bias": "cunning",
+        "demands": "cunning",
         "invert": true,
-        "dc": 55,
         "weight": 1.1,
         "note": "there is no clever version of this"
       },
       {
         "role": "General",
-        "stat_bias": "grit",
-        "dc": 76,
+        "demands": "grit",
         "weight": 1.0,
         "note": "relief works, and roads that go nowhere"
       },
       {
         "role": "PropagandaMinister",
-        "stat_bias": "cunning",
-        "dc": 71,
+        "demands": "cunning",
         "weight": 0.9,
         "note": "getting the word famine into a London paper"
       }
@@ -555,8 +506,7 @@
       "text": "A relief committee proposes a work test before the food, to keep the idle from taking advantage.",
       "check": {
         "role": "VicePresident",
-        "stat_bias": "integrity",
-        "dc": 43,
+        "demands": "integrity",
         "weight": 1.3
       }
     },

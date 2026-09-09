@@ -31,14 +31,9 @@ console.log(`  BRIEFING: ${event.briefing_hint}\n`)
 console.log('  CABINET')
 for (const role of ROLES) console.log(`    ${role.padEnd(20)} ${roster[role].name}`)
 
-console.log('\n  CHECKS')
-for (const c of result.checks) {
-  const mark = c.passed ? 'PASS' : 'FAIL'
-  const label = `${c.role}/${c.check.stat_bias}${c.check.invert ? ' (inverted)' : ''}`
-  console.log(
-    `    ${mark}  ${label.padEnd(34)} ${c.value.toFixed(0).padStart(3)} vs dc ${c.check.dc}` +
-      `  ${c.isTwist ? '<- TWIST' : ''}`,
-  )
+console.log('\n  VERDICTS  (fallback adjudicator - the shipped one is the narrator)')
+for (const v of result.verdicts) {
+  console.log(`    ${v.verdict.toUpperCase().padEnd(9)} ${v.role.padEnd(20)} ${v.reason}`)
 }
 
 if (result.chemistry.effects.length) {
@@ -48,8 +43,7 @@ if (result.chemistry.effects.length) {
   }
 }
 if (result.chemistry.coup) {
-  const { usurper, margin } = result.chemistry.coup
-  console.log(`\n  COUP: ${roster[usurper].name} (${usurper}) outclasses the President by ${margin.toFixed(0)}.`)
+  console.log(`\n  COUP: ${result.chemistry.coup.reason}`)
 }
 
 console.log(`\n  ${result.grid}  ${result.score.toFixed(0)}  ${result.tier.toUpperCase()}\n`)

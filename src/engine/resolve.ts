@@ -1,111 +1,125 @@
 import { ROLES } from './types.js'
-import type { Check, GameEvent, Role, Roster } from './types.js'
-import { chemistry, clamp, roleScore, statScore } from './score.js'
+import type { Check, GameEvent, Politician, Role, Roster } from './types.js'
+import { chemistry } from './score.js'
 import type { ChemistryResult } from './score.js'
-
-export const TIERS = ['Catastrophe', 'Debacle', 'Muddled Through', 'Triumph', 'Legendary'] as const
-export type Tier = (typeof TIERS)[number]
-
-export interface CheckResult {
-  check: Check
-  role: Role
-  politicianName: string
-  /** 0-100 blend of role fit and the biased stat, inverted where the event asks. */
-  value: number
-  margin: number
-  /** 0-1, how well this check went. Feeds the total and the share grid. */
-  outcome: number
-  passed: boolean
-  isTwist: boolean
-}
+import { scoreFrom, shareGrid, tierFor } from './verdict.js'
+import type { RoleVerdict, Tier, Verdict } from './verdict.js'
+import { seedFrom } from './rng.js'
 
 export interface Resolution {
   event: GameEvent
-  /** Kept on the result so the verdict screen can reveal the hidden stats. */
   roster: Roster
-  checks: CheckResult[]
+  verdicts: RoleVerdict[]
   chemistry: ChemistryResult
   /** 0-100. */
   score: number
   tier: Tier
   grid: string
+  /** False when the fallback adjudicator produced this rather than the narrator. */
+  judged: boolean
 }
 
-/** Half role fit, half the stat the event actually cares about. */
-const ROLE_FIT_SHARE = 0.5
 /**
- * Margin at which a check is fully won or fully lost, and the single lever over
- * how far apart ordinary and perfect play land. Raising it compresses the range:
- * shifting every dc moves the ceiling and the average together and so cannot
- * separate them. See scripts/autotune.ts.
+ * The fallback adjudicator.
+ *
+ * The real one is Claude, which knows who these people were. This is what runs
+ * when there is no key, no network, or the request failed - it must still
+ * produce a defensible verdict for every post, because a game that cannot
+ * resolve is worse than one resolved roughly.
+ *
+ * It judges from what the roster still authors by hand: traits, power tier,
+ * alignment and category. That is coarse, and it is meant to be: it is the
+ * difference between playable and broken, not a second opinion.
  */
-const MARGIN_BAND = 38
 
-function runCheck(check: Check, roster: Roster, isTwist: boolean): CheckResult {
+/** Traits that suggest a post's holder is equipped for a given demand. */
+const SUITED: Record<string, readonly string[]> = {
+  charisma: ['beloved', 'showman', 'demagogue', 'statesman'],
+  cunning: ['cunning', 'dealmaker', 'strategist', 'paranoid'],
+  integrity: ['statesman', 'beloved', 'loyalist'],
+  grit: ['soldier', 'warhawk', 'statesman', 'strategist'],
+  intellect: ['technocrat', 'strategist', 'banker'],
+  force: ['warhawk', 'soldier', 'demagogue'],
+}
+
+/** Traits that actively get in the way of a given demand. */
+const UNSUITED: Record<string, readonly string[]> = {
+  charisma: ['technocrat', 'liability'],
+  cunning: ['loyalist', 'liability'],
+  integrity: ['demagogue', 'scandal-magnet', 'cunning'],
+  grit: ['liability', 'scandal-magnet'],
+  intellect: ['liability', 'showman'],
+  force: ['technocrat', 'liability'],
+}
+
+const TIER_LIFT: Record<Politician['tier'], number> = {
+  titan: 1.4,
+  heavyweight: 0.7,
+  operator: 0,
+  flawed: -0.7,
+  liability: -1.4,
+}
+
+function judgeCheck(check: Check, roster: Roster, event: GameEvent): RoleVerdict {
   const p = roster[check.role]
-  const fit = roleScore(p.stats, check.role)
-  let biased = statScore(p.stats, check.stat_bias)
-  // The event punishes the stat rather than rewarding it: restraint over firepower.
-  if (check.invert) biased = 100 - biased
-  const value = ROLE_FIT_SHARE * fit + (1 - ROLE_FIT_SHARE) * biased
-  const margin = value - check.dc
+  const suited = (SUITED[check.demands] ?? []).filter((t) => p.traits.includes(t)).length
+  const unsuited = (UNSUITED[check.demands] ?? []).filter((t) => p.traits.includes(t)).length
+
+  // A crisis asking for restraint wants the opposite of the obvious fit.
+  let standing = check.invert ? unsuited - suited : suited - unsuited
+  standing += TIER_LIFT[p.tier]
+  // Furniture does not rise to an occasion, whatever the occasion asks.
+  if (p.category === 'object') standing -= 2.5
+
+  // A seeded nudge so identical trait sets do not always land identically,
+  // and so this stays deterministic for a given event and cabinet.
+  standing += seedFrom(`${event.id}:${check.role}:${p.id}:${check.demands}`).next() * 1.6 - 0.8
+
+  const verdict: Verdict =
+    standing >= 1.6 ? 'triumph' : standing >= 0.2 ? 'pass' : standing >= -1.4 ? 'fail' : 'disaster'
+
   return {
-    check,
     role: check.role,
-    politicianName: p.name,
-    value,
-    margin,
-    outcome: clamp((margin + MARGIN_BAND) / (2 * MARGIN_BAND), 0, 1),
-    passed: margin >= 0,
-    isTwist,
+    verdict,
+    reason: check.note ? `${p.name}, on ${check.note}.` : `${p.name} was asked for ${check.demands}.`,
+    weight: check.weight,
   }
 }
 
 export function resolveEvent(event: GameEvent, roster: Roster): Resolution {
-  const checks: CheckResult[] = [
-    ...event.checks.map((c) => runCheck(c, roster, false)),
-    runCheck(event.twist.check, roster, true),
-  ]
+  const verdicts = [...event.checks, event.twist.check].map((c) => judgeCheck(c, roster, event))
+  return assemble(event, roster, verdicts, false)
+}
 
-  let weighted = 0
-  let totalWeight = 0
-  for (const r of checks) {
-    const w = r.check.weight ?? 1
-    weighted += r.outcome * w
-    totalWeight += w
-  }
-  const base = totalWeight > 0 ? (weighted / totalWeight) * 100 : 50
-
+/**
+ * Build a Resolution from verdicts that came from somewhere else - the
+ * narrator's judgement - so scoring, chemistry, tiering and the share grid
+ * happen in exactly one place regardless of who did the judging.
+ */
+export function assemble(
+  event: GameEvent,
+  roster: Roster,
+  verdicts: RoleVerdict[],
+  judged: boolean,
+): Resolution {
   const chem = chemistry(roster)
-  const score = clamp(base + chem.total, 0, 100)
-
+  const score = scoreFrom(verdicts, chem.total)
   return {
     event,
     roster,
-    checks,
+    verdicts,
     chemistry: chem,
     score,
     tier: tierFor(score),
-    grid: shareGrid(checks),
+    grid: shareGrid(verdicts),
+    judged,
   }
 }
 
-export function tierFor(score: number): Tier {
-  if (score < 20) return 'Catastrophe'
-  if (score < 40) return 'Debacle'
-  if (score < 60) return 'Muddled Through'
-  if (score < 80) return 'Triumph'
-  return 'Legendary'
+/** The posts this crisis actually tested, in cabinet order. */
+export function testedRoles(event: GameEvent): Role[] {
+  const tested = new Set([...event.checks, event.twist.check].map((c) => c.role))
+  return ROLES.filter((r) => tested.has(r))
 }
 
-/** One square per role, in draft order. Roles the event never tested go blank. */
-export function shareGrid(checks: CheckResult[]): string {
-  return ROLES.map((role) => {
-    const forRole = checks.filter((c) => c.role === role)
-    if (forRole.length === 0) return '⬜'
-    const avg = forRole.reduce((s, c) => s + c.outcome, 0) / forRole.length
-    if (avg >= 0.66) return '🟩'
-    if (avg >= 0.33) return '🟨'
-    return '🟥'
-  }).join('')
-}
+export type { Tier, RoleVerdict, Verdict }

@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EVENTS, FIGURES } from './data.js'
 import { CandidateCard, Icon, ROLE_LABEL, SlotStrip } from './components.js'
 import { DeskAside, Masthead } from './Desk.js'
 import { narrate } from './narrate.js'
 import type { Beat } from './narrate.js'
-import { fetchNarration } from './narrateRemote.js'
+import { fetchJudgement } from './narrateRemote.js'
+import type { Judged } from './narrateRemote.js'
 import { EVENT_LOCATIONS } from './eventLocations.js'
 import { clearRun, isDaily, linkTo, loadRun, runFromUrl, saveRun } from './session.js'
 import type { RunRef, SavedPhase } from './session.js'
@@ -13,21 +14,21 @@ import type { DraftState } from '../engine/draft.js'
 import { applyAction, replayDraft } from '../engine/replay.js'
 import type { DraftAction } from '../engine/replay.js'
 import { createRun, randomSeed, todayKey } from '../engine/run.js'
-import { resolveEvent } from '../engine/resolve.js'
+import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
-import { roleScore } from '../engine/score.js'
-import { ROLES, STAT_ABBR, STATS } from '../engine/types.js'
+import type { RoleVerdict } from '../engine/verdict.js'
+import { ROLES } from '../engine/types.js'
 import type { Role } from '../engine/types.js'
 
 type Phase = SavedPhase | 'choose'
 
 /** A link beats a save: someone opening a shared game should get that game. */
-function openingRun(): { ref: RunRef; actions: DraftAction[]; phase: Phase } {
+function openingRun(): { ref: RunRef; actions: DraftAction[]; phase: Phase; verdicts?: RoleVerdict[] } {
   const shared = runFromUrl(window.location.search)
   if (shared) return { ref: shared, actions: [], phase: 'briefing' }
 
   const saved = loadRun()
-  if (saved) return { ref: { seed: saved.seed, eventId: saved.eventId }, actions: saved.actions, phase: saved.phase }
+  if (saved) return { ref: { seed: saved.seed, eventId: saved.eventId }, actions: saved.actions, phase: saved.phase, verdicts: saved.verdicts }
 
   return { ref: { seed: todayKey(), eventId: null }, actions: [], phase: 'briefing' }
 }
@@ -38,6 +39,8 @@ export default function App() {
   const [phase, setPhase] = useState<Phase>(opening.phase)
   // The log is the saved game. Draft state is rebuilt from it, never stored.
   const [actions, setActions] = useState<DraftAction[]>(opening.actions)
+  // Set once the adjudicator has judged, and saved with the run.
+  const [verdicts, setVerdicts] = useState<RoleVerdict[] | null>(opening.verdicts ?? null)
 
   const run = useMemo(() => createRun(ref.seed, EVENTS, ref.eventId), [ref])
   const daily = isDaily(ref)
@@ -51,10 +54,14 @@ export default function App() {
     () => (phase === 'briefing' || phase === 'choose' ? null : replayDraft(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)),
     [ref, actions, phase],
   )
-  const result = useMemo(
-    () => (draft && isDraftComplete(draft) ? resolveEvent(run.event, finishDraft(draft)) : null),
-    [draft, run.event],
-  )
+  const result = useMemo(() => {
+    if (!draft || !isDraftComplete(draft)) return null
+    const roster = finishDraft(draft)
+    // The fallback adjudicator runs first so a run is always complete and
+    // scored; a judgement, when one arrives, replaces its verdicts and is
+    // rescored through the same aggregation.
+    return verdicts ? assemble(run.event, roster, verdicts, true) : resolveEvent(run.event, roster)
+  }, [draft, run.event, verdicts])
 
   // A save that cannot be replayed is a save that would resume the wrong game.
   const broken = phase !== 'briefing' && phase !== 'choose' && draft === null
@@ -62,8 +69,8 @@ export default function App() {
   useEffect(() => {
     if (broken) return
     if (phase === 'briefing' && actions.length === 0) clearRun()
-    else saveRun({ ...ref, actions, phase: phase === 'choose' ? 'briefing' : phase })
-  }, [ref, actions, phase, broken])
+    else saveRun({ ...ref, actions, phase: phase === 'choose' ? 'briefing' : phase, ...(verdicts ? { verdicts } : {}) })
+  }, [ref, actions, phase, verdicts, broken])
 
   function act(action: DraftAction) {
     if (!draft || draft.endedBy) return
@@ -75,20 +82,25 @@ export default function App() {
 
     const next = applyAction(replayDraft(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)!, action)
     setActions([...actions, action])
+    setVerdicts(null)
     if (next.endedBy) setPhase('gameover')
     else if (isDraftComplete(next)) setPhase('sim')
   }
 
+  // Stable identity: this lands in a fetching effect's dependencies.
+  const onJudged = useCallback((judged: Judged) => setVerdicts(judged.resolution.verdicts), [])
+
   function startRun(next: RunRef) {
     setRef(next)
     setActions([])
+    setVerdicts(null)
     setPhase('briefing')
     // Keep the address bar honest: it should always name the game on screen.
     window.history.replaceState(null, '', next.eventId ? linkTo(next) : window.location.pathname)
   }
 
   return (
-    <div className="app">
+    <div className={`app app-${phase}`}>
       <Masthead isDaily={daily} seed={ref.seed} />
       <main className="desk">
       <section className={`pinboard phase-${phase}`} aria-label="Cabinet pinboard">
@@ -122,7 +134,7 @@ export default function App() {
       )}
 
       {phase === 'sim' && result && (
-        <Sim result={result} onDone={() => setPhase('verdict')} />
+        <Sim result={result} onJudged={onJudged} onDone={() => setPhase('verdict')} />
       )}
 
       {phase === 'verdict' && result && (
@@ -286,7 +298,11 @@ function GameOver({
  * this screen exists: without the faces, a beat is an anonymous sentence and
  * skipping to the end costs the player nothing.
  */
-function Sim({ result, onDone }: { result: Resolution; onDone: () => void }) {
+function Sim({ result, onJudged, onDone }: {
+  result: Resolution
+  onJudged: (judged: Judged) => void
+  onDone: () => void
+}) {
   const fallback = useMemo(() => narrate(result), [result])
   const [written, setWritten] = useState<Beat[] | null>(null)
   const [waiting, setWaiting] = useState(true)
@@ -294,22 +310,44 @@ function Sim({ result, onDone }: { result: Resolution; onDone: () => void }) {
   const newest = useRef<HTMLLIElement>(null)
 
   /**
-   * The written story is fetched the moment this screen appears, while the
-   * player is still reading the opening beat. Most of the wait is spent behind
-   * something worth looking at, and if it never arrives the templated version
-   * was on screen the whole time anyway.
+   * The judgement is fetched the moment this screen appears, while the player
+   * is still reading the opening beat, so most of the wait sits behind
+   * something worth looking at. If it never arrives, the fallback adjudicator
+   * has already produced a complete scored run and the player loses only the
+   * quality of the account.
+   */
+  /**
+   * Judging costs money, so it must happen once per run and no more.
+   *
+   * Two things made that harder than it looks. onJudged's identity changed on
+   * every render, so the effect re-ran constantly and billed one game
+   * thirty-two times. Guarding that with a ref then broke it the other way,
+   * because StrictMode aborts the first run of an effect and the ref blocked
+   * the second, so nothing was ever fetched.
+   *
+   * The fix is to need no guard: onJudged is stable, and the resolution object
+   * changes exactly once, when the judgement replaces it - at which point
+   * result.judged is true and there is nothing left to ask for.
    */
   useEffect(() => {
+    if (result.judged) {
+      setWaiting(false)
+      return
+    }
+
     const abort = new AbortController()
-    fetchNarration(result, abort.signal).then((beats) => {
+    fetchJudgement(result, abort.signal).then((judged) => {
       if (abort.signal.aborted) return
       // Swapping under the player would rewrite a beat they already read, so a
       // late arrival is only taken while they are still on the first one.
-      if (beats) setWritten((current) => current ?? beats)
+      if (judged) {
+        setWritten((current) => current ?? judged.beats)
+        onJudged(judged)
+      }
       setWaiting(false)
     })
     return () => abort.abort()
-  }, [result])
+  }, [result, onJudged])
 
   const beats = written ?? fallback
   const finished = shown >= beats.length
@@ -318,8 +356,16 @@ function Sim({ result, onDone }: { result: Resolution; onDone: () => void }) {
   const pending = waiting && written === null && shown === 1
 
   // Move focus to each new beat so a screen reader hears it and a keyboard
-  // player is left next to the button they just pressed.
-  useEffect(() => { if (shown > 1) newest.current?.focus() }, [shown])
+  // player is left next to the button they just pressed, and bring it into
+  // view rather than leaving the player to hunt for the line that just landed.
+  useEffect(() => {
+    if (shown <= 1) return
+    const el = newest.current
+    if (!el) return
+    el.focus({ preventScroll: true })
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({ block: 'center', behavior: still ? 'auto' : 'smooth' })
+  }, [shown])
 
   return (
     <div className="board-layout">
@@ -406,34 +452,26 @@ function Verdict({
         <div className="score">{Math.round(result.score)} / 100</div>
       </div>
 
-      <div className="panel mt-s table-panel">
-        <div className="label">What each of them actually was</div>
-        <table className="breakdown">
-          <thead>
-            <tr>
-              <th>Role</th>
-              <th>Figure</th>
-              {STATS.map((s) => <th key={s} style={{ textAlign: 'right' }}>{STAT_ABBR[s]}</th>)}
-              <th style={{ textAlign: 'right' }}>Fit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ROLES.map((role) => {
-              const checks = result.checks.filter((c) => c.role === role)
-              const p = checks[0]
-              return (
-                <tr key={role}>
-                  <td>{ROLE_LABEL[role]}</td>
-                  <td className={p ? (p.passed ? 'pass' : 'fail') : ''}>{result.roster[role].name}</td>
-                  {STATS.map((s) => (
-                    <td className="num" key={s}>{result.roster[role].stats[s]}</td>
-                  ))}
-                  <td className="num">{Math.round(roleScore(result.roster[role].stats, role))}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+      <div className="panel mt-s">
+        <div className="label">{result.judged ? 'How each of them handled it' : 'How each of them handled it · no adjudicator, so this is a rough reading'}</div>
+        <ul className="verdict-list">
+          {ROLES.map((role) => {
+            const v = result.verdicts.find((x) => x.role === role)
+            return (
+              <li key={role}>
+                <span className={`verdict-mark verdict-${v?.verdict ?? 'none'}`} aria-hidden="true" />
+                <span className="verdict-body">
+                  <span className="verdict-head">
+                    <span className="verdict-who">{result.roster[role].name}</span>
+                    <span className="verdict-role">{ROLE_LABEL[role]}</span>
+                  </span>
+                  <span className="verdict-reason">{v?.reason ?? 'This crisis never tested them.'}</span>
+                </span>
+                <span className={`verdict-word verdict-${v?.verdict ?? 'none'}`}>{v?.verdict ?? '—'}</span>
+              </li>
+            )
+          })}
+        </ul>
       </div>
 
       {(result.chemistry.effects.length > 0 || result.chemistry.coup) && (

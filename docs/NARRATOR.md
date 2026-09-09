@@ -1,7 +1,24 @@
-# The narrator
+# The adjudicator
 
-The resolution story is written per game by Claude, given the five figures the
-player actually appointed and how each of their checks went.
+Claude both judges and narrates a run: given the five figures the player
+appointed and what the crisis asked of each post, it returns one verdict per
+post - triumph, pass, fail or disaster - with a reason, plus the story.
+
+Figures carry no stats. The whole of what a figure contributes is their bio,
+office, era, traits and power tier, so the bio is now load-bearing content
+rather than flavour: it is the evidence the verdict rests on.
+
+## What is judged, and what is not
+
+The model judges. It does not score. Turning five verdicts into a number, a
+tier and a share grid happens in `src/engine/verdict.ts`, because that part
+has to be the same for everyone, has to be tunable, and contains no judgement
+worth delegating. Chemistry, rivalries and the coup also stay in code - they
+never depended on the numbers.
+
+A side effect worth knowing: five triumphs now score exactly 100. Under the old
+numeric scoring the top tier came out at 0.0-0.1% across every event, because
+the stat budgets compressed every result toward the middle.
 
 ## Why it is not pre-generated
 
@@ -39,17 +56,21 @@ environment variables. `ANTHROPIC_MODEL` is optional and defaults to
 
 ## When it fails
 
-Every failure falls back to the templated narrator in `src/app/narrate.ts`, so
-the game is fully playable with no key, no network, a rate limit, or a timeout.
-The player sees a shorter, more generic story and nothing else changes. This is
-why the templates stay in the build rather than being deleted.
+Two fallbacks, both kept in the build for this reason rather than as dead code:
+`resolveEvent` in `src/engine/resolve.ts` adjudicates from traits, power tier
+and category, and `src/app/narrate.ts` narrates from templates. With no key,
+no network, a rate limit or a timeout the game still produces a complete,
+scored, shareable run - a blunter one, and the verdict screen says so.
 
 Failure paths verified: no key (503), malformed or oversized body (400), wrong
 method (405), and a request that never returns (25s client timeout).
 
 ## Cost and latency
 
-One call per completed game. Measured on the Suez scenario:
+One call per completed game. In development React StrictMode deliberately runs
+the effect twice, so you will see two; production makes one.
+
+Measured on the Suez scenario:
 
 | Model | Latency | Input / Output |
 | --- | --- | --- |

@@ -36,7 +36,7 @@ h1, h2, h3 { text-wrap: balance; }
 .help-sheet p:last-child { margin-bottom: 0; }
 .board-stage { display: grid; grid-template-columns: minmax(0, 1fr) 227px; align-items: start; gap: 30px; }
 .board-main { min-width: 0; }
-.pinboard { position: relative; min-width: 0; padding: 28px 24px 23px; border: 14px solid #8c6648; border-top-color: #ad8660; border-left-color: #aa8059; border-right-color: #745037; border-bottom-color: #7d5539; border-radius: 5px; background-color: #bc9361; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.52' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%236f4724' opacity='.30' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); box-shadow: inset 1px 3px 9px #452d3180, 0 3px 2px #5d432b5c, 6px 17px 28px #4e3a3a2e, 1px 30px 55px #6951311a; }
+.pinboard { position: relative; min-width: 0; padding: 28px 24px 23px; border: 14px solid #8c6648; border-top-color: #ad8660; border-left-color: #aa8059; border-right-color: #745037; border-bottom-color: #7d5539; border-radius: 5px; background-color: #bc9361; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.52' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%236f4724' opacity='.30' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); box-shadow: inset 1px 3px 9px #452d3180, 0 4px 3px #5d432b6b, 8px 20px 30px #4c37374a, 4px 40px 60px #5d452f38, 2px 70px 110px #6951312e; }
 .board-screw { position: absolute; height: 7px; width: 7px; border-radius: 50%; background: linear-gradient(125deg, #d0b58b 43%, #5a452f 45% 57%, #b79665 59%); box-shadow: 0 1px 2px #432c28; }
 .screw-tl { top: -10px; left: -10px; }.screw-tr { top: -10px; right: -10px; }.screw-bl { bottom: -10px; left: -10px; }.screw-br { bottom: -10px; right: -10px; }
 .board-layout { display: grid; grid-template-columns: 164px minmax(0, 1fr); gap: 24px; }
@@ -80,15 +80,15 @@ h1, h2, h3 { text-wrap: balance; }
 .pushpin::after { content: ''; position: absolute; left: 8px; top: 8px; width: 1px; height: 5px; background: #684136; transform: rotate(-35deg); z-index: -1; }
 .portrait { display: block; width: 100%; height: 125px; overflow: hidden; background: #d1c8ae; }
 .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 10%; filter: grayscale(1) sepia(.2) contrast(.94); mix-blend-mode: multiply; }
-.portrait-wildcard img, .portrait-object img { object-fit: contain; object-position: center; }
+.portrait-wildcard img, .portrait-object img { object-position: center top; }
 .portrait-small { width: 31px; height: 40px; flex-shrink: 0; border: 2px solid #fff9ee; box-shadow: 1px 2px 2px #55422b29; }
 .portrait-fallback { display: flex; align-items: center; flex-direction: column; height: 100%; color: #8f8c7c; font-size: 8px; }.portrait-fallback svg { flex: 1; min-height: 0; width: 70%; }.portrait-fallback > span { padding: 2px 0; }
 .candidate-body { padding: 10px 2px 0; display: flex; flex-direction: column; gap: 5px; }
 .candidate-name { font-family: var(--typewriter); font-size: 16px; line-height: 1.16; overflow-wrap: anywhere; }
 .candidate-office { font-size: 10px; line-height: 1.4; color: #696859; }
 .candidate-bio { font-size: 12px; line-height: 1.45; margin-top: 3px; color: #4f5347; }
-.candidate-footer { margin-top: auto; padding: 9px 8px 6px 11px; display: flex; gap: 3px; align-items: end; }
-.traits { font-size: 9px; color: #72705d; line-height: 1.5; flex: 1; }
+.candidate-footer { margin-top: auto; padding: 9px 8px 6px 11px; display: flex; gap: 3px; align-items: end; justify-content: flex-end; }
+
 .bench-btn { display: grid; place-items: center; align-self: end; height: 27px; min-width: 27px; padding: 3px; border: 0; background: transparent; color: #696655; }
 .bench-btn:hover:not(:disabled) { color: var(--red); background: #e9dfca; }
 .selected-mark { position: absolute; right: 13px; top: 13px; width: 23px; height: 23px; background: var(--green); color: #f5f0e0; display: grid; place-items: center; border-radius: 50%; }
@@ -139,6 +139,9 @@ h1, h2, h3 { text-wrap: balance; }
 .beat.pending { height: 52px; background: #f7f3e71c; border: 0; box-shadow: none; padding: 0; }
 .slot.speaking { box-shadow: 2px 3px 5px #4f361d30, 0 0 0 2px var(--red); transform: rotate(0) translateY(-2px); }
 .sim-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+/* The story grows a beat at a time, so its controls ride the bottom of the
+   viewport instead of walking off the end of a lengthening board. */
+.phase-sim .sim-actions { flex-shrink: 0; }
 /* The crisis picker: ten files pinned in a column, one per scenario. */
 .crisis-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .crisis { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 13px 15px; border: 0; background: var(--paper); box-shadow: 2px 4px 7px #5c3c282f; }
@@ -154,23 +157,76 @@ h1, h2, h3 { text-wrap: balance; }
 .verdict { text-align: center; padding: 32px 20px; }.verdict .tier { font: 35px var(--typewriter); margin: 13px 0 8px; }.verdict .score { color: #676451; font-size: 13px; font-variant-numeric: tabular-nums; }.grid-squares { font-size: 30px; letter-spacing: 5px; margin: 18px 0; }.tier-Catastrophe, .tier-Debacle { color: var(--bad); }.tier-Triumph, .tier-Legendary { color: var(--good); }
 .table-panel { overflow-x: auto; }table.breakdown { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }table.breakdown th { text-align: left; font-size: 9px; font-weight: 500; color: #64624f; padding: 7px; }table.breakdown td { padding: 9px 7px; border-top: 1px solid #d4cfbb; }table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }.pass { color: var(--good); }.fail { color: var(--bad); }
 .gameover { text-align: center; padding: 80px 30px; margin-top: 50px; }.gameover .stamp { font-family: var(--typewriter); color: var(--red); }.gameover h1 { font: 36px var(--typewriter); margin: 28px 0 20px; }.gameover .said { max-width: 34em; margin: auto; color: #625e4c; }.copy-fallback { background: var(--paper); padding: 15px; font-size: 12px; }.copy-fallback > span { display: block; margin-top: 8px; user-select: all; }
-@media (min-width: 1450px) { .portrait { height: 145px; }.portrait-small { height: 40px; }.candidate-bio { font-size: 11px; }.candidate-name { font-size: 18px; }.candidate-office { font-size: 10px; }.traits { font-size: 9px; }.slot { min-height: 106px; }.board-layout { grid-template-columns: 183px minmax(0, 1fr); gap: 28px; }.role-label { font-size: 13px; }.rail-heading { font-size: 18px; } }
-@media (max-width: 1200px) { .app { padding: 25px 25px; }.board-stage { grid-template-columns: minmax(0, 1fr) 187px; gap: 20px; }.desk-aside { padding-left: 18px; }.pinboard { padding: 24px 19px 20px; border-width: 12px; }.board-layout { grid-template-columns: 136px minmax(0, 1fr); gap: 18px; }.cabinet-rail { padding-right: 15px; }.rail-heading { font-size: 14px; }.candidate-grid { gap: 23px 12px; }.candidate-name { font-size: 14px; }.portrait { height: 110px; }.portrait-small { height: 35px; width: 28px; }.candidate-select { padding: 7px 7px 0; }.candidate-body { padding-top: 9px; }.candidate-bio { font-size: 9px; }.traits { font-size: 7px; }.candidate-footer { padding-left: 9px; }.desk-note { width: 175px; }.desk-note p { font-size: 24px; }.desk-memo { padding: 25px 16px 16px; }.desk-memo h3 { font-size: 19px; }.confidential-stamp { position: static; display: inline-block; margin-top: 22px; }.briefing-paper { padding: 27px 25px 20px; }.slot { min-height: 99px; }.slots { gap: 18px; }.role-label { font-size: 11px; }.board-bottom-note { flex-wrap: wrap; gap: 3px; }.draft-heading h2 { font-size: 18px; }.round-counter { font-size: 9px; } }
-@media (max-width: 1000px) and (min-width: 741px) { .board-stage { grid-template-columns: minmax(0, 1fr); }.desk-aside { display: flex; justify-content: center; gap: 80px; padding: 26px 4px 6px; margin-top: 22px; border-left: 0; border-top: 1px solid #7354366b; }.desk-memo { width: 290px; }.desk-note { margin: 15px 0 0; }.candidate-bio { font-size: 11px; }.candidate-name { font-size: 17px; }.candidate-office { font-size: 10px; }.traits { font-size: 9px; }.portrait { height: 135px; }.portrait-small { height: 38px; }.board-layout { grid-template-columns: 155px minmax(0, 1fr); }.briefing-paper { min-height: 470px; }.confidential-stamp { position: absolute; }.desk-footer { margin-top: 15px; } }
+@media (min-width: 1450px) { .portrait { height: 145px; }.portrait-small { height: 40px; }.candidate-bio { font-size: 11px; }.candidate-name { font-size: 18px; }.candidate-office { font-size: 10px; }.slot { min-height: 106px; }.board-layout { grid-template-columns: 183px minmax(0, 1fr); gap: 28px; }.role-label { font-size: 13px; }.rail-heading { font-size: 18px; } }
+@media (max-width: 1200px) { .app { padding: 25px 25px; }.board-stage { grid-template-columns: minmax(0, 1fr) 187px; gap: 20px; }.desk-aside { padding-left: 18px; }.pinboard { padding: 24px 19px 20px; border-width: 12px; }.board-layout { grid-template-columns: 136px minmax(0, 1fr); gap: 18px; }.cabinet-rail { padding-right: 15px; }.rail-heading { font-size: 14px; }.candidate-grid { gap: 23px 12px; }.candidate-name { font-size: 14px; }.portrait { height: 110px; }.portrait-small { height: 35px; width: 28px; }.candidate-select { padding: 7px 7px 0; }.candidate-body { padding-top: 9px; }.candidate-bio { font-size: 9px; }.candidate-footer { padding-left: 9px; }.desk-note { width: 175px; }.desk-note p { font-size: 24px; }.desk-memo { padding: 25px 16px 16px; }.desk-memo h3 { font-size: 19px; }.confidential-stamp { position: static; display: inline-block; margin-top: 22px; }.briefing-paper { padding: 27px 25px 20px; }.slot { min-height: 99px; }.slots { gap: 18px; }.role-label { font-size: 11px; }.board-bottom-note { flex-wrap: wrap; gap: 3px; }.draft-heading h2 { font-size: 18px; }.round-counter { font-size: 9px; } }
+@media (max-width: 1000px) and (min-width: 741px) { .board-stage { grid-template-columns: minmax(0, 1fr); }.desk-aside { display: flex; justify-content: center; gap: 80px; padding: 26px 4px 6px; margin-top: 22px; border-left: 0; border-top: 1px solid #7354366b; }.desk-memo { width: 290px; }.desk-note { margin: 15px 0 0; }.candidate-bio { font-size: 11px; }.candidate-name { font-size: 17px; }.candidate-office { font-size: 10px; }.portrait { height: 135px; }.portrait-small { height: 38px; }.board-layout { grid-template-columns: 155px minmax(0, 1fr); }.briefing-paper { min-height: 470px; }.confidential-stamp { position: absolute; }.desk-footer { margin-top: 15px; } }
 @media (max-width: 740px) {
   .app { padding: 18px 12px 20px; }.masthead { grid-template-columns: 1fr auto; gap: 12px; margin: 0 7px 24px; }.edition { display: none; }.wordmark { text-align: left; }.wordmark h1 { font-size: 43px; margin: 5px 0 3px; }.wordmark p { font-size: 9px; letter-spacing: .025em; }.help-button { font-size: 11px; }.help-sheet { margin: 0 0 20px; padding: 20px; font-size: 12px; }
   .board-stage { display: block; }.pinboard { padding: 15px 13px 18px; border-width: 9px; }.board-screw { width: 5px; height: 5px; }.screw-tl, .screw-tr { top: -7px; }.screw-bl, .screw-br { bottom: -7px; }.screw-tl, .screw-bl { left: -7px; }.screw-tr, .screw-br { right: -7px; }
   .board-layout { display: flex; flex-direction: column; gap: 19px; }.cabinet-rail { position: sticky; top: 0; z-index: 10; padding: 9px 0 10px; border: 0; margin: -10px -4px 0; background: #bc9361; box-shadow: 0 7px 8px #78573314; }.rail-heading { font-size: 13px; text-align: left; margin: 0 3px 10px; }.slots { flex-direction: row; overflow-x: auto; gap: 10px; padding: 5px 3px 8px; scroll-snap-type: x proximity; }.slot { flex: 0 0 125px; min-height: 90px; scroll-snap-align: start; }.role-label { font-size: 11px; }.slot-prompt { font-size: 10px; }.rail-note { display: none; }
-  .draft-heading { align-items: flex-start; margin-bottom: 13px; }.draft-heading h2 { font-size: 20px; }.draft-heading p { font-size: 10px; }.draft-instruction { font-size: 10px; line-height: 1.5; padding: 7px 0; margin-bottom: 22px; }.candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 13px; }.portrait { height: clamp(115px, 30vw, 190px); }.portrait-small { height: 35px; }.candidate-name { font-size: 16px; }.candidate-office { font-size: 10px; }.candidate-bio { font-size: 11px; }.candidate-footer { padding-top: 10px; }.traits { font-size: 8px; }.bench-btn { min-width: 32px; height: 32px; }.candidate-select { padding: 8px 8px 0; }
+  .draft-heading { align-items: flex-start; margin-bottom: 13px; }.draft-heading h2 { font-size: 20px; }.draft-heading p { font-size: 10px; }.draft-instruction { font-size: 10px; line-height: 1.5; padding: 7px 0; margin-bottom: 22px; }.candidate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 13px; }.portrait { height: clamp(115px, 30vw, 190px); }.portrait-small { height: 35px; }.candidate-name { font-size: 16px; }.candidate-office { font-size: 10px; }.candidate-bio { font-size: 11px; }.candidate-footer { padding-top: 10px; }.bench-btn { min-width: 32px; height: 32px; }.candidate-select { padding: 8px 8px 0; }
   .draft-tools { gap: 8px; align-items: flex-start; margin-top: 25px; }.reshuffle-button { gap: 5px; padding: 10px 8px; }.reshuffle-button > span { padding-left: 4px; }.draft-tools p { font-size: 8px; padding-top: 5px; max-width: 128px; }.board-bottom-note { font-size: 9px; margin-top: 13px; gap: 5px; flex-direction: column; }
   .desk-aside { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 22px; padding: 22px 2px 4px; border-left: 0; border-top: 1px solid #7354366b; }.desk-memo { flex: 1 1 170px; min-width: 160px; max-width: 290px; }.desk-note { width: 158px; min-height: 182px; margin: 15px 0 0; padding: 24px 17px 12px; align-self: start; }.desk-note p { font-size: 22px; }.note-signature { font-size: 15px; }
   .briefing-area { padding: 0 4px; }.board-title { margin: 0 0 27px; }.board-title h2 { font-size: 24px; }.briefing-paper { padding: 26px 22px 22px; }.briefing-paper h3 { font-size: 30px; margin-top: 24px; }.dossier { font-size: 13px; }.hint { font-size: 12px; }.confidential-stamp { position: static; margin-top: 25px; font-size: 13px; }.brief-rules { font-size: 10px; }.board-handwriting { font-size: 22px; margin-top: 20px; }.begin-button { width: 100%; justify-content: space-between; padding: 13px; }
   .desk-footer { margin-top: 24px; flex-direction: column; gap: 6px; font-size: 9px; text-align: center; }.desk-footer a { margin-left: 8px; }.phase-sim, .phase-verdict, .phase-gameover { padding: 20px 14px; min-height: 500px; }.panel { padding: 20px 16px; }.beat { font-size: 12px; padding: 16px; }.verdict .tier { font-size: 30px; }.gameover { margin-top: 25px; padding: 60px 20px; }.gameover h1 { font-size: 30px; }.gameover .said { font-size: 13px; }
 }
-@media (max-width: 380px) { .app { padding-left: 8px; padding-right: 8px; }.pinboard { padding-left: 10px; padding-right: 10px; }.candidate-grid { gap: 22px 10px; }.candidate-name { font-size: 14px; }.candidate-bio { font-size: 10px; }.candidate-office { font-size: 9px; }.traits { font-size: 7px; }.draft-heading h2 { font-size: 17px; }.round-counter { font-size: 8px; }.desk-aside { gap: 5px; }.desk-note { width: 147px; }.candidate-select { padding: 6px 6px 0; } }
+@media (max-width: 380px) { .app { padding-left: 8px; padding-right: 8px; }.pinboard { padding-left: 10px; padding-right: 10px; }.candidate-grid { gap: 22px 10px; }.candidate-name { font-size: 14px; }.candidate-bio { font-size: 10px; }.candidate-office { font-size: 9px; }.draft-heading h2 { font-size: 17px; }.round-counter { font-size: 8px; }.desk-aside { gap: 5px; }.desk-note { width: 147px; }.candidate-select { padding: 6px 6px 0; } }
+/* Once the cabinet is appointed the board is the whole screen: the wall does
+   not grow a beat at a time and the masthead steps aside, so the only thing
+   that moves is the paper the player is reading. */
+@media (min-width: 741px) {
+  .app-sim, .app-verdict { display: flex; flex-direction: column; height: 100svh; padding-top: 20px; padding-bottom: 20px; overflow: hidden; }
+  .app-sim .masthead, .app-sim .help-sheet, .app-sim .desk-footer,
+  .app-verdict .masthead, .app-verdict .help-sheet, .app-verdict .desk-footer { display: none; }
+  .app-sim .desk, .app-verdict .desk { flex: 1; min-height: 0; display: flex; }
+  .app-sim .pinboard, .app-verdict .pinboard { flex: 1; min-height: 0; padding: 24px 22px 20px; }
+  /* align-items: start is what lets the aside sit at the top of a growing
+     board; inside a fixed frame the columns have to stretch instead, or the
+     paper has no height to shrink into. */
+  .app-sim .board-stage, .app-verdict .board-stage { align-items: stretch; }
+  .app-sim .board-stage, .app-sim .board-main, .app-sim .board-layout,
+  .app-verdict .board-stage, .app-verdict .board-main { height: 100%; min-height: 0; }
+  .app-sim .cabinet-rail, .app-sim .desk-aside,
+  .app-verdict .desk-aside { overflow-y: auto; scrollbar-width: none; }
+  .app-sim .cabinet-rail::-webkit-scrollbar, .app-sim .desk-aside::-webkit-scrollbar,
+  .app-verdict .desk-aside::-webkit-scrollbar { display: none; }
+  /* Five seats and a scrolling story share one screen, so the rail tightens
+     rather than clipping its last card. */
+  .app-sim .slots { gap: 11px; }
+  .app-sim .slot { min-height: 78px; }
+  .app-sim .rail-note { margin-top: 15px; font-size: 17px; }
+  .app-sim .draft-area { display: flex; flex-direction: column; min-height: 0; }
+  .app-sim .beats { flex: 1; min-height: 0; overflow-y: auto; padding-right: 10px; margin-right: -4px; overscroll-behavior: contain; }
+  /* Blank slips only existed to stop the board growing; inside a fixed frame
+     they would just pad the scroller with dead air. */
+  .app-sim .beat.pending { display: none; }
+  /* The verdict is a stack of panels rather than one list, so the column it
+     sits in is the thing that scrolls. */
+  .app-verdict .board-main { overflow-y: auto; padding-right: 10px; overscroll-behavior: contain; }
+  .app-verdict .phase-verdict { padding: 22px; }
+}
+
 @media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; }*, *::before, *::after { animation: none !important; transition: none !important; } }
 
 @media (max-width: 1000px) and (min-width: 741px) { .wall-map { flex: 0 0 230px; align-self: start; margin: 0; } }
 @media (max-width: 740px) { .wall-map { flex: 1 1 155px; max-width: 250px; align-self: start; margin: 8px 0 20px; padding: 22px 12px 12px; }.wall-map h2 { font-size: 20px; margin-bottom: 14px; }.wall-map figcaption { font-size: 17px; }.event-map { height: 97px; }.desk-aside { gap: 20px; padding: 22px 4px 4px; }.desk-note { flex: 1 1 145px; max-width: 205px; }.desk-memo { max-width: none; } }
 
 .event-circle { color: #a83828; stroke: currentColor; stroke-width: 2.1; fill: none; }.map-event-year { margin: 5px 0 0; text-align: center; font-size: 9px; color: #69634e; line-height: 1.5; }
+
+/* The verdict: five judgements with the reason each one was given. */
+.verdict-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; }
+.verdict-list li { display: flex; align-items: flex-start; gap: 12px; padding: 13px 2px; border-top: 1px solid #d4cfbb; }
+.verdict-list li:first-child { border-top: 0; }
+.verdict-mark { flex-shrink: 0; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #b4ad96; }
+.verdict-body { flex: 1; min-width: 0; }
+.verdict-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+.verdict-who { font-weight: 650; font-size: 13px; }
+.verdict-role { font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: #7c7660; }
+.verdict-reason { display: block; font-size: 11.5px; line-height: 1.6; color: #55523f; margin-top: 4px; }
+.verdict-word { flex-shrink: 0; font-family: var(--typewriter); font-size: 12px; letter-spacing: .04em; padding-top: 2px; }
+.verdict-triumph { color: var(--good); background: var(--good); }
+.verdict-pass { color: #5c7a52; background: #5c7a52; }
+.verdict-fail { color: #9a7038; background: #9a7038; }
+.verdict-disaster { color: var(--bad); background: var(--bad); }
+.verdict-none { color: #8d8874; background: #b4ad96; }
+.verdict-word.verdict-triumph, .verdict-word.verdict-pass, .verdict-word.verdict-fail, .verdict-word.verdict-disaster, .verdict-word.verdict-none { background: none; }
