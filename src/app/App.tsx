@@ -98,7 +98,7 @@ export default function App() {
       </section>
       <DeskAside event={run.event} showBriefing={phase === 'draft'} />
       </main>
-      <footer className="desk-footer"><span>A little history. A lot of bad decisions.</span><span>Politidle · an alternate-history game <a href="/portrait-credits.html" target="_blank" rel="noreferrer">Portrait credits</a></span></footer>
+      <footer className="desk-footer"><span>A little history. A lot of bad decisions.</span><span>Hell’s Cabinet · an alternate-history game <a href="/portrait-credits.html" target="_blank" rel="noreferrer">Portrait credits</a></span></footer>
     </div>
   )
 }
@@ -243,7 +243,7 @@ function Verdict({
   onDaily: () => void
 }) {
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
-  const share = `Politidle ${isDaily ? seed : 'free play'} — ${result.grid} · ${Math.round(result.score)} · ${result.tier.toUpperCase()}`
+  const share = `Hell’s Cabinet ${isDaily ? seed : 'free play'} — ${result.grid} · ${Math.round(result.score)} · ${result.tier.toUpperCase()}`
 
   async function copy() {
     try {

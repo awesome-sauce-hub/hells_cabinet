@@ -45,7 +45,7 @@ const reportSchema = z.object({
   clean: z.array(z.string()).describe('ids you would sign off as-is'),
 })
 
-const RUBRIC = `You are the reviewer on the content gate for Politidle, a satirical daily game.
+const RUBRIC = `You are the reviewer on the content gate for Hell’s Cabinet, a satirical daily game.
 
 The player is shown a historical or fictional figure - name and one line - and drafts
 them into one of five cabinet roles. Hidden stats then resolve a historical crisis.
