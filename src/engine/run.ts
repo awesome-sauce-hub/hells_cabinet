@@ -13,9 +13,18 @@ export interface RunSetup {
   event: GameEvent
 }
 
-export function createRun(seed: string, events: GameEvent[]): RunSetup {
+/**
+ * Pass an eventId to play a chosen crisis instead of the one the seed draws.
+ *
+ * The draw happens either way. The draft continues this same rng, so skipping
+ * the roll when the event is chosen would hand the same seed different
+ * candidates depending on how you arrived at it - and would quietly change
+ * every daily puzzle ever played.
+ */
+export function createRun(seed: string, events: GameEvent[], eventId?: string | null): RunSetup {
   const rng = seedFrom(seed)
-  const event = events[Math.floor(rng.next() * events.length)]!
+  const drawn = events[Math.floor(rng.next() * events.length)]!
+  const event = (eventId && events.find((e) => e.id === eventId)) || drawn
   return { seed, rng, event }
 }
 
@@ -28,9 +37,12 @@ export function todayKey(now = new Date()): string {
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
 }
 
-/** Free play still runs through a seed, so any run can be shared or replayed. */
+/**
+ * A fresh seed for a chosen crisis, so picking the same event twice does not
+ * deal the same six faces. Short enough to sit in a shareable link.
+ */
 export function randomSeed(): string {
-  return `free-${Math.random().toString(36).slice(2, 10)}`
+  return Math.random().toString(36).slice(2, 10)
 }
 
 export type { Politician }

@@ -139,6 +139,17 @@ h1, h2, h3 { text-wrap: balance; }
 .beat.pending { height: 52px; background: #f7f3e71c; border: 0; box-shadow: none; padding: 0; }
 .slot.speaking { box-shadow: 2px 3px 5px #4f361d30, 0 0 0 2px var(--red); transform: rotate(0) translateY(-2px); }
 .sim-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+/* The crisis picker: ten files pinned in a column, one per scenario. */
+.crisis-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.crisis { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 13px 15px; border: 0; background: var(--paper); box-shadow: 2px 4px 7px #5c3c282f; }
+.crisis:hover:not(:disabled) { background: #fffbed; transform: translateY(-2px); box-shadow: 2px 7px 10px #5c3c2833; }
+.crisis-year { font-family: var(--typewriter); font-size: 13px; color: var(--red); font-variant-numeric: tabular-nums; flex-shrink: 0; width: 34px; }
+.crisis-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.crisis-title { font-family: var(--typewriter); font-size: 15px; line-height: 1.2; }
+.crisis-where { font-size: 10px; color: #6a6552; }
+.crisis-go { display: grid; color: #8d8874; }
+.crisis.current { outline: 2px solid var(--green); outline-offset: -2px; }
+@media (max-width: 740px) { .crisis-list { grid-template-columns: 1fr; } }
 .sim-actions .primary { display: inline-flex; gap: 8px; align-items: center; }
 .verdict { text-align: center; padding: 32px 20px; }.verdict .tier { font: 35px var(--typewriter); margin: 13px 0 8px; }.verdict .score { color: #676451; font-size: 13px; font-variant-numeric: tabular-nums; }.grid-squares { font-size: 30px; letter-spacing: 5px; margin: 18px 0; }.tier-Catastrophe, .tier-Debacle { color: var(--bad); }.tier-Triumph, .tier-Legendary { color: var(--good); }
 .table-panel { overflow-x: auto; }table.breakdown { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }table.breakdown th { text-align: left; font-size: 9px; font-weight: 500; color: #64624f; padding: 7px; }table.breakdown td { padding: 9px 7px; border-top: 1px solid #d4cfbb; }table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }.pass { color: var(--good); }.fail { color: var(--bad); }

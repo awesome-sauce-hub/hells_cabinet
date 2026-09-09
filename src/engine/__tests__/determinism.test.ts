@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { loadEvents, loadPoliticians } from '../content.js'
-import { randomDraft } from '../draft.js'
+import { randomDraft, startDraft } from '../draft.js'
 import { dailySeed, mulberry32, seedFrom, shuffle } from '../rng.js'
 import { resolveEvent } from '../resolve.js'
+import { createRun } from '../run.js'
 import { ROLES } from '../types.js'
 
 const politicians = loadPoliticians()
@@ -42,6 +43,24 @@ describe('determinism', () => {
     const input = Array.from({ length: 50 }, (_, i) => i)
     const out = shuffle(seedFrom('shuffle'), input)
     expect(out.slice().sort((a, b) => a - b)).toEqual(input)
+  })
+
+  it('deals the same candidates whether the crisis was drawn or chosen', () => {
+    // createRun consumes one roll to draw the event, and the draft continues
+    // that same rng. Skipping the roll when the event is chosen would give the
+    // same seed different pools, and would change every past daily puzzle.
+    for (const seed of ['2026-09-09', 'abc123', 'x']) {
+      const drawn = createRun(seed, events)
+      for (const event of events) {
+        const chosen = createRun(seed, events, event.id)
+        expect(chosen.event.id, seed).toBe(event.id)
+        expect(startDraft(chosen.rng, politicians).candidates.map((c) => c.id), seed)
+          .toEqual(startDraft(createRun(seed, events).rng, politicians).candidates.map((c) => c.id))
+      }
+      // An unknown id falls back to the drawn crisis rather than crashing.
+      expect(createRun(seed, events, 'no-such-event').event.id).toBe(drawn.event.id)
+      expect(createRun(seed, events, null).event.id).toBe(drawn.event.id)
+    }
   })
 
   it('never leaves a role unfilled or a politician double-drafted', () => {
