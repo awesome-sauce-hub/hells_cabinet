@@ -13,7 +13,9 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "review": "tsx scripts/review-content.ts",
-    "bench": "tsx scripts/model-bench.ts"
+    "bench": "tsx scripts/model-bench.ts",
+    "roster:export": "python3 scripts/authoring/roster_xlsx.py export",
+    "roster:import": "python3 scripts/authoring/roster_xlsx.py import && npm run validate"
   },
   "devDependencies": {
     "@types/node": "^26.5.0",

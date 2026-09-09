@@ -264,6 +264,7 @@ function ChooseEvent({ current, isDaily, onPick, onDaily }: {
         {EVENTS.map((event) => (
           <li key={event.id}>
             <button className={`crisis ${event.id === current ? 'current' : ''}`} onClick={() => onPick(event.id)}>
+              <span className="pushpin" aria-hidden="true" />
               <span className="crisis-year">{event.year}</span>
               <span className="crisis-body">
                 <span className="crisis-title">{event.title}</span>

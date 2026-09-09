@@ -144,7 +144,10 @@ h1, h2, h3 { text-wrap: balance; }
 .phase-sim .sim-actions { flex-shrink: 0; }
 /* The crisis picker: ten files pinned in a column, one per scenario. */
 .crisis-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.crisis { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 13px 15px; border: 0; background: var(--paper); box-shadow: 2px 4px 7px #5c3c282f; }
+/* Pinned like every other slip on the board: the pin sits over the year,
+   where a hand would put it on a filing card rather than through the title. */
+.crisis { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 13px 15px; border: 0; background: var(--paper); box-shadow: 2px 4px 7px #5c3c282f; }
+.crisis .pushpin { left: 26px; }
 .crisis:hover:not(:disabled) { background: #fffbed; transform: translateY(-2px); box-shadow: 2px 7px 10px #5c3c2833; }
 .crisis-year { font-family: var(--typewriter); font-size: 13px; color: var(--red); font-variant-numeric: tabular-nums; flex-shrink: 0; width: 34px; }
 .crisis-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
