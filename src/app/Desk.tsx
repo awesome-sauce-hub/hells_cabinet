@@ -1,0 +1,57 @@
+import { useState } from 'react'
+import type { GameEvent } from '../engine/types.js'
+import { Icon, ROLE_LABEL } from './components.js'
+import { EVENT_LOCATIONS, mapPoint } from './eventLocations.js'
+
+export function Masthead({ isDaily, seed }: { isDaily: boolean; seed: string }) {
+  const [help, setHelp] = useState(false)
+  return (
+    <>
+      <header className="masthead">
+        <div className="edition"><span className="edition-dot" />{isDaily ? 'The daily cabinet game' : 'An unscheduled cabinet meeting'}<span>{isDaily ? seed.split('-').reverse().join('.') : 'Free play'}</span></div>
+        <div className="wordmark"><h1>Politidle<span className="wordmark-dot">.</span></h1><p>Great power. Questionable personnel.</p></div>
+        <button className="help-button" onClick={() => setHelp(!help)} aria-expanded={help} aria-controls="how-to-play"><Icon name={help ? 'close' : 'help'} />How to play</button>
+      </header>
+      {help && <section className="help-sheet" id="how-to-play" aria-label="How to play"><h2>A quick briefing</h2><p>Read the crisis, then appoint one of six candidates to any vacant role. Drag their photo onto a role, or select a photo and then select a role. Keyboard players can use Tab and Enter or Space.</p><p>Each appointment brings six fresh candidates. You have one reshuffle and one individual replacement for the whole game. Fill all five roles to see how your cabinet handles the crisis.</p></section>}
+    </>
+  )
+}
+
+export function DeskAside({ event, showBriefing }: { event: GameEvent; showBriefing: boolean }) {
+  const location = EVENT_LOCATIONS[event.id]
+  return (
+    <aside className="desk-aside" aria-label="Map and briefing">
+      <figure className="wall-map">
+        <span className="pushpin" aria-hidden="true" />
+        <h2>On the map</h2>
+        <div className="map-plate">
+          <svg className="event-map" viewBox="0 0 504 218" role="img" aria-label={`${event.title}: ${location?.label ?? 'location not yet mapped'}`}>
+            <image href="/maps/world.svg" width="504" height="218" />
+            {location?.points.map((point, index) => {
+              const { x, y } = mapPoint(point)
+              return <g key={index} className="event-circle" transform={`translate(${x} ${y})`}>
+                <ellipse rx="14" ry="11" transform="rotate(-17)" /><ellipse rx="15.5" ry="10.5" transform="rotate(9)" opacity=".45" />
+                <circle r="2.4" fill="currentColor" stroke="none" />
+              </g>
+            })}
+          </svg>
+          <span className="map-compass" aria-hidden="true"><svg viewBox="0 0 40 48" fill="none"><path d="m20 9 5 14-5-3-5 3 5-14Z" fill="currentColor" /><path d="m20 35 5-12-5 3-5-3 5 12Z" stroke="currentColor" strokeWidth=".8"/><text x="20" y="6" fill="currentColor" fontSize="6" textAnchor="middle">N</text></svg></span>
+        </div>
+        <figcaption>{location?.label ?? 'Location not yet mapped'}</figcaption>
+        <p className="map-event-year">{event.year}{location?.note ? ` · ${location.note}` : ''}</p>
+      </figure>
+      {showBriefing ? (
+        <section className="desk-memo">
+          <span className="paperclip" aria-hidden="true" />
+          <h2><Icon name="file" size={17} /> The situation</h2>
+          <h3>{event.title}</h3>
+          <p className="memo-year">{event.year}</p>
+          <p>{event.dossier}</p>
+          <details><summary>Read your briefing</summary><p className="memo-hint">{event.briefing_hint}</p><p className="spotlight-copy">Under scrutiny: {event.spotlight.map((role) => ROLE_LABEL[role]).join(', ')}.</p></details>
+        </section>
+      ) : (
+        <div className="desk-note"><span className="tape" aria-hidden="true" /><p>Six candidates.<br />Five seats.<br />What could<br />possibly go wrong?</p><span className="note-signature">— the electorate</span></div>
+      )}
+    </aside>
+  )
+}

@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import type { CSSProperties } from 'react'
 import type { Politician, Role } from '../engine/types.js'
+import portraitSources from './portraits.json'
 
 export const ROLE_LABEL: Record<Role, string> = {
   President: 'President',
@@ -9,142 +11,102 @@ export const ROLE_LABEL: Record<Role, string> = {
   Treasurer: 'Treasurer',
 }
 
-/**
- * A name, and one line on what they did with their life. Nothing else reaches
- * the card - no stats, no strength rating, no traits, not even a badge saying
- * whether they are real. Anything sortable would collapse an event-first draft
- * into picking the best-looking row; a life has to be read and judged. Every
- * number behind the figure surfaces only in the verdict.
- */
-/** Two-letter monogram, standing in until portraits exist. */
-function initials(name: string): string {
-  const words = name
-    .replace(/^(a|an|the|de|von)\s+/i, '')
-    .split(/\s+/)
-    .filter((w) => /[a-z]/i.test(w))
-  if (words.length === 0) return '??'
-  // Single-word names ("MrBeast", "Cleopatra") need two letters of their own.
-  if (words.length === 1) return words[0]!.slice(0, 2).toUpperCase()
-  return words.slice(0, 2).map((w) => w[0]!.toUpperCase()).join('')
+export function Icon({ name, size = 18 }: { name: 'arrow' | 'shuffle' | 'check' | 'close' | 'help' | 'file' | 'pin'; size?: number }) {
+  const paths = {
+    arrow: <><path d="M4 12h15M13 6l6 6-6 6" /></>,
+    shuffle: <><path d="m17 3 4 4-4 4M3 17h3c5 0 7-10 12-10h3M3 7h3c2 0 3 1 4 3m4 4c1 2 2 3 4 3h3m-4-4 4 4-4 4" /></>,
+    check: <path d="m5 12 4 4L19 6" />,
+    close: <path d="m6 6 12 12M6 18 18 6" />,
+    help: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4m0 3h.01" /></>,
+    file: <><path d="M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 12h8m-8 4h6" /></>,
+    pin: <><path d="m15 3 6 6-4 1-3 4-1 4-7-7 4-1 4-3 1-4ZM3 21l6-6" /></>,
+  }
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>
 }
 
-export function CandidateCard({
-  figure,
-  selected,
-  onSelect,
-  onBench,
-  canBench,
-}: {
-  figure: Politician
-  selected: boolean
-  onSelect: () => void
-  onBench: () => void
-  canBench: boolean
-}) {
+export function Portrait({ figure, compact = false }: { figure: Politician; compact?: boolean }) {
+  const [failed, setFailed] = useState(false)
+  const src = (portraitSources as Record<string, string>)[figure.id]
   return (
-    <button
-      className={`card ${figure.category} ${selected ? 'selected' : ''}`}
-      draggable
-      onDragStart={(e) => {
-        e.dataTransfer.setData('text/plain', figure.id)
-        e.dataTransfer.effectAllowed = 'move'
-        onSelect()
-      }}
-      onClick={onSelect}
-      aria-pressed={selected}
-      aria-label={`Select ${figure.name}`}
-    >
-      <div className="mono" aria-hidden>{initials(figure.name)}</div>
-      {figure.category !== 'politician' && (
-        <span className="badge">{figure.category === 'object' ? 'OBJECT' : 'WILD'}</span>
-      )}
-      {canBench && (
-        <span
-          className="bench-btn"
-          role="button"
-          tabIndex={0}
-          title="Discard this candidate and draw a replacement"
-          onClick={(e) => { e.stopPropagation(); onBench() }}
-          onKeyDown={(e) => { if (e.key === 'Enter') { e.stopPropagation(); onBench() } }}
-        >
-          bench
+    <span className={`portrait portrait-${figure.category} ${compact ? 'portrait-small' : ''}`}>
+      {src && !failed ? (
+        <img src={src} alt={figure.name} draggable={false} onError={() => setFailed(true)} />
+      ) : (
+        <span className="portrait-fallback" role="img" aria-label={`Portrait unavailable for ${figure.name}`}>
+          <svg viewBox="0 0 120 130" fill="currentColor" aria-hidden="true"><circle cx="60" cy="40" r="23" /><path d="M16 125v-16c0-29 18-43 44-43s44 14 44 43v16z" /></svg>
+          {!compact && <span>Photo not on file</span>}
         </span>
       )}
-      <span className="body">
-        <span className="name">{figure.name}</span>
-        <span className="office">{figure.office} · {figure.era}</span>
-        <span className="bio">{figure.bio}</span>
-        <span className="traits">
-          {figure.traits.map((t) => (
-            <span className="trait" key={t}>{t}</span>
-          ))}
-        </span>
-      </span>
-    </button>
+    </span>
   )
 }
 
-/**
- * The five posts, doubling as drop targets. Dragging is the intended gesture;
- * tapping a card then tapping a post does the same thing, because drag events
- * do not exist on touch.
- */
-export function SlotStrip({
-  order,
-  picks,
-  armed,
-  onPlace,
-}: {
+/** Selection and dismissal are sibling buttons so both work with touch and keyboards. */
+export function CandidateCard({ figure, selected, onSelect, onDragSelect, onBench, canBench, index }: {
+  figure: Politician
+  selected: boolean
+  onSelect: () => void
+  onDragSelect: () => void
+  onBench: () => void
+  canBench: boolean
+  index: number
+}) {
+  return (
+    <article className={`candidate ${selected ? 'selected' : ''}`} style={{ '--tilt': `${[-1.4, 1, -0.8, 1.1, -1.2, 1.5][index]}deg` } as CSSProperties}>
+      <button className="candidate-select" draggable onDragStart={(e) => {
+        e.dataTransfer.setData('text/plain', figure.id)
+        e.dataTransfer.effectAllowed = 'move'
+        onDragSelect()
+      }} onClick={onSelect} aria-pressed={selected} aria-label={`Select ${figure.name}`} aria-describedby={`bio-${figure.id}`}>
+        <span className="pushpin" aria-hidden="true" />
+        <Portrait figure={figure} />
+        <span className="candidate-body">
+          <span className="candidate-name">{figure.name}</span>
+          <span className="candidate-office">{figure.office} · {figure.era}</span>
+          <span className="candidate-bio" id={`bio-${figure.id}`}>{figure.bio}</span>
+        </span>
+        {selected && <span className="selected-mark" aria-hidden="true"><Icon name="check" size={14} /></span>}
+      </button>
+      <div className="candidate-footer">
+        <span className="traits">{figure.traits.join(' · ')}</span>
+        <button className="bench-btn" disabled={!canBench} onClick={onBench} aria-label={`Bench ${figure.name}`} title={canBench ? 'Replace this candidate (one per game)' : 'Bench already used'}><Icon name="close" size={14} /></button>
+      </div>
+    </article>
+  )
+}
+
+export function SlotStrip({ order, picks, armed = false, selectedName, onPlace }: {
   order: readonly Role[]
   picks: Partial<Record<Role, Politician>>
-  /** True while a card is selected or being dragged, to light up the targets. */
-  armed: boolean
+  armed?: boolean
+  selectedName?: string
   onPlace?: (role: Role, figureId?: string) => void
 }) {
   const [over, setOver] = useState<Role | null>(null)
   return (
-    <div className="slots">
-      {order.map((role) => {
-        const picked = picks[role]
-        const open = !picked
-        const droppable = open && armed
-        const classes = [
-          'slot',
-          picked ? 'filled' : '',
-          droppable ? 'droppable' : '',
-          over === role && droppable ? 'over' : '',
-        ]
-          .filter(Boolean)
-          .join(' ')
-        return (
-          <div
-            className={classes}
-            key={role}
-            onDragOver={(e) => {
-              if (!open) return
-              e.preventDefault()
-              setOver(role)
-            }}
-            onDragLeave={() => setOver((r) => (r === role ? null : r))}
-            onDrop={(e) => {
-              e.preventDefault()
-              setOver(null)
-              if (open) onPlace?.(role, e.dataTransfer.getData('text/plain') || undefined)
-            }}
-            onClick={() => open && onPlace?.(role)}
-            role={droppable ? 'button' : undefined}
-            tabIndex={droppable ? 0 : undefined}
-            onKeyDown={(e) => {
-              if (droppable && (e.key === 'Enter' || e.key === ' ')) onPlace?.(role)
-            }}
-          >
-            <div className="label">{ROLE_LABEL[role]}</div>
-            <div className={`who ${picked ? '' : 'empty'}`}>
-              {picked ? picked.name : droppable ? 'place here' : '—'}
-            </div>
-          </div>
-        )
-      })}
+    <div className="cabinet-rail">
+      <div className="rail-heading">Your cabinet</div>
+      <div className="slots">
+        {order.map((role, index) => {
+          const picked = picks[role]
+          const droppable = !picked && armed
+          return (
+            <button className={`slot ${picked ? 'filled' : ''} ${droppable ? 'droppable' : ''} ${over === role && droppable ? 'over' : ''}`} key={role}
+              aria-label={picked ? `${ROLE_LABEL[role]}: ${picked.name}` : selectedName ? `Appoint ${selectedName} as ${ROLE_LABEL[role]}` : `${ROLE_LABEL[role]}, vacant`}
+              aria-disabled={!droppable} onClick={() => droppable && onPlace?.(role)}
+              onDragOver={(e) => { if (picked || !armed) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; setOver(role) }}
+              onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOver(null) }}
+              onDrop={(e) => { e.preventDefault(); setOver(null); if (droppable) onPlace?.(role, e.dataTransfer.getData('text/plain')) }}>
+              <span className="role-number" aria-hidden="true">0{index + 1}</span>
+              <span className="role-label">{ROLE_LABEL[role]}</span>
+              <span className="slot-content">
+                {picked ? <><Portrait key={picked.id} figure={picked} compact /><span className="appointed-name">{picked.name}<span className="appointed-label"><Icon name="check" size={10} /> Appointed</span></span></> : <><span className="empty-photo" aria-hidden="true"><Icon name="pin" size={19} /></span><span className="slot-prompt">{droppable ? 'Pin here' : 'Position vacant'}</span></>}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+      <p className="rail-note">Choose wisely.<br />History is watching.</p>
     </div>
   )
 }

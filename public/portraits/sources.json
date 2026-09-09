@@ -1,0 +1,835 @@
+{
+  "lincoln": {
+    "src": "/portraits/lincoln.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Abraham_Lincoln_O-77_matte_collodion_print.jpg/330px-Abraham_Lincoln_O-77_matte_collodion_print.jpg",
+    "page": "https://en.wikipedia.org/wiki/Abraham_Lincoln",
+    "title": "Abraham Lincoln",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Abraham_Lincoln_O-77_matte_collodion_print.jpg"
+  },
+  "eleanor-roosevelt": {
+    "src": "/portraits/eleanor-roosevelt.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Eleanor_Roosevelt_at_the_United_Nations%2C_circa_1946-1947_%283x4_cropped%29.jpg/330px-Eleanor_Roosevelt_at_the_United_Nations%2C_circa_1946-1947_%283x4_cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Eleanor_Roosevelt",
+    "title": "Eleanor Roosevelt",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Eleanor_Roosevelt_at_the_United_Nations%2C_circa_1946-1947_%283x4_cropped%29.jpg"
+  },
+  "churchill": {
+    "src": "/portraits/churchill.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Sir_Winston_Churchill_-_19086236948_%28restored%29.jpg/330px-Sir_Winston_Churchill_-_19086236948_%28restored%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Winston_Churchill",
+    "title": "Winston Churchill",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Sir_Winston_Churchill_-_19086236948_%28restored%29.jpg"
+  },
+  "mandela": {
+    "src": "/portraits/mandela.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Nelson_Mandela_1994.jpg/330px-Nelson_Mandela_1994.jpg",
+    "page": "https://en.wikipedia.org/wiki/Nelson_Mandela",
+    "title": "Nelson Mandela",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Nelson_Mandela_1994.jpg"
+  },
+  "gandhi": {
+    "src": "/portraits/gandhi.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg/330px-Mahatma-Gandhi%2C_studio%2C_1931.jpg",
+    "page": "https://en.wikipedia.org/wiki/Mahatma_Gandhi",
+    "title": "Mahatma Gandhi",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Mahatma-Gandhi%2C_studio%2C_1931.jpg"
+  },
+  "ataturk": {
+    "src": "/portraits/ataturk.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Ataturk1930s.jpg/330px-Ataturk1930s.jpg",
+    "page": "https://en.wikipedia.org/wiki/Mustafa_Kemal_Atat%C3%BCrk",
+    "title": "Mustafa Kemal Atatürk",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Ataturk1930s.jpg"
+  },
+  "marcus-aurelius": {
+    "src": "/portraits/marcus-aurelius.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/MSR-ra-61-b-1-DM.jpg/330px-MSR-ra-61-b-1-DM.jpg",
+    "page": "https://en.wikipedia.org/wiki/Marcus_Aurelius",
+    "title": "Marcus Aurelius",
+    "filePage": "https://commons.wikimedia.org/wiki/File:MSR-ra-61-b-1-DM.jpg"
+  },
+  "ashoka": {
+    "src": "/portraits/ashoka.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Ashoka%27s_visit_to_the_Ramagrama_stupa_Sanchi_Stupa_1_Southern_gateway.jpg/330px-Ashoka%27s_visit_to_the_Ramagrama_stupa_Sanchi_Stupa_1_Southern_gateway.jpg",
+    "page": "https://en.wikipedia.org/wiki/Ashoka",
+    "title": "Ashoka",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Ashoka%27s_visit_to_the_Ramagrama_stupa_Sanchi_Stupa_1_Southern_gateway.jpg"
+  },
+  "elizabeth-i": {
+    "src": "/portraits/elizabeth-i.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Darnley_stage_3.jpg/330px-Darnley_stage_3.jpg",
+    "page": "https://en.wikipedia.org/wiki/Elizabeth_I",
+    "title": "Elizabeth I",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Darnley_stage_3.jpg"
+  },
+  "fdr": {
+    "src": "/portraits/fdr.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/FDR-1944-Campaign-Portrait_%283x4_retouched%2C_cropped%29.jpg/330px-FDR-1944-Campaign-Portrait_%283x4_retouched%2C_cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Franklin_D._Roosevelt",
+    "title": "Franklin D. Roosevelt",
+    "filePage": "https://commons.wikimedia.org/wiki/File:FDR-1944-Campaign-Portrait_%283x4_retouched%2C_cropped%29.jpg"
+  },
+  "ardern": {
+    "src": "/portraits/ardern.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/New_Zealand_Prime_Minister_Jacinda_Ardern_in_2018.jpg/330px-New_Zealand_Prime_Minister_Jacinda_Ardern_in_2018.jpg",
+    "page": "https://en.wikipedia.org/wiki/Jacinda_Ardern",
+    "title": "Jacinda Ardern",
+    "filePage": "https://commons.wikimedia.org/wiki/File:New_Zealand_Prime_Minister_Jacinda_Ardern_in_2018.jpg"
+  },
+  "lee-kuan-yew": {
+    "src": "/portraits/lee-kuan-yew.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Prime_Minister_Lee_Kuan_Yew_of_Singapore_Making_a_Toast_at_a_State_Dinner_Held_in_His_Honor%2C_1975.jpg/330px-Prime_Minister_Lee_Kuan_Yew_of_Singapore_Making_a_Toast_at_a_State_Dinner_Held_in_His_Honor%2C_1975.jpg",
+    "page": "https://en.wikipedia.org/wiki/Lee_Kuan_Yew",
+    "title": "Lee Kuan Yew",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Prime_Minister_Lee_Kuan_Yew_of_Singapore_Making_a_Toast_at_a_State_Dinner_Held_in_His_Honor%2C_1975.jpg"
+  },
+  "attlee": {
+    "src": "/portraits/attlee.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Person_attlee2.jpg/330px-Person_attlee2.jpg",
+    "page": "https://en.wikipedia.org/wiki/Clement_Attlee",
+    "title": "Clement Attlee",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Person_attlee2.jpg"
+  },
+  "allende": {
+    "src": "/portraits/allende.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Salvador_Allende_Gossens-.jpg",
+    "page": "https://en.wikipedia.org/wiki/Salvador_Allende",
+    "title": "Salvador Allende"
+  },
+  "havel": {
+    "src": "/portraits/havel.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Vaclav_Havel.jpg/330px-Vaclav_Havel.jpg",
+    "page": "https://en.wikipedia.org/wiki/V%C3%A1clav_Havel",
+    "title": "Václav Havel",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Vaclav_Havel.jpg"
+  },
+  "golda-meir": {
+    "src": "/portraits/golda-meir.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Dan_Hadani_collection_%28990044371930205171%29.jpg/330px-Dan_Hadani_collection_%28990044371930205171%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Golda_Meir",
+    "title": "Golda Meir",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Dan_Hadani_collection_%28990044371930205171%29.jpg"
+  },
+  "bolivar": {
+    "src": "/portraits/bolivar.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Sim%C3%B3n_Bol%C3%ADvar._Toro_Moreno%2C_Luis._1922%2C_Legislative_Palace%2C_La_Paz.png/330px-Sim%C3%B3n_Bol%C3%ADvar._Toro_Moreno%2C_Luis._1922%2C_Legislative_Palace%2C_La_Paz.png",
+    "page": "https://en.wikipedia.org/wiki/Sim%C3%B3n_Bol%C3%ADvar",
+    "title": "Simón Bolívar",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Sim%C3%B3n_Bol%C3%ADvar._Toro_Moreno%2C_Luis._1922%2C_Legislative_Palace%2C_La_Paz.png"
+  },
+  "toussaint": {
+    "src": "/portraits/toussaint.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Toussaint_Louverture_-_Girardin.jpg/330px-Toussaint_Louverture_-_Girardin.jpg",
+    "page": "https://en.wikipedia.org/wiki/Toussaint_Louverture",
+    "title": "Toussaint Louverture",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Toussaint_Louverture_-_Girardin.jpg"
+  },
+  "kofi-annan": {
+    "src": "/portraits/kofi-annan.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Kofi_Annan_2012_%28cropped%29.jpg/330px-Kofi_Annan_2012_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Kofi_Annan",
+    "title": "Kofi Annan",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Kofi_Annan_2012_%28cropped%29.jpg"
+  },
+  "sankara": {
+    "src": "/portraits/sankara.png",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Thomas_Sankara_in_Harlem_%281984%29.png/330px-Thomas_Sankara_in_Harlem_%281984%29.png",
+    "page": "https://en.wikipedia.org/wiki/Thomas_Sankara",
+    "title": "Thomas Sankara",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Thomas_Sankara_in_Harlem_%281984%29.png"
+  },
+  "nixon": {
+    "src": "/portraits/nixon.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Richard_Nixon_presidential_portrait_%282%29.jpg/330px-Richard_Nixon_presidential_portrait_%282%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Richard_Nixon",
+    "title": "Richard Nixon",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Richard_Nixon_presidential_portrait_%282%29.jpg"
+  },
+  "genghis": {
+    "src": "/portraits/genghis.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/YuanEmperorAlbumGenghisPortrait.jpg/330px-YuanEmperorAlbumGenghisPortrait.jpg",
+    "page": "https://en.wikipedia.org/wiki/Genghis_Khan",
+    "title": "Genghis Khan",
+    "filePage": "https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumGenghisPortrait.jpg"
+  },
+  "stalin": {
+    "src": "/portraits/stalin.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/StalinCropped1943.jpg/330px-StalinCropped1943.jpg",
+    "page": "https://en.wikipedia.org/wiki/Joseph_Stalin",
+    "title": "Joseph Stalin",
+    "filePage": "https://commons.wikimedia.org/wiki/File:StalinCropped1943.jpg"
+  },
+  "mao": {
+    "src": "/portraits/mao.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Mao_Zedong_1950_Portrait_%283x4_cropped%29%282%29.jpg/330px-Mao_Zedong_1950_Portrait_%283x4_cropped%29%282%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Mao_Zedong",
+    "title": "Mao Zedong",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Mao_Zedong_1950_Portrait_%283x4_cropped%29%282%29.jpg"
+  },
+  "pol-pot": {
+    "src": "/portraits/pol-pot.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Pol_Pot_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Pol_Pot",
+    "title": "Pol Pot"
+  },
+  "mussolini": {
+    "src": "/portraits/mussolini.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Mussolini_mezzobusto.jpg/330px-Mussolini_mezzobusto.jpg",
+    "page": "https://en.wikipedia.org/wiki/Benito_Mussolini",
+    "title": "Benito Mussolini",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Mussolini_mezzobusto.jpg"
+  },
+  "franco": {
+    "src": "/portraits/franco.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Francisco_Franco_posed_portrait_photograph.jpg/330px-Francisco_Franco_posed_portrait_photograph.jpg",
+    "page": "https://en.wikipedia.org/wiki/Francisco_Franco",
+    "title": "Francisco Franco",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Francisco_Franco_posed_portrait_photograph.jpg"
+  },
+  "idi-amin": {
+    "src": "/portraits/idi-amin.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Idi_Amin_at_UN_%28United_Nations%2C_New_York%29_gtfy.00132_%28cropped%29.jpg/330px-Idi_Amin_at_UN_%28United_Nations%2C_New_York%29_gtfy.00132_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Idi_Amin",
+    "title": "Idi Amin",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Idi_Amin_at_UN_%28United_Nations%2C_New_York%29_gtfy.00132_%28cropped%29.jpg"
+  },
+  "ceausescu": {
+    "src": "/portraits/ceausescu.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Nicolae_Ceau%C8%99escu_%283x4_cropped%29.jpg/330px-Nicolae_Ceau%C8%99escu_%283x4_cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Nicolae_Ceau%C8%99escu",
+    "title": "Nicolae Ceaușescu",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Nicolae_Ceau%C8%99escu_%283x4_cropped%29.jpg"
+  },
+  "pinochet": {
+    "src": "/portraits/pinochet.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Augusto_Pinochet_official_portrait_%283x4_cropped_b%29.jpg/330px-Augusto_Pinochet_official_portrait_%283x4_cropped_b%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Augusto_Pinochet",
+    "title": "Augusto Pinochet",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Augusto_Pinochet_official_portrait_%283x4_cropped_b%29.jpg"
+  },
+  "kim-il-sung": {
+    "src": "/portraits/kim-il-sung.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Kim_Il-sung_in_1950.jpg/330px-Kim_Il-sung_in_1950.jpg",
+    "page": "https://en.wikipedia.org/wiki/Kim_Il_Sung",
+    "title": "Kim Il Sung",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Kim_Il-sung_in_1950.jpg"
+  },
+  "duvalier": {
+    "src": "/portraits/duvalier.png",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Fran%C3%A7ois_Duvalier_Presidential_Portrait_%281957%29.png/330px-Fran%C3%A7ois_Duvalier_Presidential_Portrait_%281957%29.png",
+    "page": "https://en.wikipedia.org/wiki/Fran%C3%A7ois_Duvalier",
+    "title": "François Duvalier",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Duvalier_Presidential_Portrait_%281957%29.png"
+  },
+  "gaddafi": {
+    "src": "/portraits/gaddafi.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Muammar_al-Gaddafi_at_the_AU_summit.jpg/330px-Muammar_al-Gaddafi_at_the_AU_summit.jpg",
+    "page": "https://en.wikipedia.org/wiki/Muammar_Gaddafi",
+    "title": "Muammar Gaddafi",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Muammar_al-Gaddafi_at_the_AU_summit.jpg"
+  },
+  "saddam": {
+    "src": "/portraits/saddam.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Saddam_Hussein_1979.jpg/330px-Saddam_Hussein_1979.jpg",
+    "page": "https://en.wikipedia.org/wiki/Saddam_Hussein",
+    "title": "Saddam Hussein",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Saddam_Hussein_1979.jpg"
+  },
+  "bokassa": {
+    "src": "/portraits/bokassa.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Bokassa_with_Ceausescu_%28cropped%29.jpg/330px-Bokassa_with_Ceausescu_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Jean-B%C3%A9del_Bokassa",
+    "title": "Jean-Bédel Bokassa",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Bokassa_with_Ceausescu_%28cropped%29.jpg"
+  },
+  "mobutu": {
+    "src": "/portraits/mobutu.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mobutu_%28cropped%29.jpg/330px-Mobutu_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Mobutu_Sese_Seko",
+    "title": "Mobutu Sese Seko",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Mobutu_%28cropped%29.jpg"
+  },
+  "marcos": {
+    "src": "/portraits/marcos.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Ferdinand_Marcos_%28cropped%29.jpg/330px-Ferdinand_Marcos_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Ferdinand_Marcos",
+    "title": "Ferdinand Marcos",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Ferdinand_Marcos_%28cropped%29.jpg"
+  },
+  "niyazov": {
+    "src": "/portraits/niyazov.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Nyyazov_in_February_1998.jpg/330px-Nyyazov_in_February_1998.jpg",
+    "page": "https://en.wikipedia.org/wiki/Saparmurat_Niyazov",
+    "title": "Saparmurat Niyazov",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Nyyazov_in_February_1998.jpg"
+  },
+  "leopold-ii": {
+    "src": "/portraits/leopold-ii.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Leopold_II%2C_King_of_the_Belgians_by_Alexander_Bassano_%281889%29.jpg/330px-Leopold_II%2C_King_of_the_Belgians_by_Alexander_Bassano_%281889%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Leopold_II_of_Belgium",
+    "title": "Leopold II of Belgium",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Leopold_II%2C_King_of_the_Belgians_by_Alexander_Bassano_%281889%29.jpg"
+  },
+  "caligula": {
+    "src": "/portraits/caligula.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Caligula.Carlsberg_Glyptotek.%28cropped%29.jpg/330px-Caligula.Carlsberg_Glyptotek.%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Caligula",
+    "title": "Caligula",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Caligula.Carlsberg_Glyptotek.%28cropped%29.jpg"
+  },
+  "vlad": {
+    "src": "/portraits/vlad.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vlad_%C5%A2epe%C5%9F%2C_the_Impaler%2C_Prince_of_Wallachia_%281456-1462%29_%28died_1477%29.jpg/330px-Vlad_%C5%A2epe%C5%9F%2C_the_Impaler%2C_Prince_of_Wallachia_%281456-1462%29_%28died_1477%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Vlad_the_Impaler",
+    "title": "Vlad the Impaler",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Vlad_%C5%A2epe%C5%9F%2C_the_Impaler%2C_Prince_of_Wallachia_%281456-1462%29_%28died_1477%29.jpg"
+  },
+  "robespierre": {
+    "src": "/portraits/robespierre.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Robespierre.jpg/330px-Robespierre.jpg",
+    "page": "https://en.wikipedia.org/wiki/Maximilien_Robespierre",
+    "title": "Maximilien Robespierre",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Robespierre.jpg"
+  },
+  "chamberlain": {
+    "src": "/portraits/chamberlain.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Neville-Chamberlain.jpg/330px-Neville-Chamberlain.jpg",
+    "page": "https://en.wikipedia.org/wiki/Neville_Chamberlain",
+    "title": "Neville Chamberlain",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Neville-Chamberlain.jpg"
+  },
+  "bismarck": {
+    "src": "/portraits/bismarck.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Otto_von_Bismarck_1885_%28cropped%29.jpg/330px-Otto_von_Bismarck_1885_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Otto_von_Bismarck",
+    "title": "Otto von Bismarck",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Otto_von_Bismarck_1885_%28cropped%29.jpg"
+  },
+  "caesar": {
+    "src": "/portraits/caesar.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Retrato_de_Julio_C%C3%A9sar_%2826724093101%29_%28cropped%29.jpg/330px-Retrato_de_Julio_C%C3%A9sar_%2826724093101%29_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Julius_Caesar",
+    "title": "Julius Caesar",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Retrato_de_Julio_C%C3%A9sar_%2826724093101%29_%28cropped%29.jpg"
+  },
+  "cleopatra": {
+    "src": "/portraits/cleopatra.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kleopatra-VII.-Altes-Museum-Berlin1.jpg/330px-Kleopatra-VII.-Altes-Museum-Berlin1.jpg",
+    "page": "https://en.wikipedia.org/wiki/Cleopatra",
+    "title": "Cleopatra",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Kleopatra-VII.-Altes-Museum-Berlin1.jpg"
+  },
+  "hamilton": {
+    "src": "/portraits/hamilton.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Alexander_Hamilton_%28NPG%29.jpg/330px-Alexander_Hamilton_%28NPG%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Alexander_Hamilton",
+    "title": "Alexander Hamilton",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Alexander_Hamilton_%28NPG%29.jpg"
+  },
+  "hearst": {
+    "src": "/portraits/hearst.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/HearstAbout1910.jpg/330px-HearstAbout1910.jpg",
+    "page": "https://en.wikipedia.org/wiki/William_Randolph_Hearst",
+    "title": "William Randolph Hearst",
+    "filePage": "https://commons.wikimedia.org/wiki/File:HearstAbout1910.jpg"
+  },
+  "crassus": {
+    "src": "/portraits/crassus.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Bust_of_a_Roman%2C_Ny_Carlsberg_Glyptotek.jpg/330px-Bust_of_a_Roman%2C_Ny_Carlsberg_Glyptotek.jpg",
+    "page": "https://en.wikipedia.org/wiki/Marcus_Licinius_Crassus",
+    "title": "Marcus Licinius Crassus",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Bust_of_a_Roman%2C_Ny_Carlsberg_Glyptotek.jpg"
+  },
+  "talleyrand": {
+    "src": "/portraits/talleyrand.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Charles_Maurice_de_Talleyrand_P%C3%A9rigord_%281754%E2%80%931838%29%2C_Prince_de_Talleyrand_MET_DP148275.jpg/330px-Charles_Maurice_de_Talleyrand_P%C3%A9rigord_%281754%E2%80%931838%29%2C_Prince_de_Talleyrand_MET_DP148275.jpg",
+    "page": "https://en.wikipedia.org/wiki/Charles_Maurice_de_Talleyrand-P%C3%A9rigord",
+    "title": "Charles Maurice de Talleyrand-Périgord",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Charles_Maurice_de_Talleyrand_P%C3%A9rigord_%281754%E2%80%931838%29%2C_Prince_de_Talleyrand_MET_DP148275.jpg"
+  },
+  "freddy-fazbear": {
+    "src": "/portraits/freddy-fazbear.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Five_Nights_at_Freddy%27s.svg/330px-Five_Nights_at_Freddy%27s.svg.png",
+    "page": "https://en.wikipedia.org/wiki/Five_Nights_at_Freddy's",
+    "title": "Five Nights at Freddy's",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Five_Nights_at_Freddy%27s.svg"
+  },
+  "markiplier": {
+    "src": "/portraits/markiplier.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Markiplier_in_We_Tried_Peanut_Free_Candy_from_YouTube_at_0-1-16_%28cropped%29.png/330px-Markiplier_in_We_Tried_Peanut_Free_Candy_from_YouTube_at_0-1-16_%28cropped%29.png",
+    "page": "https://en.wikipedia.org/wiki/Markiplier",
+    "title": "Markiplier",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Markiplier_in_We_Tried_Peanut_Free_Candy_from_YouTube_at_0-1-16_%28cropped%29.png"
+  },
+  "mrbeast": {
+    "src": "/portraits/mrbeast.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/MrBeast_in_2026_%28cropped_4%29.png/330px-MrBeast_in_2026_%28cropped_4%29.png",
+    "page": "https://en.wikipedia.org/wiki/MrBeast",
+    "title": "MrBeast",
+    "filePage": "https://commons.wikimedia.org/wiki/File:MrBeast_in_2026_%28cropped_4%29.png"
+  },
+  "gordon-ramsay": {
+    "src": "/portraits/gordon-ramsay.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Gordon_Ramsay_%28cropped%29.jpg/330px-Gordon_Ramsay_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gordon_Ramsay",
+    "title": "Gordon Ramsay",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Gordon_Ramsay_%28cropped%29.jpg"
+  },
+  "bob-ross": {
+    "src": "/portraits/bob-ross.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Bob_Ross_publicity_photo_%28c._1982%29_%28cropped%29.jpg/330px-Bob_Ross_publicity_photo_%28c._1982%29_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Bob_Ross",
+    "title": "Bob Ross",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Bob_Ross_publicity_photo_%28c._1982%29_%28cropped%29.jpg"
+  },
+  "darth-vader": {
+    "src": "/portraits/darth-vader.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
+    "page": "https://en.wikipedia.org/wiki/Darth_Vader",
+    "title": "Darth Vader"
+  },
+  "keanu-reeves": {
+    "src": "/portraits/keanu-reeves.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Keanu_Reeves_at_TIFF_2025_02_%28Cropped%29.jpg/330px-Keanu_Reeves_at_TIFF_2025_02_%28Cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Keanu_Reeves",
+    "title": "Keanu Reeves",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Keanu_Reeves_at_TIFF_2025_02_%28Cropped%29.jpg"
+  },
+  "kermit": {
+    "src": "/portraits/kermit.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Kermit_puppet.jpg/330px-Kermit_puppet.jpg",
+    "page": "https://en.wikipedia.org/wiki/Kermit_the_Frog",
+    "title": "Kermit the Frog",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Kermit_puppet.jpg"
+  },
+  "shrek": {
+    "src": "/portraits/shrek.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/7/7b/Shrek_%282001_animated_feature_film%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Shrek",
+    "title": "Shrek"
+  },
+  "gandalf": {
+    "src": "/portraits/gandalf.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/b/bd/Gandalf_from_The_Trolls_are_Turned_to_Stone_-_J.R.R_Tolkien.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gandalf",
+    "title": "Gandalf"
+  },
+  "sauron": {
+    "src": "/portraits/sauron.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/f/f8/Sauron_Tolkien_illustration.jpg",
+    "page": "https://en.wikipedia.org/wiki/Sauron",
+    "title": "Sauron"
+  },
+  "yoda": {
+    "src": "/portraits/yoda.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/9/9b/Yoda_Empire_Strikes_Back.png",
+    "page": "https://en.wikipedia.org/wiki/Yoda",
+    "title": "Yoda"
+  },
+  "batman": {
+    "src": "/portraits/batman.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/c/c7/Batman_Infobox.jpg",
+    "page": "https://en.wikipedia.org/wiki/Batman",
+    "title": "Batman"
+  },
+  "joker": {
+    "src": "/portraits/joker.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/5/5f/Batman_Three_Jokers.jpg",
+    "page": "https://en.wikipedia.org/wiki/Joker_(character)",
+    "title": "Joker (character)"
+  },
+  "homer-simpson": {
+    "src": "/portraits/homer-simpson.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png",
+    "page": "https://en.wikipedia.org/wiki/Homer_Simpson",
+    "title": "Homer Simpson"
+  },
+  "mr-burns": {
+    "src": "/portraits/mr-burns.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/5/56/Mr_Burns.png",
+    "page": "https://en.wikipedia.org/wiki/Mr._Burns",
+    "title": "Mr. Burns"
+  },
+  "spongebob": {
+    "src": "/portraits/spongebob.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/SpongeBob_character.svg/330px-SpongeBob_character.svg.png",
+    "page": "https://en.wikipedia.org/wiki/SpongeBob_SquarePants_(character)",
+    "title": "SpongeBob SquarePants (character)",
+    "filePage": "https://commons.wikimedia.org/wiki/File:SpongeBob_character.svg"
+  },
+  "patrick-star": {
+    "src": "/portraits/patrick-star.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Patrick_Star_character.png/330px-Patrick_Star_character.png",
+    "page": "https://en.wikipedia.org/wiki/Patrick_Star",
+    "title": "Patrick Star",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Patrick_Star_character.png"
+  },
+  "bowser": {
+    "src": "/portraits/bowser.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d1/Bowser_by_Shigehisa_Nakaue.png/330px-Bowser_by_Shigehisa_Nakaue.png",
+    "page": "https://en.wikipedia.org/wiki/Bowser",
+    "title": "Bowser",
+    "filePage": "https://en.wikipedia.org/wiki/File:Bowser_by_Shigehisa_Nakaue.png"
+  },
+  "mario": {
+    "src": "/portraits/mario.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/5/5c/Mario_by_Shigehisa_Nakaue.png",
+    "page": "https://en.wikipedia.org/wiki/Mario",
+    "title": "Mario"
+  },
+  "godzilla": {
+    "src": "/portraits/godzilla.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Godzilla_%281954%29_%28cropped%29.jpg/330px-Godzilla_%281954%29_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Godzilla",
+    "title": "Godzilla",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Godzilla_%281954%29_%28cropped%29.jpg"
+  },
+  "optimus-prime": {
+    "src": "/portraits/optimus-prime.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/b/b2/Optimusprime-originaltoy.jpg",
+    "page": "https://en.wikipedia.org/wiki/Optimus_Prime",
+    "title": "Optimus Prime"
+  },
+  "thanos": {
+    "src": "/portraits/thanos.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/b/b7/Thanos_%28Infobox_image%29.png",
+    "page": "https://en.wikipedia.org/wiki/Thanos",
+    "title": "Thanos"
+  },
+  "hal-9000": {
+    "src": "/portraits/hal-9000.svg",
+    "source": "Original vector illustration created for Politidle",
+    "page": "https://en.wikipedia.org/wiki/HAL_9000",
+    "title": "HAL 9000"
+  },
+  "glados": {
+    "src": "/portraits/glados.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png",
+    "page": "https://en.wikipedia.org/wiki/GLaDOS",
+    "title": "GLaDOS"
+  },
+  "sherlock": {
+    "src": "/portraits/sherlock.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Sherlock_Holmes_Portrait_Paget.jpg",
+    "page": "https://en.wikipedia.org/wiki/Sherlock_Holmes",
+    "title": "Sherlock Holmes"
+  },
+  "dracula": {
+    "src": "/portraits/dracula.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Bela_Lugosi_as_Dracula.jpg/330px-Bela_Lugosi_as_Dracula.jpg",
+    "page": "https://en.wikipedia.org/wiki/Count_Dracula",
+    "title": "Count Dracula",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Bela_Lugosi_as_Dracula.jpg"
+  },
+  "winnie-the-pooh": {
+    "src": "/portraits/winnie-the-pooh.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Pooh_Shepard1928.jpg/330px-Pooh_Shepard1928.jpg",
+    "page": "https://en.wikipedia.org/wiki/Winnie-the-Pooh",
+    "title": "Winnie-the-Pooh",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Pooh_Shepard1928.jpg"
+  },
+  "gollum": {
+    "src": "/portraits/gollum.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Gollum_at_Wellington_Airport.jpg/330px-Gollum_at_Wellington_Airport.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gollum",
+    "title": "Gollum",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Gollum_at_Wellington_Airport.jpg"
+  },
+  "voldemort": {
+    "src": "/portraits/voldemort.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Voldemort_book_and_film.jpg/330px-Voldemort_book_and_film.jpg",
+    "page": "https://en.wikipedia.org/wiki/Voldemort",
+    "title": "Voldemort",
+    "filePage": "https://en.wikipedia.org/wiki/File:Voldemort_book_and_film.jpg"
+  },
+  "umbridge": {
+    "src": "/portraits/umbridge.jpeg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Umbridge.jpeg/330px-Umbridge.jpeg",
+    "page": "https://en.wikipedia.org/wiki/Dolores_Umbridge",
+    "title": "Dolores Umbridge",
+    "filePage": "https://en.wikipedia.org/wiki/File:Umbridge.jpeg"
+  },
+  "cthulhu": {
+    "src": "/portraits/cthulhu.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Cthulhu3.jpg/330px-Cthulhu3.jpg",
+    "page": "https://en.wikipedia.org/wiki/Cthulhu",
+    "title": "Cthulhu",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Cthulhu3.jpg"
+  },
+  "jar-jar": {
+    "src": "/portraits/jar-jar.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/4/4b/Jjportrait.jpg",
+    "page": "https://en.wikipedia.org/wiki/Jar_Jar_Binks",
+    "title": "Jar Jar Binks"
+  },
+  "sonic": {
+    "src": "/portraits/sonic.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Sonic_The_Hedgehog.svg/330px-Sonic_The_Hedgehog.svg.png",
+    "page": "https://en.wikipedia.org/wiki/Sonic_the_Hedgehog",
+    "title": "Sonic the Hedgehog",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Sonic_The_Hedgehog.svg"
+  },
+  "crewmate": {
+    "src": "/portraits/crewmate.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg",
+    "page": "https://en.wikipedia.org/wiki/Among_Us",
+    "title": "Among Us"
+  },
+  "minecraft-steve": {
+    "src": "/portraits/minecraft-steve.png",
+    "source": "https://upload.wikimedia.org/wikipedia/en/e/e7/Steve_%28Minecraft%29.png",
+    "page": "https://en.wikipedia.org/wiki/Steve_(Minecraft)",
+    "title": "Steve (Minecraft)"
+  },
+  "elon-musk": {
+    "src": "/portraits/elon-musk.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Elon_Musk_-_54820081119_%28cropped%29.jpg/330px-Elon_Musk_-_54820081119_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Elon_Musk",
+    "title": "Elon Musk",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Elon_Musk_-_54820081119_%28cropped%29.jpg"
+  },
+  "oprah": {
+    "src": "/portraits/oprah.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Oprah_Winfrey_2016.jpg/330px-Oprah_Winfrey_2016.jpg",
+    "page": "https://en.wikipedia.org/wiki/Oprah_Winfrey",
+    "title": "Oprah Winfrey",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Oprah_Winfrey_2016.jpg"
+  },
+  "the-rock": {
+    "src": "/portraits/the-rock.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Dwayne_Johnson-1764_%284x5_cropped_with_moderate_headroom%29.jpg/330px-Dwayne_Johnson-1764_%284x5_cropped_with_moderate_headroom%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Dwayne_Johnson",
+    "title": "Dwayne Johnson",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Dwayne_Johnson-1764_%284x5_cropped_with_moderate_headroom%29.jpg"
+  },
+  "snoop-dogg": {
+    "src": "/portraits/snoop-dogg.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Snoop_Dogg%2C_WrestleMania_XL_%28cropped%29_%28cropped%29.jpg/330px-Snoop_Dogg%2C_WrestleMania_XL_%28cropped%29_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Snoop_Dogg",
+    "title": "Snoop Dogg",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Snoop_Dogg%2C_WrestleMania_XL_%28cropped%29_%28cropped%29.jpg"
+  },
+  "attenborough": {
+    "src": "/portraits/attenborough.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/David_Attenborough_in_2025.jpg/330px-David_Attenborough_in_2025.jpg",
+    "page": "https://en.wikipedia.org/wiki/David_Attenborough",
+    "title": "David Attenborough",
+    "filePage": "https://commons.wikimedia.org/wiki/File:David_Attenborough_in_2025.jpg"
+  },
+  "steve-irwin": {
+    "src": "/portraits/steve-irwin.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Steve_Irwin_December_2005_%284x5_cropped%29.jpg/330px-Steve_Irwin_December_2005_%284x5_cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Steve_Irwin",
+    "title": "Steve Irwin",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Steve_Irwin_December_2005_%284x5_cropped%29.jpg"
+  },
+  "mister-rogers": {
+    "src": "/portraits/mister-rogers.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Fred-Rogers_1988_%28full%29_%28cropped%29.jpg/330px-Fred-Rogers_1988_%28full%29_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Fred_Rogers",
+    "title": "Fred Rogers",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Fred-Rogers_1988_%28full%29_%28cropped%29.jpg"
+  },
+  "julia-child": {
+    "src": "/portraits/julia-child.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Julia_Child_portrait_by_%C2%A9Lynn_Gilbert%2C_1978.jpg/330px-Julia_Child_portrait_by_%C2%A9Lynn_Gilbert%2C_1978.jpg",
+    "page": "https://en.wikipedia.org/wiki/Julia_Child",
+    "title": "Julia Child",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Julia_Child_portrait_by_%C2%A9Lynn_Gilbert%2C_1978.jpg"
+  },
+  "tesla": {
+    "src": "/portraits/tesla.jpeg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Tesla_circa_1890.jpeg/330px-Tesla_circa_1890.jpeg",
+    "page": "https://en.wikipedia.org/wiki/Nikola_Tesla",
+    "title": "Nikola Tesla",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Tesla_circa_1890.jpeg"
+  },
+  "einstein": {
+    "src": "/portraits/einstein.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/330px-Albert_Einstein_Head_cleaned.jpg",
+    "page": "https://en.wikipedia.org/wiki/Albert_Einstein",
+    "title": "Albert Einstein",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Albert_Einstein_Head_cleaned.jpg"
+  },
+  "ada-lovelace": {
+    "src": "/portraits/ada-lovelace.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Ada_Lovelace_daguerreotype_by_Antoine_Claudet_1843_-_cropped.png/330px-Ada_Lovelace_daguerreotype_by_Antoine_Claudet_1843_-_cropped.png",
+    "page": "https://en.wikipedia.org/wiki/Ada_Lovelace",
+    "title": "Ada Lovelace",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Ada_Lovelace_daguerreotype_by_Antoine_Claudet_1843_-_cropped.png"
+  },
+  "marie-curie": {
+    "src": "/portraits/marie-curie.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Marie_Curie_c._1920s.jpg/330px-Marie_Curie_c._1920s.jpg",
+    "page": "https://en.wikipedia.org/wiki/Marie_Curie",
+    "title": "Marie Curie",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Marie_Curie_c._1920s.jpg"
+  },
+  "turing": {
+    "src": "/portraits/turing.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Alan_turing_header.jpg/330px-Alan_turing_header.jpg",
+    "page": "https://en.wikipedia.org/wiki/Alan_Turing",
+    "title": "Alan Turing",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Alan_turing_header.jpg"
+  },
+  "jane-goodall": {
+    "src": "/portraits/jane-goodall.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Deputy_Secretary_Higginbottom_Poses_for_a_Photo_With_Dr._Jane_Goodall_and_the_State_Department%27s_Global_Health_Diplomacy_Director_Jordan_in_Washington_%2822365513310%29_%282%29_%28cropped_2%29.jpg/330px-thumbnail.jpg",
+    "page": "https://en.wikipedia.org/wiki/Jane_Goodall",
+    "title": "Jane Goodall",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Deputy_Secretary_Higginbottom_Poses_for_a_Photo_With_Dr._Jane_Goodall_and_the_State_Department%27s_Global_Health_Diplomacy_Director_Jordan_in_Washington_%2822365513310%29_%282%29_%28cropped_2%29.jpg"
+  },
+  "danny-devito": {
+    "src": "/portraits/danny-devito.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Danny_DeVito_cropped_and_edited_for_brightness.jpg/330px-Danny_DeVito_cropped_and_edited_for_brightness.jpg",
+    "page": "https://en.wikipedia.org/wiki/Danny_DeVito",
+    "title": "Danny DeVito",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Danny_DeVito_cropped_and_edited_for_brightness.jpg"
+  },
+  "nicolas-cage": {
+    "src": "/portraits/nicolas-cage.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Nicolas_Cage_Deauville_2013.jpg/330px-Nicolas_Cage_Deauville_2013.jpg",
+    "page": "https://en.wikipedia.org/wiki/Nicolas_Cage",
+    "title": "Nicolas Cage",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Nicolas_Cage_Deauville_2013.jpg"
+  },
+  "herzog": {
+    "src": "/portraits/herzog.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Werner_Herzog-9290.jpg/330px-Werner_Herzog-9290.jpg",
+    "page": "https://en.wikipedia.org/wiki/Werner_Herzog",
+    "title": "Werner Herzog",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Werner_Herzog-9290.jpg"
+  },
+  "weird-al": {
+    "src": "/portraits/weird-al.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Weird_Al_Yankovic_Photo_Op_GalaxyCon_St._Louis_2025.jpg/330px-Weird_Al_Yankovic_Photo_Op_GalaxyCon_St._Louis_2025.jpg",
+    "page": "https://en.wikipedia.org/wiki/%22Weird_Al%22_Yankovic",
+    "title": "\"Weird Al\" Yankovic",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Weird_Al_Yankovic_Photo_Op_GalaxyCon_St._Louis_2025.jpg"
+  },
+  "bear-grylls": {
+    "src": "/portraits/bear-grylls.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Coventry_Scouts_groups_have_a_visit_from_Bear_Grylls.jpg/330px-Coventry_Scouts_groups_have_a_visit_from_Bear_Grylls.jpg",
+    "page": "https://en.wikipedia.org/wiki/Bear_Grylls",
+    "title": "Bear Grylls",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Coventry_Scouts_groups_have_a_visit_from_Bear_Grylls.jpg"
+  },
+  "clarkson": {
+    "src": "/portraits/clarkson.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Jeremy_Clarkson%2C_Top_Gear_Live_2012_%284x5_cropped%29.jpg/330px-Jeremy_Clarkson%2C_Top_Gear_Live_2012_%284x5_cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Jeremy_Clarkson",
+    "title": "Jeremy Clarkson",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Jeremy_Clarkson%2C_Top_Gear_Live_2012_%284x5_cropped%29.jpg"
+  },
+  "judge-judy": {
+    "src": "/portraits/judge-judy.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Judge_Judy_Sheindlin_VF_2012_Shankbone.JPG/330px-Judge_Judy_Sheindlin_VF_2012_Shankbone.JPG",
+    "page": "https://en.wikipedia.org/wiki/Judy_Sheindlin",
+    "title": "Judy Sheindlin",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Judge_Judy_Sheindlin_VF_2012_Shankbone.JPG"
+  },
+  "simon-cowell": {
+    "src": "/portraits/simon-cowell.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Simon_Cowell_at_Greater_Together_LA_2026_%28cropped%29_2.jpg/330px-Simon_Cowell_at_Greater_Together_LA_2026_%28cropped%29_2.jpg",
+    "page": "https://en.wikipedia.org/wiki/Simon_Cowell",
+    "title": "Simon Cowell",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Simon_Cowell_at_Greater_Together_LA_2026_%28cropped%29_2.jpg"
+  },
+  "colonel-sanders": {
+    "src": "/portraits/colonel-sanders.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Colonel_Harland_Sanders_in_character_%283x4_cropped%29.jpg/330px-Colonel_Harland_Sanders_in_character_%283x4_cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Colonel_Sanders",
+    "title": "Colonel Sanders",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Colonel_Harland_Sanders_in_character_%283x4_cropped%29.jpg"
+  },
+  "gritty": {
+    "src": "/portraits/gritty.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Gov._Wolf_Joins_Philadelphia_Flyers_Organization_to_Encourage_Pennsylvanians_to_%E2%80%98Take_Your_Shot%E2%80%99_%2851156977424%29_%28cropped%29.jpg/330px-Gov._Wolf_Joins_Philadelphia_Flyers_Organization_to_Encourage_Pennsylvanians_to_%E2%80%98Take_Your_Shot%E2%80%99_%2851156977424%29_%28cropped%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Gritty",
+    "title": "Gritty",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Gov._Wolf_Joins_Philadelphia_Flyers_Organization_to_Encourage_Pennsylvanians_to_%E2%80%98Take_Your_Shot%E2%80%99_%2851156977424%29_%28cropped%29.jpg"
+  },
+  "chunghwa-cigs": {
+    "src": "/portraits/chunghwa-cigs.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Logo_Chunghwa_Cigarette.png/330px-Logo_Chunghwa_Cigarette.png",
+    "page": "https://en.wikipedia.org/wiki/Chunghwa_(cigarette)",
+    "title": "Chunghwa (cigarette)",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Logo_Chunghwa_Cigarette.png"
+  },
+  "red-telephone": {
+    "src": "/portraits/red-telephone.png",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/The_Pentagon%2C_cropped_square.png/330px-The_Pentagon%2C_cropped_square.png",
+    "page": "https://en.wikipedia.org/wiki/Moscow%E2%80%93Washington_hotline",
+    "title": "Moscow–Washington hotline",
+    "filePage": "https://commons.wikimedia.org/wiki/File:The_Pentagon%2C_cropped_square.png"
+  },
+  "rubber-stamp": {
+    "src": "/portraits/rubber-stamp.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Censored_stamp.jpg/330px-Censored_stamp.jpg",
+    "page": "https://en.wikipedia.org/wiki/Rubber_stamp",
+    "title": "Rubber stamp",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Censored_stamp.jpg"
+  },
+  "filing-cabinet": {
+    "src": "/portraits/filing-cabinet.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/1/16/Metal_File_Cabinet.jpg",
+    "page": "https://en.wikipedia.org/wiki/Filing_cabinet",
+    "title": "Filing cabinet"
+  },
+  "traffic-cone": {
+    "src": "/portraits/traffic-cone.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Cones.jpg/330px-Cones.jpg",
+    "page": "https://en.wikipedia.org/wiki/Traffic_cone",
+    "title": "Traffic cone",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Cones.jpg"
+  },
+  "roomba": {
+    "src": "/portraits/roomba.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Roomba_original.jpg/330px-Roomba_original.jpg",
+    "page": "https://en.wikipedia.org/wiki/Roomba",
+    "title": "Roomba",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Roomba_original.jpg"
+  },
+  "fax-machine": {
+    "src": "/portraits/fax-machine.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Samsung_SF-3100_Inkjet_Fax_Machine.jpg/330px-Samsung_SF-3100_Inkjet_Fax_Machine.jpg",
+    "page": "https://en.wikipedia.org/wiki/Fax",
+    "title": "Fax",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Samsung_SF-3100_Inkjet_Fax_Machine.jpg"
+  },
+  "potted-fern": {
+    "src": "/portraits/potted-fern.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/The_ferns_of_Great_Britain%2C_and_their_allies_the_club-mosses%2C_pepperworts%2C_and_horsetails_%28Pl._2%29_%288515393495%29.jpg/330px-The_ferns_of_Great_Britain%2C_and_their_allies_the_club-mosses%2C_pepperworts%2C_and_horsetails_%28Pl._2%29_%288515393495%29.jpg",
+    "page": "https://en.wikipedia.org/wiki/Fern",
+    "title": "Fern",
+    "filePage": "https://commons.wikimedia.org/wiki/File:The_ferns_of_Great_Britain%2C_and_their_allies_the_club-mosses%2C_pepperworts%2C_and_horsetails_%28Pl._2%29_%288515393495%29.jpg"
+  },
+  "shredder": {
+    "src": "/portraits/shredder.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Paper_Shredder.jpg/330px-Paper_Shredder.jpg",
+    "page": "https://en.wikipedia.org/wiki/Paper_shredder",
+    "title": "Paper shredder",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Paper_Shredder.jpg"
+  },
+  "briefcase-of-cash": {
+    "src": "/portraits/briefcase-of-cash.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Briefcase-photo.jpg/330px-Briefcase-photo.jpg",
+    "page": "https://en.wikipedia.org/wiki/Briefcase",
+    "title": "Briefcase",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Briefcase-photo.jpg"
+  },
+  "nuclear-football": {
+    "src": "/portraits/nuclear-football.jpg",
+    "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Reagans_and_Nuclear_Football_in_Venice.jpg/330px-Reagans_and_Nuclear_Football_in_Venice.jpg",
+    "page": "https://en.wikipedia.org/wiki/Nuclear_football",
+    "title": "Nuclear football",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Reagans_and_Nuclear_Football_in_Venice.jpg"
+  },
+  "half-sandwich": {
+    "src": "/portraits/half-sandwich.jpg",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Bacon%2C_lettuce%2C_tomato%2C_and_avocado.jpg/330px-Bacon%2C_lettuce%2C_tomato%2C_and_avocado.jpg",
+    "page": "https://en.wikipedia.org/wiki/Sandwich",
+    "title": "Sandwich",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Bacon%2C_lettuce%2C_tomato%2C_and_avocado.jpg"
+  }
+}
