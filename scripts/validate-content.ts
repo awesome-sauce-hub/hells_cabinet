@@ -22,6 +22,13 @@ const politicianSchema = z.object({
   category: z.enum(CATEGORIES),
   alignment: z.enum(ALIGNMENTS),
   endsRun: z.string().min(1).optional(),
+  /**
+   * Never validated until the schema was made strict, which is how it got here
+   * unlisted while the draft was already rolling against it. A value outside
+   * 0-1 does not error anywhere: it silently turns the one-in-ten gamble back
+   * into the certainty it was deliberately stopped from being.
+   */
+  endsRunChance: z.number().gt(0).lte(1).optional(),
   tier: z.enum(POWER_TIERS),
   name: z.string().min(1),
   country: z.string().min(1),
@@ -32,7 +39,12 @@ const politicianSchema = z.object({
   rivals: z.array(z.string()).optional(),
   party: z.string().optional(),
   reviewed: z.boolean(),
-})
+// Strict on purpose. The spreadsheet round-trip preserves fields it does not
+// recognise, which is right for a sheet and wrong for the shipped file: a
+// mistyped column comes back through the importer, lands on disk, and passes a
+// permissive schema while doing nothing. Unknown keys have to be an error here
+// or the sheet becomes a way to write dead data into the game.
+}).strict()
 
 const checkSchema = z.object({
   role: roleEnum,
@@ -54,6 +66,14 @@ const eventSchema = z.object({
   tags: z.array(z.string()).min(1),
 })
 
+/**
+ * Eras are mostly decades, and the exceptions are the point: a fictional
+ * character has no decade and an abstraction has no century. The list is closed
+ * so that "1960's" or "modern" is caught rather than quietly becoming a
+ * twenty-seventh era nobody meant to create.
+ */
+const ERA_WORDS = ['Antiquity', 'Medieval', 'Modern', 'Fictional', 'Internet']
+
 const errors: string[] = []
 const fail = (msg: string) => errors.push(msg)
 
@@ -67,6 +87,12 @@ for (const [i, p] of rawPoliticians.entries()) {
 for (const [i, e] of rawEvents.entries()) {
   const parsed = eventSchema.safeParse(e)
   if (!parsed.success) fail(`event[${i}] ${e?.id ?? '?'}: ${parsed.error.issues.map((x) => `${x.path.join('.')} ${x.message}`).join('; ')}`)
+}
+
+for (const p of rawPoliticians) {
+  if (typeof p.era === 'string' && !/^\d{3,4}s$/.test(p.era) && !ERA_WORDS.includes(p.era)) {
+    fail(`politician ${p.id}: era "${p.era}" is neither a decade nor one of ${ERA_WORDS.join(', ')}`)
+  }
 }
 
 /**
