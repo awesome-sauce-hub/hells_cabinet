@@ -40,5 +40,16 @@
     }
   ],
 
+  /**
+   * The game's own name. Both are custom domains rather than routes, so
+   * Cloudflare owns the DNS record and the certificate for each; www redirects
+   * to the apex in the worker so there is one canonical URL rather than two
+   * copies of the same game.
+   */
+  "routes": [
+    { "pattern": "hellscabinet.com", "custom_domain": true },
+    { "pattern": "www.hellscabinet.com", "custom_domain": true }
+  ],
+
   "observability": { "enabled": true }
 }

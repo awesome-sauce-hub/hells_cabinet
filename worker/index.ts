@@ -18,7 +18,17 @@ interface Env {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const { pathname } = new URL(request.url)
+    const url = new URL(request.url)
+    const { pathname } = url
+
+    // One canonical host. Both names are attached to this worker, and a game
+    // whose whole distribution is people sending each other links should not
+    // have two spellings of every link in circulation.
+    if (url.hostname === 'www.hellscabinet.com') {
+      url.hostname = 'hellscabinet.com'
+      return Response.redirect(url.toString(), 308)
+    }
+
     if (pathname === '/api/narrate') return narrate(request, env.NARRATE_BURST)
 
     // Anything else under /api is a route that does not exist. Without this it
