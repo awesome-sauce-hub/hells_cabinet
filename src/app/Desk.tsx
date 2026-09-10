@@ -10,7 +10,11 @@ export function Masthead({ isDaily, seed }: { isDaily: boolean; seed: string }) 
     <>
       <header className="masthead">
         <div className="edition"><span className="edition-dot" />{isDaily ? 'The daily cabinet game' : 'An unscheduled cabinet meeting'}<span>{isDaily ? seed.split('-').reverse().join('.') : 'Free play'}</span></div>
-        <div className="wordmark"><h1>Hell’s Cabinet<span className="wordmark-dot">.</span></h1><p>Great power. Questionable personnel.</p></div>
+        <div className="wordmark">
+          {/* Nixon, pinned to the masthead like everything else on this board. */}
+          <img className="wordmark-mark" src="/mark.png" alt="" width={46} height={46} />
+          <div><h1>Hell’s Cabinet<span className="wordmark-dot">.</span></h1><p>Great power. Questionable personnel.</p></div>
+        </div>
         <button className="help-button" onClick={() => setHelp(!help)} aria-expanded={help} aria-controls="how-to-play"><Icon name={help ? 'close' : 'help'} />How to play</button>
       </header>
       {help && (
