@@ -28,7 +28,7 @@ export const roleVerdictSchema = z.object({
 export const narrationSchema = z.object({
   /** Exactly one judgement per post, whether or not the crisis tested it. */
   verdicts: z.array(roleVerdictSchema).length(ROLES.length),
-  beats: z.array(beatSchema).min(4).max(10),
+  beats: z.array(beatSchema).min(4).max(12),
 })
 export type Narration = z.infer<typeof narrationSchema>
 

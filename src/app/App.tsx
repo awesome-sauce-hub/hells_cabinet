@@ -228,7 +228,7 @@ function SharedRun({ sent, onPlay }: { sent: SharedCabinet; onPlay: () => void }
         <div className="sim-actions">
           <button className="primary" onClick={onPlay}>Play this crisis yourself <Icon name="arrow" /></button>
         </div>
-        <p className="brief-rules">The same crisis, dealt the same way: six hopefuls a round, five seats, one reshuffle. See if you can do better than that.</p>
+        <p className="brief-rules">The same crisis, dealt the same way: six hopefuls a round, six seats, one reshuffle. See if you can do better than that.</p>
       </div>
     </div>
   )
@@ -278,7 +278,7 @@ function Briefing({ run, isDaily, onBegin }: {
             <p className="demand-sealed">One further demand arrives partway through. It is not in this file.</p>
           </div>
           <button className="primary begin-button" onClick={onBegin}>Assemble your cabinet <Icon name="arrow" /></button>
-          <p className="brief-rules">Five rounds. Six candidates each. One appointment per round.</p>
+          <p className="brief-rules">Six rounds. Six candidates each. One appointment per round.</p>
           <span className="confidential-stamp" aria-hidden="true">EYES ONLY</span>
         </section>
         <p className="board-handwriting">Pin your hopes on the right people.</p>

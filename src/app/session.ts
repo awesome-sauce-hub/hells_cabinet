@@ -46,11 +46,22 @@ const KEY = 'hells-cabinet:run'
  * A version-1 save replays the same action log into a different set of
  * candidates, so it has to be discarded rather than resumed.
  *
+ * 6: the daily deals from a shuffled pack instead of drawing each morning, so
+ * a date now names a different crisis than it did. A save from before it would
+ * replay its action log against the wrong event entirely.
+ *
  * 3: the run-ender became a one-in-ten gamble rolled off the draft's stream.
  * A version-2 save that ended on him replays into a government still standing,
  * and any save made after him draws from a stream one number further on.
+ *
+ * 4: the deputy became the Spymaster and two other seats were renamed. A
+ * version-3 save's action log places figures into posts that no longer exist,
+ * which would resume as a cabinet with a hole in it.
+ *
+ * 5: the Attorney-General made it six seats, so the draft runs a sixth round.
+ * A version-4 log fills five posts and stops.
  */
-const VERSION = 3
+const VERSION = 6
 
 /**
  * Changing the roster or the events changes what a seed deals, so a save from
@@ -64,6 +75,23 @@ export const CONTENT_FINGERPRINT = hashString(
 
 export function isDaily(ref: RunRef): boolean {
   return ref.eventId === null && ref.seed === todayKey()
+}
+
+/**
+ * Whether a save is a daily that has been overtaken by the calendar.
+ *
+ * The daily is seeded by the date, so a save from yesterday names yesterday's
+ * crisis. Resuming it is not resuming a game - it is refusing to let the day
+ * turn over. Nothing here checked the date, so the first player to finish a
+ * daily was pinned to it: they came back the next morning, got their own
+ * finished verdict screen again, and with the crisis picker gone there was no
+ * way forward from it at all.
+ *
+ * Only dailies expire. A shared link carries its own seed and its own crisis,
+ * and is no more stale tomorrow than it was when it was sent.
+ */
+export function isStaleDaily(ref: RunRef, today = todayKey()): boolean {
+  return ref.eventId === null && ref.seed !== today
 }
 
 /** Storage is unavailable in some browsers and private modes; never throw. */
@@ -92,6 +120,10 @@ export function loadRun(): SavedRun | null {
     if (saved.version !== VERSION || saved.content !== CONTENT_FINGERPRINT) return null
     if (typeof saved.seed !== 'string' || !Array.isArray(saved.actions)) return null
     if (saved.eventId !== null && !EVENTS.some((e) => e.id === saved.eventId)) return null
+    // Yesterday's daily is not this game. Discarding it here rather than in the
+    // caller means every entry point gets today's crisis, including a reload
+    // that happens to cross midnight mid-draft.
+    if (isStaleDaily({ seed: saved.seed, eventId: saved.eventId })) return null
     return saved
   } catch {
     return null

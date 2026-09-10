@@ -61,7 +61,7 @@ export function DeskAside({ event, showBriefing }: { event: GameEvent; showBrief
           </details>
         </section>
       ) : (
-        <div className="desk-note"><span className="pushpin" aria-hidden="true" /><p>Six candidates.<br />Five seats.<br />What could<br />possibly go wrong?</p><span className="note-signature">— the electorate</span></div>
+        <div className="desk-note"><span className="pushpin" aria-hidden="true" /><p>Six candidates.<br />Six seats.<br />What could<br />possibly go wrong?</p><span className="note-signature">— the electorate</span></div>
       )}
     </aside>
   )

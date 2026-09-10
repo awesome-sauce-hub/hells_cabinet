@@ -40,7 +40,7 @@ describe('turning verdicts into a score', () => {
   it('weights a post the event cares about more heavily', () => {
     const heavy: RoleVerdict[] = [
       { role: 'President', verdict: 'disaster', reason: '', weight: 3 },
-      { role: 'Treasurer', verdict: 'triumph', reason: '', weight: 1 },
+      { role: 'Chancellor', verdict: 'triumph', reason: '', weight: 1 },
     ]
     const even: RoleVerdict[] = heavy.map((v) => ({ ...v, weight: 1 }))
     expect(scoreFrom(heavy)).toBeLessThan(scoreFrom(even))
@@ -68,7 +68,7 @@ describe('chemistry, which never depended on the numbers', () => {
   it('penalises a cabinet of rivals', () => {
     const a = dummy('a', { rivals: ['b'] })
     const b = dummy('b')
-    const roster = { ...rosterOf(a), Treasurer: b } as Roster
+    const roster = { ...rosterOf(a), Chancellor: b } as Roster
     const result = chemistry(roster)
     expect(result.effects.some((e) => e.id.startsWith('rivalry'))).toBe(true)
     expect(result.total).toBeLessThan(0)
@@ -85,21 +85,21 @@ describe('chemistry, which never depended on the numbers', () => {
   it('will not depose a President who is not out of their depth', () => {
     const strong = dummy('strong', { tier: 'titan' })
     const grasping = dummy('grasping', { tier: 'titan', traits: ['paranoid', 'cunning'] })
-    const roster = { ...rosterOf(strong), VicePresident: grasping } as Roster
+    const roster = { ...rosterOf(strong), Spymaster: grasping } as Roster
     expect(chemistry(roster).coup).toBeNull()
   })
 
   it('deposes a President who is, when the deputy is the grasping sort', () => {
     const weak = dummy('weak', { tier: 'liability' })
     const grasping = dummy('grasping', { tier: 'titan', traits: ['paranoid', 'cunning'] })
-    const roster = { ...rosterOf(weak), VicePresident: grasping } as Roster
-    expect(chemistry(roster).coup?.usurper).toBe('VicePresident')
+    const roster = { ...rosterOf(weak), Spymaster: grasping } as Roster
+    expect(chemistry(roster).coup?.usurper).toBe('Spymaster')
   })
 
   it('never lets furniture mount a coup', () => {
     const weak = dummy('weak', { tier: 'liability' })
     const thing = dummy('thing', { tier: 'titan', category: 'object', traits: ['paranoid', 'cunning'] })
-    const roster = { ...rosterOf(weak), VicePresident: thing } as Roster
+    const roster = { ...rosterOf(weak), Spymaster: thing } as Roster
     expect(chemistry(roster).coup).toBeNull()
   })
 })

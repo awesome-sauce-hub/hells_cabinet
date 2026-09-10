@@ -20,14 +20,62 @@ export const QUALITY_LABEL: Record<Quality, string> = {
   force: 'the decision taken',
 }
 
+/**
+ * The six seats, one lever of state power each: the decision, what is known,
+ * violence, the law, the story, and the money.
+ *
+ * The deputy used to sit second and was cut because it owned no question. Every
+ * demand ever written for it was a President demand handed down a rank, so a
+ * player could bring nothing to the seat that they were not already bringing to
+ * the chair. The Spymaster owns concealment instead, which is the one domain
+ * the crisis can test that the chair cannot - and it is the natural home for the
+ * Act 2 complication, since that beat is about what surfaces and when.
+ *
+ * The Attorney-General was added because integrity is the most-demanded quality
+ * in the events and was the only one no seat owned - it was being smeared
+ * across the chair, the ledger and the podium because it had nowhere to sit.
+ * The law is also the one thing that can be technically available and still the
+ * wrong answer, which is a demand no other post can carry.
+ */
 export const ROLES = [
   'President',
-  'VicePresident',
+  'Spymaster',
   'General',
-  'PropagandaMinister',
-  'Treasurer',
+  'AttorneyGeneral',
+  'PressSecretary',
+  'Chancellor',
 ] as const
 export type Role = (typeof ROLES)[number]
+
+/**
+ * How a seat is spoken about. The keys are identifiers and read like it, so
+ * anything a person or the adjudicator sees goes through here instead.
+ */
+export const ROLE_LABEL: Record<Role, string> = {
+  President: 'President',
+  Spymaster: 'Spymaster',
+  General: 'General',
+  AttorneyGeneral: 'Attorney-General',
+  PressSecretary: 'Press Secretary',
+  Chancellor: 'Chancellor',
+}
+
+/**
+ * What a seat is for, as opposed to what one particular crisis wants from it.
+ *
+ * The briefing tells the player what this crisis is asking of each post; it
+ * never told them what the post is. A player who has not worked out that the
+ * General's demands are usually a question about restraint is guessing, and
+ * guessing is what the demands were added to stop.
+ */
+export const ROLE_BRIEF: Record<Role, string> = {
+  President: 'Takes the decision, and carries it afterwards.',
+  Spymaster: 'Knows first, and decides how much of it the room hears.',
+  General: 'Holds the option of force, and the discipline to leave it on the table.',
+  AttorneyGeneral: 'Says whether it is lawful, and what it costs when it is done anyway.',
+  PressSecretary: 'Decides which version of events the country gets.',
+  Chancellor: 'Works out what it costs, and who ends up paying.',
+}
 
 export const CATEGORIES = ['politician', 'wildcard', 'object'] as const
 /**

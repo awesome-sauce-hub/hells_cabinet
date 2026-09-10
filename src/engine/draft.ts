@@ -14,10 +14,13 @@ export const BENCH_TOKENS = 1
  */
 const ROLE_AFFINITY: Record<Role, string[]> = {
   President: ['beloved', 'showman', 'statesman'],
-  VicePresident: ['dealmaker', 'loyalist', 'paranoid'],
+  Spymaster: ['paranoid', 'cunning', 'strategist'],
   General: ['warhawk', 'soldier', 'strategist'],
-  PropagandaMinister: ['demagogue', 'showman', 'scandal-magnet'],
-  Treasurer: ['technocrat', 'banker', 'dealmaker'],
+  // The chair's own man is the joke this seat is built on, so loyalist sits
+  // here rather than nowhere.
+  AttorneyGeneral: ['statesman', 'technocrat', 'loyalist'],
+  PressSecretary: ['demagogue', 'showman', 'scandal-magnet'],
+  Chancellor: ['technocrat', 'banker', 'dealmaker'],
 }
 
 const AFFINITY_BONUS = 2.5

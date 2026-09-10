@@ -1,15 +1,10 @@
 import { useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
+import { ROLE_LABEL } from '../engine/types.js'
 import type { Politician, Role } from '../engine/types.js'
 import portraitSources from './portraits.json'
 
-export const ROLE_LABEL: Record<Role, string> = {
-  President: 'President',
-  VicePresident: 'Vice President',
-  General: 'General',
-  PropagandaMinister: 'Propaganda Minister',
-  Treasurer: 'Treasurer',
-}
+export { ROLE_LABEL }
 
 export function Icon({ name, size = 18 }: { name: 'arrow' | 'shuffle' | 'check' | 'close' | 'help' | 'file' | 'pin'; size?: number }) {
   const paths = {
@@ -88,11 +83,10 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
   /** Lit while this role is the one acting, during the simulation. */
   activeRole?: Role
   /**
-   * What the crisis wants from each post, shown on the seats still vacant.
-   * The player is choosing which chair to put someone in, so the chair is
-   * where the demand has to be legible - reading it once on the briefing and
-   * then holding five of them in your head is not a decision, it is a memory
-   * test.
+   * What the crisis wants from each post. Not printed on the seat: five
+   * paragraphs of demand text turned the rail into a wall and pushed the
+   * seats themselves off the screen. The briefing carries the words; the seat
+   * carries them only into its accessible name, where they cost no space.
    */
   demands?: Partial<Record<Role, { text: string }>>
 }) {
@@ -111,7 +105,6 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
               <span className="role-label">{ROLE_LABEL[role]}</span>
               <span className="slot-content">
                 {picked ? <><Portrait key={picked.id} figure={picked} compact /><span className="appointed-name">{picked.name}<span className="appointed-label"><Icon name="check" size={10} /> Appointed</span></span></> : <><span className="empty-photo" aria-hidden="true"><Icon name="pin" size={19} /></span><span className="slot-prompt">{droppable ? 'Pin here' : 'Position vacant'}</span></>}
-                {!picked && demand && <span className="slot-demand">{demand.text}</span>}
               </span>
             </>
           )

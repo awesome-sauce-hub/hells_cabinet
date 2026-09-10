@@ -96,7 +96,10 @@ export function chemistry(roster: Roster): ChemistryResult {
 }
 
 /**
- * An ambitious deputy takes the chair from a President who cannot hold it.
+ * Somebody in the room takes the chair from a President who cannot hold it.
+ *
+ * The Spymaster and the General are the two seats with the means: one knows
+ * what everyone did, the other has the soldiers.
  *
  * This used to compare two presidential scores and fire on a margin. With no
  * numbers to compare it asks the question the numbers were standing in for:
@@ -115,7 +118,7 @@ function coupCheck(roster: Roster): { usurper: Role; reason: string } | null {
   // joke of an object in the chair is that nothing at all happens.
   if (president.category === 'object') return null
 
-  for (const role of ['VicePresident', 'General'] as const) {
+  for (const role of ['Spymaster', 'General'] as const) {
     const p = roster[role]
     if (p.category === 'object') continue
     const grasping = GRASPING.filter((t) => p.traits.includes(t))

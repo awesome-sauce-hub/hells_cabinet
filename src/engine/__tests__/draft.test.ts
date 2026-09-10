@@ -24,10 +24,10 @@ describe('wave draft', () => {
   it('places a candidate in the post the player chose, not a fixed order', () => {
     const s = startDraft(seedFrom('b'), figures)
     const who = s.candidates.find((c) => !c.endsRun)!
-    const next = placeCandidate(s, who.id, 'Treasurer')
-    expect(next.picks.Treasurer?.id).toBe(who.id)
+    const next = placeCandidate(s, who.id, 'Chancellor')
+    expect(next.picks.Chancellor?.id).toBe(who.id)
     expect(next.picks.President).toBeUndefined()
-    expect(openRoles(next)).not.toContain('Treasurer')
+    expect(openRoles(next)).not.toContain('Chancellor')
   })
 
   it('advances a wave and retires everyone who was on the table', () => {
@@ -137,7 +137,7 @@ describe('wave draft', () => {
     const s = startDraft(seedFrom('g'), figures)
     const certain = { ...figures.find((p) => p.endsRun)!, endsRunChance: undefined }
     s.candidates = [certain, ...s.candidates.slice(1)]
-    const next = placeCandidate(s, certain.id, 'VicePresident')
+    const next = placeCandidate(s, certain.id, 'Spymaster')
     expect(next.endedBy?.id).toBe(certain.id)
     expect(next.candidates).toHaveLength(0)
     expect(next.wave).toBe(0)

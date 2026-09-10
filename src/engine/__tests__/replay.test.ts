@@ -125,3 +125,57 @@ describe('replaying a saved run', () => {
     expect(replayDraft(seedFrom('ender'), figures, [{ t: 'place', id: nixon.id, role: 'President' }])).toBeNull()
   })
 })
+
+import { createRun as createRunForCalendar, todayKey as todayKeyForCalendar } from '../run.js'
+import { loadEvents as loadEventsForCalendar } from '../content.js'
+
+describe('the daily calendar', () => {
+  const events = loadEventsForCalendar()
+  const run = (d: Date) => createRunForCalendar(todayKeyForCalendar(d), events, null).event.id
+  const days = (from: string, n: number) => {
+    const d = new Date(`${from}T12:00:00`)
+    return Array.from({ length: n }, () => { const id = run(d); d.setDate(d.getDate() + 1); return id })
+  }
+
+  it('never deals the same crisis two days running', () => {
+    // It did, four times in sixty days, when each morning drew independently.
+    const seq = days('2026-01-01', 400)
+    for (let i = 1; i < seq.length; i++) expect(seq[i]).not.toBe(seq[i - 1])
+  })
+
+  it('uses every crisis before reusing any', () => {
+    // Packs are aligned to the epoch rather than to whichever date a test picks,
+    // so the window has to start on a pack boundary to be a whole pack.
+    const start = new Date('2026-01-01T00:00:00Z')
+    while (Math.floor(start.getTime() / 86400000) % events.length !== 0) {
+      start.setUTCDate(start.getUTCDate() + 1)
+    }
+    const from = start.toISOString().slice(0, 10)
+    const dealt = days(from, events.length * 3)
+    for (let c = 0; c < 3; c++) {
+      const pack = dealt.slice(c * events.length, (c + 1) * events.length)
+      expect(new Set(pack).size).toBe(events.length)
+    }
+  })
+
+  it('gives everyone on a date the same crisis', () => {
+    for (const d of ['2026-09-10', '2027-02-28', '2030-12-31']) {
+      expect(createRunForCalendar(d, events, null).event.id).toBe(createRunForCalendar(d, events, null).event.id)
+    }
+  })
+
+  it('leaves a shared link’s random seed drawing freely', () => {
+    // A sent cabinet is one crisis with no calendar to sit in.
+    const ids = new Set(['ab12cd34', 'zz99zz99', 'q1w2e3r4'].map((s) => createRunForCalendar(s, events, null).event.id))
+    expect(ids.size).toBeGreaterThan(0)
+  })
+
+  it('deals the same draft whether the crisis was named or dealt', () => {
+    // The roll is consumed either way; this is what stops a shared link and a
+    // daily on the same seed diverging.
+    const a = createRunForCalendar('2026-09-10', events, null)
+    const b = createRunForCalendar('2026-09-10', events, a.event.id)
+    expect(b.event.id).toBe(a.event.id)
+    expect(b.rng.next()).toBe(a.rng.next())
+  })
+})

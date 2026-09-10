@@ -25,19 +25,23 @@ const SUCCESS: Record<Role, string[]> = {
     '{who} says almost nothing for six hours, then says the one sentence that works.',
     '{who} finds the other side a way to back down without admitting they backed down.',
   ],
-  VicePresident: [
-    '{who} keeps the room awake, fed, and speaking to each other.',
-    '{who} quietly removes two bad options before anyone can fall in love with them.',
+  Spymaster: [
+    '{who} knew about it on Tuesday and says so before anyone has to ask.',
+    '{who} produces the file, and the file is the one that settles it.',
   ],
   General: [
     '{who} is asked for options and declines to provide the exciting one.',
     '{who} moves nothing, which turns out to be the manoeuvre.',
   ],
-  PropagandaMinister: [
+  AttorneyGeneral: [
+    '{who} finds the power was there all along, in an act nobody had read since 1912.',
+    '{who} says it is lawful, and is willing to put that in writing.',
+  ],
+  PressSecretary: [
     '{who} reframes the whole thing before the evening bulletin.',
     'By morning {who} has everyone using a word nobody used yesterday.',
   ],
-  Treasurer: [
+  Chancellor: [
     '{who} produces the actual number, and the actual number is survivable.',
     '{who} has already worked out who pays, and it is not us.',
   ],
@@ -48,19 +52,23 @@ const FAILURE: Record<Role, string[]> = {
     '{who} decides to sleep on it. The situation does not.',
     '{who} gives a speech. It is a very good speech about the wrong problem.',
   ],
-  VicePresident: [
-    '{who} takes a position, then takes the opposite one to a different room.',
-    '{who} is discovered to have been briefing against the plan since Tuesday.',
+  Spymaster: [
+    '{who} knew about it on Tuesday and mentions this on Friday.',
+    '{who} has a file on everyone in the room and it is the only thing they brought.',
   ],
   General: [
     '{who} presents three options, all of which are the same option.',
     '{who} has already moved the fleet. Nobody asked {who} to move the fleet.',
   ],
-  PropagandaMinister: [
+  AttorneyGeneral: [
+    '{who} advises that it is legal, having been asked whether it is legal by the person who wants it.',
+    '{who} discovers the power exists only in the version of the act that was never passed.',
+  ],
+  PressSecretary: [
     '{who} denies something nobody had accused anyone of yet.',
     "{who}'s statement is technically accurate and completely unbelievable.",
   ],
-  Treasurer: [
+  Chancellor: [
     '{who} explains the mechanism twice. Nobody in the room is any wiser.',
     '{who} discovers the figure is worse than the figure they brought.',
   ],
