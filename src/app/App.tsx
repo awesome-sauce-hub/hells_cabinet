@@ -11,17 +11,18 @@ import { clearRun, isDaily, linkTo, loadRun, runFromUrl, saveRun, sharedFromUrl 
 import type { RunRef, SavedPhase, SharedCabinet } from './session.js'
 import { finishDraft, isDraftComplete, openRoles } from '../engine/draft.js'
 import type { DraftState } from '../engine/draft.js'
+import { demandByRole, demandsFor } from '../engine/demands.js'
 import { applyAction, replayDraft } from '../engine/replay.js'
 import type { DraftAction } from '../engine/replay.js'
-import { createRun, randomSeed, todayKey } from '../engine/run.js'
+import { createRun, todayKey } from '../engine/run.js'
 import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
 import { tierFor } from '../engine/verdict.js'
 import type { RoleVerdict } from '../engine/verdict.js'
 import { ROLES } from '../engine/types.js'
-import type { Role } from '../engine/types.js'
+import type { GameEvent, Role } from '../engine/types.js'
 
-type Phase = SavedPhase | 'choose' | 'shared'
+type Phase = SavedPhase | 'shared'
 
 /**
  * How long the opening beat waits for a written story before the game goes on
@@ -70,7 +71,7 @@ export default function App() {
    * from localStorage a week ago, so resuming cannot drift from playing.
    */
   const draft = useMemo(
-    () => (phase === 'briefing' || phase === 'choose' || phase === 'shared' ? null : replayDraft(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)),
+    () => (phase === 'briefing' || phase === 'shared' ? null : replayDraft(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)),
     [ref, actions, phase],
   )
   const result = useMemo(() => {
@@ -83,7 +84,7 @@ export default function App() {
   }, [draft, run.event, verdicts])
 
   // A save that cannot be replayed is a save that would resume the wrong game.
-  const broken = phase !== 'briefing' && phase !== 'choose' && phase !== 'shared' && draft === null
+  const broken = phase !== 'briefing' && phase !== 'shared' && draft === null
 
   useEffect(() => {
     if (broken) return
@@ -91,7 +92,7 @@ export default function App() {
     // or clear the run this player has of their own.
     if (phase === 'shared') return
     if (phase === 'briefing' && actions.length === 0) clearRun()
-    else saveRun({ ...ref, actions, phase: phase === 'choose' ? 'briefing' : phase, ...(verdicts ? { verdicts } : {}) })
+    else saveRun({ ...ref, actions, phase, ...(verdicts ? { verdicts } : {}) })
   }, [ref, actions, phase, verdicts, broken])
 
   function act(action: DraftAction) {
@@ -133,22 +134,18 @@ export default function App() {
       {broken ? (
         <Unresumable onFresh={() => startRun({ seed: todayKey(), eventId: null })} />
       ) : (<>
-      {phase === 'choose' && (
-        <ChooseEvent current={run.event.id} onPick={(id) => startRun({ seed: randomSeed(), eventId: id })}
-          onDaily={() => startRun({ seed: todayKey(), eventId: null })} isDaily={daily} />
-      )}
-
       {phase === 'shared' && opening.sent && (
         <SharedRun sent={opening.sent} onPlay={() => startRun(opening.sent!.ref)} />
       )}
 
       {phase === 'briefing' && (
-        <Briefing run={run} isDaily={daily} onBegin={() => setPhase('draft')} onChoose={() => setPhase('choose')} />
+        <Briefing run={run} isDaily={daily} onBegin={() => setPhase('draft')} />
       )}
 
       {phase === 'draft' && draft && (
         <Draft
           draft={draft}
+          event={run.event}
           onPlace={(id, role) => act({ t: 'place', id, role })}
           onRespin={() => act({ t: 'respin' })}
           onBench={(id) => act({ t: 'bench', id })}
@@ -156,7 +153,7 @@ export default function App() {
       )}
 
       {phase === 'gameover' && draft?.endedBy && (
-        <GameOver figure={draft.endedBy} onAgain={() => setPhase('choose')} />
+        <GameOver figure={draft.endedBy} />
       )}
 
       {phase === 'sim' && result && (
@@ -164,7 +161,7 @@ export default function App() {
       )}
 
       {phase === 'verdict' && result && (
-        <Verdict result={result} runRef={ref} isDaily={daily} onChoose={() => setPhase('choose')} />
+        <Verdict result={result} runRef={ref} isDaily={daily} />
       )}
       </>)}
       </div>
@@ -251,49 +248,15 @@ function Unresumable({ onFresh }: { onFresh: () => void }) {
   )
 }
 
-function ChooseEvent({ current, isDaily, onPick, onDaily }: {
-  current: string
-  isDaily: boolean
-  onPick: (id: string) => void
-  onDaily: () => void
-}) {
-  return (
-    <div className="briefing-area">
-      <div className="board-title"><h2>Pick your crisis.</h2><p>Ten of them. None went well the first time.</p></div>
-      <ul className="crisis-list">
-        {EVENTS.map((event) => (
-          <li key={event.id}>
-            <button className={`crisis ${event.id === current ? 'current' : ''}`} onClick={() => onPick(event.id)}>
-              <span className="pushpin" aria-hidden="true" />
-              <span className="crisis-year">{event.year}</span>
-              <span className="crisis-body">
-                <span className="crisis-title">{event.title}</span>
-                <span className="crisis-where">{EVENT_LOCATIONS[event.id]?.label ?? 'Location not yet mapped'}</span>
-              </span>
-              <span className="crisis-go" aria-hidden="true"><Icon name="arrow" size={16} /></span>
-            </button>
-          </li>
-        ))}
-      </ul>
-      {!isDaily && (
-        <div className="sim-actions">
-          <button onClick={onDaily}>Back to today’s crisis</button>
-        </div>
-      )}
-    </div>
-  )
-}
-
-function Briefing({ run, isDaily, onBegin, onChoose }: {
+function Briefing({ run, isDaily, onBegin }: {
   run: ReturnType<typeof createRun>
   isDaily: boolean
   onBegin: () => void
-  onChoose: () => void
 }) {
   const { event } = run
   return (
     <div className="board-layout briefing-layout">
-      <SlotStrip order={ROLES} picks={{}} />
+      <SlotStrip order={ROLES} picks={{}} demands={demandByRole(event)} />
       <div className="briefing-area">
         <div className="board-title"><h2>Your country needs a cabinet.</h2><p>Qualifications are… negotiable.</p></div>
         <section className="briefing-paper">
@@ -302,20 +265,31 @@ function Briefing({ run, isDaily, onBegin, onChoose }: {
           <h3>{event.title}</h3>
           <p className="dossier">{event.dossier}</p>
           <p className="hint">{event.briefing_hint}</p>
-          <div className="brief-scrutiny"><span>Under scrutiny</span><p>{event.spotlight.map((role) => ROLE_LABEL[role]).join(' / ')}</p></div>
+          <div className="brief-scrutiny">
+            <span>What this one will ask for</span>
+            <ul className="demand-list">
+              {demandsFor(event).map((d) => (
+                <li key={d.role} className={event.spotlight.includes(d.role) ? 'spotlit' : ''}>
+                  <span className="demand-role">{ROLE_LABEL[d.role]}</span>
+                  <span className="demand-text">{d.text}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="demand-sealed">One further demand arrives partway through. It is not in this file.</p>
+          </div>
           <button className="primary begin-button" onClick={onBegin}>Assemble your cabinet <Icon name="arrow" /></button>
           <p className="brief-rules">Five rounds. Six candidates each. One appointment per round.</p>
           <span className="confidential-stamp" aria-hidden="true">EYES ONLY</span>
         </section>
         <p className="board-handwriting">Pin your hopes on the right people.</p>
-        <div className="sim-actions"><button onClick={onChoose}>Play a different crisis</button></div>
       </div>
     </div>
   )
 }
 
-function Draft({ draft, onPlace, onRespin, onBench }: {
+function Draft({ draft, event, onPlace, onRespin, onBench }: {
   draft: DraftState
+  event: GameEvent
   onPlace: (id: string, role: Role) => void
   onRespin: () => void
   onBench: (id: string) => void
@@ -325,6 +299,7 @@ function Draft({ draft, onPlace, onRespin, onBench }: {
   const open = openRoles(draft)
   const filled = ROLES.length - open.length
   const candidate = draft.candidates.find((c) => c.id === selected)
+  const demands = useMemo(() => demandByRole(event), [event])
   useEffect(() => { heading.current?.focus() }, [draft.wave])
 
   function place(role: Role, draggedId?: string) {
@@ -336,7 +311,7 @@ function Draft({ draft, onPlace, onRespin, onBench }: {
 
   return (
     <div className="board-layout">
-      <SlotStrip order={ROLES} picks={draft.picks} armed={!!candidate} selectedName={candidate?.name} onPlace={place} />
+      <SlotStrip order={ROLES} picks={draft.picks} armed={!!candidate} selectedName={candidate?.name} onPlace={place} demands={demands} />
       <div className="draft-area">
         <div className="draft-heading">
           <div><h2 ref={heading} tabIndex={-1}>Make your appointments.</h2><p>Six hopefuls. One seat to fill.</p></div>
@@ -356,13 +331,15 @@ function Draft({ draft, onPlace, onRespin, onBench }: {
 }
 
 /** The one card that ends a run the moment it is appointed. */
-function GameOver({
-  figure,
-  onAgain,
-}: {
-  figure: NonNullable<DraftState['endedBy']>
-  onAgain: () => void
-}) {
+/**
+ * There is no button here on purpose.
+ *
+ * The run-ender is a one-in-ten bet the player chose to take, rolled off the
+ * draft's own seeded stream so it cannot be re-rolled by reloading. A "try
+ * again" button would hand back the thing the gamble was supposed to cost, and
+ * with one crisis a day there is nothing else to offer them until tomorrow.
+ */
+function GameOver({ figure }: { figure: NonNullable<DraftState['endedBy']> }) {
   return (
     <>
       <div className="panel gameover">
@@ -370,9 +347,7 @@ function GameOver({
         <h1>{figure.name}</h1>
         <p className="said">{figure.endsRun}</p>
       </div>
-      <div className="row mt">
-        <button className="primary" onClick={onAgain}>Try that again</button>
-      </div>
+      <p className="said mt">That was today's. There will be another one tomorrow.</p>
     </>
   )
 }
@@ -547,12 +522,10 @@ function Verdict({
   result,
   runRef,
   isDaily,
-  onChoose,
 }: {
   result: Resolution
   runRef: RunRef
   isDaily: boolean
-  onChoose: () => void
 }) {
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
   // The link carries the seed, so whoever opens it is dealt the same six faces
@@ -632,7 +605,7 @@ function Verdict({
       {copyState === 'failed' && <p className="copy-fallback" role="status">Copy wasn’t available. Select and copy this result: <span>{share}</span></p>}
       <div className="row mt">
         <button className="primary" onClick={copy}>{copyState === 'copied' ? 'Copied' : 'Copy result and link'}</button>
-        <button onClick={onChoose}>Play another crisis</button>
+        <span className="next-edition">Next crisis tomorrow.</span>
       </div>
     </>
   )

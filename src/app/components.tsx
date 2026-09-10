@@ -77,7 +77,7 @@ export function CandidateCard({ figure, selected, onSelect, onDragSelect, onBenc
   )
 }
 
-export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, heading = 'Your cabinet', note, activeRole }: {
+export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, heading = 'Your cabinet', note, activeRole, demands }: {
   order: readonly Role[]
   picks: Partial<Record<Role, Politician>>
   armed?: boolean
@@ -87,6 +87,14 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
   note?: ReactNode
   /** Lit while this role is the one acting, during the simulation. */
   activeRole?: Role
+  /**
+   * What the crisis wants from each post, shown on the seats still vacant.
+   * The player is choosing which chair to put someone in, so the chair is
+   * where the demand has to be legible - reading it once on the briefing and
+   * then holding five of them in your head is not a decision, it is a memory
+   * test.
+   */
+  demands?: Partial<Record<Role, { text: string }>>
 }) {
   const [over, setOver] = useState<Role | null>(null)
   return (
@@ -95,6 +103,7 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
       <div className="slots">
         {order.map((role, index) => {
           const picked = picks[role]
+          const demand = demands?.[role]
           const droppable = !picked && armed
           const inner = (
             <>
@@ -102,11 +111,13 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
               <span className="role-label">{ROLE_LABEL[role]}</span>
               <span className="slot-content">
                 {picked ? <><Portrait key={picked.id} figure={picked} compact /><span className="appointed-name">{picked.name}<span className="appointed-label"><Icon name="check" size={10} /> Appointed</span></span></> : <><span className="empty-photo" aria-hidden="true"><Icon name="pin" size={19} /></span><span className="slot-prompt">{droppable ? 'Pin here' : 'Position vacant'}</span></>}
+                {!picked && demand && <span className="slot-demand">{demand.text}</span>}
               </span>
             </>
           )
           const className = `slot ${picked ? 'filled' : ''} ${droppable ? 'droppable' : ''} ${over === role && droppable ? 'over' : ''} ${activeRole === role ? 'speaking' : ''}`
-          const label = picked ? `${ROLE_LABEL[role]}: ${picked.name}` : selectedName ? `Appoint ${selectedName} as ${ROLE_LABEL[role]}` : `${ROLE_LABEL[role]}, vacant`
+          const wants = demand ? `, wants ${demand.text}` : ''
+          const label = picked ? `${ROLE_LABEL[role]}: ${picked.name}` : selectedName ? `Appoint ${selectedName} as ${ROLE_LABEL[role]}${wants}` : `${ROLE_LABEL[role]}, vacant${wants}`
 
           // Once the draft is over the rail is a record, not a control: a plain
           // element keeps five dead buttons out of the keyboard's way.

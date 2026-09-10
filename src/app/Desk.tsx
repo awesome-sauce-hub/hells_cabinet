@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { GameEvent } from '../engine/types.js'
 import { Icon, ROLE_LABEL } from './components.js'
+import { demandsFor } from '../engine/demands.js'
 import { EVENT_LOCATIONS, MAP_HEIGHT, MAP_WIDTH, mapFrame, mapPoint } from './eventLocations.js'
 
 export function Masthead({ isDaily, seed }: { isDaily: boolean; seed: string }) {
@@ -50,7 +51,14 @@ export function DeskAside({ event, showBriefing }: { event: GameEvent; showBrief
           <h3>{event.title}</h3>
           <p className="memo-year">{event.year}</p>
           <p>{event.dossier}</p>
-          <details><summary>Read your briefing</summary><p className="memo-hint">{event.briefing_hint}</p><p className="spotlight-copy">Under scrutiny: {event.spotlight.map((role) => ROLE_LABEL[role]).join(', ')}.</p></details>
+          <details><summary>Read your briefing</summary>
+            <p className="memo-hint">{event.briefing_hint}</p>
+            <ul className="demand-list memo-demands">
+              {demandsFor(event).map((d) => (
+                <li key={d.role}><span className="demand-role">{ROLE_LABEL[d.role]}</span><span className="demand-text">{d.text}</span></li>
+              ))}
+            </ul>
+          </details>
         </section>
       ) : (
         <div className="desk-note"><span className="pushpin" aria-hidden="true" /><p>Six candidates.<br />Five seats.<br />What could<br />possibly go wrong?</p><span className="note-signature">— the electorate</span></div>

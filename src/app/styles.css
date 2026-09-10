@@ -111,7 +111,7 @@ h1, h2, h3 { text-wrap: balance; }
 .desk-memo h2 { display: flex; gap: 6px; align-items: center; font-size: 11px; font-weight: 500; margin: 0 0 15px; padding-bottom: 11px; border-bottom: 1px solid #c7c4b4; }
 .desk-memo h3 { font: 400 21px/1.2 var(--typewriter); margin-bottom: 5px; }.memo-year { color: #776f58; font-size: 10px; }
 .desk-memo p:not(.memo-year) { font-size: 11px; line-height: 1.65; }.desk-memo summary { font-size: 10px; cursor: pointer; padding: 9px 0; border-top: 1px solid #cfcbba; }
-.desk-memo .memo-hint { font-style: italic; margin-top: 8px; }.desk-memo .spotlight-copy { font-size: 10px; margin-bottom: 0; }
+.desk-memo .memo-hint { font-style: italic; margin-top: 8px; }
 .paperclip { position: absolute; right: 21px; top: -11px; width: 13px; height: 34px; border: 2px solid #8a8e81; border-radius: 8px; transform: rotate(10deg); box-shadow: 1px 1px 1px #736b5240; }.paperclip::after { content: ''; position: absolute; top: 7px; left: 3px; width: 7px; height: 24px; border: 1px solid #8a8e81; border-radius: 5px; }
 /* The briefing is a single file pinned onto the same board. */
 .briefing-area { padding: 4px 7px 0; }.board-title { text-align: center; margin: 2px 0 35px; }
@@ -120,6 +120,20 @@ h1, h2, h3 { text-wrap: balance; }
 .briefing-paper h3 { font: 400 clamp(27px, 2.4vw, 36px)/1.2 var(--typewriter); margin: 28px 0 18px; max-width: 14ch; }
 .dossier { font-size: 14px; line-height: 1.7; margin-bottom: 17px; }.hint { font-size: 13px; line-height: 1.65; font-style: italic; color: #6f644c; }
 .brief-scrutiny { margin: 24px 0; padding-top: 15px; border-top: 1px solid var(--line); }.brief-scrutiny > span { font-size: 9px; color: #746e58; }.brief-scrutiny p { font-size: 11px; margin: 5px 0 0; }
+/* What the crisis is asking of each post. Typed as a file's own margin notes:
+   the role in the left column, what it wants beside it. */
+.demand-list { list-style: none; margin: 9px 0 0; padding: 0; display: grid; gap: 6px; }
+.demand-list li { display: grid; grid-template-columns: 88px 1fr; gap: 10px; align-items: baseline; font-size: 11px; line-height: 1.45; }
+.demand-role { font-family: var(--typewriter); font-size: 10px; color: #746e58; text-transform: uppercase; letter-spacing: .04em; }
+.demand-text { color: #37332a; }
+/* The posts the event names as spotlit are the ones it leans on hardest. */
+.demand-list li.spotlit .demand-text { color: var(--red); }
+.demand-sealed { font-size: 10px; font-style: italic; color: #8d8874; margin: 12px 0 0; }
+.memo-demands li { grid-template-columns: 74px 1fr; font-size: 10px; }
+/* On a vacant seat, so the choice of chair is made against what the chair wants. */
+.slot-demand { display: block; font-size: 9px; line-height: 1.35; color: #7d7660; margin-top: 4px; }
+.slot.droppable .slot-demand { color: var(--green); }
+.next-edition { font-size: 11px; color: #746e58; align-self: center; }
 .primary { background: var(--green); border-color: var(--green); color: #faf6e7; font-size: 12px; font-weight: 550; padding: 12px 18px; box-shadow: 1px 3px 4px #2f453224; }.primary:hover:not(:disabled) { background: #263f32; border-color: #263f32; }
 .begin-button { display: flex; gap: 18px; align-items: center; }.brief-rules { font-size: 9px; color: #736e5b; max-width: 34ch; margin: 12px 0 0; line-height: 1.5; }
 .confidential-stamp { position: absolute; bottom: 28px; right: 27px; border: 2px solid #99483a80; padding: 4px 7px 0; transform: rotate(-13deg); color: #99483a99; font: 15px var(--typewriter); }
@@ -142,20 +156,6 @@ h1, h2, h3 { text-wrap: balance; }
 /* The story grows a beat at a time, so its controls ride the bottom of the
    viewport instead of walking off the end of a lengthening board. */
 .phase-sim .sim-actions { flex-shrink: 0; }
-/* The crisis picker: ten files pinned in a column, one per scenario. */
-.crisis-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-/* Pinned like every other slip on the board: the pin sits over the year,
-   where a hand would put it on a filing card rather than through the title. */
-.crisis { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 13px 15px; border: 0; background: var(--paper); box-shadow: 2px 4px 7px #5c3c282f; }
-.crisis .pushpin { left: 26px; }
-.crisis:hover:not(:disabled) { background: #fffbed; transform: translateY(-2px); box-shadow: 2px 7px 10px #5c3c2833; }
-.crisis-year { font-family: var(--typewriter); font-size: 13px; color: var(--red); font-variant-numeric: tabular-nums; flex-shrink: 0; width: 34px; }
-.crisis-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
-.crisis-title { font-family: var(--typewriter); font-size: 15px; line-height: 1.2; }
-.crisis-where { font-size: 10px; color: #6a6552; }
-.crisis-go { display: grid; color: #8d8874; }
-.crisis.current { outline: 2px solid var(--green); outline-offset: -2px; }
-@media (max-width: 740px) { .crisis-list { grid-template-columns: 1fr; } }
 .sim-actions .primary { display: inline-flex; gap: 8px; align-items: center; }
 .verdict { text-align: center; padding: 32px 20px; }.verdict .tier { font: 35px var(--typewriter); margin: 13px 0 8px; }.verdict .score { color: #676451; font-size: 13px; font-variant-numeric: tabular-nums; }.grid-squares { font-size: 30px; letter-spacing: 5px; margin: 18px 0; }.tier-Catastrophe, .tier-Debacle { color: var(--bad); }.tier-Triumph, .tier-Legendary { color: var(--good); }
 .table-panel { overflow-x: auto; }table.breakdown { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }table.breakdown th { text-align: left; font-size: 9px; font-weight: 500; color: #64624f; padding: 7px; }table.breakdown td { padding: 9px 7px; border-top: 1px solid #d4cfbb; }table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }.pass { color: var(--good); }.fail { color: var(--bad); }
