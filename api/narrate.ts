@@ -96,9 +96,65 @@ export function userPrompt(req: NarrationRequest): string {
 }
 
 /** The handler proper, in Web terms. Exported so the local server can call it. */
+/**
+ * Who is allowed to spend the API key.
+ *
+ * Every call here is an Opus request, so an endpoint anyone can POST to is an
+ * endpoint anyone can run a bill up on. There is no login to check and there
+ * should not be one - the game asks nothing of the player - so the two things
+ * available are where the request claims to come from and how often it comes.
+ *
+ * Neither is a real authentication and this does not pretend otherwise: a
+ * header is trivially forged by anybody who reads this file. What they stop is
+ * the actual failure, which is the endpoint being scriptable from a browser tab
+ * or hammered in a loop, not a determined person with curl.
+ */
+function sameOrigin(request: Request): boolean {
+  const allowed = process.env.ALLOWED_ORIGIN
+  // Unset in development and in the local server, where the check would only
+  // get in the way of the person running it.
+  if (!allowed) return true
+  const from = request.headers.get('origin') ?? request.headers.get('referer')
+  if (!from) return false
+  try {
+    return new URL(from).origin === new URL(allowed).origin
+  } catch {
+    return false
+  }
+}
+
+/**
+ * One run takes about twenty seconds and a player gets one crisis a day, so a
+ * handful an hour is generous for anybody actually playing and useless to
+ * anybody who is not. In memory on purpose: a serverless instance forgets this
+ * when it recycles, which makes it leaky rather than strict, and the thing it
+ * has to stop is a loop rather than a persistent adversary.
+ */
+const RATE_LIMIT = 12
+const RATE_WINDOW_MS = 60 * 60 * 1000
+const seen = new Map<string, number[]>()
+
+function withinRate(request: Request): boolean {
+  const who = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  const now = Date.now()
+  const recent = (seen.get(who) ?? []).filter((t) => now - t < RATE_WINDOW_MS)
+  recent.push(now)
+  seen.set(who, recent)
+  // Unbounded growth is the other way to take this endpoint down. The map only
+  // needs the current window, so anything older than it can go.
+  if (seen.size > 5000) {
+    for (const [key, times] of seen) {
+      if (times.every((t) => now - t >= RATE_WINDOW_MS)) seen.delete(key)
+    }
+  }
+  return recent.length <= RATE_LIMIT
+}
+
 export async function narrate(request: Request): Promise<Response> {
   if (request.method !== 'POST') return json({ error: 'POST only' }, 405)
   if (!process.env.ANTHROPIC_API_KEY) return json({ error: 'Narrator is not configured' }, 503)
+  if (!sameOrigin(request)) return json({ error: 'Not available from here' }, 403)
+  if (!withinRate(request)) return json({ error: 'Narrator is busy' }, 429)
 
   let parsed: NarrationRequest
   try {

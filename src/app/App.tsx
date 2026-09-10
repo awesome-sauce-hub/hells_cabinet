@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EVENTS, FIGURES } from './data.js'
 import { CandidateCard, Icon, ROLE_LABEL, SlotStrip } from './components.js'
 import { DeskAside, Masthead } from './Desk.js'
+import { DevBar } from './DevBar.js'
 import { narrate } from './narrate.js'
 import type { Beat } from './narrate.js'
 import { fetchJudgement } from './narrateRemote.js'
@@ -170,6 +171,9 @@ export default function App() {
       </section>
       </main>
       <footer className="desk-footer"><span>A little history. A lot of bad decisions.</span><span>Hell’s Cabinet · an alternate-history game <a href="/portrait-credits.html" target="_blank" rel="noreferrer">Portrait credits</a></span></footer>
+      {/* Dropped from the production bundle: import.meta.env.DEV is a literal
+          false there, so the branch and the module behind it are dead code. */}
+      {import.meta.env.DEV && <DevBar current={ref} onStart={startRun} />}
     </div>
   )
 }

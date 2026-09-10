@@ -130,8 +130,30 @@ export function loadRun(): SavedRun | null {
   }
 }
 
-/** ?event=<id>&seed=<seed> on the address bar, if it names a real event. */
-export function runFromUrl(search: string): RunRef | null {
+/**
+ * Whether this build hands out crises on request.
+ *
+ * A bare ?event=&seed= is the crisis picker with a different front door: it
+ * opens any of the ten on any seed, as many times a day as you like. That is
+ * exactly what we want while building - it is the only way to look at a
+ * specific crisis on purpose - and exactly what the daily cannot survive in
+ * public, where one crisis a day is the entire proposition.
+ *
+ * Vite inlines this at build time, so the branch below is not merely unused in
+ * production, it is not in the bundle at all: the shipped file has no code path
+ * that reads the parameter, and nothing to find by reading it.
+ */
+const FREE_PLAY = import.meta.env.DEV
+
+/**
+ * ?event=<id>&seed=<seed> on the address bar, if it names a real event.
+ *
+ * Refused in production. A shared cabinet is read by sharedFromUrl below, which
+ * calls this and then requires the appointments as well - so someone else's
+ * result still opens for anybody, and a hand-typed link to a crisis does not.
+ */
+export function runFromUrl(search: string, allow = FREE_PLAY): RunRef | null {
+  if (!allow) return null
   try {
     const params = new URLSearchParams(search)
     const seed = params.get('seed')
@@ -169,7 +191,9 @@ const PICK_SEPARATOR = '.'
  */
 export function sharedFromUrl(search: string): SharedCabinet | null {
   try {
-    const ref = runFromUrl(search)
+    // Always allowed: a sent cabinet is somebody showing you what they did, and
+    // it is the only way the game reaches a person who has not played.
+    const ref = runFromUrl(search, true)
     if (!ref) return null
 
     const params = new URLSearchParams(search)
