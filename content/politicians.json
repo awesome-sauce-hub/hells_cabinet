@@ -84,7 +84,7 @@
     "traits": [
       "beloved",
       "statesman",
-      "isolationist"
+      "strategist"
     ],
     "reviewed": true,
     "rivals": [
@@ -358,7 +358,7 @@
     "country": "United States",
     "era": "1970s",
     "office": "President",
-    "bio": "Appointing him usually works out. He has ended a government before, and would rather not discuss the odds.",
+    "bio": "Taped every conversation in his own office, then fought the Supreme Court to keep the tapes; also flew to Peking and shook Mao's hand.",
     "traits": [
       "paranoid",
       "cunning",
@@ -610,7 +610,7 @@
     "bio": "Spent a third of the national budget crowning himself.",
     "traits": [
       "showman",
-      "warhawk",
+      "soldier",
       "paranoid"
     ],
     "reviewed": true
@@ -679,7 +679,7 @@
     "traits": [
       "banker",
       "cunning",
-      "isolationist"
+      "dealmaker"
     ],
     "reviewed": true
   },
@@ -870,7 +870,7 @@
     "traits": [
       "dealmaker",
       "cunning",
-      "loyalist"
+      "statesman"
     ],
     "reviewed": true
   },
@@ -964,7 +964,7 @@
     "name": "Darth Vader",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Sith Lord",
@@ -986,7 +986,7 @@
     "country": "Canada",
     "era": "Modern",
     "office": "Actor",
-    "bio": "Universally trusted, which in this cabinet is a structural advantage.",
+    "bio": "Gave away a large chunk of his Matrix profits to the effects and stunt crews, and funds a cancer charity he refuses to put his name on.",
     "traits": [
       "beloved",
       "loyalist",
@@ -1033,7 +1033,7 @@
     "name": "Gandalf",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "good",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Wizard, Consultant",
@@ -1053,7 +1053,7 @@
     "name": "Sauron",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Dark Lord",
@@ -1073,7 +1073,7 @@
     "name": "Yoda",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "good",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Grand Master",
@@ -1110,7 +1110,7 @@
     "name": "The Joker",
     "category": "wildcard",
     "tier": "flawed",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Agent of Chaos",
@@ -1150,7 +1150,7 @@
     "name": "Montgomery Burns",
     "category": "wildcard",
     "tier": "flawed",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Plant Owner",
@@ -1261,7 +1261,7 @@
     "name": "Optimus Prime",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "good",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Autobot Commander",
@@ -1278,7 +1278,7 @@
     "name": "Thanos",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Titan",
@@ -1346,7 +1346,7 @@
     "name": "Count Dracula",
     "category": "wildcard",
     "tier": "operator",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Voivode, Landlord",
@@ -1397,7 +1397,7 @@
     "name": "Lord Voldemort",
     "category": "wildcard",
     "tier": "heavyweight",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Dark Lord",
@@ -1414,7 +1414,7 @@
     "name": "Dolores Umbridge",
     "category": "wildcard",
     "tier": "operator",
-    "alignment": "neutral",
+    "alignment": "bad",
     "country": "Fictional",
     "era": "Fictional",
     "office": "Undersecretary",
@@ -1452,7 +1452,7 @@
     "country": "Fictional",
     "era": "Fictional",
     "office": "Junior Representative",
-    "bio": "Was handed emergency powers once. Everyone agreed not to discuss it.",
+    "bio": "Stood up in the Senate and moved that the Chancellor be given emergency powers. Everyone agreed not to discuss it.",
     "traits": [
       "liability",
       "loyalist",
@@ -1558,7 +1558,7 @@
     "traits": [
       "beloved",
       "showman",
-      "soldier"
+      "dealmaker"
     ],
     "reviewed": true
   },
@@ -1694,7 +1694,7 @@
     "traits": [
       "technocrat",
       "strategist",
-      "banker"
+      "cunning"
     ],
     "reviewed": true
   },
@@ -1711,7 +1711,7 @@
     "traits": [
       "technocrat",
       "loyalist",
-      "statesman"
+      "beloved"
     ],
     "reviewed": true
   },
@@ -1778,7 +1778,7 @@
     "bio": "Committed. Unpredictably, enormously committed.",
     "traits": [
       "showman",
-      "soldier",
+      "scandal-magnet",
       "liability"
     ],
     "reviewed": true
@@ -1794,7 +1794,7 @@
     "office": "Director",
     "bio": "Regards the crisis as confirmation of everything he has always said.",
     "traits": [
-      "statesman",
+      "showman",
       "strategist",
       "isolationist"
     ],
@@ -1813,7 +1813,7 @@
     "traits": [
       "showman",
       "beloved",
-      "demagogue"
+      "cunning"
     ],
     "reviewed": true
   },
@@ -1862,9 +1862,9 @@
     "office": "Judge",
     "bio": "Thirty seconds per case and no interest at all in your explanation.",
     "traits": [
-      "statesman",
-      "soldier",
-      "technocrat"
+      "showman",
+      "technocrat",
+      "cunning"
     ],
     "reviewed": true
   },
@@ -2153,7 +2153,7 @@
     "traits": [
       "paranoid",
       "warhawk",
-      "statesman"
+      "cunning"
     ],
     "reviewed": true
   },
@@ -2376,8 +2376,7 @@
     "bio": "Still the reason a nation flinches at the number seven.",
     "traits": [
       "liability",
-      "scandal-magnet",
-      "soldier"
+      "scandal-magnet"
     ],
     "reviewed": true
   },
@@ -2546,7 +2545,7 @@
     "country": "Fictional",
     "era": "Internet",
     "office": "Endless Office Space",
-    "bio": "Six hundred million square feet of civil service and no exit.",
+    "bio": "Six hundred million square miles of damp carpet, buzzing fluorescents and no exit.",
     "traits": [
       "isolationist",
       "paranoid",

@@ -6,9 +6,9 @@ import type { BurstLimiter } from '../api/narrate.js'
  *
  * There is almost nothing here on purpose. The narrator was already written
  * against the Fetch API - narrate() takes a Request and returns a Response -
- * so this routes to it rather than reimplementing it, and the same handler
- * body serves both hosts. The Node adapter in api/narrate.ts is the other
- * side of that arrangement and is not used on this path.
+ * so this routes to it rather than reimplementing it. Vercel's Node adapter
+ * used to sit alongside it for the other host; with Vercel retired there is
+ * one convention left and this is it.
  */
 interface Env {
   ASSETS: { fetch(request: Request): Promise<Response> }

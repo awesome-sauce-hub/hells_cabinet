@@ -2,10 +2,15 @@
  * The human gate's research assistant.
  *
  * `npm run validate` proves the roster is well-formed - schema, tier budget,
- * unique ids. It cannot tell whether the numbers match the person: Bob Ross at
- * force 1 is correct, Bob Ross at grit 3 is wrong, and both pass the gate. This
- * asks Claude to read each figure against what it knows of their life and report
+ * unique ids. It cannot tell whether the entry matches the person: Judge Judy
+ * traited 'soldier' is well-formed and wrong, and the gate passes it. This asks
+ * Claude to read each figure against what it knows of their life and report
  * where the data disagrees with history.
+ *
+ * It used to ask about stats too, and kept asking after the stat blocks were
+ * removed: 38 of 96 findings in one run were about charisma, force and cunning
+ * fields that no longer exist, invented because the rubric requested them. A
+ * rubric that outlives its schema does not fail, it fabricates.
  *
  * It NEVER writes to content/. Findings land in a report for a human to accept
  * or reject, because `reviewed: true` is a claim a person makes, not a model.
@@ -30,7 +35,7 @@ const findingSchema = z.object({
   id: z.string().describe('the figure id this is about'),
   field: z
     .string()
-    .describe('what disagrees: a stat name, "tier", "traits", "alignment", "category" or "bio"'),
+    .describe('what disagrees: "tier", "traits", "alignment", "category", "office" or "bio"'),
   severity: z
     .enum(['error', 'warn', 'nit'])
     .describe('error = plainly wrong about the person; warn = defensible but off; nit = taste'),
@@ -47,10 +52,15 @@ const reportSchema = z.object({
 const RUBRIC = `You are the reviewer on the content gate for Hell’s Cabinet, a satirical daily game.
 
 The player is shown a historical or fictional figure - name, office, and one line of
-bio - and drafts them into one of five cabinet roles. A historical crisis then plays
+bio - and drafts them into one of six cabinet posts. A historical crisis then plays
 out, and an adjudicator decides how each of them handled what it asked, judging on
 who they actually were. There are no hidden numbers: the bio and the traits ARE the
 figure, so a lazy bio makes a figure unjudgeable and a wrong trait misjudges them.
+
+There are no stats. A figure is its tier, its alignment, its traits and its bio,
+and nothing else - do not report a finding about charisma, force, cunning, grit,
+intellect or integrity, because those fields do not exist. The only fields you
+may name are: tier, alignment, traits, bio, office, category.
 
   tiers (how much weight they threw around): ${POWER_TIERS.join(', ')}
   alignments: ${ALIGNMENTS.join(', ')} - how history remembers them, NOT how strong they are
@@ -74,9 +84,13 @@ Judge each figure against the life they actually led:
 Rules:
 - Report a finding ONLY where you can name the fact that decides it. No vibes.
 - Fictional characters and objects are judged against their own canon or function,
-  not against real history. An object's stats describe what it does in a room.
+  not against real history. An object's bio describes what it does in a room.
 - A figure with nothing wrong goes in "clean". Most figures should be clean.
-- Never suggest a stat outside 1-10.`
+- For traits, "current" must be either the single trait you are replacing or the
+  whole list; whichever you give, "suggested" must match it in shape. A single
+  trait against a three-trait list is read as a swap.
+- Traits come only from the vocabulary above, and a figure keeps the number of
+  traits it has unless the finding is that it has too many.`
 
 const client = new Anthropic()
 const roster: Politician[] = JSON.parse(readFileSync('content/politicians.json', 'utf8'))
