@@ -123,11 +123,48 @@ if (enders.length > 1) {
   fail(`${enders.length} figures end the run instantly; exactly one is allowed`)
 }
 
+/**
+ * Roughly when a figure was walking around, for the rivalry check below.
+ * Fictional has no date and is excluded rather than guessed at.
+ */
+function eraYear(era: string): number | null {
+  const decade = /^(\d{3,4})s$/.exec(era)
+  if (decade) return Number(decade[1])
+  return { Antiquity: -50, Medieval: 1400, Modern: 2000, Internet: 2010 }[era] ?? null
+}
+
+/**
+ * A rivalry is not a moral opposition. The player is told these two "will not
+ * be in a room together" and loses twelve points for it, so it has to describe
+ * an antagonism that actually happened - Allende and Pinochet, Churchill and
+ * Gandhi - and not a saint paired off against the nearest monster.
+ *
+ * Six of the original twelve failed that standard, including Lincoln against a
+ * Leopold II who took the throne eight months after Lincoln was shot. Half of
+ * them were centuries apart, which is the part a machine can check. Whether two
+ * contemporaries were ever actually opposed is a judgement, and this only
+ * catches the anachronisms.
+ */
+const CONTEMPORARY_YEARS = 60
+
 const ids = new Set<string>(rawPoliticians.map((p: { id: string }) => p.id))
+const byId = new Map<string, { era: string; name: string }>(rawPoliticians.map((p: { id: string }) => [p.id, p]))
 for (const p of rawPoliticians) {
   for (const r of p.rivals ?? []) {
     if (!ids.has(r)) fail(`politician ${p.id}: rival "${r}" does not exist`)
     if (r === p.id) fail(`politician ${p.id}: is their own rival`)
+    const other = byId.get(r)
+    if (!other) continue
+    // A rivalry has two sides. A one-way entry means only one of the pair is
+    // penalised depending on which of them the chemistry pass reaches first.
+    if (!(other as { rivals?: string[] }).rivals?.includes(p.id)) {
+      fail(`politician ${p.id}: names ${r} as a rival, but ${r} does not name them back`)
+    }
+    const a = eraYear(p.era)
+    const b = eraYear(other.era)
+    if (a !== null && b !== null && Math.abs(a - b) > CONTEMPORARY_YEARS) {
+      fail(`politician ${p.id}: cannot have been a rival of ${r} - ${p.era} and ${other.era} are ${Math.abs(a - b)} years apart`)
+    }
   }
 }
 if (ids.size !== rawPoliticians.length) fail('duplicate politician ids')
