@@ -548,6 +548,11 @@ function Verdict({
     '',
     ...ROLES.map((role) =>
       `${squareFor(result.verdicts, role)} ${ROLE_LABEL[role]} · ${result.roster[role].name}`),
+    '',
+    // Last, because it is for the reader who wants a go rather than the one
+    // reading the cabinet. It carries the seed, so whoever opens it is dealt the
+    // same faces in the same order and can try to beat what they were sent.
+    linkTo(runRef, result),
   ].join('\n')
 
   async function copy() {
