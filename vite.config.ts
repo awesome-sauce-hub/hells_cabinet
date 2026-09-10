@@ -39,9 +39,20 @@ function narratorServer(env: Record<string, string>): Plugin {
             ? await (server as unknown as { ssrLoadModule: (id: string) => Promise<unknown> }).ssrLoadModule('/api/narrate.ts')
             : await import('./api/narrate.js')
           const { default: handler } = loaded as { default: (request: Request) => Promise<Response> }
-          const result = await handler(new Request(`http://localhost${req.url}`, {
+          // Forward the real headers rather than a minimal pair. The handler
+          // reads Origin and Host to decide whether it will answer at all, so a
+          // stripped-down Request is not the same request: it would be refused
+          // here and accepted in production, which is the one way this mount can
+          // lie about what ships.
+          const headers = new Headers({ 'content-type': 'application/json' })
+          for (const [key, value] of Object.entries(req.headers)) {
+            if (value === undefined) continue
+            headers.set(key, Array.isArray(value) ? value.join(', ') : value)
+          }
+          const host = req.headers.host ?? 'localhost'
+          const result = await handler(new Request(`http://${host}${req.url}`, {
             method: req.method ?? 'POST',
-            headers: { 'content-type': 'application/json' },
+            headers,
             body: chunks.length > 0 ? Buffer.concat(chunks) : undefined,
           }))
 

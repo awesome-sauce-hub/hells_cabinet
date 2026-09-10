@@ -110,14 +110,30 @@ export function userPrompt(req: NarrationRequest): string {
  * or hammered in a loop, not a determined person with curl.
  */
 function sameOrigin(request: Request): boolean {
-  const allowed = process.env.ALLOWED_ORIGIN
-  // Unset in development and in the local server, where the check would only
-  // get in the way of the person running it.
-  if (!allowed) return true
   const from = request.headers.get('origin') ?? request.headers.get('referer')
+  // No Origin at all is a request no browser made. Curl, mostly, which is the
+  // thing being kept out.
   if (!from) return false
+
+  let host: string
   try {
-    return new URL(from).origin === new URL(allowed).origin
+    host = new URL(from).host
+  } catch {
+    return false
+  }
+
+  // Compared against the host this very request arrived on rather than a
+  // configured URL. Nothing to keep in step: it is right on the production
+  // domain, on every preview deployment, and on whatever the game is renamed to
+  // later, and it cannot be quietly wrong the way a hardcoded origin can.
+  if (host === request.headers.get('host')) return true
+
+  // An explicit second origin, for the day the game is embedded somewhere or
+  // served from a domain that is not the one the function answers on.
+  const allowed = process.env.ALLOWED_ORIGIN
+  if (!allowed) return false
+  try {
+    return host === new URL(allowed).host
   } catch {
     return false
   }
@@ -204,6 +220,7 @@ function json(body: unknown, status: number): Response {
 interface NodeRequest {
   method?: string
   url?: string
+  headers?: Record<string, string | string[] | undefined>
   on(event: string, listener: (chunk?: unknown) => void): unknown
 }
 interface NodeResponse {
@@ -235,10 +252,22 @@ export default async function handler(a: Request | NodeRequest, b?: NodeResponse
     req.on('error', (error) => reject(error as Error))
   })
 
+  // Carry the headers across. This adapter used to build a Request with a
+  // content-type and an invented hostname, which was harmless while the handler
+  // only read the body - and became a bug the moment it read Origin to decide
+  // whether to answer, because on this path there was never an Origin to read
+  // and every request arrived looking like curl.
+  const headers = new Headers({ 'content-type': 'application/json' })
+  for (const [key, value] of Object.entries(req.headers ?? {})) {
+    if (value === undefined) continue
+    headers.set(key, Array.isArray(value) ? value.join(', ') : String(value))
+  }
+  const host = headers.get('host') ?? 'serverless.local'
+
   const result = await narrate(
-    new Request(`https://serverless.local${req.url ?? '/api/narrate'}`, {
+    new Request(`https://${host}${req.url ?? '/api/narrate'}`, {
       method: req.method ?? 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers,
       body: chunks.length > 0 ? Buffer.concat(chunks) : undefined,
     }),
   )

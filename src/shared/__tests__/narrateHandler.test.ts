@@ -55,21 +55,44 @@ describe('the narrator endpoint answers both calling conventions', () => {
     expect(res.headers['content-type']).toBe('application/json')
   })
 
-  it('reads a streamed body when called as (req, res)', async () => {
-    const req = new EventEmitter() as EventEmitter & { method: string; url: string }
+  const posting = (headers: Record<string, string>) => {
+    const req = new EventEmitter() as EventEmitter & {
+      method: string; url: string; headers: Record<string, string>
+    }
     req.method = 'POST'
     req.url = '/api/narrate'
+    req.headers = headers
     queueMicrotask(() => {
       req.emit('data', Buffer.from('{"not":"a valid request"}'))
       req.emit('end')
     })
+    return req
+  }
 
+  it('reads a streamed body when called as (req, res)', async () => {
     const res = fakeNodeResponse()
-    await handler(req, res)
+    await handler(posting({ host: 'hells.example', origin: 'https://hells.example' }), res)
 
     // 400 means the body arrived and was rejected by the schema; a hang or a
     // 500 would mean it never got there.
     expect([400, 503]).toContain(res.statusCode)
     expect(res.body).toBeDefined()
+  })
+
+  it('carries the headers across, so the origin check sees them', async () => {
+    // The adapter used to invent a hostname and forward nothing, which made
+    // every request on this path - the one Vercel actually uses - look like it
+    // came from nowhere. The handler then refused all of them.
+    const mine = fakeNodeResponse()
+    await handler(posting({ host: 'hells.example', origin: 'https://hells.example' }), mine)
+    expect(mine.statusCode).not.toBe(403)
+
+    const theirs = fakeNodeResponse()
+    await handler(posting({ host: 'hells.example', origin: 'https://somewhere.else' }), theirs)
+    expect(theirs.statusCode).toBe(403)
+
+    const none = fakeNodeResponse()
+    await handler(posting({ host: 'hells.example' }), none)
+    expect(none.statusCode).toBe(403)
   })
 })
