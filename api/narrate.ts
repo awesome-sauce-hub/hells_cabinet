@@ -150,8 +150,23 @@ const RATE_LIMIT = 12
 const RATE_WINDOW_MS = 60 * 60 * 1000
 const seen = new Map<string, number[]>()
 
+/**
+ * Who the request is from, as well as the platform will say.
+ *
+ * CF-Connecting-IP first because on Cloudflare that is the canonical client
+ * address; x-forwarded-for is set there too but is the header a proxy in front
+ * could have written. Reading only x-forwarded-for put most Cloudflare traffic
+ * in the 'unknown' bucket, which is one shared counter for every player at
+ * once - the limiter was rate-limiting the game rather than the abuser.
+ */
+function clientIp(request: Request): string {
+  return request.headers.get('cf-connecting-ip')
+    ?? request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    ?? 'unknown'
+}
+
 function withinRate(request: Request): boolean {
-  const who = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  const who = clientIp(request)
   const now = Date.now()
   const recent = (seen.get(who) ?? []).filter((t) => now - t < RATE_WINDOW_MS)
   recent.push(now)
@@ -166,10 +181,24 @@ function withinRate(request: Request): boolean {
   return recent.length <= RATE_LIMIT
 }
 
-export async function narrate(request: Request): Promise<Response> {
+/**
+ * A platform-provided counter, when the platform has one.
+ *
+ * Cloudflare's rate limit binding is the shape this expects. The in-memory
+ * limiter below cannot see across instances - on Workers it cannot even see
+ * across isolates - so where a real counter is available it goes in front.
+ */
+export interface BurstLimiter {
+  limit(options: { key: string }): Promise<{ success: boolean }>
+}
+
+export async function narrate(request: Request, burst?: BurstLimiter): Promise<Response> {
   if (request.method !== 'POST') return json({ error: 'POST only' }, 405)
   if (!process.env.ANTHROPIC_API_KEY) return json({ error: 'Narrator is not configured' }, 503)
   if (!sameOrigin(request)) return json({ error: 'Not available from here' }, 403)
+  if (burst && !(await burst.limit({ key: clientIp(request) })).success) {
+    return json({ error: 'Narrator is busy' }, 429)
+  }
   if (!withinRate(request)) return json({ error: 'Narrator is busy' }, 429)
 
   let parsed: NarrationRequest

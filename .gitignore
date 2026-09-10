@@ -10,3 +10,10 @@ dist
 !.env.example
 .vercel
 .env*
+
+# Wrangler's local state and build cache.
+.wrangler
+
+# Local Worker secrets. wrangler dev reads this; it must never be committed.
+.dev.vars
+.dev.vars.*

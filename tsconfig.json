@@ -8,10 +8,10 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["node", "react", "react-dom"],
+    "types": ["node", "react", "react-dom", "vite/client"],
     "jsx": "react-jsx",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "allowImportingTsExtensions": false
   },
-  "include": ["src", "scripts", "api", "vite.config.ts"]
+  "include": ["src", "scripts", "api", "worker", "vite.config.ts"]
 }

@@ -1,0 +1,44 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "hells-cabinet",
+  "main": "worker/index.ts",
+
+  // process.env is populated from vars and secrets only with nodejs_compat and
+  // a compatibility date on or after 2025-04-01. The narrator reads
+  // process.env.ANTHROPIC_API_KEY directly, so both of these are load-bearing:
+  // drop either one and the endpoint answers 503 "Narrator is not configured"
+  // with the key sitting right there in the dashboard.
+  "compatibility_date": "2026-09-10",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // The built game. not_found_handling is what makes a deep link work: the
+  // client reads ?event= and ?picks= off the address bar, so a shared cabinet
+  // is a URL the asset server has never heard of and must answer with the app.
+  "assets": {
+    "directory": "./dist/",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+
+  /**
+   * Burst protection in front of the narrator.
+   *
+   * The handler's own limiter is a Map in module scope, which on Workers is
+   * per-isolate - and there are many isolates, so a loop just lands on fresh
+   * ones. This binding counts per Cloudflare location instead, which is not
+   * global either but is the difference between a speed bump and nothing.
+   *
+   * period is only ever 10 or 60 seconds, so it cannot express the handler's
+   * one-an-hour intent. It is not trying to: this stops the loop, and the
+   * hourly counter stays behind it for the slower kind of abuse.
+   */
+  "ratelimits": [
+    {
+      "name": "NARRATE_BURST",
+      "namespace_id": "1001",
+      "simple": { "limit": 6, "period": 60 }
+    }
+  ],
+
+  "observability": { "enabled": true }
+}
