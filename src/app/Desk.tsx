@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { GameEvent } from '../engine/types.js'
-import { Icon, ROLE_LABEL } from './components.js'
+import { Icon, ROLE_LABEL, Rulebook } from './components.js'
 import { demandsFor } from '../engine/demands.js'
 import { EVENT_LOCATIONS, MAP_HEIGHT, MAP_WIDTH, mapFrame, mapPoint } from './eventLocations.js'
 
@@ -13,7 +13,13 @@ export function Masthead({ isDaily, seed }: { isDaily: boolean; seed: string }) 
         <div className="wordmark"><h1>Hell’s Cabinet<span className="wordmark-dot">.</span></h1><p>Great power. Questionable personnel.</p></div>
         <button className="help-button" onClick={() => setHelp(!help)} aria-expanded={help} aria-controls="how-to-play"><Icon name={help ? 'close' : 'help'} />How to play</button>
       </header>
-      {help && <section className="help-sheet" id="how-to-play" aria-label="How to play"><h2>A quick briefing</h2><p>Read the crisis, then appoint one of six candidates to any vacant role. Drag their photo onto a role, or select a photo and then select a role. Keyboard players can use Tab and Enter or Space.</p><p>Each appointment brings six fresh candidates. You have one reshuffle and one individual replacement for the whole game. Fill all five roles to see how your cabinet handles the crisis.</p></section>}
+      {help && (
+        <section className="help-sheet" id="how-to-play" aria-label="How to play">
+          <h2>A quick briefing</h2>
+          <p>Read the crisis, then appoint one of six candidates to any vacant post. Drag their photo onto a post, or select a photo and then select a post. Keyboard players can use Tab and Enter or Space. Fill all six seats to see how your cabinet handles the crisis.</p>
+          <Rulebook />
+        </section>
+      )}
     </>
   )
 }

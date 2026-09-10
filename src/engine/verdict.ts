@@ -59,16 +59,22 @@ export function tierFor(score: number): Tier {
   return 'Legendary'
 }
 
+/**
+ * How one post reads in a shared result. A post can be asked two things, so the
+ * square is the average rather than the worse of them.
+ */
+export function squareFor(verdicts: readonly RoleVerdict[], role: Role): string {
+  const forRole = verdicts.filter((v) => v.role === role)
+  if (forRole.length === 0) return '⬜'
+  const avg = forRole.reduce((sum, v) => sum + VERDICT_VALUE[v.verdict], 0) / forRole.length
+  if (avg >= 0.66) return '🟩'
+  if (avg >= 0.33) return '🟨'
+  return '🟥'
+}
+
 /** One square per post, in cabinet order. Posts the crisis never tested go blank. */
 export function shareGrid(verdicts: readonly RoleVerdict[]): string {
-  return ROLES.map((role) => {
-    const forRole = verdicts.filter((v) => v.role === role)
-    if (forRole.length === 0) return '⬜'
-    const avg = forRole.reduce((sum, v) => sum + VERDICT_VALUE[v.verdict], 0) / forRole.length
-    if (avg >= 0.66) return '🟩'
-    if (avg >= 0.33) return '🟨'
-    return '🟥'
-  }).join('')
+  return ROLES.map((role) => squareFor(verdicts, role)).join('')
 }
 
 export function isVerdict(value: unknown): value is Verdict {

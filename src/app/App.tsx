@@ -17,7 +17,7 @@ import type { DraftAction } from '../engine/replay.js'
 import { createRun, todayKey } from '../engine/run.js'
 import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
-import { tierFor } from '../engine/verdict.js'
+import { squareFor, tierFor } from '../engine/verdict.js'
 import type { RoleVerdict } from '../engine/verdict.js'
 import { ROLES } from '../engine/types.js'
 import type { GameEvent, Role } from '../engine/types.js'
@@ -528,12 +528,26 @@ function Verdict({
   isDaily: boolean
 }) {
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
-  // The link carries the seed, so whoever opens it is dealt the same six faces
-  // in the same order and can try to beat the result they were just sent.
+  /**
+   * The result as a cabinet, not as a link.
+   *
+   * A row of coloured squares over a URL says nothing about the run: the whole
+   * point of the game is which specific person you put in which specific chair,
+   * and that was the one thing the shared result left out. Reading who somebody
+   * appointed - and watching the Attorney General line say Mussolini - is the
+   * result. The squares stay as the summary line, because they are what makes
+   * two results comparable at a glance.
+   *
+   * Laid out one post per line with a separator rather than padded columns,
+   * because most places this gets pasted render it in a proportional font and
+   * any alignment done with spaces arrives crooked.
+   */
   const share = [
     `Hell’s Cabinet — ${result.event.title}${isDaily ? ` · ${runRef.seed}` : ''}`,
     `${result.grid} · ${Math.round(result.score)}/100 · ${result.tier.toUpperCase()}`,
-    linkTo(runRef, result),
+    '',
+    ...ROLES.map((role) =>
+      `${squareFor(result.verdicts, role)} ${ROLE_LABEL[role]} · ${result.roster[role].name}`),
   ].join('\n')
 
   async function copy() {
@@ -602,9 +616,9 @@ function Verdict({
         </div>
       )}
 
-      {copyState === 'failed' && <p className="copy-fallback" role="status">Copy wasn’t available. Select and copy this result: <span>{share}</span></p>}
+      {copyState === 'failed' && <p className="copy-fallback" role="status">Copy wasn’t available. Select and copy this result: <span className="copy-share">{share}</span></p>}
       <div className="row mt">
-        <button className="primary" onClick={copy}>{copyState === 'copied' ? 'Copied' : 'Copy result and link'}</button>
+        <button className="primary" onClick={copy}>{copyState === 'copied' ? 'Copied' : 'Copy your cabinet'}</button>
         <span className="next-edition">Next crisis tomorrow.</span>
       </div>
     </>

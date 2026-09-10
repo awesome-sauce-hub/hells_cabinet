@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
-import { ROLE_LABEL } from '../engine/types.js'
+import { ROLE_BRIEF, ROLE_LABEL, ROLES } from '../engine/types.js'
 import type { Politician, Role } from '../engine/types.js'
 import portraitSources from './portraits.json'
 
@@ -69,6 +69,49 @@ export function CandidateCard({ figure, selected, onSelect, onDragSelect, onBenc
         <button className="bench-btn" disabled={!canBench} onClick={onBench} aria-label={`Bench ${figure.name}`} title={canBench ? 'Replace this candidate (one per game)' : 'Bench already used'}><Icon name="close" size={14} /></button>
       </div>
     </article>
+  )
+}
+
+/**
+ * The rules, and what each seat is for.
+ *
+ * Lives in the one place the rules already lived - the masthead's how-to-play
+ * sheet - rather than being repeated on the briefing. The briefing says what
+ * this crisis wants from each post; this says what the post is.
+ */
+export function Rulebook() {
+  return (
+    <div className="rulebook">
+      <section>
+        <h3>The six posts</h3>
+        <p className="rulebook-lede">Each seat is one lever of the state. Every crisis leans on some of them and ignores others, and your briefing says which.</p>
+        <ul className="rulebook-posts">
+          {ROLES.map((role) => (
+            <li key={role}>
+              <span className="rulebook-post">{ROLE_LABEL[role]}</span>
+              <span className="rulebook-does">{ROLE_BRIEF[role]}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h3>The draft</h3>
+        <ul className="rulebook-rules">
+          <li>Six rounds, six candidates a round, one appointment per round. The five you pass over leave with the round.</li>
+          <li>One reshuffle and one individual replacement for the whole game. Both retire whoever they dismiss, so nobody sent away comes back.</li>
+          <li>Appointments are final. A seat cannot be swapped once it is filled.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>The judging</h3>
+        <ul className="rulebook-rules">
+          <li>Nobody has stats. An adjudicator is told who your appointee actually was and what the crisis asked of their post, then decides how they handled it: triumph, pass, fail or disaster.</li>
+          <li>So knowing these people is the game. A post asking for restraint wants somebody who had it, whatever else they are famous for.</li>
+          <li>A post the crisis never tests is still judged, on how they were as that, in that crisis.</li>
+          <li>One further demand arrives partway through and is not in the briefing. That part is meant to be luck.</li>
+        </ul>
+      </section>
+    </div>
   )
 }
 
