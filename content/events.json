@@ -8,7 +8,7 @@
     "spotlight": [
       "President",
       "General",
-      "VicePresident"
+      "Spymaster"
     ],
     "checks": [
       {
@@ -23,23 +23,29 @@
         "note": "a ladder for the other side to climb down"
       },
       {
-        "role": "VicePresident",
-        "demands": "grit",
+        "role": "Spymaster",
+        "demands": "intellect",
         "weight": 0.8,
-        "note": "holding the room together at 4am"
+        "note": "what the photographs show, and not what they suggest"
       },
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.5,
         "note": "costing the blockade"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "cunning",
+        "weight": 1.1,
+        "note": "a blockade is an act of war, so it will have to be called something else"
       }
     ],
     "twist": {
       "id": "the-leak",
       "text": "A transcript of the war room reaches the evening papers.",
       "check": {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "charisma",
         "weight": 1.2
       }
@@ -57,13 +63,13 @@
     "dossier": "A bank you have never heard of has failed, and it turns out everything was standing on it.",
     "briefing_hint": "Nobody will remember your speech. They will remember whether the cash machines worked.",
     "spotlight": [
-      "Treasurer",
+      "Chancellor",
       "President",
-      "PropagandaMinister"
+      "PressSecretary"
     ],
     "checks": [
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "intellect",
         "weight": 1.5,
         "note": "understanding the instruments"
@@ -74,7 +80,7 @@
         "note": "stopping the run before it starts"
       },
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "cunning",
         "note": "the word 'rescue' instead of 'bailout'"
       },
@@ -84,13 +90,18 @@
         "invert": true,
         "weight": 0.4,
         "note": "not deploying troops to a bank"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "intellect",
+        "note": "the authority to spend it, found by Sunday night"
       }
     ],
     "twist": {
       "id": "the-bonus-memo",
       "text": "The rescued bank pays out its bonuses on schedule.",
       "check": {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "integrity",
         "weight": 1.2
       }
@@ -105,25 +116,25 @@
     "id": "the-hotel-break-in",
     "title": "The Hotel Break-In",
     "year": 1972,
-    "dossier": "Five men were arrested in an office they had no reason to be in, and one of them has your Vice President's phone number in his pocket.",
+    "dossier": "Five men were arrested in an office they had no reason to be in, and one of them has your Spymaster's phone number in his pocket.",
     "briefing_hint": "Nobody is going to prison for the burglary. They are going to prison for what happens next.",
     "spotlight": [
-      "PropagandaMinister",
-      "VicePresident",
+      "PressSecretary",
+      "Spymaster",
       "President"
     ],
     "checks": [
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "cunning",
         "weight": 1.2,
         "note": "a story that survives a second question"
       },
       {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "integrity",
         "invert": true,
-        "note": "someone has to make the calls"
+        "note": "someone has to make the calls nobody writes down"
       },
       {
         "role": "President",
@@ -131,17 +142,23 @@
         "note": "the press conference nobody wanted"
       },
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "integrity",
         "weight": 0.7,
         "note": "the money leaves a trail whatever you say"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "integrity",
+        "weight": 1.4,
+        "note": "the difference between advising the cover-up and joining it"
       }
     ],
     "twist": {
       "id": "the-immunity-offer",
       "text": "A junior staffer is offered immunity and takes an afternoon to think about it.",
       "check": {
-        "role": "President",
+        "role": "AttorneyGeneral",
         "demands": "integrity",
         "weight": 1.2
       }
@@ -160,8 +177,8 @@
     "briefing_hint": "The lie buys you nine days and costs you the winter.",
     "spotlight": [
       "President",
-      "PropagandaMinister",
-      "Treasurer"
+      "PressSecretary",
+      "Chancellor"
     ],
     "checks": [
       {
@@ -171,13 +188,13 @@
         "note": "publishing the real number"
       },
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "cunning",
         "invert": true,
         "note": "this is the one week spin kills people"
       },
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.9,
         "note": "paying for cities that have stopped working"
@@ -187,13 +204,19 @@
         "demands": "grit",
         "weight": 0.8,
         "note": "moving supplies with a sick army"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "force",
+        "weight": 0.9,
+        "note": "the power to close the theatres either exists or it does not"
       }
     ],
     "twist": {
       "id": "the-parade",
       "text": "The city that went ahead with its parade is now everybody's example.",
       "check": {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "cunning",
         "weight": 1.1
       }
@@ -213,7 +236,7 @@
     "spotlight": [
       "General",
       "President",
-      "Treasurer"
+      "Chancellor"
     ],
     "checks": [
       {
@@ -229,23 +252,29 @@
         "note": "an alliance nobody admits to"
       },
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "charisma",
         "note": "explaining a war you started as a war you joined"
       },
       {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "integrity",
         "invert": true,
         "weight": 0.7,
         "note": "deniability needs a comfortable liar"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "integrity",
+        "weight": 1.2,
+        "note": "the opinion the room does not want, delivered anyway"
       }
     ],
     "twist": {
       "id": "the-run-on-the-pound",
       "text": "Your largest creditor phones about the currency rather than the canal.",
       "check": {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "cunning",
         "weight": 1.3
       }
@@ -263,16 +292,16 @@
     "dossier": "Nothing has moved since Monday. Half the cabinet wants to talk to the unions and the other half wants to put soldiers on the trains.",
     "briefing_hint": "Whoever runs out of money first loses, and it may well be you.",
     "spotlight": [
-      "VicePresident",
+      "Spymaster",
       "General",
-      "PropagandaMinister"
+      "PressSecretary"
     ],
     "checks": [
       {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "cunning",
         "weight": 1.3,
-        "note": "the deal made in a corridor"
+        "note": "knowing which union man will settle before his committee does"
       },
       {
         "role": "General",
@@ -281,7 +310,7 @@
         "note": "soldiers on the trains ends this the wrong way"
       },
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "integrity",
         "weight": 0.9,
         "note": "a bulletin the strikers will also believe"
@@ -291,13 +320,18 @@
         "demands": "grit",
         "weight": 0.8,
         "note": "outlasting nine days of nothing working"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "integrity",
+        "note": "ruling the strike unlawful is available, and is not the same as it being unlawful"
       }
     ],
     "twist": {
       "id": "the-strike-fund",
       "text": "The strike fund is emptier than the union has admitted.",
       "check": {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.9
       }
@@ -316,7 +350,7 @@
     "briefing_hint": "The wind is already carrying your decision to four other countries.",
     "spotlight": [
       "General",
-      "Treasurer",
+      "Chancellor",
       "President"
     ],
     "checks": [
@@ -327,7 +361,7 @@
         "note": "ninety seconds on the roof, then the next man"
       },
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "intellect",
         "weight": 1.3,
         "note": "the reading is not high, the instrument stops there"
@@ -339,17 +373,22 @@
         "note": "telephoning the countries downwind"
       },
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "charisma",
         "weight": 0.8,
         "note": "an evacuation order that does not become a stampede"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "integrity",
+        "note": "the operators will be tried for this, and the design will not"
       }
     ],
     "twist": {
       "id": "the-may-parade",
       "text": "The parade is scheduled for the fourth day and the children are already rehearsing.",
       "check": {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "integrity",
         "weight": 1.2
       }
@@ -367,22 +406,22 @@
     "dossier": "Forty tonnes of methyl isocyanate left a tank the plant's own engineers had flagged in writing, into a city sleeping against the fence. The hospitals are asking what the gas was and nobody will tell them.",
     "briefing_hint": "The safety budget was cut on paper years ago, and the paper still exists.",
     "spotlight": [
-      "Treasurer",
-      "VicePresident",
+      "Chancellor",
+      "Spymaster",
       "President"
     ],
     "checks": [
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "integrity",
         "weight": 1.3,
         "note": "who signed off on the shortcuts, and when"
       },
       {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "grit",
         "weight": 1.1,
-        "note": "the hospitals need the compound name tonight"
+        "note": "the compound name is in a company safe and the hospitals need it tonight"
       },
       {
         "role": "President",
@@ -395,6 +434,12 @@
         "invert": true,
         "weight": 0.7,
         "note": "this is not a crowd to be controlled"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "cunning",
+        "weight": 1.2,
+        "note": "which court hears this decides what it costs"
       }
     ],
     "twist": {
@@ -421,7 +466,7 @@
     "spotlight": [
       "General",
       "President",
-      "VicePresident"
+      "Spymaster"
     ],
     "checks": [
       {
@@ -437,22 +482,27 @@
         "note": "the ground, or the window of the aircraft"
       },
       {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "cunning",
-        "note": "making three agencies answer one telephone"
+        "note": "which agency's report is a report and which is a hope"
       },
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.8,
         "note": "costing a city that has to be rebuilt either way"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "intellect",
+        "note": "troops on American streets, and the statute that says no"
       }
     ],
     "twist": {
       "id": "the-convention-centre",
       "text": "The convention centre has been on live television for four days and your briefing says it is being handled.",
       "check": {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "integrity",
         "weight": 1.2
       }
@@ -470,13 +520,13 @@
     "dossier": "The potato crop has failed for the second year and the grain ships are still leaving the harbour on schedule, because the ledgers say they are owed elsewhere.",
     "briefing_hint": "Every clever theory in the room ends with fewer people in the country.",
     "spotlight": [
-      "Treasurer",
+      "Chancellor",
       "President",
       "General"
     ],
     "checks": [
       {
-        "role": "Treasurer",
+        "role": "Chancellor",
         "demands": "integrity",
         "weight": 1.4,
         "note": "the grain leaving is on your ledger too"
@@ -495,17 +545,23 @@
         "note": "relief works, and roads that go nowhere"
       },
       {
-        "role": "PropagandaMinister",
+        "role": "PressSecretary",
         "demands": "cunning",
         "weight": 0.9,
         "note": "getting the word famine into a London paper"
+      },
+      {
+        "role": "AttorneyGeneral",
+        "demands": "force",
+        "weight": 1.1,
+        "note": "the ships can be stopped tonight, if someone will sign the order"
       }
     ],
     "twist": {
       "id": "the-work-test",
       "text": "A relief committee proposes a work test before the food, to keep the idle from taking advantage.",
       "check": {
-        "role": "VicePresident",
+        "role": "Spymaster",
         "demands": "integrity",
         "weight": 1.3
       }

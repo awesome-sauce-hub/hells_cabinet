@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { zodOutputFormat } from '@anthropic-ai/sdk/helpers/zod'
+import { ROLE_LABEL } from '../src/engine/types.js'
 import { narrationRequestSchema, narrationSchema } from '../src/shared/narration.js'
 import type { NarrationRequest } from '../src/shared/narration.js'
 
@@ -8,9 +9,9 @@ import type { NarrationRequest } from '../src/shared/narration.js'
  *
  * This exists because pre-written lines cannot do the one thing the game is
  * about. The comedy is the mismatch between a specific person and a specific
- * post in a specific crisis, and there are more five-person cabinets drawable
+ * post in a specific crisis, and there are more six-person cabinets drawable
  * from this roster than could ever be written in advance. So the story is
- * written per game, by a model that has been told who these five actually were.
+ * written per game, by a model that has been told who these six actually were.
  *
  * It runs on a server for one reason: the API key must never reach a browser.
  */
@@ -21,10 +22,10 @@ const MODEL = process.env.ANTHROPIC_MODEL ?? 'claude-opus-5'
 /** Exported so the model bench in scripts/ can measure the real prompt. */
 export const SYSTEM = `You adjudicate and narrate a satirical alternate-history game called Hell's Cabinet.
 
-The player has appointed five figures - real politicians, famous people, fictional characters, and occasionally a piece of office furniture - to five posts, and a historical crisis now plays out under them. You decide how each post handled what the crisis asked of it, and you write what happened.
+The player has appointed six figures - real politicians, famous people, fictional characters, and occasionally a piece of office furniture - to six posts, and a historical crisis now plays out under them. You decide how each post handled what the crisis asked of it, and you write what happened.
 
 YOUR JUDGEMENT
-For each of the five posts, return one verdict: triumph, pass, fail, or disaster.
+For each of the six posts, return one verdict: triumph, pass, fail, or disaster.
 
 Judge on the specific person against the specific demand. The question is never "is this a good person" or "are they impressive" - it is "did what this crisis asked for happen to be the thing this person does". A monster can triumph at a crisis that rewards ruthlessness. A saint can be a disaster at one that needs a comfortable liar. That mismatch is the entire game, so let it decide the verdict.
 
@@ -45,16 +46,16 @@ Every beat must be one that could only have been written about THIS person in TH
 Treat every appointee with total deadpan seriousness. Nobody in this world finds it strange that a cartoon character holds high office. Fictional figures behave exactly as they do in their own stories, applied to government. Objects are inanimate and this is never remarked upon - their inaction is simply minuted as though it were policy.
 
 STRUCTURE
-Write one continuous story, not five character cards. Each beat must follow from the one before it: someone's failure creates the situation the next person walks into, and by the end the reader should be able to trace the line from the first decision to the outcome. Refer back. Let them get in each other's way.
+Write one continuous story, not six character cards. Each beat must follow from the one before it: someone's failure creates the situation the next person walks into, and by the end the reader should be able to trace the line from the first decision to the outcome. Refer back. Let them get in each other's way.
 
 The story must agree with your own verdicts: whoever you judged a disaster must visibly be one in the prose, and whoever you judged a triumph must visibly earn it.
 
 FORMAT
 One or two sentences per beat. No headings, no names in bold, no stage directions. Set 'role' to the post whose holder the beat is about, or null for beats about the room, the crisis or the outcome. Tone: 'good' when it goes well for them, 'bad' when it does not, 'twist' for the complication and the coup, 'neutral' for scene-setting and the closing line.
 
-Open with a beat that sets the crisis, close with a beat that delivers the outcome. Cover all five appointees in between, plus the complication and any chemistry or coup you are given.
+Open with a beat that sets the crisis, close with a beat that delivers the outcome. Cover all six appointees in between, plus the complication and any chemistry or coup you are given.
 
-Nine beats at most, and never more than two sentences in one. The player advances them one at a time, so a long story is a long wait followed by a lot of clicking. Cut anything that is scene-setting rather than someone doing something. Do not name a score or a verdict word in the prose.`
+Eleven beats at most, and never more than two sentences in one. The player advances them one at a time, so a long story is a long wait followed by a lot of clicking. Cut anything that is scene-setting rather than someone doing something. Do not name a score or a verdict word in the prose.`
 
 export function userPrompt(req: NarrationRequest): string {
   const cabinet = req.cabinet.map((a) => {
@@ -66,7 +67,7 @@ export function userPrompt(req: NarrationRequest): string {
           return d.isTwist ? `${framing}, and this one arrives as the complication` : framing
         }).join('; ')
     return [
-      `${a.role}: ${a.name} (${a.office}, ${a.era})`,
+      `${ROLE_LABEL[a.role]}: ${a.name} (${a.office}, ${a.era})`,
       `  who they were: ${a.bio}`,
       `  known for: ${a.traits.join(', ')}`,
       `  what the crisis asked of them: ${demands}`,
@@ -87,10 +88,10 @@ export function userPrompt(req: NarrationRequest): string {
       : `WHAT THE ROOM WAS LIKE\nNothing notable between them.`,
     ``,
     req.coup
-      ? `A COUP HAPPENS: ${req.coup.usurperName}, the ${req.coup.usurperRole}, takes the chair from ${req.coup.presidentName}. Give this its own beat near the end.`
+      ? `A COUP HAPPENS: ${req.coup.usurperName}, the ${ROLE_LABEL[req.coup.usurperRole]}, takes the chair from ${req.coup.presidentName}. Give this its own beat near the end.`
       : `No coup.`,
     ``,
-    `Judge all five posts, then write the story.`,
+    `Judge all six posts, then write the story.`,
   ].join('\n')
 }
 
