@@ -554,9 +554,10 @@ function Verdict({
       `${squareFor(result.verdicts, role)} ${ROLE_LABEL[role]} · ${result.roster[role].name}`),
     '',
     // Last, because it is for the reader who wants a go rather than the one
-    // reading the cabinet. It carries the seed, so whoever opens it is dealt the
-    // same faces in the same order and can try to beat what they were sent.
-    linkTo(runRef, result),
+    // reading the cabinet. The bare name rather than the seeded link: a wall of
+    // query string was the ugliest line in the paste, and the invitation reads
+    // better than the machinery behind it.
+    'Play now: hellscabinet.com',
   ].join('\n')
 
   async function copy() {
