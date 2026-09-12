@@ -111,6 +111,24 @@ Secrets: `npx wrangler secret put ANTHROPIC_API_KEY`.
   reachable only from the address bar, which `App.tsx` still keeps current. Re-pointing the
   share at a short seeded link is the open follow-up, not a bug.
 
+## Today's decisions (2026-09-13)
+
+- **The daily turns over on its own, at the player's local midnight.** `isStaleDaily()`
+  was right and had always been right, but it only ran at page load, and `openingRun()`
+  is a `useState` initialiser that runs once - so a tab left open overnight kept
+  yesterday's crisis and yesterday's masthead date until somebody reloaded. `App.tsx` now
+  arms a timer on `msUntilMidnight()` (`src/engine/run.ts`) and re-checks on
+  `visibilitychange` and `focus`, because a sleeping laptop does not fire a timer on time
+  and a phone browser may not fire one at all. All three paths ask `isStaleDaily()`, so a
+  slept-through midnight and a stale timer cannot disagree. `msUntilMidnight()` rolls the
+  calendar date forward and lets `Date` normalise it, which is what makes it 23 or 25
+  hours on a daylight-saving night rather than a hardcoded 24.
+- **Only the daily rolls.** Free play and a shared cabinet both carry their own crisis,
+  and `isStaleDaily()` already leaves anything with an `eventId` alone.
+- **A run in progress is not spared.** Midnight resets it to the new briefing wherever the
+  player had got to. The daily is the date; a game that outlives its own date is the bug
+  this closes.
+
 ## Open, and blocking a real launch
 
 - **19 portraits are non-free English-Wikipedia fair-use files** (Vader, Mario, Batman, Thanos, Voldemort, …). Wikipedia's fair-use rationale does not transfer; these need replacing or removing.

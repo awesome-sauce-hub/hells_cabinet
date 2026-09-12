@@ -8,14 +8,14 @@ import type { Beat, Tone } from './narrate.js'
 import { fetchJudgement } from './narrateRemote.js'
 import type { Judged } from './narrateRemote.js'
 import { EVENT_LOCATIONS } from './eventLocations.js'
-import { clearRun, isDaily, linkTo, loadRun, runFromUrl, saveRun, sharedFromUrl } from './session.js'
+import { clearRun, isDaily, isStaleDaily, linkTo, loadRun, runFromUrl, saveRun, sharedFromUrl } from './session.js'
 import type { RunRef, SavedPhase, SharedCabinet } from './session.js'
 import { finishDraft, isDraftComplete, openRoles } from '../engine/draft.js'
 import type { DraftState } from '../engine/draft.js'
 import { demandByRole, demandsFor } from '../engine/demands.js'
 import { applyAction, replayDraft } from '../engine/replay.js'
 import type { DraftAction } from '../engine/replay.js'
-import { createRun, todayKey } from '../engine/run.js'
+import { createRun, msUntilMidnight, todayKey } from '../engine/run.js'
 import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
 import { breakdown, squareFor, tierFor } from '../engine/verdict.js'
@@ -122,14 +122,65 @@ export default function App() {
   // Stable identity: this lands in a fetching effect's dependencies.
   const onJudged = useCallback((judged: Judged) => setVerdicts(judged.resolution.verdicts), [])
 
-  function startRun(next: RunRef) {
+  const startRun = useCallback((next: RunRef) => {
     setRef(next)
     setActions([])
     setVerdicts(null)
     setPhase('briefing')
     // Keep the address bar honest: it should always name the game on screen.
     window.history.replaceState(null, '', next.eventId ? linkTo(next) : window.location.pathname)
-  }
+  }, [])
+
+  /**
+   * The daily turns over on the player's own midnight, without a reload.
+   *
+   * loadRun() has always discarded a daily the calendar has overtaken, but it
+   * only runs at page load, and openingRun() is a useState initialiser that
+   * runs once. So the check never fired for the player it was written for: the
+   * one who leaves the tab open, comes back after midnight and is still being
+   * shown yesterday's crisis with yesterday's date on the masthead.
+   *
+   * Everything here is keyed off todayKey(), which is the device's own
+   * calendar - so the game turns over at midnight where the player is, not at
+   * midnight in Greenwich, and it follows them if they fly somewhere or the
+   * clock moves under them.
+   *
+   * A timer alone is not enough: a sleeping laptop does not fire one on time,
+   * and a phone browser may not fire it at all. So the wake events re-check as
+   * well, and the timer is re-armed off the real clock every pass rather than
+   * counted on. isStaleDaily() is the single source of truth for all of them,
+   * which is what keeps a slept-through midnight and a stale timer from
+   * disagreeing.
+   *
+   * Only the daily rolls. A free-play run and a cabinet somebody sent both
+   * carry their own crisis, and isStaleDaily() leaves them alone - a shared
+   * link is no more stale tomorrow than it was when it arrived.
+   */
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>
+
+    const check = () => {
+      if (isStaleDaily(ref)) startRun({ seed: todayKey(), eventId: null })
+      else arm()
+    }
+
+    const arm = () => {
+      clearTimeout(timer)
+      // A second the far side of the hour. Firing on the stroke races the
+      // clock the check then reads, and losing that race parks the game on
+      // yesterday until the next wake.
+      timer = setTimeout(check, msUntilMidnight() + 1_000)
+    }
+
+    arm()
+    document.addEventListener('visibilitychange', check)
+    window.addEventListener('focus', check)
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('visibilitychange', check)
+      window.removeEventListener('focus', check)
+    }
+  }, [ref, startRun])
 
   return (
     <div className={`app app-${phase}`}>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { isDaily, isStaleDaily, runFromUrl, sharedFromUrl } from '../session.js'
-import { createRun, todayKey } from '../../engine/run.js'
+import { createRun, msUntilMidnight, todayKey } from '../../engine/run.js'
 import { EVENTS } from '../data.js'
 import { ROLES } from '../../engine/types.js'
 
@@ -32,6 +32,23 @@ describe('the daily turns over', () => {
   it('only today’s dated run counts as the daily', () => {
     expect(isDaily({ seed: todayKey(), eventId: null })).toBe(true)
     expect(isDaily({ seed: dayBefore(todayKey()), eventId: null })).toBe(false)
+  })
+
+  it('counts down to the player’s own midnight, not to Greenwich’s', () => {
+    // What the open tab arms its timer against. Local by construction: these
+    // are local wall-clock times, so the answer is the same number of hours in
+    // every zone, which is the whole point.
+    expect(msUntilMidnight(new Date(2026, 8, 12, 23, 59, 0))).toBe(60_000)
+    expect(msUntilMidnight(new Date(2026, 8, 12, 0, 0, 0))).toBe(24 * 60 * 60 * 1_000)
+  })
+
+  it('lands on a date the staleness check reads as tomorrow', () => {
+    // The two have to agree: a countdown that expires while todayKey() still
+    // says yesterday leaves the game parked until the next wake.
+    const now = new Date(2026, 8, 12, 23, 59, 59)
+    const woken = new Date(now.getTime() + msUntilMidnight(now) + 1_000)
+    expect(todayKey(woken)).toBe('2026-09-13')
+    expect(isStaleDaily({ seed: todayKey(now), eventId: null }, todayKey(woken))).toBe(true)
   })
 })
 

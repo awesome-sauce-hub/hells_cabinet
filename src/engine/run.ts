@@ -84,6 +84,23 @@ export function todayKey(now = new Date()): string {
 }
 
 /**
+ * How long until the player's own midnight, in milliseconds.
+ *
+ * The staleness check only ever ran at page load, so a tab left open overnight
+ * kept yesterday's crisis and printed yesterday's date until somebody
+ * reloaded. This is what a running game arms a timer against.
+ *
+ * Built by rolling the calendar date forward and letting Date normalise it,
+ * which is what makes it right on the two nights a year it matters: the next
+ * local midnight is 23 or 25 hours away across a daylight-saving boundary,
+ * never 24. In the zones where midnight itself is skipped, the normalised
+ * instant is the one the date changes on, which is the same answer.
+ */
+export function msUntilMidnight(now = new Date()): number {
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime() - now.getTime()
+}
+
+/**
  * A fresh seed for a chosen crisis, so picking the same event twice does not
  * deal the same six faces. Short enough to sit in a shareable link.
  */
