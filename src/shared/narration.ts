@@ -9,12 +9,28 @@ import { VERDICTS } from '../engine/verdict.js'
  * builds the request, the serverless function validates it. One definition
  * means the two cannot drift into disagreeing about the same JSON.
  */
-/** A short line of the story. Beats are revealed one at a time. */
+/**
+ * A short line of the story. Beats are revealed one at a time.
+ *
+ * The beat is shown beside the speaker's photograph, at reading size, one at a
+ * time: a caption, not a paragraph. The prompt asks for 190 characters, about
+ * two sentences, and this cap is deliberately looser than that.
+ *
+ * The cap used to be 400 - four sentences - and a schema that permits
+ * something is the instruction that wins, so the screen filled with prose.
+ * But the two numbers cannot be the same one. This schema is what
+ * messages.parse validates against, and a single beat one character over
+ * throws away the entire judgement: the run drops to the templated fallback
+ * after the call has already been paid for, which is the flat story this
+ * change exists to stop. String length is not reliably enforced by structured
+ * output, so the prompt carries the brief and the schema only catches prose
+ * that has genuinely run away.
+ */
 export const beatSchema = z.object({
   tone: z.enum(TONES),
   /** The post whose holder this beat is about, or null for the room at large. */
   role: z.enum(ROLES).nullable(),
-  text: z.string().min(1).max(400),
+  text: z.string().min(1).max(260),
 })
 export type NarrationBeat = z.infer<typeof beatSchema>
 

@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EVENTS, FIGURES } from './data.js'
-import { CandidateCard, Icon, ROLE_LABEL, SlotStrip } from './components.js'
+import { CandidateCard, Icon, Portrait, ROLE_LABEL, SlotStrip } from './components.js'
 import { DeskAside, Masthead } from './Desk.js'
 import { DevBar } from './DevBar.js'
 import { narrate } from './narrate.js'
-import type { Beat } from './narrate.js'
+import type { Beat, Tone } from './narrate.js'
 import { fetchJudgement } from './narrateRemote.js'
 import type { Judged } from './narrateRemote.js'
 import { EVENT_LOCATIONS } from './eventLocations.js'
@@ -18,10 +18,18 @@ import type { DraftAction } from '../engine/replay.js'
 import { createRun, todayKey } from '../engine/run.js'
 import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
-import { squareFor, tierFor } from '../engine/verdict.js'
+import { breakdown, squareFor, tierFor } from '../engine/verdict.js'
 import type { RoleVerdict } from '../engine/verdict.js'
 import { ROLES } from '../engine/types.js'
 import type { GameEvent, Role } from '../engine/types.js'
+
+/**
+ * How a played beat reads at a glance in the ledger. Shape rather than colour
+ * alone, so the run is still legible to a player who cannot separate the two.
+ */
+const LEDGER_MARK: Record<Tone, string> = {
+  good: '\u2713', bad: '\u2715', twist: '!', neutral: '\u00b7',
+}
 
 type Phase = SavedPhase | 'shared'
 
@@ -379,7 +387,16 @@ function Sim({ result, onJudged, onDone }: {
   // the player holding a templated story with no way to get the real one.
   const [attempt, setAttempt] = useState(0)
   const [shown, setShown] = useState(1)
-  const newest = useRef<HTMLLIElement>(null)
+  /**
+   * The story plays itself.
+   *
+   * Nine presses of Continue is a reading task with a button in the way: the
+   * player supplies all the energy and the screen supplies none. On a clock it
+   * is a scene, and the presses that remain - pause, next, skip - are there for
+   * someone who wants to take it at their own pace rather than required of
+   * everyone who wants to reach the end.
+   */
+  const [playing, setPlaying] = useState(true)
   // Where the player has got to, readable from the fetch's callback without
   // making the request depend on it.
   const shownRef = useRef(1)
@@ -449,17 +466,24 @@ function Sim({ result, onJudged, onDone }: {
   // Hold at the opening beat while there is still a chance of a written story.
   const pending = waiting && written === null && shown === 1
 
-  // Move focus to each new beat so a screen reader hears it and a keyboard
-  // player is left next to the button they just pressed, and bring it into
-  // view rather than leaving the player to hunt for the line that just landed.
+  /**
+   * How long a beat holds the stage: long enough to read it, scaled to its
+   * length, and capped so the longest line cannot strand someone watching.
+   */
   useEffect(() => {
-    if (shown <= 1) return
-    const el = newest.current
-    if (!el) return
-    el.focus({ preventScroll: true })
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    el.scrollIntoView({ block: 'center', behavior: still ? 'auto' : 'smooth' })
-  }, [shown])
+    if (!playing || pending || finished) return
+    const text = beats[shown - 1]?.text ?? ''
+    const hold = Math.min(6200, 1500 + text.length * 42)
+    const tick = setTimeout(() => setShown((n) => n + 1), hold)
+    return () => clearTimeout(tick)
+  }, [playing, pending, finished, shown, beats])
+
+  // Taking a beat by hand means taking the pace by hand: a press should show
+  // the next line, not race the clock that was about to show it anyway.
+  function advance() {
+    setPlaying(false)
+    setShown((n) => Math.min(n + 1, beats.length))
+  }
 
   return (
     <div className="board-layout">
@@ -491,16 +515,57 @@ function Sim({ result, onJudged, onDone }: {
           </p>
         )}
 
-        <ol className="beats">
-          {beats.slice(0, shown).map((b, i) => (
-            <li className={`beat ${b.tone}`} key={`${b.id}-${i}`} ref={i === shown - 1 ? newest : undefined} tabIndex={-1}>
-              {b.who && <div className="who">{b.role ? `${ROLE_LABEL[b.role]} · ` : ''}{b.who}</div>}
-              <div>{b.text}</div>
+        {/*
+          * One beat holds the stage, with the face of whoever is acting.
+          *
+          * The screen used to be the whole story stacked at one weight, which
+          * is a wall of prose by the fourth beat and unreadable by the ninth.
+          * Only the current line is at reading size now; everything played
+          * drops into the ledger below, where it stays glanceable without
+          * competing. The portrait is the point: a beat about restraint under
+          * pressure reads differently over Bokassa's face than it does over a
+          * caption with his name in it.
+          */}
+        <div className={`stage-beat ${latest?.tone ?? 'neutral'} ${latest?.role ? '' : 'stage-room'}`}
+          aria-live="polite" aria-atomic="true">
+          {latest?.role && (
+            <span className="stage-face">
+              <Portrait key={result.roster[latest.role].id} figure={result.roster[latest.role]} size="lg" />
+            </span>
+          )}
+          <div className="stage-body">
+            <div className="stage-attr">
+              {latest?.role ? (
+                <>
+                  <span className="stage-role">{ROLE_LABEL[latest.role]}</span>
+                  <span className="stage-who">{result.roster[latest.role].name}</span>
+                </>
+              ) : (
+                <span className="stage-role">{latest?.tone === 'twist' ? 'The complication' : 'The room'}</span>
+              )}
+            </div>
+            <p className="stage-line">{latest?.text}</p>
+          </div>
+        </div>
+
+        {/* Newest first, so the line that just left the stage is the one
+            nearest it and the eye does not travel to follow the story. */}
+        <ol className="ledger">
+          {beats.slice(0, Math.max(0, shown - 1)).reverse().map((b, i) => (
+            <li className={`ledger-item ${b.tone}`} key={`${b.id}-${i}`}>
+              {b.role
+                ? <Portrait figure={result.roster[b.role]} size="sm" />
+                : <span className="ledger-noface" aria-hidden="true" />}
+              <span className="ledger-text">{b.role ? `${ROLE_LABEL[b.role]} \u2014 ` : ''}{b.text}</span>
+              <span className="ledger-mark" aria-hidden="true">{LEDGER_MARK[b.tone]}</span>
             </li>
           ))}
-          {/* Blank slips hold the space the story will fill, so the board does
-              not grow under the player one beat at a time. */}
-          {beats.slice(shown).map((b, i) => <li className="beat pending" key={`pending-${b.id}-${i}`} aria-hidden="true" />)}
+          {/* Blank rows hold the space the rest of the story will take, so the
+              board is full from the first beat and does not grow under the
+              player as it plays. */}
+          {beats.slice(shown).map((b, i) => (
+            <li className="ledger-pending" key={`pending-${b.id}-${i}`} aria-hidden="true" />
+          ))}
         </ol>
 
         <div className="sim-actions">
@@ -508,12 +573,13 @@ function Sim({ result, onJudged, onDone }: {
             <button className="primary" onClick={onDone}>See the verdict <Icon name="arrow" /></button>
           ) : (
             <>
-              <button className="primary" onClick={() => setShown((n) => n + 1)} disabled={pending}>
-                {pending ? 'The room is deliberating…' : <>Continue <Icon name="arrow" /></>}
+              <button className="primary" onClick={() => setPlaying((p) => !p)} disabled={pending}>
+                {pending ? 'The room is deliberating…' : playing ? 'Pause' : <>Play <Icon name="arrow" /></>}
               </button>
+              <button onClick={advance} disabled={pending}>Next beat</button>
               {/* Never disabled: the templated story is complete from the
                   first render, so skipping it needs nobody's permission. */}
-              <button onClick={() => setShown(beats.length)}>Skip to the end</button>
+              <button onClick={() => { setPlaying(false); setShown(beats.length) }}>Skip to the end</button>
             </>
           )}
         </div>
@@ -557,8 +623,25 @@ function Verdict({
     // reading the cabinet. The bare name rather than the seeded link: a wall of
     // query string was the ugliest line in the paste, and the invitation reads
     // better than the machinery behind it.
-    'Play now: hellscabinet.com',
+    //
+    // Written in full, with the scheme. A bare domain is not a link: most
+    // clients leave it as plain text, and the ones that do linkify it still
+    // skip the preview card, so the shared result arrived as a naked string.
+    // The cost of keeping it seedless is that SharedRun and the result branch
+    // of linkTo() are now reachable only from the address bar - deliberate, and
+    // noted in CLAUDE.md so it is not rediscovered as a bug.
+    'Play now: https://hellscabinet.com/',
   ].join('\n')
+
+  /**
+   * The score, decomposed. The weights are authored per crisis and have never
+   * been visible, so a player could not tell which post the run turned on -
+   * only that a number arrived. These are the same numbers scoreFrom() uses.
+   */
+  const points = new Map(
+    breakdown(result.verdicts, result.event.twist.check.role, result.chemistry.total)
+      .posts.map((p) => [p.role, p]),
+  )
 
   async function copy() {
     try {
@@ -588,17 +671,42 @@ function Verdict({
         <ul className="verdict-list">
           {ROLES.map((role) => {
             const v = result.verdicts.find((x) => x.role === role)
+            const post = points.get(role)
+            // The row takes its own class prefix. verdict-* already means
+            // "paint this element in the verdict's colour", which is right for
+            // a dot and a word and floods a whole row.
             return (
-              <li key={role}>
+              <li key={role} className={`took-${v?.verdict ?? 'none'} ${post?.isTwist ? 'verdict-twist-row' : ''}`}>
                 <span className={`verdict-mark verdict-${v?.verdict ?? 'none'}`} aria-hidden="true" />
+                {/* The face, on the screen the whole game was played to reach.
+                    Reading that the Attorney-General line says Mussolini is the
+                    result; it was set as plain text until now. */}
+                <Portrait figure={result.roster[role]} size="md" />
                 <span className="verdict-body">
                   <span className="verdict-head">
                     <span className="verdict-who">{result.roster[role].name}</span>
                     <span className="verdict-role">{ROLE_LABEL[role]}</span>
+                    {/* Named only now. During the briefing this demand is
+                        sealed, and it stays sealed until it has been paid for. */}
+                    {post?.isTwist && <span className="verdict-twist">the complication</span>}
                   </span>
                   <span className="verdict-reason">{v?.reason ?? 'This crisis never tested them.'}</span>
                 </span>
-                <span className={`verdict-word verdict-${v?.verdict ?? 'none'}`}>{v?.verdict ?? '—'}</span>
+                <span className="verdict-tally">
+                  <span className={`verdict-word verdict-${v?.verdict ?? 'none'}`}>{v?.verdict ?? '—'}</span>
+                  {post && (
+                    <>
+                      <span className="verdict-points">
+                        {post.earned.toFixed(1)} of {post.available.toFixed(1)}
+                      </span>
+                      {/* The same numbers as a length, because which seat lost
+                          the run is not a thing anyone reads out of decimals. */}
+                      <span className="verdict-bar" aria-hidden="true">
+                        <i style={{ width: `${post.available > 0 ? (post.earned / post.available) * 100 : 0}%` }} />
+                      </span>
+                    </>
+                  )}
+                </span>
               </li>
             )
           })}

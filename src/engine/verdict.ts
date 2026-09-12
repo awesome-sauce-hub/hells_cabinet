@@ -14,7 +14,7 @@ export const VERDICTS = ['disaster', 'fail', 'pass', 'triumph'] as const
 export type Verdict = (typeof VERDICTS)[number]
 
 /** What each verdict is worth, 0-1, before weighting. */
-const VERDICT_VALUE: Record<Verdict, number> = {
+export const VERDICT_VALUE: Record<Verdict, number> = {
   disaster: 0,
   fail: 0.3,
   pass: 0.72,
@@ -83,4 +83,65 @@ export function isVerdict(value: unknown): value is Verdict {
 
 export function clamp(n: number, lo: number, hi: number): number {
   return Math.min(Math.max(n, lo), hi)
+}
+
+/**
+ * The arithmetic, made visible.
+ *
+ * The score has always been a weighted mean the player never got to see: four
+ * words arrived, a number arrived, and nothing in between. That is most of why
+ * it reads as arbitrary. Nothing here changes how a run scores - it only says
+ * out loud what each post contributed and what it could have contributed, so a
+ * player can tell which seat mattered and which seat lost it.
+ */
+export interface PostBreakdown {
+  role: Role
+  verdict: Verdict
+  /** The event's authored weight for this post, summed if it was asked twice. */
+  weight: number
+  /** Points this post put on the board, out of 100. */
+  earned: number
+  /** Points it was carrying - the same for every verdict word. */
+  available: number
+  /** True for the post the sealed complication landed on. */
+  isTwist: boolean
+}
+
+export interface ScoreBreakdown {
+  posts: PostBreakdown[]
+  /** The chemistry adjustment, applied after the posts are totalled. */
+  chemistry: number
+  /** posts + chemistry, clamped - identical to scoreFrom(). */
+  total: number
+}
+
+/**
+ * Decompose a score into what each post contributed.
+ *
+ * `earned` across every post sums to the score before chemistry, which is the
+ * property that makes the panel trustworthy: the numbers on screen add up to
+ * the number at the top.
+ */
+export function breakdown(
+  verdicts: readonly RoleVerdict[],
+  twistRole: Role | null = null,
+  chemistryTotal = 0,
+): ScoreBreakdown {
+  let total = 0
+  for (const v of verdicts) total += v.weight ?? 1
+
+  const posts = verdicts.map((v) => {
+    const weight = v.weight ?? 1
+    const available = total === 0 ? 0 : (weight / total) * 100
+    return {
+      role: v.role,
+      verdict: v.verdict,
+      weight,
+      earned: available * VERDICT_VALUE[v.verdict],
+      available,
+      isTwist: v.role === twistRole,
+    }
+  })
+
+  return { posts, chemistry: chemistryTotal, total: scoreFrom(verdicts, chemistryTotal) }
 }

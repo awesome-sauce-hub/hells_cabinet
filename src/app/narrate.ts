@@ -86,6 +86,22 @@ function variant(options: string[], key: string): string {
   return options[Math.floor(seedFrom(key).next() * options.length)]!
 }
 
+/**
+ * The name, minus the one the picture already gives.
+ *
+ * Every template opens on its subject, which was right when a beat was a line
+ * of text with a caption over it. The beat is now printed beside the
+ * appointee's photograph with their name and post above it, so opening on the
+ * name again says it three times before the sentence starts. The lead drops
+ * and the verb takes the front; a second mention later in the line stays,
+ * because there is no pronoun a roster this mixed could safely be given.
+ */
+function nameOnce(template: string, who: string): string {
+  if (!template.startsWith('{who} ')) return template.replaceAll('{who}', who)
+  const rest = template.slice(6).replaceAll('{who}', who)
+  return rest.charAt(0).toUpperCase() + rest.slice(1)
+}
+
 export function narrate(result: Resolution): Beat[] {
   const beats: Beat[] = [
     { id: 'briefing', tone: 'neutral', text: result.event.dossier },
@@ -105,8 +121,10 @@ export function narrate(result: Resolution): Beat[] {
       tone: went ? 'good' : 'bad',
       who,
       role: v.role,
-      text: variant((went ? SUCCESS : FAILURE)[v.role], `${result.event.id}-${v.role}-${who}-${v.verdict}`)
-        .replaceAll('{who}', who),
+      text: nameOnce(
+        variant((went ? SUCCESS : FAILURE)[v.role], `${result.event.id}-${v.role}-${who}-${v.verdict}`),
+        who,
+      ),
     })
   }
 

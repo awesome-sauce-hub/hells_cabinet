@@ -51,11 +51,13 @@ Write one continuous story, not six character cards. Each beat must follow from 
 The story must agree with your own verdicts: whoever you judged a disaster must visibly be one in the prose, and whoever you judged a triumph must visibly earn it.
 
 FORMAT
-One or two sentences per beat. No headings, no names in bold, no stage directions. Set 'role' to the post whose holder the beat is about, or null for beats about the room, the crisis or the outcome. Tone: 'good' when it goes well for them, 'bad' when it does not, 'twist' for the complication and the coup, 'neutral' for scene-setting and the closing line.
+One or two sentences per beat, and never more than 190 characters. No headings, no names in bold, no stage directions. Set 'role' to the post whose holder the beat is about, or null for beats about the room, the crisis or the outcome. Tone: 'good' when it goes well for them, 'bad' when it does not, 'twist' for the complication and the coup, 'neutral' for scene-setting and the closing line.
 
 Open with a beat that sets the crisis, close with a beat that delivers the outcome. Cover all six appointees in between, plus the complication and any chemistry or coup you are given.
 
-Eleven beats at most, and never more than two sentences in one. The player advances them one at a time, so a long story is a long wait followed by a lot of clicking. Cut anything that is scene-setting rather than someone doing something. Do not name a score or a verdict word in the prose.`
+Eleven beats at most, and never more than two sentences in one. The player watches them play out one at a time, so a long story is a long sit. Cut anything that is scene-setting rather than someone doing something. Do not name a score or a verdict word in the prose.
+
+The player sees the appointee's photograph and their name and post printed beside the line as it plays. So do not name them in the prose of their own beat - the caption has already said who this is, and repeating it is the flattest way to open a sentence. Start with what they did. Write "Has already moved the fleet, and nobody asked him to" rather than "Jean-Bedel Bokassa has already moved the fleet. Nobody asked Jean-Bedel Bokassa to move the fleet." Name somebody only when a beat is about what one appointee did to another, or when the beat belongs to the room rather than to a person.`
 
 export function userPrompt(req: NarrationRequest): string {
   const cabinet = req.cabinet.map((a) => {

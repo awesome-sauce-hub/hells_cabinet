@@ -73,12 +73,49 @@ Secrets: `npx wrangler secret put ANTHROPIC_API_KEY`.
 - **One gate suggestion was declined**: rewriting Epstein's bio to state the trafficking conviction outright reverses a deliberate choice to keep these as jokes about self-regard and silence rather than prose restating allegations — and the bio is what the adjudicator generates fresh prose from every run.
 - **A rules section** was added to the masthead's help sheet (`Rulebook` in `components.tsx`, `ROLE_BRIEF` in `types.ts`) because nothing had ever said what a post *is*, only what a given crisis wanted from it.
 
+## Today's decisions (2026-09-11)
+
+- **The story screen tells itself in faces.** `Sim` used to render the whole story as a
+  flat list of paper slips at one weight, which is a wall of prose by the fourth beat. One
+  beat now holds a stage with the acting appointee's portrait beside it, and everything
+  already played drops into a one-line ledger underneath. Only one line is ever at reading
+  size. Every beat already carried its `role`, so this needed no schema, prompt or engine
+  change — the portrait was one `result.roster[role]` lookup from where the code already was.
+- **The story plays on a clock**, roughly `1500 + 42ms a character`, capped at 6.2s. Nine
+  presses of Continue was a reading task with a button in the way. Pause, Next beat and
+  Skip to the end are all still there for anyone who wants the pace back.
+- **Tone lands on the face, not a verdict stamp.** A `good` beat straightens and sharpens
+  the portrait, a `bad` one tilts and greys it. The narrator already put a tone on every
+  beat; spending the verdict here instead would have front-run the verdict screen and
+  unsealed the twist a screen early.
+- **A missing portrait is now a plate, not a silhouette.** Initials over office and era, in
+  the same sepia frame; an `object` sets its own name on a cooler ground, because giving
+  initials to a thing that was never a person makes it look like one. 37 of 159 figures
+  have no photograph and an empty frame reads as a broken image once the game is told in faces.
+- **The verdict screen grew faces**, a bar per post and a flag on the seat the sealed
+  complication landed on. `breakdown()` was already being printed as `earned of available`;
+  the numbers just could not be read as a comparison.
+- **Beat length: the schema was overruling the prompt.** `SYSTEM` has always said "never
+  more than two sentences" while `beatSchema` allowed 400 characters, which is about four.
+  The cap is now 260 and the prompt asks for 190 — deliberately two different numbers,
+  because the schema is what `messages.parse` validates and one beat a character over
+  throws away the whole judgement after the call has been paid for. The prompt also now
+  says not to name the appointee in their own beat, since the caption beside the line
+  already has. The fallback templates drop their leading `{who}` for the same reason.
+- **The share link is a link.** `Play now: hellscabinet.com` was a bare domain: most clients
+  leave it as plain text and none of them unfurl it. Now `https://hellscabinet.com/`.
+- **Open Graph was already done** and the note here saying otherwise was stale. `index.html`
+  has the full card, description, favicon and touch icon, and `public/og.jpg` exists.
+- **`SharedRun` has no front door, by choice.** The share text carries the bare domain
+  rather than a seeded link, so `SharedRun` and the `result` branch of `linkTo()` are
+  reachable only from the address bar, which `App.tsx` still keeps current. Re-pointing the
+  share at a short seeded link is the open follow-up, not a bug.
+
 ## Open, and blocking a real launch
 
 - **19 portraits are non-free English-Wikipedia fair-use files** (Vader, Mario, Batman, Thanos, Voldemort, …). Wikipedia's fair-use rationale does not transfer; these need replacing or removing.
 - **43 portraits are CC BY / BY-SA** and legally require the author's name and the licence in the work. `public/portrait-credits.html` currently gives only a source link, which is not sufficient. Author and licence data can be pulled from the Commons API.
-- **37 of 159 figures have no portrait at all.** The politicians need licensing; the abstractions (Nine Eleven, The Concept of Time Passing) need a design treatment, since no photograph exists.
-- `index.html` has **no Open Graph, description or favicon** — every shared cabinet link pastes as a bare URL, which for a game distributed by sharing is the highest-leverage gap.
+- **37 of 159 figures have no portrait at all.** They now render a monogram plate rather than an empty silhouette, which makes the gap presentable but does not fill it: the politicians still need licensed photographs, and the abstractions (Nine Eleven, The Concept of Time Passing) still deserve a real design treatment rather than their own name set in type.
 - **No React error boundary**; a render exception serves a blank page. No error reporting.
 - The narrator's rate limiting is **per-Cloudflare-location, not per-player** (`Map` in module scope is per-isolate on Workers). At ~8¢ a judged run, that is the cost exposure.
 - 35 warns and 7 nits from the content gate are unactioned in `content/review-findings.json`.

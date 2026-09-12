@@ -19,17 +19,55 @@ export function Icon({ name, size = 18 }: { name: 'arrow' | 'shuffle' | 'check' 
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>
 }
 
-export function Portrait({ figure, compact = false }: { figure: Politician; compact?: boolean }) {
+/**
+ * Initials for the plate a figure with no photograph gets.
+ *
+ * First and last rather than first two, so Lee Kuan Yew reads LY and not LK -
+ * a family name is the half a reader recognises. A single-word name has no
+ * last to take, so it lends its own second letter instead.
+ */
+function initialsFor(name: string): string {
+  const words = name.split(/\s+/).filter(Boolean)
+  const first = words[0]
+  const last = words[words.length - 1]
+  if (!first || !last) return '?'
+  if (words.length === 1) return first.slice(0, 2).toUpperCase()
+  return (first.slice(0, 1) + last.slice(0, 1)).toUpperCase()
+}
+
+/**
+ * A figure's face, at one of four sizes.
+ *
+ * 'card' is the draft's pinned index card, 'lg' the one on stage while a beat
+ * is playing, 'md' the verdict row and 'sm' the rail thumbnail.
+ *
+ * The fallback is a plate rather than a silhouette. Thirty-seven of the roster
+ * have no photograph, and once the story is told in faces an empty frame reads
+ * as a broken image rather than as a dossier nobody could illustrate. Initials,
+ * office and era carry the same information the photograph would have, and an
+ * abstraction - Nine Eleven, The Concept of Time Passing - is set in its own
+ * name on a cooler ground, because initialising a thing that was never a person
+ * only makes it look like one.
+ */
+export function Portrait({ figure, size = 'card' }: {
+  figure: Politician
+  size?: 'card' | 'sm' | 'md' | 'lg'
+}) {
   const [failed, setFailed] = useState(false)
   const src = (portraitSources as Record<string, string>)[figure.id]
+  const abstract = figure.category === 'object'
   return (
-    <span className={`portrait portrait-${figure.category} ${compact ? 'portrait-small' : ''}`}>
+    <span className={`portrait portrait-${figure.category} ${size === 'card' ? '' : `portrait-${size}`}`}>
       {src && !failed ? (
         <img src={src} alt={figure.name} draggable={false} onError={() => setFailed(true)} />
       ) : (
-        <span className="portrait-fallback" role="img" aria-label={`Portrait unavailable for ${figure.name}`}>
-          <svg viewBox="0 0 120 130" fill="currentColor" aria-hidden="true"><circle cx="60" cy="40" r="23" /><path d="M16 125v-16c0-29 18-43 44-43s44 14 44 43v16z" /></svg>
-          {!compact && <span>Photo not on file</span>}
+        <span className={`portrait-plate ${abstract ? 'portrait-plate-abstract' : ''}`}
+          role="img" aria-label={`No portrait on file for ${figure.name}`}>
+          <span className="plate-mark" aria-hidden="true">
+            {abstract ? figure.name : initialsFor(figure.name)}
+          </span>
+          <span className="plate-rule" aria-hidden="true" />
+          <span className="plate-meta" aria-hidden="true">{figure.office}<br />{figure.era}</span>
         </span>
       )}
     </span>
@@ -147,7 +185,7 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
               <span className="role-number" aria-hidden="true">0{index + 1}</span>
               <span className="role-label">{ROLE_LABEL[role]}</span>
               <span className="slot-content">
-                {picked ? <><Portrait key={picked.id} figure={picked} compact /><span className="appointed-name">{picked.name}<span className="appointed-label"><Icon name="check" size={10} /> Appointed</span></span></> : <><span className="empty-photo" aria-hidden="true"><Icon name="pin" size={19} /></span><span className="slot-prompt">{droppable ? 'Pin here' : 'Position vacant'}</span></>}
+                {picked ? <><Portrait key={picked.id} figure={picked} size="sm" /><span className="appointed-name">{picked.name}<span className="appointed-label"><Icon name="check" size={10} /> Appointed</span></span></> : <><span className="empty-photo" aria-hidden="true"><Icon name="pin" size={19} /></span><span className="slot-prompt">{droppable ? 'Pin here' : 'Position vacant'}</span></>}
               </span>
             </>
           )
