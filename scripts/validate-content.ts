@@ -36,6 +36,7 @@ const politicianSchema = z.object({
   office: z.string().min(1),
   bio: z.string().min(1).max(140),
   traits: z.array(z.string()).min(1).max(4),
+  record: z.string().min(1).optional(),
   rivals: z.array(z.string()).optional(),
   party: z.string().optional(),
   reviewed: z.boolean(),
@@ -52,6 +53,8 @@ const checkSchema = z.object({
   invert: z.boolean().optional(),
   weight: z.number().positive().optional(),
   note: z.string().optional(),
+  /** Why the post mattered in the real crisis. Required on non-twist checks below. */
+  why: z.string().optional(),
 })
 
 const eventSchema = z.object({
@@ -63,6 +66,8 @@ const eventSchema = z.object({
   spotlight: z.array(roleEnum).min(1),
   checks: z.array(checkSchema).min(1),
   twist: z.object({ id: z.string(), text: z.string().min(1), check: checkSchema }),
+  aftermath: z.string().optional(),
+  lesson: z.string().optional(),
   tags: z.array(z.string()).min(1),
 })
 
@@ -190,7 +195,13 @@ for (const event of loadEvents()) {
     const key = `${c.role}/${c.demands}`
     if (seen.has(key)) fail(`event ${event.id}: duplicate check ${key}`)
     seen.add(key)
+    // Optional in the schema so the type stays tolerant, required here so the
+    // briefing cannot quietly lose the one line that says why a post matters.
+    // The twist's check is exempt: its demand is withheld, so its reason is too.
+    if (!c.why) fail(`event ${event.id}: check ${key} has no why`)
   }
+  if (!event.aftermath) fail(`event ${event.id}: no aftermath - the debrief has nothing to say`)
+  if (!event.lesson) fail(`event ${event.id}: no lesson`)
 }
 
 if (errors.length) {

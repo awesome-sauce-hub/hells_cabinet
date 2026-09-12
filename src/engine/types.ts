@@ -77,6 +77,30 @@ export const ROLE_BRIEF: Record<Role, string> = {
   Chancellor: 'Works out what it costs, and who ends up paying.',
 }
 
+/**
+ * What the office is, outside the joke.
+ *
+ * ROLE_BRIEF says what the seat does in this game. This says what it does in a
+ * real government: the power it actually holds, and the thing that is supposed
+ * to hold it back. Six seats is the entire separation-of-powers argument, and
+ * the game spends every run teaching it by implication without ever once
+ * stating it.
+ */
+export const ROLE_CIVICS: Record<Role, string> = {
+  President:
+    'Head of government. Owns the decision and the blame for it, which is why the office is bounded everywhere else - by a term, by a legislature, by a court. A president who cannot be removed is not a president.',
+  Spymaster:
+    'Runs intelligence. Uniquely powerful because the room can only argue about what it has been told, and uniquely hard to check for the same reason: oversight of a secret service has to be done by people who are not allowed to describe what they found.',
+  General:
+    'Commands the armed forces, under civilian authority rather than beside it. The order comes from the elected side; the expertise about whether it can be carried out comes from this one. Collapsing those two is the shape most coups take.',
+  AttorneyGeneral:
+    "The government's lawyer, and the one minister whose job includes telling it no. The tension is structural: appointed by the people they must be willing to prosecute, which is why the independence of this office is a standing constitutional argument rather than a settled fact.",
+  PressSecretary:
+    'Speaks for the government to the public. Holds no formal power at all and enormous practical power, because what the country believes happened shapes what the government can do next. The check is a press that asks again.',
+  Chancellor:
+    'Controls money - raising it, spending it, and saying what cannot be afforded. In most systems the legislature must vote the funds, which makes the purse the oldest and sharpest check on an executive there is.',
+}
+
 export const CATEGORIES = ['politician', 'wildcard', 'object'] as const
 /**
  * Wildcards are the non-politicians - fictional characters, internet figures,
@@ -124,6 +148,16 @@ export interface Politician {
   bio: string
   /** Visible on the card. Drives chemistry and the fallback adjudicator. */
   traits: string[]
+  /**
+   * What this person actually did, plainly. Post-run display only.
+   *
+   * Deliberately separate from `bio`, and deliberately never sent to the
+   * adjudicator: the bio is the only description it gets, and a second,
+   * factual one would change every judgement and invalidate the balance
+   * harnesses. It also lets the bio go on being a joke - which is the point of
+   * the bios - while the facts still get stated somewhere.
+   */
+  record?: string
   /** Ids of politicians this one cannot work with. */
   rivals?: string[]
   party?: string
@@ -155,6 +189,18 @@ export interface Check {
   weight?: number
   /** What is actually being asked, in words. The adjudicator reads this. */
   note?: string
+  /**
+   * Why this post mattered in the real crisis. Shown to the player in the
+   * briefing, never sent to the adjudicator.
+   *
+   * The demand list has always been the game's one piece of pre-draft
+   * knowledge and its most opaque: it says what is wanted without saying why a
+   * cabinet would want it, which makes it a checklist to match rather than a
+   * reason to understand. This is the sentence that turns one into the other,
+   * and it is the cheapest teaching in the game because the player is already
+   * reading the line it attaches to.
+   */
+  why?: string
 }
 
 export interface Twist {
@@ -174,6 +220,13 @@ export interface GameEvent {
   checks: Check[]
   /** Hidden until Act 2. */
   twist: Twist
+  /**
+   * What actually happened. Shown only after the verdict, so it lands as the
+   * archive footnote to a run rather than as homework before one.
+   */
+  aftermath?: string
+  /** The way governments fail that this crisis is an instance of. */
+  lesson?: string
   tags: string[]
 }
 

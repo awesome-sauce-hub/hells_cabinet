@@ -60,8 +60,14 @@ const TIER_LIFT: Record<Politician['tier'], number> = {
   liability: -1.4,
 }
 
-function judgeCheck(check: Check, roster: Roster, event: GameEvent): RoleVerdict {
-  const p = roster[check.role]
+/**
+ * Judge one named person against one demand.
+ *
+ * Split out from judgeCheck so the rating can ask the same question of someone
+ * who was never appointed - "what would this have scored" - using the identical
+ * judge, which is the only thing that makes par comparable to what happened.
+ */
+export function judgeFor(check: Check, p: Politician, event: GameEvent): RoleVerdict {
   const suited = (SUITED[check.demands] ?? []).filter((t) => p.traits.includes(t)).length
   const unsuited = (UNSUITED[check.demands] ?? []).filter((t) => p.traits.includes(t)).length
 
@@ -84,6 +90,10 @@ function judgeCheck(check: Check, roster: Roster, event: GameEvent): RoleVerdict
     reason: check.note ? `${p.name}, on ${check.note}.` : `${p.name} was asked for ${check.demands}.`,
     weight: check.weight,
   }
+}
+
+function judgeCheck(check: Check, roster: Roster, event: GameEvent): RoleVerdict {
+  return judgeFor(check, roster[check.role], event)
 }
 
 export function resolveEvent(event: GameEvent, roster: Roster): Resolution {

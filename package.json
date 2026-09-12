@@ -7,6 +7,7 @@
     "sim": "tsx scripts/sim.ts",
     "balance": "tsx scripts/balance.ts",
     "solvability": "tsx scripts/solvability.ts",
+    "rating": "tsx scripts/rating.ts",
     "validate": "tsx scripts/validate-content.ts",
     "test": "vitest run && npm run validate",
     "dev": "vite",

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EVENTS, FIGURES } from './data.js'
-import { CandidateCard, Icon, Portrait, ROLE_LABEL, SlotStrip } from './components.js'
+import { CandidateCard, Debrief, Icon, Portrait, ROLE_LABEL, SlotStrip } from './components.js'
 import { DeskAside, Masthead } from './Desk.js'
 import { DevBar } from './DevBar.js'
 import { narrate } from './narrate.js'
@@ -9,15 +9,19 @@ import { fetchJudgement } from './narrateRemote.js'
 import type { Judged } from './narrateRemote.js'
 import { EVENT_LOCATIONS } from './eventLocations.js'
 import { clearRun, isDaily, isStaleDaily, linkTo, loadRun, runFromUrl, saveRun, sharedFromUrl } from './session.js'
+import { form, loadDossier, recordRun, runKey } from './progress.js'
+import type { Dossier } from './progress.js'
 import type { RunRef, SavedPhase, SharedCabinet } from './session.js'
 import { finishDraft, isDraftComplete, openRoles } from '../engine/draft.js'
 import type { DraftState } from '../engine/draft.js'
 import { demandByRole, demandsFor } from '../engine/demands.js'
-import { applyAction, replayDraft } from '../engine/replay.js'
+import { applyAction, dealHistory, replayDraft } from '../engine/replay.js'
 import type { DraftAction } from '../engine/replay.js'
 import { createRun, msUntilMidnight, todayKey } from '../engine/run.js'
 import { assemble, resolveEvent } from '../engine/resolve.js'
 import type { Resolution } from '../engine/resolve.js'
+import { rate } from '../engine/rating.js'
+import type { Rating } from '../engine/rating.js'
 import { breakdown, squareFor, tierFor } from '../engine/verdict.js'
 import type { RoleVerdict } from '../engine/verdict.js'
 import { ROLES } from '../engine/types.js'
@@ -91,6 +95,37 @@ export default function App() {
     // rescored through the same aggregation.
     return verdicts ? assemble(run.event, roster, verdicts, true) : resolveEvent(run.event, roster)
   }, [draft, run.event, verdicts])
+
+  /**
+   * How well the run was played, as opposed to how it went.
+   *
+   * Derived from the same log the draft is, so it costs a replay and no
+   * storage, and so a resumed run rates identically to one played straight
+   * through. Null whenever there is nothing to rate - an unfinished draft, or a
+   * crisis that left no daylight between blind picking and the best available.
+   */
+  const rating = useMemo(
+    () => {
+      if (!result) return null
+      const deals = dealHistory(createRun(ref.seed, EVENTS, ref.eventId).rng, FIGURES, actions)
+      return deals ? rate(run.event, result.roster, deals) : null
+    },
+    [result, ref, actions, run.event],
+  )
+
+  /**
+   * The record across runs, folded in once the verdict is on screen.
+   *
+   * Deliberately at the verdict rather than at the last appointment: a run
+   * abandoned before it resolves has no result to remember, and one ended by a
+   * run-ender never had a cabinet. Guarded on the run's own key so reloading
+   * the verdict screen cannot count the same cabinet twice.
+   */
+  const [dossier, setDossier] = useState<Dossier | null>(null)
+  useEffect(() => {
+    if (phase !== 'verdict' || !result) return
+    setDossier(recordRun(runKey(ref.seed, run.event.id), result, rating))
+  }, [phase, result, rating, ref.seed, run.event.id])
 
   // A save that cannot be replayed is a save that would resume the wrong game.
   const broken = phase !== 'briefing' && phase !== 'shared' && draft === null
@@ -221,7 +256,7 @@ export default function App() {
       )}
 
       {phase === 'verdict' && result && (
-        <Verdict result={result} runRef={ref} isDaily={daily} />
+        <Verdict result={result} rating={rating} dossier={dossier} runRef={ref} isDaily={daily} />
       )}
       </>)}
       </div>
@@ -338,6 +373,26 @@ function Briefing({ run, isDaily, onBegin }: {
                 </li>
               ))}
             </ul>
+            {/*
+              * Behind a disclosure rather than under each demand.
+              *
+              * The list has to stay scannable - it is read once, while deciding
+              * six things - and five paragraphs of history inline turns the
+              * briefing into an essay nobody finishes. Collapsed, it costs one
+              * line and gives the whole reason to whoever wants it.
+              */}
+            {demandsFor(event).some((d) => d.why) && (
+              <details className="brief-why">
+                <summary>Why these posts, in {event.year}</summary>
+                <ul>
+                  {demandsFor(event).filter((d) => d.why).map((d) => (
+                    <li key={d.role}>
+                      <strong>{ROLE_LABEL[d.role]}</strong> {d.why}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            )}
             <p className="demand-sealed">One further demand arrives partway through. It is not in this file.</p>
           </div>
           <button className="primary begin-button" onClick={onBegin}>Assemble your cabinet <Icon name="arrow" /></button>
@@ -641,10 +696,14 @@ function Sim({ result, onJudged, onDone }: {
 
 function Verdict({
   result,
+  rating,
+  dossier,
   runRef,
   isDaily,
 }: {
   result: Resolution
+  rating: Rating | null
+  dossier: Dossier | null
   runRef: RunRef
   isDaily: boolean
 }) {
@@ -710,6 +769,26 @@ function Verdict({
         <div className="grid-squares">{result.grid}</div>
         <div className={`tier tier-${result.tier.replace(/\s/g, '')}`}>{result.tier}</div>
         <div className="score">{Math.round(result.score)} / 100</div>
+        {rating && (
+          /**
+           * The second number, and the point of having two.
+           *
+           * The score says what happened, and what happened includes the deal
+           * and the sealed complication. This says how the calls were, against
+           * the only fair yardstick there is - the best cabinet that existed in
+           * the faces this player was actually shown. A hopeless hand played
+           * well reads high here and low above, which is the distinction the
+           * game has always been about and has never said out loud.
+           */
+          <div className="judgement">
+            <span className="judgement-rating">Your judgement: {Math.round(rating.rating * 100)}%</span>
+            <span className="judgement-grade">{rating.grade}</span>
+            <p className="judgement-par">
+              The best cabinet in the faces you were dealt would have scored{' '}
+              {Math.round(rating.par)}. Picking blind averages {Math.round(rating.floor)}.
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="panel mt-s">
@@ -784,6 +863,49 @@ function Verdict({
           ))}
         </div>
       )}
+
+      {rating && rating.missed.length > 0 && (
+        /**
+         * The part that teaches, because it is the only feedback tied to a
+         * decision the player actually made rather than to the result.
+         *
+         * Deliberately quiet: only a gap of a whole verdict word appears, the
+         * post the complication landed on is never second-guessed, and two is
+         * the ceiling. Six of these stops being a debrief and becomes a
+         * telling-off, and nobody reads to the end of one of those.
+         */
+        <div className="panel mt-s">
+          <div className="label">What else was on that table</div>
+          {rating.missed.map((m) => (
+            <p key={m.role} className="missed mt-s">
+              You gave the {ROLE_LABEL[m.role]} to {m.chosen.name}, and it wanted{' '}
+              {m.wanted}. <strong>{m.better.name}</strong> was standing in the same
+              six.
+            </p>
+          ))}
+        </div>
+      )}
+
+      {dossier && dossier.ratings.length > 1 && (
+        /*
+         * The only thing in the game that accumulates.
+         *
+         * Held back until there are two runs to compare, because a trend drawn
+         * through one point is just the score again with a longer label.
+         */
+        <div className="panel mt-s">
+          <div className="label">Your form</div>
+          <p className="form-line mt-s">
+            Across your last {dossier.ratings.length} cabinets your judgement averages{' '}
+            <strong>{Math.round((form(dossier) ?? 0) * 100)}%</strong>.{' '}
+            {Object.keys(dossier.crises).length < EVENTS.length
+              ? `You have faced ${Object.keys(dossier.crises).length} of the ${EVENTS.length} crises.`
+              : 'You have faced every crisis in the file.'}
+          </p>
+        </div>
+      )}
+
+      <Debrief event={result.event} roster={result.roster} dossier={dossier} />
 
       {copyState === 'failed' && <p className="copy-fallback" role="status">Copy wasn’t available. Select and copy this result: <span className="copy-share">{share}</span></p>}
       <div className="row mt">

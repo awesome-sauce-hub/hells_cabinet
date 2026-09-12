@@ -15,30 +15,35 @@
         "role": "General",
         "demands": "force",
         "invert": true,
-        "note": "restraint under pressure"
+        "note": "restraint under pressure",
+        "why": "Curtis LeMay pressed Kennedy for air strikes and called the blockade appeasement. He was overruled. Soviet commanders in Cuba turned out to hold tactical nuclear warheads already, with authority to use them if invaded."
       },
       {
         "role": "President",
         "demands": "cunning",
-        "note": "a ladder for the other side to climb down"
+        "note": "a ladder for the other side to climb down",
+        "why": "Kennedy answered Khrushchev's conciliatory first letter and behaved as though the harder second one had never arrived, while privately conceding the American missiles in Turkey. Firm in public, a way out in private."
       },
       {
         "role": "Spymaster",
         "demands": "intellect",
         "weight": 0.8,
-        "note": "what the photographs show, and not what they suggest"
+        "note": "what the photographs show, and not what they suggest",
+        "why": "The U-2 photographs of 14 October overturned the CIA's own standing estimate that Moscow would never base missiles in Cuba. The job was to report what the film showed against what the agency had already told the President."
       },
       {
         "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.5,
-        "note": "costing the blockade"
+        "note": "costing the blockade",
+        "why": "A naval quarantine of an island is not a gesture; it is a sustained operation somebody has to fund and keep funding for as long as it lasts."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "cunning",
         "weight": 1.1,
-        "note": "a blockade is an act of war, so it will have to be called something else"
+        "note": "a blockade is an act of war, so it will have to be called something else",
+        "why": "A blockade is an act of war in international law. So it was named a quarantine and put to the Organization of American States for authorisation first, which made it a regional police action rather than a unilateral one. The word was the whole of the difference."
       }
     ],
     "twist": {
@@ -54,7 +59,9 @@
       "military",
       "diplomacy",
       "brinkmanship"
-    ]
+    ],
+    "aftermath": "The missiles came out of Cuba, and the American missiles quietly came out of Turkey a few months later under an arrangement neither side announced. A direct teleprinter line between Washington and Moscow was installed the following summer, because both governments had just spent thirteen days learning how slowly they could reach each other.",
+    "lesson": "The closest the world has come to nuclear war turned on people at the bottom of the chain. A Soviet submarine officer, Vasili Arkhipov, refused to agree to launching a nuclear torpedo while his boat was being depth-charged and out of contact with Moscow. A crisis is not only the decisions taken in the room; it is every delegated authority nobody in the room remembers granting."
   },
   {
     "id": "the-2008-crash",
@@ -72,29 +79,34 @@
         "role": "Chancellor",
         "demands": "intellect",
         "weight": 1.5,
-        "note": "understanding the instruments"
+        "note": "understanding the instruments",
+        "why": "Almost nobody in government understood collateralised debt obligations or credit default swaps. The Treasury had to be taught the products before it could work out what insuring them would cost."
       },
       {
         "role": "President",
         "demands": "charisma",
-        "note": "stopping the run before it starts"
+        "note": "stopping the run before it starts",
+        "why": "A bank run is a belief that becomes true by being held. Roosevelt stopped the 1933 run with a radio address telling people their money was safer in the bank than under the mattress, and deposits came back."
       },
       {
         "role": "PressSecretary",
         "demands": "cunning",
-        "note": "the word 'rescue' instead of 'bailout'"
+        "note": "the word 'rescue' instead of 'bailout'",
+        "why": "The first TARP bill failed in the House on 29 September 2008 and the market fell 778 points that afternoon. It passed four days later, relabelled and padded, having changed very little of substance."
       },
       {
         "role": "General",
         "demands": "force",
         "invert": true,
         "weight": 0.4,
-        "note": "not deploying troops to a bank"
+        "note": "not deploying troops to a bank",
+        "why": "A financial panic is not a security problem. Putting soldiers anywhere near a bank destroys the confidence the whole rescue depends on."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "intellect",
-        "note": "the authority to spend it, found by Sunday night"
+        "note": "the authority to spend it, found by Sunday night",
+        "why": "Each rescue had to have its legal authority found inside existing statute, usually over a single weekend. The Federal Reserve reached for Section 13(3) emergency powers that had sat unused since the 1930s."
       }
     ],
     "twist": {
@@ -110,7 +122,9 @@
       "economy",
       "panic",
       "media"
-    ]
+    ],
+    "aftermath": "The banking system was recapitalised with public money and did not collapse. Almost no senior banker was prosecuted, the bonuses were paid, and the cost was carried instead by a decade of stagnant wages and austerity budgets, which did more to reshape politics than the crash itself.",
+    "lesson": "Rescuing an institution and punishing the people who ran it are separate decisions, and a government in a hurry will only make the first one. The bill does not disappear when it is not sent; it is simply posted to people who were not in the room."
   },
   {
     "id": "the-hotel-break-in",
@@ -128,30 +142,35 @@
         "role": "PressSecretary",
         "demands": "cunning",
         "weight": 1.2,
-        "note": "a story that survives a second question"
+        "note": "a story that survives a second question",
+        "why": "Ron Ziegler called it a third-rate burglary attempt. Two years later he had to stand at the same podium and declare all his previous statements on the matter inoperative."
       },
       {
         "role": "Spymaster",
         "demands": "integrity",
         "invert": true,
-        "note": "someone has to make the calls nobody writes down"
+        "note": "someone has to make the calls nobody writes down",
+        "why": "The White House asked the CIA to tell the FBI to drop the investigation on national security grounds. That request, caught on tape, is the conversation that ended the presidency."
       },
       {
         "role": "President",
         "demands": "charisma",
-        "note": "the press conference nobody wanted"
+        "note": "the press conference nobody wanted",
+        "why": "The cover-up, not the burglary, is what the articles of impeachment were about. Every statement made to keep the lid on became a separate count."
       },
       {
         "role": "Chancellor",
         "demands": "integrity",
         "weight": 0.7,
-        "note": "the money leaves a trail whatever you say"
+        "note": "the money leaves a trail whatever you say",
+        "why": "The burglars were carrying sequentially numbered hundred-dollar bills, which traced straight back to the Committee to Re-elect the President. The money is what broke it open, and money is what usually does."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "integrity",
         "weight": 1.4,
-        "note": "the difference between advising the cover-up and joining it"
+        "note": "the difference between advising the cover-up and joining it",
+        "why": "John Mitchell ran the re-election committee while serving as Attorney-General and went to prison. Elliot Richardson, in the same office a year later, resigned rather than fire the special prosecutor."
       }
     ],
     "twist": {
@@ -167,7 +186,9 @@
       "scandal",
       "cover-up",
       "media"
-    ]
+    ],
+    "aftermath": "Nixon resigned on 9 August 1974 rather than face certain impeachment, and was pardoned a month later. Forty-eight people were convicted. Congress responded with a decade of statute - campaign finance limits, the Freedom of Information Act strengthened, inspectors general, intelligence oversight committees - most of the modern American machinery for watching an executive.",
+    "lesson": "The break-in was survivable and the cover-up was not. What destroys a government is almost never the original act; it is the second decision, taken calmly, by people who had time to think, to use the institutions of the state to hide it."
   },
   {
     "id": "the-influenza-winter",
@@ -185,31 +206,36 @@
         "role": "President",
         "demands": "integrity",
         "weight": 1.3,
-        "note": "publishing the real number"
+        "note": "publishing the real number",
+        "why": "Wartime censorship kept the outbreak out of the papers in every country fighting. Neutral Spain reported it freely, which is the only reason it is called Spanish flu."
       },
       {
         "role": "PressSecretary",
         "demands": "cunning",
         "invert": true,
-        "note": "this is the one week spin kills people"
+        "note": "this is the one week spin kills people",
+        "why": "Philadelphia's public health director let the Liberty Loan parade go ahead on 28 September 1918 after publicly assuring the city there was no danger. Two hundred thousand people came. The city's death rate became among the worst in America."
       },
       {
         "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.9,
-        "note": "paying for cities that have stopped working"
+        "note": "paying for cities that have stopped working",
+        "why": "A city where nobody can work still has to be paid for. The bill for a stopped economy arrives whether or not anyone has budgeted for it."
       },
       {
         "role": "General",
         "demands": "grit",
         "weight": 0.8,
-        "note": "moving supplies with a sick army"
+        "note": "moving supplies with a sick army",
+        "why": "The troop transports were the amplifier. Moving men to the war moved the virus with them, and the army's own crowded camps seeded the second and deadliest wave."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "force",
         "weight": 0.9,
-        "note": "the power to close the theatres either exists or it does not"
+        "note": "the power to close the theatres either exists or it does not",
+        "why": "Closure powers sat with cities and states, not the centre. Whether anyone could lawfully shut a theatre was a real question, answered differently in every jurisdiction, which is why the response looked like a patchwork."
       }
     ],
     "twist": {
@@ -225,7 +251,9 @@
       "disaster",
       "public health",
       "truth"
-    ]
+    ],
+    "aftermath": "Between fifty and a hundred million people died, more than the war that was still being fought. Cities that closed early and stayed closed - St Louis is the standard comparison with Philadelphia - had death rates a fraction as high. The lesson was then almost entirely forgotten for eighty years.",
+    "lesson": "Censorship during an epidemic is not a reputational strategy, it is a transmission mechanism. People who are not told the truth do not become calm; they become unable to protect themselves, and they stop believing the next announcement too."
   },
   {
     "id": "the-canal",
@@ -243,31 +271,36 @@
         "role": "General",
         "demands": "force",
         "weight": 1.1,
-        "note": "taking the canal on schedule"
+        "note": "taking the canal on schedule",
+        "why": "The Anglo-French landing worked. Troops took the canal on schedule and then had to hand it straight back, which is the clearest case there is of a military success that settled nothing."
       },
       {
         "role": "President",
         "demands": "cunning",
         "weight": 1.2,
-        "note": "an alliance nobody admits to"
+        "note": "an alliance nobody admits to",
+        "why": "At Sèvres, Britain, France and Israel secretly agreed that Israel would invade so the other two could intervene as peacekeepers separating them. Eden ordered the British copy of the protocol destroyed."
       },
       {
         "role": "PressSecretary",
         "demands": "charisma",
-        "note": "explaining a war you started as a war you joined"
+        "note": "explaining a war you started as a war you joined",
+        "why": "The government had to present a war it had arranged in advance as one it had been dragged into. It did not hold, and the unravelling of the story is what forced Eden out."
       },
       {
         "role": "Spymaster",
         "demands": "integrity",
         "invert": true,
         "weight": 0.7,
-        "note": "deniability needs a comfortable liar"
+        "note": "deniability needs a comfortable liar",
+        "why": "The whole plan rested on deniability, which is a thing that has to be maintained by people willing to keep maintaining it after the questions get specific."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "integrity",
         "weight": 1.2,
-        "note": "the opinion the room does not want, delivered anyway"
+        "note": "the opinion the room does not want, delivered anyway",
+        "why": "The Foreign Office's own legal adviser, Gerald Fitzmaurice, advised that the operation was unlawful. He was routed around rather than answered."
       }
     ],
     "twist": {
@@ -283,7 +316,9 @@
       "military",
       "diplomacy",
       "empire"
-    ]
+    ],
+    "aftermath": "The United States refused to support the pound until the troops withdrew, and they withdrew. Eden resigned within weeks. Britain had discovered it could no longer act against Washington's wishes, which is generally taken as the moment the empire ended in fact rather than on paper.",
+    "lesson": "The decisive weapon was financial, and it was never fired in public. A government that has to borrow is a government that can be stopped by its creditors, and that limit is invisible on any map of forces."
   },
   {
     "id": "the-general-strike",
@@ -301,30 +336,35 @@
         "role": "Spymaster",
         "demands": "cunning",
         "weight": 1.3,
-        "note": "knowing which union man will settle before his committee does"
+        "note": "knowing which union man will settle before his committee does",
+        "why": "The Trades Union Congress leadership was more frightened of the strike than the government was, and wanted a way out of it almost from the start. Knowing that was worth more than any amount of force."
       },
       {
         "role": "General",
         "demands": "force",
         "invert": true,
-        "note": "soldiers on the trains ends this the wrong way"
+        "note": "soldiers on the trains ends this the wrong way",
+        "why": "Troops were kept visible and kept back. Using soldiers to run the trains would have turned an industrial dispute into a confrontation with the state, which is the one outcome that could have lost it."
       },
       {
         "role": "PressSecretary",
         "demands": "integrity",
         "weight": 0.9,
-        "note": "a bulletin the strikers will also believe"
+        "note": "a bulletin the strikers will also believe",
+        "why": "Churchill edited the government's own paper, the British Gazette, into open propaganda. John Reith kept the BBC close enough to neutral to be believed by both sides, and the BBC's reputation was made by that decision."
       },
       {
         "role": "President",
         "demands": "grit",
         "weight": 0.8,
-        "note": "outlasting nine days of nothing working"
+        "note": "outlasting nine days of nothing working",
+        "why": "Baldwin's strategy was to wait. The TUC called the strike off after nine days having won nothing, and the miners it was called for stayed out alone for months."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "integrity",
-        "note": "ruling the strike unlawful is available, and is not the same as it being unlawful"
+        "note": "ruling the strike unlawful is available, and is not the same as it being unlawful",
+        "why": "Sir John Simon told the Commons the strike was unlawful and that every striker was liable in damages. The law was contested and the ruling has never been settled, but the announcement broke the union leadership's nerve, which was its purpose."
       }
     ],
     "twist": {
@@ -340,7 +380,9 @@
       "domestic",
       "labour",
       "brinkmanship"
-    ]
+    ],
+    "aftermath": "The strike collapsed after nine days. The miners stayed out for six months and went back on worse terms. The Trade Disputes Act of 1927 made sympathetic strikes unlawful, and the defeat shaped British industrial relations for a generation.",
+    "lesson": "A government that can wait usually wins, because a strike spends its own resources to exist while the state spends nothing to continue. Endurance is a form of power that looks like passivity from the outside."
   },
   {
     "id": "reactor-four",
@@ -358,30 +400,35 @@
         "role": "General",
         "demands": "grit",
         "weight": 1.2,
-        "note": "ninety seconds on the roof, then the next man"
+        "note": "ninety seconds on the roof, then the next man",
+        "why": "Machines sent onto the roof failed in the radiation, so men went instead, in shifts of about ninety seconds each. Several thousand of them, one after another, clearing graphite by hand."
       },
       {
         "role": "Chancellor",
         "demands": "intellect",
         "weight": 1.3,
-        "note": "the reading is not high, the instrument stops there"
+        "note": "the reading is not high, the instrument stops there",
+        "why": "The dosimeters on site stopped at 3.6 roentgen an hour, so 3.6 is what was reported upward. The true figure was in the thousands. An instrument at its limit reads exactly like a safe reading."
       },
       {
         "role": "President",
         "demands": "integrity",
         "weight": 1.1,
-        "note": "telephoning the countries downwind"
+        "note": "telephoning the countries downwind",
+        "why": "Moscow said nothing for two days. The alarm was raised by monitors at the Forsmark plant in Sweden, who detected the plume and assumed at first that the leak was their own."
       },
       {
         "role": "PressSecretary",
         "demands": "charisma",
         "weight": 0.8,
-        "note": "an evacuation order that does not become a stampede"
+        "note": "an evacuation order that does not become a stampede",
+        "why": "Pripyat was evacuated thirty-six hours after the explosion, and its fifty thousand residents were told to pack for three days. Nobody ever went back."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "integrity",
-        "note": "the operators will be tried for this, and the design will not"
+        "note": "the operators will be tried for this, and the design will not",
+        "why": "Six operators were convicted. The reactor's positive void coefficient and the graphite tips on its control rods, both known to the designers and both classified, were not on trial."
       }
     ],
     "twist": {
@@ -397,7 +444,9 @@
       "disaster",
       "cover-up",
       "nuclear"
-    ]
+    ],
+    "aftermath": "Thirty-one died immediately or within weeks; the eventual toll is still argued over. Roughly three hundred and fifty thousand people were resettled and the exclusion zone remains. The scale of the lie required to manage it, and the speed with which it came apart, damaged Soviet authority in a way Gorbachev later said was decisive for what followed.",
+    "lesson": "A system that punishes bad news stops receiving it, and then its leadership is genuinely the last to know. Chernobyl was not only a reactor failing; it was an information structure built so that nobody at any level could afford to report what their instruments said."
   },
   {
     "id": "the-gas-leak",
@@ -415,31 +464,36 @@
         "role": "Chancellor",
         "demands": "integrity",
         "weight": 1.3,
-        "note": "who signed off on the shortcuts, and when"
+        "note": "who signed off on the shortcuts, and when",
+        "why": "The refrigeration on the methyl isocyanate tank had been switched off to save money, and the plant's own engineers had put their concerns in writing beforehand. The savings were trivial next to what followed."
       },
       {
         "role": "Spymaster",
         "demands": "grit",
         "weight": 1.1,
-        "note": "the compound name is in a company safe and the hospitals need it tonight"
+        "note": "the compound name is in a company safe and the hospitals need it tonight",
+        "why": "Doctors treating thousands of people asked what the gas was. The company told them it was nothing worse than a potent tear gas. Knowing it was methyl isocyanate would have changed the treatment that first night."
       },
       {
         "role": "President",
         "demands": "charisma",
-        "note": "a city that will not be reassured twice"
+        "note": "a city that will not be reassured twice",
+        "why": "A city that has been told once that it is safe, and then found out otherwise, does not accept a second assurance from the same source. Credibility spends down and does not refill."
       },
       {
         "role": "General",
         "demands": "force",
         "invert": true,
         "weight": 0.7,
-        "note": "this is not a crowd to be controlled"
+        "note": "this is not a crowd to be controlled",
+        "why": "The people outside the fence were casualties, not a mob. Treating a disaster as a public order problem is how the count goes up."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "cunning",
         "weight": 1.2,
-        "note": "which court hears this decides what it costs"
+        "note": "which court hears this decides what it costs",
+        "why": "India sued in a US federal court and the case was dismissed to India on forum grounds. The 1989 settlement came to 470 million dollars for over half a million claimants. Which court hears a case can matter more than its facts."
       }
     ],
     "twist": {
@@ -455,7 +509,9 @@
       "disaster",
       "industry",
       "negligence"
-    ]
+    ],
+    "aftermath": "Somewhere between three and sixteen thousand people died in the first days and hundreds of thousands were injured. The 1989 settlement worked out at a few hundred dollars a claimant. The site was never fully cleaned; the groundwater is still contaminated, and children are still being born with the consequences.",
+    "lesson": "Where a company is headquartered, where the plant is, and where the case is heard determine what a life is worth in the settlement. The same negligence carries different prices in different jurisdictions, and corporations are considerably better than their victims at choosing which one applies."
   },
   {
     "id": "the-levees",
@@ -473,29 +529,34 @@
         "role": "General",
         "demands": "grit",
         "weight": 1.3,
-        "note": "boats and buses, tonight, not a plan for tonight"
+        "note": "boats and buses, tonight, not a plan for tonight",
+        "why": "Around eleven hundred city buses sat in a flooded lot. The evacuation order assumed a car, and roughly a fifth of New Orleans households did not have one."
       },
       {
         "role": "President",
         "demands": "integrity",
         "weight": 1.1,
-        "note": "the ground, or the window of the aircraft"
+        "note": "the ground, or the window of the aircraft",
+        "why": "Bush looked at the city through the window of Air Force One on 31 August. The photograph of him doing it did more political damage than any decision taken that week."
       },
       {
         "role": "Spymaster",
         "demands": "cunning",
-        "note": "which agency's report is a report and which is a hope"
+        "note": "which agency's report is a report and which is a hope",
+        "why": "The National Hurricane Center had warned, in writing and by telephone, that the levees would likely be overtopped. The warning was accurate, specific, early, and did not move anybody."
       },
       {
         "role": "Chancellor",
         "demands": "intellect",
         "weight": 0.8,
-        "note": "costing a city that has to be rebuilt either way"
+        "note": "costing a city that has to be rebuilt either way",
+        "why": "The city was going to be rebuilt whatever the meeting decided. The only open question was how much of the bill would be paid late, at emergency prices."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "intellect",
-        "note": "troops on American streets, and the statute that says no"
+        "note": "troops on American streets, and the statute that says no",
+        "why": "The Posse Comitatus Act restricts the use of federal troops for domestic law enforcement. The argument over whether to federalise the Louisiana National Guard, and who would then command it, cost days that people on roofs did not have."
       }
     ],
     "twist": {
@@ -511,7 +572,9 @@
       "disaster",
       "negligence",
       "media"
-    ]
+    ],
+    "aftermath": "Over eighteen hundred people died. The levees had failed by design defect, not by being overwhelmed, which the Army Corps of Engineers eventually conceded. The city lost a third of its population and much of it never returned. FEMA's director resigned within two weeks.",
+    "lesson": "The disaster was not the hurricane, which had been modelled in detail and rehearsed the year before. It was three agencies each correctly waiting for another to hold authority it did not have. Unclear command is not a delay in the response; it is the response."
   },
   {
     "id": "the-hungry-forties",
@@ -529,32 +592,37 @@
         "role": "Chancellor",
         "demands": "integrity",
         "weight": 1.4,
-        "note": "the grain leaving is on your ledger too"
+        "note": "the grain leaving is on your ledger too",
+        "why": "Grain and livestock kept leaving Irish ports throughout the famine. Charles Trevelyan at the Treasury held that relief must not be allowed to disturb the market, and the ledgers were on his desk."
       },
       {
         "role": "President",
         "demands": "cunning",
         "invert": true,
         "weight": 1.1,
-        "note": "there is no clever version of this"
+        "note": "there is no clever version of this",
+        "why": "Peel repealed the Corn Laws and his own party destroyed him for it. It was the least ingenious thing available and close to the only thing that helped."
       },
       {
         "role": "General",
         "demands": "grit",
         "weight": 1.0,
-        "note": "relief works, and roads that go nowhere"
+        "note": "relief works, and roads that go nowhere",
+        "why": "Relief had to be earned rather than given, so the public works built roads that went nowhere, walls around nothing, and piers on shores with no boats. Starving men were paid to do heavy labour."
       },
       {
         "role": "PressSecretary",
         "demands": "cunning",
         "weight": 0.9,
-        "note": "getting the word famine into a London paper"
+        "note": "getting the word famine into a London paper",
+        "why": "It took a long time for the word famine to appear in a London paper as a description rather than an accusation. What is happening has to be named before anything can be voted for it."
       },
       {
         "role": "AttorneyGeneral",
         "demands": "force",
         "weight": 1.1,
-        "note": "the ships can be stopped tonight, if someone will sign the order"
+        "note": "the ships can be stopped tonight, if someone will sign the order",
+        "why": "There was a lawful power to hold the ships. It required somebody senior enough to sign an order that the Treasury would regard as an attack on property, and nobody did."
       }
     ],
     "twist": {
@@ -570,6 +638,8 @@
       "famine",
       "ideology",
       "empire"
-    ]
+    ],
+    "aftermath": "About a million people died and a million more emigrated. Ireland's population has not recovered to its 1841 level in the nearly two centuries since. Tony Blair issued a statement of regret in 1997, a hundred and fifty years after.",
+    "lesson": "Food left the country throughout. A famine is rarely an absence of food; it is an absence of entitlement to food, and the ships kept sailing because the ledgers said somebody else owned what was on them. Doctrine held more firmly than any harvest failed."
   }
 ]

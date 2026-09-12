@@ -21,6 +21,16 @@ export interface Demand {
   text: string
   /** Whether the crisis leans on this post or merely glances at it. */
   weight: number
+  /**
+   * Why the post mattered when this actually happened, where the event says.
+   *
+   * Kept beside the demand rather than in a debrief because it is the thing
+   * that turns the list from a checklist into a reason. The demand says the
+   * Attorney-General wants a blockade called something else; this says that
+   * Kennedy's lawyers really did rename it a quarantine, and why the word was
+   * the difference between a police action and a declaration of war.
+   */
+  why?: string
 }
 
 function phrase(check: Check): string {
@@ -45,6 +55,8 @@ export function demandsFor(event: GameEvent): Demand[] {
       role,
       text: sorted.map(phrase).join(', and '),
       weight: sorted[0]!.weight ?? 1,
+      // The heaviest check's reason, matching the phrasing order above.
+      ...(sorted[0]!.why ? { why: sorted[0]!.why } : {}),
     }]
   })
 }

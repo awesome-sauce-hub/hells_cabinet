@@ -9,6 +9,7 @@
     "era": "1860s",
     "office": "President",
     "bio": "Keeps his rivals in the cabinet and his temper in a drawer.",
+    "record": "Held the Union together through four years of civil war and issued the Emancipation Proclamation in 1863. Filled his cabinet with the rivals who had run against him, on the reasoning that he needed the strongest men in the country and these were they.",
     "traits": [
       "beloved",
       "statesman",
@@ -26,6 +27,7 @@
     "era": "1940s",
     "office": "First Lady, UN Delegate",
     "bio": "The only person in the cabinet who has read the whole document.",
+    "record": "Redefined the role of First Lady into an independent political office, holding her own press conferences and writing a daily column for nearly thirty years. Chaired the drafting committee of the Universal Declaration of Human Rights, adopted in 1948.",
     "traits": [
       "beloved",
       "statesman",
@@ -43,6 +45,7 @@
     "era": "1940s",
     "office": "Prime Minister",
     "bio": "Will not surrender, will not go to bed, will not stop dictating.",
+    "record": "Prime Minister for most of the Second World War, and the voice that kept Britain in it after France fell. Also the architect of Gallipoli, an unbending imperialist, and the man whose government's policy during the 1943 Bengal famine remains bitterly argued over.",
     "traits": [
       "statesman",
       "warhawk",
@@ -64,6 +67,7 @@
     "era": "1990s",
     "office": "President",
     "bio": "Twenty-seven years in a cell and somehow the least bitter man in the room.",
+    "record": "Spent twenty-seven years in prison, then negotiated the end of apartheid with the government that jailed him and served one term as president. Chose a truth commission over prosecutions, which is the decision the transition is usually credited to.",
     "traits": [
       "beloved",
       "statesman",
@@ -81,6 +85,7 @@
     "era": "1930s",
     "office": "Independence Leader",
     "bio": "Refuses to eat until you reconsider, and he can keep this up for weeks.",
+    "record": "Led the Indian independence movement through mass non-cooperation - the Salt March, the boycotts, the fasts - and made civil disobedience a workable political technique rather than a gesture. Assassinated in 1948 by a Hindu nationalist who thought him too conciliatory toward Muslims.",
     "traits": [
       "beloved",
       "statesman",
@@ -101,6 +106,7 @@
     "era": "1920s",
     "office": "President",
     "bio": "Rebuilt a country from scratch and changed the alphabet while he was at it.",
+    "record": "Commanded at Gallipoli, then founded the Turkish republic out of the Ottoman collapse and rebuilt it by decree: the alphabet, the legal code, the calendar, the status of women. Modernisation imposed from above, including on people who had not asked for it.",
     "traits": [
       "statesman",
       "soldier",
@@ -118,6 +124,7 @@
     "era": "Antiquity",
     "office": "Emperor",
     "bio": "Runs an empire by day and writes anxious diary entries about it by night.",
+    "record": "Roman emperor for nineteen years, most of them spent on the Danube frontier fighting wars he had not wanted. Wrote the Meditations privately, to himself, as an exercise in bearing the job; it was never intended to be read.",
     "traits": [
       "statesman",
       "technocrat",
@@ -135,6 +142,7 @@
     "era": "Antiquity",
     "office": "Emperor",
     "bio": "Conquered everything, felt terrible about it, carved the apology into rocks.",
+    "record": "Conquered Kalinga at a cost he recorded himself - a hundred thousand dead - and then renounced conquest, converted to Buddhism, and had the renunciation carved into rock across the subcontinent. One of the few rulers to publish his own remorse as state policy.",
     "traits": [
       "statesman",
       "beloved",
@@ -152,6 +160,7 @@
     "era": "1500s",
     "office": "Queen",
     "bio": "Answers every question in a way that commits her to nothing.",
+    "record": "Reigned forty-four years and made indecision into a working method, keeping suitors, factions and foreign powers in play for decades rather than committing. Signed her cousin Mary's death warrant and then punished the secretary who delivered it.",
     "traits": [
       "statesman",
       "cunning",
@@ -169,6 +178,7 @@
     "era": "1930s",
     "office": "President",
     "bio": "Will explain the crisis to the nation as if you were all sitting by his fire.",
+    "record": "Elected four times, rebuilt the American state around the New Deal, and led the country through the Depression and most of the Second World War. Also interned a hundred and twenty thousand Japanese Americans and tried to pack the Supreme Court.",
     "traits": [
       "beloved",
       "showman",
@@ -186,6 +196,7 @@
     "era": "Modern",
     "office": "Prime Minister",
     "bio": "Turns up, says the obviously decent thing, and means it.",
+    "record": "Prime Minister of New Zealand, best known internationally for the response to the 2019 Christchurch mosque attacks, when gun law was rewritten within a month, and for an early and severe COVID closure of the border. Resigned in 2023 saying she no longer had enough in the tank.",
     "traits": [
       "beloved",
       "statesman",
@@ -203,6 +214,7 @@
     "era": "1970s",
     "office": "Prime Minister",
     "bio": "Built a first-world country and fined it for chewing gum.",
+    "record": "Governed Singapore for thirty-one years and took it from a poor port to one of the richest places on earth. Did it with a tightly controlled press, defamation suits against opponents, and detention without trial, and argued openly that this was the price.",
     "traits": [
       "technocrat",
       "statesman",
@@ -220,6 +232,7 @@
     "era": "1940s",
     "office": "Prime Minister",
     "bio": "Rebuilt the country without once raising his voice or being remembered.",
+    "record": "Churchill's deputy through the war, then beat him in 1945 and built the National Health Service, the welfare state, and the nationalised industries in six years. Famously reticent; his cabinets were short because he cut people off.",
     "traits": [
       "technocrat",
       "statesman",
@@ -237,6 +250,7 @@
     "era": "1970s",
     "office": "President",
     "bio": "Elected, obstructed, and eventually shelled.",
+    "record": "Elected president of Chile in 1970 on a socialist programme, and overthrown three years later by a military coup that shelled the presidential palace. Died there. The United States had spent years working to prevent and then to undermine his government.",
     "traits": [
       "statesman",
       "beloved",
@@ -257,6 +271,7 @@
     "era": "1990s",
     "office": "President",
     "bio": "A playwright who accidentally won, and then did the job properly.",
+    "record": "Playwright and dissident, jailed repeatedly by the Czechoslovak state, who went from prison to the presidency within a year of the 1989 Velvet Revolution. Argued that the essential political act was refusing to live inside the lie.",
     "traits": [
       "beloved",
       "statesman",
@@ -274,6 +289,7 @@
     "era": "1970s",
     "office": "Prime Minister",
     "bio": "Runs the war cabinet out of her kitchen and does not care for your opinion.",
+    "record": "Prime Minister of Israel during the 1973 Yom Kippur War, which began with a surprise attack her government had been warned about and had discounted. An inquiry cleared her personally; she resigned anyway the following year.",
     "traits": [
       "statesman",
       "warhawk",
@@ -291,6 +307,7 @@
     "era": "1820s",
     "office": "Liberator",
     "bio": "Liberated six countries and could not get any of them to agree on lunch.",
+    "record": "Led the wars that freed six South American countries from Spain, then watched the union he had built for them come apart within his own lifetime. Died saying he had ploughed the sea.",
     "traits": [
       "soldier",
       "showman",
@@ -308,6 +325,7 @@
     "era": "1790s",
     "office": "Governor-General",
     "bio": "Out-generalled three empires with an army that started as a rumour.",
+    "record": "Born enslaved, and led the only slave revolt in history to found a state. Outmanoeuvred the French, Spanish and British in turn, then was lured to a negotiation, seized, and died in a French prison before Haiti's independence was declared.",
     "traits": [
       "soldier",
       "strategist",
@@ -325,6 +343,7 @@
     "era": "2000s",
     "office": "UN Secretary-General",
     "bio": "Can get two people who hate each other to sign the same piece of paper.",
+    "record": "UN Secretary-General from 1997 to 2006, and before that head of peacekeeping during Rwanda and Srebrenica - failures he later described as his own in unusually plain terms. Won the Nobel Peace Prize and opposed the 2003 invasion of Iraq as illegal.",
     "traits": [
       "dealmaker",
       "statesman",
@@ -342,6 +361,7 @@
     "era": "1980s",
     "office": "President",
     "bio": "Sold the government limousines and cycled to work.",
+    "record": "Took power in Burkina Faso at thirty-three, and in four years pushed literacy, vaccination and land reform, banned female genital mutilation, sold off the government's Mercedes fleet and cut his own salary. Assassinated in 1987 in a coup led by his closest colleague.",
     "traits": [
       "beloved",
       "statesman",
@@ -359,6 +379,7 @@
     "era": "1970s",
     "office": "President",
     "bio": "Taped every conversation in his own office, then fought the Supreme Court to keep the tapes; also flew to Peking and shook Mao's hand.",
+    "record": "Opened relations with China, founded the Environmental Protection Agency, and ended the draft. Then resigned in 1974 rather than be impeached for the cover-up of a burglary he did not order and did not need.",
     "traits": [
       "paranoid",
       "cunning",
@@ -378,6 +399,7 @@
     "era": "Medieval",
     "office": "Great Khan",
     "bio": "Outstanding logistics. Do not give him the word \"escalate\".",
+    "record": "Unified the Mongol tribes and built the largest contiguous land empire there has been, with a written legal code, a courier network and religious tolerance inside it. Established that a city which surrendered was spared and a city which resisted was destroyed, and kept to both halves.",
     "traits": [
       "warhawk",
       "soldier",
@@ -395,6 +417,7 @@
     "era": "1930s",
     "office": "General Secretary",
     "bio": "Remembers everything anyone has ever said, and files it.",
+    "record": "Ruled the Soviet Union for thirty years. Industrialised it, won the war against Germany, and killed enormous numbers of his own people doing both: the purges, the Gulag, and a collectivisation-driven famine in Ukraine that killed several million.",
     "traits": [
       "paranoid",
       "cunning",
@@ -415,6 +438,7 @@
     "era": "1960s",
     "office": "Chairman",
     "bio": "Has a big idea about agriculture and will not be talked out of it.",
+    "record": "Founded the People's Republic and held it for twenty-seven years. The Great Leap Forward produced the largest famine in recorded history, between fifteen and forty-five million dead, and the Cultural Revolution that followed was launched partly to recover the authority it cost him.",
     "traits": [
       "demagogue",
       "strategist",
@@ -432,6 +456,7 @@
     "era": "1970s",
     "office": "General Secretary",
     "bio": "Abolished money, cities and the calendar. Considers this a strong start.",
+    "record": "Emptied Cambodia's cities in 1975, abolished money, and set the calendar to Year Zero. Around a quarter of the population died in under four years, most of them killed for education, spectacles, city origin, or nothing.",
     "traits": [
       "paranoid",
       "demagogue",
@@ -452,6 +477,7 @@
     "era": "1930s",
     "office": "Prime Minister",
     "bio": "Jaw first, plan later.",
+    "record": "Invented fascism and governed Italy for twenty-one years, on a reputation for competence that did not survive contact with the war he chose to enter. Deposed by his own Grand Council in 1943 and shot by partisans in 1945.",
     "traits": [
       "demagogue",
       "showman",
@@ -469,6 +495,7 @@
     "era": "1950s",
     "office": "Caudillo",
     "bio": "Outlives everyone by refusing to be interesting.",
+    "record": "Won the Spanish Civil War with German and Italian help and ruled for thirty-six years afterwards, keeping Spain out of the Second World War and in political isolation for most of the rest. Left a monarchy behind and expected it to continue him; it did not.",
     "traits": [
       "paranoid",
       "soldier",
@@ -486,6 +513,7 @@
     "era": "1970s",
     "office": "President",
     "bio": "Awarded himself every medal in the building, then some from other buildings.",
+    "record": "Seized power in Uganda in 1971, expelled the country's Asian population, and presided over the killing of somewhere between one and three hundred thousand people. Awarded himself an increasingly baroque set of titles and a Victoria Cross that did not exist.",
     "traits": [
       "showman",
       "warhawk",
@@ -503,6 +531,7 @@
     "era": "1980s",
     "office": "General Secretary",
     "bio": "Demolished a third of the capital to build a palace he found slightly small.",
+    "record": "Ruled Romania for twenty-four years, built the largest administrative building on earth while rationing food to repay the national debt, and banned contraception to raise the birth rate. He and his wife were tried and shot on Christmas Day 1989 after a two-hour trial.",
     "traits": [
       "paranoid",
       "demagogue",
@@ -520,6 +549,7 @@
     "era": "1970s",
     "office": "President",
     "bio": "Arrived by helicopter, stayed seventeen years.",
+    "record": "Took Chile in a 1973 coup and held it for seventeen years. Around three thousand people were killed or disappeared and tens of thousands tortured. Handed power back after losing a referendum he had called himself expecting to win.",
     "traits": [
       "soldier",
       "paranoid",
@@ -540,6 +570,7 @@
     "era": "1950s",
     "office": "Supreme Leader",
     "bio": "Still holds the office. Has been dead since 1994.",
+    "record": "Founded North Korea, started the Korean War, and built a dynastic state around himself that has now outlasted him by longer than he ruled it. Remains its Eternal President, a post held by a dead man since 1994.",
     "traits": [
       "demagogue",
       "paranoid",
@@ -557,6 +588,7 @@
     "era": "1960s",
     "office": "President for Life",
     "bio": "A country doctor who decided the country was the patient.",
+    "record": "Ruled Haiti for fourteen years through the Tontons Macoute, a private militia answerable only to him, and wove the imagery of Vodou into his own cult. Declared himself President for Life and passed the office to his nineteen-year-old son.",
     "traits": [
       "paranoid",
       "demagogue",
@@ -574,6 +606,7 @@
     "era": "1980s",
     "office": "Brotherly Leader",
     "bio": "Travels with a tent, a female bodyguard corps, and a book he wrote.",
+    "record": "Held Libya for forty-two years without ever holding a formal office, sponsored terrorism including Lockerbie, then renounced his weapons programme and was briefly rehabilitated. Killed by a mob in 2011 during the uprising against him.",
     "traits": [
       "showman",
       "demagogue",
@@ -591,6 +624,7 @@
     "era": "1990s",
     "office": "President",
     "bio": "Commissioned a novel, a mosque and several statues, all of himself.",
+    "record": "Ruled Iraq for twenty-four years, gassed Kurdish civilians at Halabja, and fought two catastrophic wars of his own choosing. Concealed the fact that he had abandoned his weapons programmes, on the reasoning that the appearance of having them deterred Iran.",
     "traits": [
       "paranoid",
       "warhawk",
@@ -608,6 +642,7 @@
     "era": "1970s",
     "office": "Emperor",
     "bio": "Spent a third of the national budget crowning himself.",
+    "record": "Made himself Emperor of the Central African Republic in 1977 at a coronation costing roughly a third of the national budget, modelled closely on Napoleon's. Deposed two years later; the throne is in a warehouse.",
     "traits": [
       "showman",
       "soldier",
@@ -625,6 +660,7 @@
     "era": "1980s",
     "office": "President",
     "bio": "Renamed the country, the river, and himself. Kept the money.",
+    "record": "Renamed Congo as Zaire and himself as Mobutu Sese Seko, and took an estimated several billion dollars out of it over thirty-two years while the state stopped functioning. Kept Western backing throughout by being reliably anti-communist.",
     "traits": [
       "cunning",
       "showman",
@@ -642,6 +678,7 @@
     "era": "1980s",
     "office": "President",
     "bio": "Declared martial law and left behind three thousand pairs of shoes.",
+    "record": "Declared martial law in the Philippines in 1972 and stayed twenty-one years. Removed by the People Power revolution in 1986; the family fled with crates of jewellery and left the shoes behind. Billions were later traced and partly recovered.",
     "traits": [
       "cunning",
       "demagogue",
@@ -659,6 +696,7 @@
     "era": "1990s",
     "office": "President for Life",
     "bio": "Renamed the months of the year after himself and his mother.",
+    "record": "Ran Turkmenistan for fifteen years, renamed the months of the year after himself and his mother, made his own book compulsory for the driving test, and put a gold statue of himself on a rotating plinth so it always faced the sun.",
     "traits": [
       "showman",
       "demagogue",
@@ -676,6 +714,7 @@
     "era": "1880s",
     "office": "King",
     "bio": "Ran a country as a private business and never once visited it.",
+    "record": "Held the Congo as personal property, not as a colony, for twenty-three years, and ran it as a rubber extraction operation enforced by mutilation and hostage-taking. Estimates of the dead run to millions. He never went there.",
     "traits": [
       "banker",
       "cunning",
@@ -693,6 +732,7 @@
     "era": "Antiquity",
     "office": "Emperor",
     "bio": "Made his horse a senator. The horse was, by most accounts, an improvement.",
+    "record": "Emperor for four years, remembered through hostile sources for cruelty and derangement, including the story that he meant to make his horse a consul. Killed by his own Praetorian Guard.",
     "traits": [
       "showman",
       "paranoid",
@@ -710,6 +750,7 @@
     "era": "Medieval",
     "office": "Voivode",
     "bio": "Has a preferred solution and applies it consistently.",
+    "record": "Ruled Wallachia in three short stints, resisting Ottoman expansion with a campaign of terror whose signature method gave him the name. Regarded in Romania as a national defender and elsewhere as the origin of a vampire.",
     "traits": [
       "warhawk",
       "paranoid",
@@ -727,6 +768,7 @@
     "era": "1790s",
     "office": "Committee of Public Safety",
     "bio": "Incorruptible, tireless, and running out of people he trusts.",
+    "record": "Drove the Terror from the Committee of Public Safety, defending it as virtue's necessary form, and sent thousands to the guillotine including most of his former allies. Went to it himself in July 1794, less than three months after the friend he had let be executed.",
     "traits": [
       "paranoid",
       "demagogue",
@@ -744,6 +786,7 @@
     "era": "1930s",
     "office": "Prime Minister",
     "bio": "Brings an umbrella to every crisis and a signature to most of them.",
+    "record": "Came back from Munich in 1938 having conceded Czechoslovakia's border regions to Hitler, and said it meant peace for our time. It meant eleven months. He had also begun the rearmament that made 1940 survivable.",
     "traits": [
       "statesman",
       "isolationist",
@@ -764,6 +807,7 @@
     "era": "1870s",
     "office": "Chancellor",
     "bio": "Has already arranged the war you have not yet decided to start.",
+    "record": "Unified Germany through three deliberately engineered wars, then spent twenty years keeping the peace he had made by building an alliance system only he could operate. Also founded the first modern welfare state, explicitly to take the socialists' argument away from them.",
     "traits": [
       "strategist",
       "cunning",
@@ -781,6 +825,7 @@
     "era": "Antiquity",
     "office": "Dictator",
     "bio": "Excellent general, adequate delegator, catastrophic at reading a room.",
+    "record": "Conquered Gaul, crossed the Rubicon against his own republic, won the civil war and pardoned most of his enemies. Several of the pardoned killed him on the Senate floor.",
     "traits": [
       "soldier",
       "strategist",
@@ -799,6 +844,7 @@
     "era": "Antiquity",
     "office": "Pharaoh",
     "bio": "Arrives by boat, leaves with your navy.",
+    "record": "Last pharaoh of Egypt, who held a kingdom the size of a Roman province in play against Rome for twenty years by allying with the strongest Roman available. Spoke many languages, ran a working economy, and lost the final bet on Antony.",
     "traits": [
       "dealmaker",
       "showman",
@@ -816,6 +862,7 @@
     "era": "1790s",
     "office": "Secretary of the Treasury",
     "bio": "Will fix the national debt and publish a pamphlet about his personal life.",
+    "record": "First Treasury Secretary of the United States and the designer of its financial system: the national bank, the assumption of state debts, the customs revenue. Also published a pamphlet detailing his own affair to refute a charge of speculation, and died in a duel.",
     "traits": [
       "technocrat",
       "banker",
@@ -833,6 +880,7 @@
     "era": "1900s",
     "office": "Congressman, Publisher",
     "bio": "You furnish the crisis, he will furnish the coverage.",
+    "record": "Built the largest newspaper chain in America and used it as a political instrument, most notoriously in the run-up to the Spanish-American War. Ran for office repeatedly and mostly lost, which he took as a failure of the public.",
     "traits": [
       "demagogue",
       "showman",
@@ -850,6 +898,7 @@
     "era": "Antiquity",
     "office": "Consul",
     "bio": "Richest man in Rome. Owns the fire brigade. Will negotiate at the fire.",
+    "record": "The richest man in Rome, who made much of it buying burning buildings cheaply from their owners while they were still alight. Funded Caesar's career, crushed Spartacus, and died invading Parthia on an expedition nobody had asked him to undertake.",
     "traits": [
       "banker",
       "dealmaker",
@@ -867,6 +916,7 @@
     "era": "1800s",
     "office": "Foreign Minister",
     "bio": "Has served every regime France has had, and outlived most of them.",
+    "record": "Served the monarchy, the Revolution, Napoleon, and the restored monarchy in turn, and at the Congress of Vienna negotiated defeated France back into the concert of Europe. Survived everything by never being indispensable to any one side.",
     "traits": [
       "dealmaker",
       "cunning",
@@ -2133,6 +2183,7 @@
     "era": "2020s",
     "office": "Commentator, Campus Organiser",
     "bio": "Built a movement out of arguing with undergraduates on their own lawns.",
+    "record": "Founded Turning Point USA at eighteen and built it into one of the largest conservative youth organisations in the United States, known for campus debate events and a large online following. Killed in September 2025.",
     "traits": [
       "demagogue",
       "showman",
@@ -2201,6 +2252,7 @@
     "era": "2000s",
     "office": "Financier",
     "bio": "Managed money nobody could name for clients nobody would name.",
+    "record": "A financier who pleaded guilty in 2008 to procuring a minor for prostitution and served thirteen months under a plea agreement later found to have been unlawfully concealed from his victims. Arrested again in 2019 on federal sex trafficking charges and died in custody awaiting trial.",
     "traits": [
       "cunning",
       "dealmaker",
@@ -2218,6 +2270,7 @@
     "era": "1990s",
     "office": "Prime Minister",
     "bio": "Held the office for thirty-eight years and called every one of them a mandate.",
+    "record": "Prime Minister of Cambodia for thirty-eight years, the longest-serving in the world when he stepped down in 2023, having dissolved the main opposition party through the courts. Handed the office to his son.",
     "traits": [
       "cunning",
       "paranoid",
@@ -2238,6 +2291,7 @@
     "era": "2020s",
     "office": "President",
     "bio": "Says the quiet part at length, on a stage, to applause.",
+    "record": "The only US president elected to two non-consecutive terms, and the only one impeached twice. Convicted in 2024 on thirty-four felony counts of falsifying business records; returned to office in 2025.",
     "traits": [
       "demagogue",
       "showman",
@@ -2272,6 +2326,7 @@
     "era": "2020s",
     "office": "General Secretary",
     "bio": "Removed the term limit, then removed the discussion about removing the term limit.",
+    "record": "General Secretary of the Chinese Communist Party since 2012. Ran an anti-corruption campaign that removed both corruption and rivals, had presidential term limits abolished in 2018, and took a third term in 2022 - the first leader since Mao to do so.",
     "traits": [
       "cunning",
       "paranoid",
@@ -2340,6 +2395,7 @@
     "era": "2020s",
     "office": "Executive, Author",
     "bio": "Inherited an organisation and a great deal of unsolicited advice about it.",
+    "record": "Chief executive of Turning Point USA since September 2025, following the death of her husband Charlie Kirk. Previously ran a Christian apparel business and a related charity, and is a former Miss Arizona USA.",
     "traits": [
       "loyalist",
       "statesman",
@@ -2441,6 +2497,7 @@
     "era": "Modern",
     "office": "Football Administrator",
     "bio": "Awards the tournament to whoever asks most generously.",
+    "record": "President of FIFA since 2016, elected on a reform platform after the corruption scandal that removed his predecessor. Has since expanded the World Cup to forty-eight teams and moved the 2022 tournament to Qatar's winter.",
     "traits": [
       "dealmaker",
       "cunning",
@@ -2458,6 +2515,7 @@
     "era": "1930s",
     "office": "Chancellor",
     "bio": "Failed at art school and made it comprehensively everybody else's problem.",
+    "record": "Came to power legally in 1933 and dismantled the republic that elected him within months. Started the Second World War and directed the industrial murder of six million Jews and millions of others.",
     "traits": [
       "demagogue",
       "warhawk",
@@ -2580,6 +2638,7 @@
     "era": "2020s",
     "office": "Interim President",
     "bio": "Took power at thirty-four and was gifted two hundred pregnant cows for it.",
+    "record": "Took power in Burkina Faso in a 2022 coup at thirty-four, the second that year, amid a jihadist insurgency the previous governments had failed to contain. Has styled himself on Thomas Sankara, expelled French forces, and postponed elections.",
     "traits": [
       "soldier",
       "demagogue",

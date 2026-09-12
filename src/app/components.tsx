@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
-import { ROLE_BRIEF, ROLE_LABEL, ROLES } from '../engine/types.js'
-import type { Politician, Role } from '../engine/types.js'
+import { ROLE_BRIEF, ROLE_CIVICS, ROLE_LABEL, ROLES } from '../engine/types.js'
+import type { GameEvent, Politician, Role, Roster } from '../engine/types.js'
 import portraitSources from './portraits.json'
 
 export { ROLE_LABEL }
@@ -149,6 +149,23 @@ export function Rulebook() {
           <li>One further demand arrives partway through and is not in the briefing. That part is meant to be luck.</li>
         </ul>
       </section>
+      {/*
+        * The scoring, stated.
+        *
+        * It has always been a weighted average of four words and the player has
+        * never been shown the arithmetic, which is most of why the number read
+        * as arbitrary rather than as a measurement of anything.
+        */}
+      <section>
+        <h3>The two numbers</h3>
+        <ul className="rulebook-rules">
+          <li><strong>Your score</strong> is what happened. Each post carries a share of the hundred set by how heavily this crisis leans on it, and earns its share of that: nothing for a disaster, about a third for a fail, most of it for a pass, all of it for a triumph. Cabinet chemistry is added or taken off at the end.</li>
+          <li>A pass is worth most of what a triumph is. The distance from fail to pass is larger than the distance from pass to triumph, deliberately: getting a post from bad to adequate matters more than getting it from adequate to brilliant. That is not a quirk of the maths, it is most of what governing is.</li>
+          <li><strong>Your judgement</strong> is how well you chose, which is a different question. It measures your cabinet against the best one that existed in the six faces you were actually dealt, with picking blind as the zero. A hopeless deal played perfectly rates high; a gift squandered does not.</li>
+          <li>The sealed demand counts toward the score and not toward your judgement. Nobody can be marked on a demand the briefing is built to withhold.</li>
+          <li>Your judgement is worked out by the engine rather than the adjudicator, so the two can disagree. It is a comparison between you and the people you turned down, under one consistent judge.</li>
+        </ul>
+      </section>
     </div>
   )
 }
@@ -209,6 +226,74 @@ export function SlotStrip({ order, picks, armed = false, selectedName, onPlace, 
         })}
       </div>
       <p className="rail-note">{note ?? <>Choose wisely.<br />History is watching.</>}</p>
+    </div>
+  )
+}
+
+/**
+ * The archive footnote to a run.
+ *
+ * Everything educational in the game lives here, after the verdict, and
+ * nowhere earlier. The crises are real and the people are real, and a player
+ * who has just spent ten minutes deciding whether Bokassa should have had the
+ * General's chair is the most curious about 1986 they are ever going to be.
+ * Before the draft the same text is homework; after it, it is the answer.
+ *
+ * It stays out of the joke's way by being a different register rather than a
+ * softer one - a file note, not a lesson - and by being the last thing on the
+ * page rather than the first.
+ */
+export function Debrief({ event, roster, dossier }: {
+  event: GameEvent
+  roster: Roster
+  /** Optional: how often the player has used these people before. */
+  dossier?: { people: Record<string, { appointed: number }> } | null
+}) {
+  const known = ROLES.map((role) => roster[role]).filter((p) => p.record)
+  if (!event.aftermath && !event.lesson && known.length === 0) return null
+
+  return (
+    <div className="panel mt-s debrief">
+      <div className="label">The file, since declassified</div>
+      {event.aftermath && <p className="debrief-after">{event.aftermath}</p>}
+      {event.lesson && (
+        <p className="debrief-lesson">
+          <span>How this kind of thing fails</span>
+          {event.lesson}
+        </p>
+      )}
+
+      {known.length > 0 && (
+        <details className="debrief-who">
+          <summary>Who they actually were</summary>
+          <ul>
+            {known.map((p) => {
+              const before = (dossier?.people[p.id]?.appointed ?? 1) - 1
+              return (
+                <li key={p.id}>
+                  <strong>{p.name}</strong> {p.record}
+                  {before > 0 && (
+                    <span className="debrief-tally">
+                      {' '}You have appointed them {before === 1 ? 'once' : `${before} times`} before.
+                    </span>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </details>
+      )}
+
+      <details className="debrief-civics">
+        <summary>What these six offices really do</summary>
+        <ul>
+          {ROLES.map((role) => (
+            <li key={role}>
+              <strong>{ROLE_LABEL[role]}</strong> {ROLE_CIVICS[role]}
+            </li>
+          ))}
+        </ul>
+      </details>
     </div>
   )
 }

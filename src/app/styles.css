@@ -228,6 +228,14 @@ h1, h2, h3 { text-wrap: balance; }
 .sim-actions .primary { display: inline-flex; gap: 8px; align-items: center; }
 .verdict { text-align: center; padding: 32px 20px; }.verdict .tier { font: 35px var(--typewriter); margin: 13px 0 8px; }.verdict .score { color: #676451; font-size: 13px; font-variant-numeric: tabular-nums; }.grid-squares { font-size: 30px; letter-spacing: 5px; margin: 18px 0; }.tier-Catastrophe, .tier-Debacle { color: var(--bad); }.tier-Triumph, .tier-Legendary { color: var(--good); }
 
+/* The second number. Set below the score and visibly quieter than it: it is the
+   more useful of the two, but the score is the one being shared, and a headline
+   with two headlines in it has none. */
+.judgement { margin: 21px auto 0; padding-top: 17px; border-top: 1px solid #d4cfbb; max-width: 26em; }
+.judgement-rating { font-family: var(--typewriter); font-size: 17px; color: #3d4a3d; }
+.judgement-grade { display: block; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: #7c7660; margin-top: 5px; }
+.judgement-par { font-size: 11px; line-height: 1.6; color: #625e4c; margin-top: 9px; }
+
 /* The arithmetic, against the post it belongs to. Tabular figures so the column
    reads as a column - the whole point is comparing one post's weight to another's. */
 .verdict-tally { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
@@ -243,6 +251,31 @@ h1, h2, h3 { text-wrap: balance; }
 .verdict-twist-row { background: #f3ecd6; }
 .verdict-twist { font-family: var(--typewriter); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #8a6417; border: 1px solid #cdae6e; border-radius: 2px; padding: 1px 5px; }
 
+/* Stated as a fact about the table, not a verdict on the player. */
+.missed { font-size: 11.5px; line-height: 1.65; color: #55523f; }
+.missed strong { font-weight: 650; color: #3d4a3d; }
+
+/* The history behind the demand list. Collapsed, because the briefing is read
+   once while deciding six things and must stay scannable. */
+.brief-why { margin-top: 14px; border-top: 1px solid #cfc7ae; }
+.brief-why summary { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #6f684f; cursor: pointer; padding: 10px 0 0; }
+.brief-why ul { list-style: none; margin: 11px 0 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.brief-why li { font-size: 11px; line-height: 1.65; color: #55523f; }
+.brief-why strong { display: block; font-family: var(--typewriter); font-weight: 400; font-size: 11.5px; color: #3d4a3d; }
+
+/* The archive footnote. A different register from the game above it, not a
+   softer one: file-note grey, set narrow, last on the page. */
+.debrief-after { font-size: 12px; line-height: 1.72; color: #4b4838; margin-top: 12px; max-width: 46em; }
+.debrief-lesson { font-size: 12px; line-height: 1.72; color: #4b4838; margin-top: 15px; padding-top: 13px; border-top: 1px solid #d4cfbb; max-width: 46em; }
+.debrief-lesson > span { display: block; font: 9px var(--typewriter); letter-spacing: .1em; text-transform: uppercase; color: #7c7660; margin-bottom: 6px; }
+.debrief details { margin-top: 15px; border-top: 1px solid #d4cfbb; }
+.debrief summary { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #6f684f; cursor: pointer; padding: 12px 0 0; }
+.debrief details ul { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; max-width: 46em; }
+.debrief details li { font-size: 11.5px; line-height: 1.68; color: #55523f; }
+.debrief details strong { display: block; font-family: var(--typewriter); font-weight: 400; font-size: 12px; color: #3d4a3d; }
+.debrief-tally { color: #7c7660; font-style: italic; }
+.form-line { font-size: 12px; line-height: 1.7; color: #4b4838; max-width: 44em; }
+.form-line strong { font-family: var(--typewriter); font-weight: 400; font-size: 14px; color: #3d4a3d; }
 .table-panel { overflow-x: auto; }table.breakdown { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11px; }table.breakdown th { text-align: left; font-size: 9px; font-weight: 500; color: #64624f; padding: 7px; }table.breakdown td { padding: 9px 7px; border-top: 1px solid #d4cfbb; }table.breakdown .num { text-align: right; font-variant-numeric: tabular-nums; }.pass { color: var(--good); }.fail { color: var(--bad); }
 .gameover { text-align: center; padding: 80px 30px; margin-top: 50px; }.gameover .stamp { font-family: var(--typewriter); color: var(--red); }.gameover h1 { font: 36px var(--typewriter); margin: 28px 0 20px; }.gameover .said { max-width: 34em; margin: auto; color: #625e4c; }.copy-fallback { background: var(--paper); padding: 15px; font-size: 12px; }.copy-fallback > span { display: block; margin-top: 8px; user-select: all; }
 @media (min-width: 1450px) { .portrait { height: 145px; }.portrait-sm { height: 40px; }.candidate-bio { font-size: 11px; }.candidate-name { font-size: 18px; }.candidate-office { font-size: 10px; }.slot { min-height: 106px; }.board-layout { grid-template-columns: 183px minmax(0, 1fr); gap: 28px; }.role-label { font-size: 13px; }.rail-heading { font-size: 18px; } }

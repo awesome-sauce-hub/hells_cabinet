@@ -1,6 +1,7 @@
 import { bench, placeCandidate, respin, startDraft } from './draft.js'
 import type { DraftState } from './draft.js'
 import type { Rng } from './rng.js'
+import { ROLES } from './types.js'
 import type { Politician, Role } from './types.js'
 
 /**
@@ -44,6 +45,61 @@ export function replayDraft(
       state = applyAction(state, action)
     }
     return state
+  } catch {
+    return null
+  }
+}
+
+/**
+ * One wave as the player actually saw it: the six faces on the table, the posts
+ * still open, and what they did with it.
+ *
+ * The draft does not keep this - `DraftState.candidates` is overwritten every
+ * wave, because playing the game never needs last wave's table. Measuring the
+ * game does: you cannot say whether a call was good without knowing what else
+ * was on offer when it was made. Replaying the log re-deals every wave from the
+ * same seed, so the tables are recoverable exactly rather than stored.
+ */
+export interface Deal {
+  wave: number
+  /** The faces on the table at the moment of the appointment. */
+  table: Politician[]
+  /** Posts still unfilled, so an alternative call has to be a legal one. */
+  open: Role[]
+  chosen: Politician
+  role: Role
+}
+
+/**
+ * Replay a log and collect the table standing in front of each appointment.
+ *
+ * Returns null on exactly the same conditions as replayDraft, so a save that
+ * cannot be resumed also cannot be silently half-measured.
+ */
+export function dealHistory(
+  rng: Rng,
+  figures: readonly Politician[],
+  actions: readonly DraftAction[],
+): Deal[] | null {
+  try {
+    let state = startDraft(rng, figures)
+    const deals: Deal[] = []
+    for (const action of actions) {
+      if (state.endedBy) return null
+      if (action.t === 'place') {
+        const chosen = state.candidates.find((c) => c.id === action.id)
+        if (!chosen) return null
+        deals.push({
+          wave: state.wave,
+          table: state.candidates.slice(),
+          open: ROLES.filter((r) => !state.picks[r]),
+          chosen,
+          role: action.role,
+        })
+      }
+      state = applyAction(state, action)
+    }
+    return deals
   } catch {
     return null
   }
